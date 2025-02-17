@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AITS-Welcome Page</title>
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+    body {
+        display: flex;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+
+    }
+    .left {
+        width: 50%;
+        background-color:white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        text-align: center;
+        background:linear-gradient(to bottom,rgba(136, 240, 124, 0.5),rgba(178, 241, 190, 0.5)),(rgba(rgb(213, 243, 221), green, rgb(15, 172, 94), alpha));
+        border: #4b5320;
+    }
+    .left img {
+        max-width: 100%;
+        height: auto;
+        display:block;
+       
+        
+    }
+    .left h1 {
+        font-size: 7rem;
+        font-weight: bolder;
+        color: black;
+        font-style: italic;
+        font-family: "Bogart","cursive";
+        text-decoration: underline;
+        text-shadow: 2px 2px 5px #333;
+        
+    }
+    .left h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+
+        margin: 10px 0;
+        color: #333;
+    }
+    .left h4 {
+        font-weight: normal;
+        font-family: 'Poppins', sans-serif;
+        margin: 10px 0;
+        color: #333;
+        letter-spacing: 7px;
+    }
+    .left h2:first-of-type {
+        font-family: 'Montserrat', sans-serif;
+        text-shadow: 2px 2px 5px #333;
+        color: black;
+        text-decoration: underline;
+    }
+    .left p {
+        font-size: 18px;
+        margin: 20px 0;
+        max-width: 80%;
+        word-spacing: 3px;
+        line-height: 1.5;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+    .card {
+        background: skyblue;
+        padding: 8px;
+        border-radius: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),0 6px 20px rgba(0, 0, 0, 0.19);
+        margin-bottom: 50px;
+        text-align: center;
+        padding-top: 7px;
+        
+    }
+    .card p {
+        text-align: center;
+        padding-left: 20px;
+        
+    }
+    .buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+        text-decoration: underline;
+    }
+    .buttons a {
+        text-decoration:none ;
+        font-weight: bold;
+        color:rgb(2, 36, 111);
+        padding: 10px 20px;
+        border: none;
+        display: inline-block;
+    }
+    .right {
+        width: 50%;
+        background: url('/Users/reinamichal/Desktop/SDP-Project/Frontend/images/pic.jpg') no-repeat center center/cover;
+        filter: blur(3px);
+    }
+</style>
+</head>
+<body>
+  <div class="left">
+    <img src="/Users/reinamichal/Desktop/SDP-Project/Frontend/images/MAK.jpeg" alt="MUK LOGO" >
+      <h4>MAKERERE UNIVERSITY</h4>
+      <div class="card">
+      <h1>AITS</h1>
+      <h2>ACADEMIC ISSUE TRACKING SYSTEM</h2>
+      <p>"Streamline your academic concerns with our efficient issue tracking system. Submit, track, and resolve academic matters seamlessly."</p>
+      <br>
+      <h3 style="text-decoration: underline;">Get started today!</h3>
+      </div>
+
+      <div class="buttons">
+          <a href="Sign up page.html">REGISTER TO START</a>
+          <a href="Login page.html">LOGIN TO YOUR ACCOUNT</a>
+      </div>
+      <footer>
+          <p>&copy; 2025 AITS. All rights reserved.</p>
+      </footer>
+  </div>
+  <div class="right"></div>
+  
+</body>
+</html>
