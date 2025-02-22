@@ -1,0 +1,137 @@
+/*Welcomepage css styling*/
+
+.Welcome-container {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+body {
+  display: flex;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+
+}
+.left {
+  width: 50%;
+  background-color:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  background:linear-gradient(to bottom,rgba(136, 240, 124, 0.5),rgba(178, 241, 190, 0.5)),(rgba(rgb(213, 243, 221), green, rgb(15, 172, 94), alpha));
+  border: #4b5320;
+}
+.left img {
+  max-width: 100%;
+  height: 155px;
+  display:block;
+ 
+  
+}
+.title {
+  font-size: 7rem;
+  font-weight: bolder;
+  color: black;
+  font-family: "Bogart","cursive";
+  text-decoration: underline darkgreen;
+  text-shadow: 2px 2px 5px #333;
+ accent-color: #333;
+ cursor: pointer;
+ margin: 2px;
+ padding: 20px 20px 20px 20px;
+  
+}
+.semi-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+.university {
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  margin: 10px 0;
+  color: darkgreen;
+  letter-spacing: 7px;
+}
+.semi-title {
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 2px 2px 5px #333;
+  color: darkgreen;
+  text-decoration: underline black;
+  font-weight: bold;
+}
+
+.motto{
+  font-size: 18px;
+  margin: 20px 0;
+  max-width: 80%;
+  word-spacing: 3px;
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding-left: 70px;
+}
+.card {
+  background:rgb(214, 246, 253);
+  padding: 8px;
+  border-radius: 0px;
+  box-shadow: 0 7px 14px rgba(5, 0, 0, 0.2),0 25px 35px rgba(0, 0, 0, 0.19);
+  margin-bottom: 50px;
+  text-align: center;
+  border-style: ridge;
+  border-top: 10px solid #333;
+
+  
+  
+}
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  text-decoration: none;
+background-color:white;
+  border-radius: 5px;
+  
+  cursor: pointer;
+  padding: 10px 20px;
+
+}
+.btn {
+  font-weight: bolder;
+  color: black;
+  padding: 10px 15px;
+  text-decoration: none;
+  border: 0px solid rgb(1, 1, 29);
+  border-radius: 5px;
+  margin: 5px;
+  display: inline-block;
+  font-family: 'Times New Roman', Times, serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+ 
+
+}
+.btn:hover {
+  text-decoration:none ;
+  font-weight: bold;
+  color:rgb(21, 5, 170);
+  padding: 10px 20px;
+  border: none;
+  display: inline-block;
+  background-color: rgb(14, 164, 62);
+  color: white ;
+}
+.right {
+  width: 50%;
+  background-position:  no-repeat center center/cover;
+  filter: blur(3px);
+}
+
+footer {
+  margin-top: 20px;
+}
