@@ -5,7 +5,7 @@ class User(AbstractUser):
     USER_TYPES = (
         ('student', 'Student'),
         ('lecturer', 'Lecturer'),
-        ('admin', 'Admin')
+        # ('admin', 'Admin')
     )
     
     user_type = models.CharField(max_length=30, choices=USER_TYPES)
