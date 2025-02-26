@@ -6,7 +6,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-image: url('/images/pic.jpg') ;
+  /*background-image: url('/images/pic.jpg') ;*/
   background-size: 70%;
 }
 .card{
