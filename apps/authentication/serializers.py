@@ -15,6 +15,22 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Use create_user instead of create
         return User.objects.create_user(**validated_data)
+# serializers.py
+class AdminRegistrationSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = User
+        fields = ['user']
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        user_data['user_type'] = 'admin'  # Ensure user is created as admin
+        user_serializer = UserSerializer(data=user_data)
+        user_serializer.is_valid(raise_exception=True)
+        user = user_serializer.save()
+        return user
+
 
 class StudentRegistrationSerializer(serializers.ModelSerializer):
     user = UserSerializer()

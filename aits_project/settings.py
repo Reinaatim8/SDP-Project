@@ -8,9 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(03v#x@(ht6vp)5!9jq&e+68vm*l**!o386t8xt)3ulch$o@3_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['kennedymutebi.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'aits_project.urls'
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "apps.authentication.context_processors.global_context"
             ],
         },
     },
@@ -76,15 +78,16 @@ WSGI_APPLICATION = 'aits_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aits',
-        'USER': 'root',
-        'PASSWORD': 'PSS@12345',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'bsbsospksvhgffxmycgectdm',
+        'USER': 'xrpkupbggoygzcxj',
+        'PASSWORD': 'Dm_#GSYN-MoJhk2V9L=FgRV0%8B,n<10',
+        'HOST': '102.134.147.233',
+        'PORT': '32764',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'charset': 'utf8mb4',
         },
+        
     }
 }
 
@@ -112,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Kampala'
 USE_I18N = True
 USE_TZ = True
 

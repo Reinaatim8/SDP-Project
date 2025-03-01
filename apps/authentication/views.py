@@ -27,11 +27,24 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model  # Import User model dynamically
-
+from .serializers import AdminRegistrationSerializer
+from django.shortcuts import render
+import logging
+logger = logging.getLogger(__name__)
+def home_view(request):
+    return render(request, 'home.html') 
 @csrf_exempt
+
+
+
+
 def my_view(request):
-    if request.method == "POST":
-        return JsonResponse({"message": "Success"})
+    logger.info(f"Request path: {request.path}")
+    return render(request, "my_template.html", {"name": "John"})
+
+
+  # Ensure 'name' is passed
+
   
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -103,6 +116,20 @@ class LoginView(APIView):
             )
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# views.py
+class AdminRegistrationView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = AdminRegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response(
+                {"message": "Admin registered successfully!", "admin_id": user.id},
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class LecturerRegistrationView(APIView):

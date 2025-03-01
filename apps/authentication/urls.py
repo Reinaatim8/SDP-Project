@@ -8,7 +8,8 @@ from .views import (
     CustomLogoutView,
     TestView
 )
-
+from .views import my_view 
+from .views import AdminRegistrationView 
 urlpatterns = [
     path('register/student', StudentRegistrationView.as_view(), name='register-student'),
     path('register/lecturer', LecturerRegistrationView.as_view(), name='register-lecturer'),
@@ -16,4 +17,6 @@ urlpatterns = [
     path('logout', CustomLogoutView.as_view(), name='logout'),  
     path('auth-token/', obtain_auth_token, name='auth-token'),
     path('test', TestView.as_view(), name='test-view'),
+    path('register/admin', AdminRegistrationView.as_view(), name='register-admin'),
+     path('', my_view, name="auth_home"),
 ]
