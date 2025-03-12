@@ -6,7 +6,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  /*background-image: url('/Users/reinamichal/Desktop/SDP-Project/Frontend/aits_frontend/src/images/pic.jpg') ;*/
+  /* background-image: url('/aits_frontend/src/images/pic.jpg') ; */
   
 }
 .card{
@@ -158,6 +158,6 @@ flex-direction: column;
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-image: url('../images/pic.jpg') ;
-  background-size: 100%;
+  /* background-image: url('/Frontend/aits_frontend/src/images/pic.jpg') ; */
+  background-size: 70%;
 }
