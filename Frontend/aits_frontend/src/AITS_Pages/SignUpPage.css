@@ -1,4 +1,8 @@
 /* SignUpPage.css */
+.body{
+  background-image: url('../images/pic.jpg');
+  background-size: 100%;
+}
 .signup-container {
     justify-content: center;
     align-items: center;
@@ -19,7 +23,7 @@
   }
   
   .signup-card {
-    background: white;
+    background: transparent;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
