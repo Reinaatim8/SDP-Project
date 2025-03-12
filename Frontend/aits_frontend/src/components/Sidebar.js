@@ -23,10 +23,10 @@ const Sidebar = () => {
           <ul>
           
             <li>
-            <Link to="/">Homepage</Link>
+              <a href="dashboard">Dashboard</a>
             </li>
             <li>
-              <a href="#report-issue">Notifications</a>
+              <a href="Studentissue">Report an Issue</a>
             </li>
             <li>
               <a href="#view-issues">View all Issues</a>

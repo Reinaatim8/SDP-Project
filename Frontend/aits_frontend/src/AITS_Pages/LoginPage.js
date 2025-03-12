@@ -25,17 +25,17 @@ const Loginpage = () => {
     <form>
      <div className="form-group">
       <div>
-        <label htmlFor="username">Username</label><br/>
+        <label htmlFor="username" style={{fontWeight: 'bold'}}>Username</label><br/>
         <input type="text" name="username" placeholder="Username"  required/>
     </div>
     
     <div>
-      <label htmlFor="password">Password</label><br/>
+      <label htmlFor="password" style={{fontWeight: 'bold'}}>Password</label><br/>
       <input type="password" name="password" placeholder="Password" required/>
     </div>
   <br/>
   <div className='button'>
-    <button type="submit">Login</button>
+    <button type="submit" className='button'>Login</button>
    </div> 
   </div>
 

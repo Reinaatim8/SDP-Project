@@ -6,22 +6,25 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  /*background-image: url('/images/pic.jpg') ;*/
-  background-size: 70%;
+  background-image: url('/Users/reinamichal/Desktop/SDP-Project/Frontend/aits_frontend/src/images/pic.jpg') ;
+  
 }
 .card{
   width: 500px;
   height: 680px;
   border-color: 1px solid #333;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   background-color: transparent;
   text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   page: center;
-  background-color: transparent;
+  background-color: rgb(201, 236, 254);
+  background-image: linear-gradient(315deg, #f0f0f0 0%, #ffffff 74%);
+  border-style: groove 5px;
+  
 
 }
 .card h1{
@@ -71,6 +74,14 @@
   font-weight: bold;
   color: #333;
 }
+.card p{
+  font-size: 1.2rem;
+  color: black;
+  letter-spacing: 0px;
+  font-family: 'Times New Roman', Times, serif;
+  text-decoration: underline black;
+  text-align: center;
+}
 
 .footer{
   position: fixed;
@@ -93,18 +104,37 @@
 
 }
 .button{
-  width: 100%;
+  width: 95%;
+  padding: 0.5rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 25px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.button:hover{
+ background-color: #0d82d0;
+}
+.btn1{
+  width: 70%;
   padding: 0.8rem;
   background-color: #3498db;
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 30px;
   cursor: pointer;
   margin-top: 1rem;
   justify-content: center;
   align-items: center;
-  
+}
+.btn1:hover{
+  text-decoration: underline black;
 }
 .image-container img{
 width: 100%;
@@ -123,11 +153,11 @@ flex-direction: column;
 
 }
 .Login-container{
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  background-image: url('/home/kajjabwangu/repos/SDP-Project/Frontend/aits_frontend/src/images/pic.jpg') ;
+  background-image: url('/Frontend/aits_frontend/src/images/pic.jpg') ;
   background-size: 70%;
 }

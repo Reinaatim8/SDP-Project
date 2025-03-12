@@ -1,10 +1,21 @@
 /* SignUpPage.css */
 .signup-container {
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f9f9f9;
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 20px;
+    border-color: black;
+    border-style: groove;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 60vh;
+    transform: translate(-50%, -50%);
+    height: 65.7vh;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
   }
   
   .signup-card {
