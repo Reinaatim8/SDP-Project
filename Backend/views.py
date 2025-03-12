@@ -54,7 +54,7 @@ class LoginView(APIView):
             
             print(f"Login attempt for username: {username}")
             
-            # Get the User model
+            # Get the User models
             User = get_user_model()
             
             try:
