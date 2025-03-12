@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import "./StudentDashboard.css";
+import "./LecturerDashboard.css";
 
 const LecturerDashboard = () => {
   const navigate = useNavigate();
@@ -16,21 +16,22 @@ const LecturerDashboard = () => {
       <div className="dashboard-content">
         <div className="dashboard-panel">
           <div className="dashboard-header">
-            <h2>Welcome back Lecturer dude!</h2>
-            <p className="subtitle">Track your academic progress and stay organized.</p>
+            <img src="/images/teacherlogo.png" alt="teacherlogo" className="teacherlogo"/>
+            <h2>Welcome back, Professor!</h2>
+            <p className="subtitle">Manage your courses, students, and academic tasks efficiently.</p>
           </div>
           <div className="dashboard-buttons">
             <button className="btn btn-primary" onClick={handleReportIssue}>
-              <span className="btn-icon">📩</span>
-              Report an Issue
+              <span className="btn-icon">📝</span>
+              Submit Grade Report
+            </button>
+            <button className="btn btn-secondary">
+              <span className="btn-icon">👥</span>
+              View Student Roster
             </button>
             <button className="btn btn-secondary">
               <span className="btn-icon">📅</span>
-              View Course Schedule
-            </button>
-            <button className="btn btn-secondary">
-              <span className="btn-icon">📞</span>
-              Contact Lecturer
+              Schedule Office Hours
             </button>
           </div>
           <div className="dashboard-sections">
@@ -39,27 +40,27 @@ const LecturerDashboard = () => {
               <ul>
                 <li className="issue-item">
                   <span className="issue-icon">⚠️</span>
-                  <span className="issue-text">Missing Marks - Pending</span>
+                  <span className="issue-text">Grade Submission Pending</span>
                 </li>
                 <li className="issue-item">
                   <span className="issue-icon">✅</span>
-                  <span className="issue-text">Lecturer Response - Resolved</span>
+                  <span className="issue-text">Student Query Resolved</span>
                 </li>
                 <li className="issue-item">
                   <span className="issue-icon">🔄</span>
-                  <span className="issue-text">Request in Progress</span>
+                  <span className="issue-text">Resource Request Processing</span>
                 </li>
               </ul>
             </div>
             <div className="section announcements">
               <h2>📢 Announcements</h2>
-              <p>Midterm results will be released on March 10th.</p>
-              <p>Course registration closes soon.</p>
+              <p>Faculty Meeting: March 15th, 2 PM</p>
+              <p>New Course Materials Available</p>
             </div>
             <div className="section deadlines">
               <h2>📚 Upcoming Deadlines</h2>
-              <p>Assignment 3 - Due March 5th</p>
-              <p>Final Project - Due March 20th</p>
+              <p>Grade Submission: March 8th</p>
+              <p>Research Proposal: March 22nd</p>
             </div>
           </div>
         </div>

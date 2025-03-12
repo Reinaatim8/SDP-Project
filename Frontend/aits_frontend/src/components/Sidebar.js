@@ -34,6 +34,9 @@ const Sidebar = () => {
             <li>
               <a href="#profile">Student Profile</a>
             </li>
+            <li>
+              <a href="#">Student Profile</a>
+            </li>
           </ul>
           {/* <br></br>         using br tag to add space btn the listitems and logo */}
           <br></br>  

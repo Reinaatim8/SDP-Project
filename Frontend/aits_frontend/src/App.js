@@ -7,7 +7,6 @@ import StudentDashboard from './AITS_Pages/StudentDashboard';
 import StudentIssueReport from './AITS_Pages/StudentIssueReport';
 import LecturerDashboard from './AITS_Pages/LecturerDashboard';
 import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
-import IssueReport from './AITS_Pages/IssueReport';
 
 
 function App() {
@@ -17,10 +16,9 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/signup" element={<SignUpPage />} />//
         <Route path="/login" element={<Loginpage />} />
-        <Route path="/dashboard" element={<StudentDashboard />} /> 
-        <Route path="/IssueReport" element={<IssueReport />} /> 
-        <Route path="/Studentissue" element={<StudentIssueReport/>} />
-        <Route path="/lecturer" element={<LecturerDashboard />} />
+        <Route path="/StudentDashboard" element={<StudentDashboard />} /> 
+        <Route path="/StudentIssueReport" element={<StudentIssueReport/>} />
+        <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
         <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />
 
       </Routes>
