@@ -2,7 +2,7 @@
 .sidebar {
   width: 250px;
   height: 100vh;
-  background: #343a40;
+  background: #36664a;
   color: white;
   padding: 20px;
   position: fixed;
@@ -62,7 +62,7 @@
 }
 
 .sidebar-nav a:hover {
-  background: #495057;
+  background: #49574b;
 }
 
 /* Adjust content when sidebar is minimized */
@@ -74,3 +74,11 @@
 .sidebar.minimized + .dashboard-content {
   margin-left: 60px;
 }
+
+.schoollogo {
+  
+  width: 180px;
+  margin-right: 180px;
+  margin-left: 30px;
+}
+
