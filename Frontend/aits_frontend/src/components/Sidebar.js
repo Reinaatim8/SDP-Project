@@ -20,10 +20,10 @@ const Sidebar = () => {
         <nav className="sidebar-nav">
           <ul>
             <li>
-              <a href="#dashboard">Dashboard</a>
+              <a href="dashboard">Dashboard</a>
             </li>
             <li>
-              <a href="#report-issue">Report an Issue</a>
+              <a href="Studentissue">Report an Issue</a>
             </li>
             <li>
               <a href="#view-issues">View Issues</a>

@@ -16,7 +16,7 @@ const StudentDashboard = () => {
       <div className="dashboard-content">
         <div className="dashboard-panel">
           <div className="dashboard-header">
-            <h2>Welcome Back, Student!</h2>
+            <h2>AITS, <br/>Welcome Back, Student!</h2>
             <p className="subtitle">Track your academic progress and stay organized.</p>
           </div>
           <div className="dashboard-buttons">

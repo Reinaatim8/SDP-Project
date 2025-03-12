@@ -1,14 +1,24 @@
 /* Layout */
 .issue-report-container {
-    display: flex;
-    min-height: 100vh;
+  max-width: 750px;
+  margin: 50px auto;
+  height: 900px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
   }
   
   .issue-report-content {
-    flex: 1;
-    padding: 20px;
-    margin-left: 220px;
-    transition: margin-left 0.3s ease-in-out;
+  max-width: 750px;
+  margin: 50px auto;
+  height: 800px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  flex: 1;
+  transition: margin-left 0.3s ease-in-out;
   }
   
   /* Adjust content when sidebar is closed */
@@ -22,8 +32,10 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 750px;
     margin-top: 20px;
+    height: 630px;
+    
   }
   
   .form-group {

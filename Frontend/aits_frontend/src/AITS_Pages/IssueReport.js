@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Sidebar from '../components/Sidebar';
 import './IssueReport.css'; // Ensure the CSS file is correctly imported
 
 const IssueReport = () => {
@@ -13,32 +14,35 @@ const IssueReport = () => {
   };
 
   return (
-    <div className="issue-report-container">
-      <h1>Report an Issue</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="issueTitle">Issue Title</label>
-          <input
-            type="text"
-            id="issueTitle"
-            value={issueTitle}
-            onChange={(e) => setIssueTitle(e.target.value)}
-            required
-          />
+      <div>
+        <Sidebar />
+        <div className="issue-report-container">
+          <h1>REPORT AN ISSUE</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="issueTitle">Issue Title</label>
+              <input
+                type="text"
+                id="issueTitle"
+                value={issueTitle}
+                onChange={(e) => setIssueTitle(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="issueDescription">Issue Description</label>
+              <textarea
+                id="issueDescription"
+                value={issueDescription}
+                onChange={(e) => setIssueDescription(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit Issue</button>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="issueDescription">Issue Description</label>
-          <textarea
-            id="issueDescription"
-            value={issueDescription}
-            onChange={(e) => setIssueDescription(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Submit Issue</button>
-      </form>
-    </div>
-  );
+      </div>
+    );
 };
 
 export default IssueReport;
