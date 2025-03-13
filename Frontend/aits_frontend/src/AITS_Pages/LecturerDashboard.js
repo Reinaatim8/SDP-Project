@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import LecturerSidebar from "../components/LecturerSidebar";
 import "./LecturerDashboard.css";
 
 const LecturerDashboard = () => {
@@ -12,7 +12,7 @@ const LecturerDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <Sidebar />
+      <LecturerSidebar />
       <div className="dashboard-content">
         <div className="dashboard-panel">
           <div className="dashboard-header">
