@@ -13,9 +13,9 @@ const Sidebar = () => {
   return (
     <div className={`sidebar ${isMinimized ? 'minimized' : ''}`}>
       <div className="sidebar-header">
-        {!isMinimized && <h2>Student Portal</h2>}
+        {!isMinimized && <h2>Student Hub</h2>}
         <button className="minimize-btn" onClick={toggleMinimize}>
-          {isMinimized ? '➜' : '⬅'}
+          {isMinimized ? '🚦' : '🚥'}
         </button>
       </div>
       {!isMinimized && (
@@ -23,10 +23,10 @@ const Sidebar = () => {
           <ul>
           
             <li>
-              <a href="dashboard">Dashboard</a>
+              <a href="StudentDashboard">Dashboard</a>
             </li>
             <li>
-              <a href="Studentissue">Report an Issue</a>
+              <a href="StudentIssueReport">Report an Issue</a>
             </li>
             <li>
               <a href="#view-issues">View all Issues</a>
