@@ -1,179 +1,5 @@
 /* ... your existing CSS ... */
 
-.section {
-  display: flex; /* Apply Flexbox to all sections */
-  align-items: center;
-  flex: 1;
-  min-width: 300px;
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.section-content {
-  flex: 1;
-  padding-right: 20px;
-}
-
-.section-image {
-  flex: 1;
-}
-
-.section-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-/* ... your existing CSS ... */
-
-
-.dashboard-header {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.dashboard-header h2 {
-  font-size: 2.2rem;
-  color: #2c3e50;
-}
-
-.dashboard-header .subtitle {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  margin-bottom: 40px;
-}
-
-.dashboard-sections {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  width: 100%;
-}
-
-.section {
-  flex: 1;
-  min-width: 300px;
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.section h3 {
-  font-size: 1.8rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
-.section p {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.section .btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #3498db;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.section .btn:hover {
-  background-color: #2980b9;
-}
-/* .registrar-dashboard-container {
-  display: flex;
-  flex-direction: column; 
-  min-height: 100vh; 
-} */
-
-.registrar-dashboard-content {
-  flex: 1;
-  margin-left: 280px; /* Default width */
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow-y: auto;
-  transition: margin-left 0.3s ease;
-  flex-grow: 1; /* added */
-}
-
-.registrar-sidebar.collapsed + .registrar-dashboard-content {
-  margin-left: 60px;
-}
-
-.reports {
-  display: flex; /* Enable Flexbox */
-  align-items: center; /* Vertically center content */
-  padding: 20px; /* Add some padding */
-}
-
-.reports-content {
-  flex: 1; /* Take up remaining space on the left */
-  padding-right: 20px; /* Add some spacing between content and image */
-}
-
-.reports-image {
-  flex: 1; /* Take up equal space on the right */
-}
-
-.reports-image img {
-  width: 100%; /* Make image fill its container */
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Remove extra space below image */
-  object-fit: cover; /*prevent image distortion*/
-}
-
-.dashboard-header img{
-  width: 80px;
-}
-
-.footer {
-  text-align: center;
-  padding: 10px 0;
-  background-color: transparent; /* Makes the background transparent */
-}
-
-/* ... your existing CSS ... */
-
-.registrar-dashboard-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure container takes full viewport height */
-}
-
-.registrar-dashboard-content {
-  flex: 1;
-  margin-left: 280px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow-y: auto;
-  flex-grow: 1; /* Allow content to grow and push footer down */
-}
-
-/* ... rest of your CSS ... */
-
-/* ... your existing CSS ... */
-
 .registrar-dashboard-container {
   display: flex;
   flex-direction: column;
@@ -190,9 +16,117 @@
   overflow-y: auto;
 }
 
-.footer {
+.registrar-dashboard-title {
+  font-size: 2.2rem;
+  color: #2c3e50;
+}
+
+.registrar-dashboard-subtitle {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-bottom: 40px;
+}
+
+.registrar-dashboard-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  width: 100%;
+}
+
+.registrar-dashboard-section {
+  flex: 1;
+  min-width: 300px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registrar-dashboard-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.registrar-dashboard-section h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.registrar-dashboard-section p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.registrar-dashboard-section .registrar-dashboard-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registrar-dashboard-section .registrar-dashboard-btn:hover {
+  background-color: #2980b9;
+}
+
+.registrar-dashboard-footer {
   text-align: center;
   padding: 10px 0;
   background-color: transparent;
   width: 100%;
+}
+
+.registrar-dashboard-section {
+  display: flex; /* Apply Flexbox to all sections */
+  align-items: center;
+  flex: 1;
+  min-width: 300px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registrar-dashboard-section-content {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.registrar-dashboard-section-image {
+  flex: 1;
+}
+
+.registrar-dashboard-section-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.registrar-dashboard-header img {
+ width: 80px;
+ display: flex;
+ align-items: center;
+}
+
+.registrar-dashboard-reports img{
+  width: 200px;
+  
+}
+
+.registrar-dashboard-header{
+  display: block;
+  text-align: center;
+  align-items: center;
+  margin:auto;
 }

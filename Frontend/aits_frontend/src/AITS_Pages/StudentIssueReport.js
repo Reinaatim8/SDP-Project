@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import StudentSidebar from "../components/StudentSidebar";
 import LecturerDropdown from "../components/LecturerDropdown";
 import "./StudentIssueReport.css";
 
@@ -21,28 +21,28 @@ const StudentIssueReport = () => {
   };
 
   return (
-    <div className="issue-report-container">
-      <Sidebar />
-      <div className="issue-report-content">
-        <h1>📩 Report an Issue</h1>
-        <p>Select a lecturer, categorize your issue, and describe it below.</p>
+    <div className="student-issue-report-container">
+      <StudentSidebar />
+      <div className="student-issue-report-content">
+        <h1 className="student-issue-report-title">📩 Report an Issue</h1>
+        <p className="student-issue-report-description">Select a lecturer, categorize your issue, and describe it below.</p>
 
-        <form className="issue-form" onSubmit={handleSubmit}>
+        <form className="student-issue-report-form" onSubmit={handleSubmit}>
           {/* Lecturer Selection */}
-          <div className="form-group">
-            <label>Select Lecturer:</label>
+          <div className="student-issue-report-form-group">
+            <label className="student-issue-report-label">Select Lecturer:</label>
             <LecturerDropdown />
           </div>
 
           {/* Issue Tags */}
-          <div className="form-group">
-            <label>Issue Category:</label>
-            <div className="tags-container">
+          <div className="student-issue-report-form-group">
+            <label className="student-issue-report-label">Issue Category:</label>
+            <div className="student-issue-report-tags-container">
               {tags.map((tag) => (
                 <button
                   key={tag}
                   type="button"
-                  className={`tag-button ${selectedTag === tag ? "selected" : ""}`}
+                  className={`student-issue-report-tag-button ${selectedTag === tag ? "selected" : ""}`}
                   onClick={() => handleTagSelection(tag)}
                 >
                   {tag}
@@ -56,14 +56,14 @@ const StudentIssueReport = () => {
                   setCustomTag(e.target.value);
                   setSelectedTag(""); // Clear predefined tags when custom is typed
                 }}
-                className="custom-tag-input"
+                className="student-issue-report-custom-tag-input"
               />
             </div>
           </div>
 
           {/* Issue Description */}
-          <div className="form-group">
-            <label>Issue Description:</label>
+          <div className="student-issue-report-form-group">
+            <label className="student-issue-report-label">Issue Description:</label>
             <textarea
               rows="5"
               placeholder="Describe your issue..."
@@ -74,7 +74,7 @@ const StudentIssueReport = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="submit-button">Submit Issue</button>
+          <button type="submit" className="student-issue-report-submit-button">Submit Issue</button>
         </form>
       </div>
     </div>

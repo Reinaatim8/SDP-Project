@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./Sidebar.css";
+import "./StudentSidebar.css";
 import { Link } from 'react-router-dom';
 
 
-const Sidebar = () => {
+const StudentSidebar = () => {
   const [isMinimized, setIsMinimized] = useState(false);
 
   const toggleMinimize = () => {
@@ -54,4 +54,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default StudentSidebar;

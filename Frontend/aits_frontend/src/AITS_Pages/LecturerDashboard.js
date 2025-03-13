@@ -11,56 +11,56 @@ const LecturerDashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="lecturer-dashboard-container">
       <LecturerSidebar />
-      <div className="dashboard-content">
-        <div className="dashboard-panel">
-          <div className="dashboard-header">
-            <img src="/images/teacherlogo.png" alt="teacherlogo" className="teacherlogo"/>
-            <h2>Welcome back, Professor!</h2>
-            <p className="subtitle">Manage your courses, students, and academic tasks efficiently.</p>
+      <div className="lecturer-dashboard-content">
+        <div className="lecturer-dashboard-panel">
+          <div className="lecturer-dashboard-header">
+            <img src="/images/teacherlogo.png" alt="teacherlogo" className="lecturer-dashboard-teacherlogo"/>
+            <h2 className="lecturer-dashboard-title">Welcome back, Professor!</h2>
+            <p className="lecturer-dashboard-subtitle">Manage your courses, students, and academic tasks efficiently.</p>
           </div>
-          <div className="dashboard-buttons">
-            <button className="btn btn-primary" onClick={handleReportIssue}>
-              <span className="btn-icon">📝</span>
+          <div className="lecturer-dashboard-buttons">
+            <button className="lecturer-dashboard-btn lecturer-dashboard-btn-primary" onClick={handleReportIssue}>
+              <span className="lecturer-dashboard-btn-icon">📝</span>
               Submit Grade Report
             </button>
-            <button className="btn btn-secondary">
-              <span className="btn-icon">👥</span>
+            <button className="lecturer-dashboard-btn lecturer-dashboard-btn-secondary">
+              <span className="lecturer-dashboard-btn-icon">👥</span>
               View Student Roster
             </button>
-            <button className="btn btn-secondary">
-              <span className="btn-icon">📅</span>
+            <button className="lecturer-dashboard-btn lecturer-dashboard-btn-secondary">
+              <span className="lecturer-dashboard-btn-icon">📅</span>
               Schedule Office Hours
             </button>
           </div>
-          <div className="dashboard-sections">
-            <div className="section issue-tracker">
-              <h2>📌 Issue Tracker</h2>
-              <ul>
-                <li className="issue-item">
-                  <span className="issue-icon">⚠️</span>
-                  <span className="issue-text">Grade Submission Pending</span>
+          <div className="lecturer-dashboard-sections">
+            <div className="lecturer-dashboard-section lecturer-dashboard-issue-tracker">
+              <h2 className="lecturer-dashboard-section-title">📌 Issue Tracker</h2>
+              <ul className="lecturer-dashboard-issue-list">
+                <li className="lecturer-dashboard-issue-item">
+                  <span className="lecturer-dashboard-issue-icon">⚠️</span>
+                  <span className="lecturer-dashboard-issue-text">Grade Submission Pending</span>
                 </li>
-                <li className="issue-item">
-                  <span className="issue-icon">✅</span>
-                  <span className="issue-text">Student Query Resolved</span>
+                <li className="lecturer-dashboard-issue-item">
+                  <span className="lecturer-dashboard-issue-icon">✅</span>
+                  <span className="lecturer-dashboard-issue-text">Student Query Resolved</span>
                 </li>
-                <li className="issue-item">
-                  <span className="issue-icon">🔄</span>
-                  <span className="issue-text">Resource Request Processing</span>
+                <li className="lecturer-dashboard-issue-item">
+                  <span className="lecturer-dashboard-issue-icon">🔄</span>
+                  <span className="lecturer-dashboard-issue-text">Resource Request Processing</span>
                 </li>
               </ul>
             </div>
-            <div className="section announcements">
-              <h2>📢 Announcements</h2>
-              <p>Faculty Meeting: March 15th, 2 PM</p>
-              <p>New Course Materials Available</p>
+            <div className="lecturer-dashboard-section lecturer-dashboard-announcements">
+              <h2 className="lecturer-dashboard-section-title">📢 Announcements</h2>
+              <p className="lecturer-dashboard-announcement">Faculty Meeting: March 15th, 2 PM</p>
+              <p className="lecturer-dashboard-announcement">New Course Materials Available</p>
             </div>
-            <div className="section deadlines">
-              <h2>📚 Upcoming Deadlines</h2>
-              <p>Grade Submission: March 8th</p>
-              <p>Research Proposal: March 22nd</p>
+            <div className="lecturer-dashboard-section lecturer-dashboard-deadlines">
+              <h2 className="lecturer-dashboard-section-title">📚 Upcoming Deadlines</h2>
+              <p className="lecturer-dashboard-deadline">Grade Submission: March 8th</p>
+              <p className="lecturer-dashboard-deadline">Research Proposal: March 22nd</p>
             </div>
           </div>
         </div>

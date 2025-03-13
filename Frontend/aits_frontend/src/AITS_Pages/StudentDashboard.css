@@ -1,15 +1,15 @@
 /* Main Container */
-.dashboard-container {
+.student-dashboard-container {
   display: flex;
   height: 100vh;
-  background: linear-gradient(135deg, #f4f6f9, #e0e5ec); /* Gradient background */
+  background: linear-gradient(135deg, #f4f6f9, #e0e5ec);
   font-family: 'Inter', sans-serif;
 }
 
 /* Content Area */
-.dashboard-content {
+.student-dashboard-content {
   flex: 1;
-  margin-left: 250px; /* Prevent overlap with sidebar */
+  margin-left: 250px;
   padding: 40px;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@
 }
 
 /* Dashboard Panel */
-.dashboard-panel {
+.student-dashboard-panel {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   padding: 20px;
@@ -30,7 +30,7 @@
   transition: all 0.3s ease;
 }
 
-.dashboard-panel.minimized {
+.student-dashboard-panel.minimized {
   height: 60px;
   padding: 10px;
 }
@@ -60,24 +60,24 @@
 }
 
 /* Header Section */
-.dashboard-header {
+.student-dashboard-header {
   margin-bottom: 30px;
 }
 
-.dashboard-header h2 {
+.student-dashboard-title {
   font-size: 2.2rem;
   color: #2c3e50;
   margin-bottom: 10px;
   font-weight: 700;
 }
 
-.dashboard-header .subtitle {
+.student-dashboard-subtitle {
   font-size: 1.2rem;
   color: #7f8c8d;
 }
 
 /* Buttons */
-.btn {
+.student-dashboard-btn {
   padding: 12px 24px;
   margin: 8px;
   border-radius: 10px;
@@ -90,39 +90,39 @@
   gap: 8px;
 }
 
-.btn-primary {
+.student-dashboard-btn-primary {
   background: #007bff;
   color: white;
 }
 
-.btn-primary:hover {
+.student-dashboard-btn-primary:hover {
   background: #0056b3;
   transform: translateY(-2px);
 }
 
-.btn-secondary {
+.student-dashboard-btn-secondary {
   background: #e9ecef;
   color: #2c3e50;
 }
 
-.btn-secondary:hover {
+.student-dashboard-btn-secondary:hover {
   background: #d4d9df;
   transform: translateY(-2px);
 }
 
-.btn-icon {
+.student-dashboard-btn-icon {
   font-size: 1.2rem;
 }
 
 /* Sections */
-.dashboard-sections {
+.student-dashboard-sections {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.section {
+.student-dashboard-section {
   padding: 20px;
   background: rgba(255, 255, 255, 0.98);
   border-radius: 15px;
@@ -130,26 +130,26 @@
   text-align: left;
 }
 
-.section h2 {
+.student-dashboard-section-title {
   font-size: 1.6rem;
   color: #2c3e50;
   margin-bottom: 15px;
   font-weight: 600;
 }
 
-.section p {
+.student-dashboard-section p {
   font-size: 1.1rem;
   color: #555;
   margin: 10px 0;
 }
 
 /* Issue Tracker */
-.issue-tracker ul {
+.student-dashboard-issue-list {
   list-style: none;
   padding: 0;
 }
 
-.issue-item {
+.student-dashboard-issue-item {
   display: flex;
   align-items: center;
   margin: 12px 0;
@@ -159,24 +159,24 @@
   transition: all 0.3s ease;
 }
 
-.issue-item:hover {
+.student-dashboard-issue-item:hover {
   background: rgba(241, 242, 246, 1);
   transform: translateX(5px);
 }
 
-.issue-icon {
+.student-dashboard-issue-icon {
   margin-right: 10px;
   font-size: 1.3rem;
 }
 
-.issue-text {
+.student-dashboard-issue-text {
   font-size: 1.1rem;
   color: #555;
 }
 
 /* Announcements and Deadlines */
-.announcements p,
-.deadlines p {
+.student-dashboard-announcement,
+.student-dashboard-deadline {
   font-size: 1.1rem;
   color: #555;
   margin: 10px 0;
