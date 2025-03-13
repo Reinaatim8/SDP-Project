@@ -52,6 +52,7 @@ const SignUpPage = () => {
   };
 
   return (
+    <body>
     <div className="signup-container">
       <div className="signup-card">
         <h2 className="signup-title">Create Your Account</h2>
@@ -152,6 +153,7 @@ const SignUpPage = () => {
         </p>
       </div>
     </div>
+    </body>
   );
 };
 
