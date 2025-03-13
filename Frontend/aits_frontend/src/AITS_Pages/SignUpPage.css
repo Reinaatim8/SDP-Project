@@ -1,41 +1,49 @@
 /* SignUpPage.css */
-.body{
+.signup-panel{
   background-image: url('../images/pic.jpg');
   background-size: 100%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
-.signup-container {
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border-radius: 10px;
-    padding: 20px;
-    border-color: black;
-    border-style: groove;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 60vh;
-    transform: translate(-50%, -50%);
-    height: 65.7vh;
-    place-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    
-  }
-  
+
   .signup-card {
-    background: transparent;
+    background: rgb(228, 249, 252);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+    width: 650px;
+    max-width: 550px;
     text-align: center;
+    max-height: 1000px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    border-color: rgb(178, 245, 244);
+    border-style: groove;
+    width: 650px;
+    transform: translate(-50%, -50%);
+    height: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   
   .signup-title {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #2c3e50;
+  }
+  .signup-heading{
+    font-size: 4rem;
+  font-weight: bold;
+  color:black;
+  text-shadow: #333;
   }
   
   .form-group {
@@ -51,7 +59,7 @@
   
   .form-group input,
   .form-group select {
-    width: 100%;
+    width: 80%;
     padding: 0.8rem;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -62,6 +70,19 @@
   .form-group select:focus {
     border-color: #3498db;
     outline: none;
+  }
+  .inline-fields {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .form-field {
+    flex: 1;
+  }
+  
+  .form-field input {
+    width: 100%;
   }
   
   .error {
@@ -81,6 +102,8 @@
     font-size: 1rem;
     cursor: pointer;
     margin-top: 1rem;
+    font-weight: 900;
+    font-size: 20px;
   }
   
   .signup-button:hover {
@@ -99,4 +122,16 @@
   
   .login-link a:hover {
     text-decoration: underline;
+  }
+  .form{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 90%;
+    max-height: 650px;
+  }
+  .error{
+    color: red;
+    font-size: 20px;
+    margin-top: 5px;
+    font-weight: 500;
   }
