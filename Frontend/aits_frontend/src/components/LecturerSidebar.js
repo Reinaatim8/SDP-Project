@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./Sidebar.css";
+import "./LecturerSidebar.css";
 import { Link } from 'react-router-dom';
 
 
-const Sidebar = () => {
+const LecturerSidebar = () => {
   const [isMinimized, setIsMinimized] = useState(false);
 
   const toggleMinimize = () => {
@@ -13,9 +13,9 @@ const Sidebar = () => {
   return (
     <div className={`sidebar ${isMinimized ? 'minimized' : ''}`}>
       <div className="sidebar-header">
-        {!isMinimized && <h2>Student Portal</h2>}
+        {!isMinimized && <h2>LECTURER HUB</h2>}
         <button className="minimize-btn" onClick={toggleMinimize}>
-          {isMinimized ? '➜' : '⬅'}
+          {isMinimized ? '🚦' : '🚥'}
         </button>
       </div>
       {!isMinimized && (
@@ -26,16 +26,16 @@ const Sidebar = () => {
               <a href="dashboard">Dashboard</a>
             </li>
             <li>
-              <a href="Studentissue">Report an Issue</a>
+              <a href="Studentissue">Respond to Students</a>
             </li>
             <li>
               <a href="#view-issues">View all Issues</a>
             </li>
             <li>
-              <a href="#profile">Student Profile</a>
+              <a href="#profile">Your Profile</a>
             </li>
             <li>
-              <a href="#">Student Profile</a>
+              <a href="#">GAY?</a>
             </li>
           </ul>
           {/* <br></br>         using br tag to add space btn the listitems and logo */}
@@ -54,4 +54,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default LecturerSidebar;

@@ -12,7 +12,7 @@ const RegistrarSidebar = () => {
   return (
     <div className={`registrar-sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
       <button className="toggle-btn" onClick={toggleSidebar}>
-        {isExpanded ? '❌' : '🚥'}
+        {isExpanded ? '🚥' : '🚦'}
       </button>
       <nav>
         <ul>
