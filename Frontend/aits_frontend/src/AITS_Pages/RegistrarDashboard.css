@@ -115,7 +115,7 @@
 
 .registrar-dashboard-header img {
  width: 80px;
- display: flex;
+ /* display: flex; */
  align-items: center;
 }
 

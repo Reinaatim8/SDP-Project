@@ -16,6 +16,7 @@ const StudentDashboard = () => {
       <div className="student-dashboard-content">
         <div className="student-dashboard-panel">
           <div className="student-dashboard-header">
+            <img src="/images/academician.png" alt="student logo"/>
             <h2 className="student-dashboard-title">Glad to see you back!</h2>
             <p className="student-dashboard-subtitle">Track your academic progress and stay organized.</p>
           </div>
