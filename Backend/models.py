@@ -26,6 +26,8 @@ class Student(models.Model):
     
     class Meta:
         db_table = 'students'
+           #Defines student model with unique ID.
+
 
 class Lecturer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
