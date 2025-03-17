@@ -52,8 +52,16 @@ const WelcomePage = () => {
 
       {/* Footer */}
       <footer className="footer">
+        <div className='footer-div'>
+          <div>lorem ddddddddddddd</div>
+          <div>loremloremloremloremloremloremlorem</div>
+          <div>loremloremloremloremloremlorem</div>
+
+
+        </div>
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
+      
     </div>
   );
 };

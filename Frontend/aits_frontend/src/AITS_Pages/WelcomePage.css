@@ -149,3 +149,15 @@
     transform: translateX(-50%);
   }
 }
+
+
+.footer-div{
+  box-sizing: border-box;
+  display: flex;
+  float: none;
+  line-height: 24px;
+  position: static;
+  z-index: auto;
+  flex-wrap: wrap;
+  
+}
