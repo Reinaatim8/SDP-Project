@@ -2,23 +2,28 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WelcomePage from './AITS_Pages/WelcomePage';
 import SignUpPage from './AITS_Pages/SignUpPage';
-// import LoginPage from './AITS_Pages/LoginPage';
+import Loginpage from './AITS_Pages/LoginPage';
+import StudentDashboard from './AITS_Pages/StudentDashboard'; 
+import StudentIssueReport from './AITS_Pages/StudentIssueReport';
+import LecturerDashboard from './AITS_Pages/LecturerDashboard';
+import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
 
-import Welcomepage from './AITS_Pages/Welcomepage';
-// import Loginpage from './AITS_Pages/Login page';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        {/* <Route path="/" element={<LoginPage />} /> */}
-=======
-        <Route path="/" element={<Welcomepage />} />
-        <Route path="/" element={<Loginpage />} />
+        <Route path="/signup" element={<SignUpPage />} />//
+        <Route path="/login" element={<Loginpage />} />
+        <Route path="/StudentDashboard" element={<StudentDashboard />} /> 
+        <Route path="/StudentIssueReport" element={<StudentIssueReport/>} />
+        <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
+        <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />
+
       </Routes>
     </Router>
   );
 }
+
 export default App;
