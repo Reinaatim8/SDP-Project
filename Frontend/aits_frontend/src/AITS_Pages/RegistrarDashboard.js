@@ -20,7 +20,7 @@ const RegistrarDashboard = () => {
               <button className="registrar-dashboard-btn registrar-dashboard-btn-primary">View Students</button>
             </div>
             <div className="registrar-dashboard-section-image">
-              <img src="/images/student.png" alt="Student Management" />
+              <img src="/images/student.gif" alt="Student Management" />
             </div>
           </div>
           <div className="registrar-dashboard-section registrar-dashboard-course-management">
@@ -30,7 +30,7 @@ const RegistrarDashboard = () => {
               <button className="registrar-dashboard-btn registrar-dashboard-btn-primary">Manage Courses</button>
             </div>
             <div className="registrar-dashboard-section-image">
-              <img src="/images/courses.png" alt="Course Management" />
+              <img src="/images/courses.gif" alt="Course Management" />
             </div>
           </div>
           <div className="registrar-dashboard-section registrar-dashboard-reports" id='reports-section'>
@@ -40,7 +40,7 @@ const RegistrarDashboard = () => {
               <button className="registrar-dashboard-btn registrar-dashboard-btn-primary">View Reports</button>
             </div>
             <div className="registrar-dashboard-reports-image">
-              <img src="/images/analytics.png" alt="Reports and Analytics" />
+              <img src="/images/statistics.gif" alt="Reports and Analytics" />
             </div>
           </div>
           <div className="registrar-dashboard-section registrar-dashboard-notifications">
@@ -50,7 +50,7 @@ const RegistrarDashboard = () => {
               <button className="registrar-dashboard-btn registrar-dashboard-btn-primary">View Notifications</button>
             </div>
             <div className="registrar-dashboard-section-image">
-              <img src="/images/notifications.png" alt="Notifications" />
+              <img src="/images/notifications.gif" alt="Notifications" />
             </div>
           </div>
         </div>

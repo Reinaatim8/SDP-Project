@@ -149,9 +149,9 @@ const Loginpage = () => {
   </div>
   </div>
   </div>
-  <div className="footer">
+  <footer className="footer">
     <p>&copy; 2025 AITS. All rights reserved.</p>
-  </div>
+  </footer>
 
   </div>
   
