@@ -213,7 +213,12 @@ a{ color: #c07d00;}
   width: 50px;
   
 }
-
+.divone ul li:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+  filter: brightness(120%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+}
 #footer-footer{
   font-family: sans-serif;
   font-weight: bold;

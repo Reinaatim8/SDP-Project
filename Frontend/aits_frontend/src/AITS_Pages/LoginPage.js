@@ -93,27 +93,24 @@ const Loginpage = () => {
   return (
    <div className="Login-container">
    {/*Background picture on login form*/}
-   <div className="left">
-   <div className="image-container">
-    </div>
-    </div>
 
     {/*Login form*/}
+
   <div className='right'>
   <div className="container">
    <div className="card">
     <h1>AITS</h1>
-    <h2>LOGIN</h2>
-    <p style={{color:'black'}}>"Submit, track, and resolve academic matters seamlessly."</p>
+    <img src='/images/nobgmaklogo.png' id='maklogologin'/>
+    <p style={{color:'white'}}>"Submit, track, and resolve academic matters seamlessly."</p>
     
     {/* Display error message if exists */}
-    {error && <p style={{ color: 'red',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '20px', textDecoration: 'none', content: 'open-quote', content: 'close-quote' }}>{error}</p>}
+    {error && <p style={{ color: 'white',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '15px', textDecoration: 'none', content: 'open-quote', content: 'close-quote' }}>{error}</p>}
 
    {/*Form for the user to input their login details*/}
     <form onSubmit={handleSubmit}>
      <div className="form-group">
       <div>
-        <label htmlFor="username" style={{fontWeight: 'bold'}}>Username</label><br/>
+        <label htmlFor="username" style={{fontWeight: 'bold'}}>Username</label>
         <input 
         type="text" 
         name="username" 
@@ -123,7 +120,7 @@ const Loginpage = () => {
     </div>
     
     <div>
-      <label htmlFor="password" style={{fontWeight: 'bold'}}>Password</label><br/>
+      <label htmlFor="password" style={{fontWeight: 'bold'}}>Password</label>
       <input 
       type="password" 
       name="password" 
@@ -139,8 +136,8 @@ const Loginpage = () => {
     >Remember Me</label>
       </div>
   <br/>
-  <div>
-    <button type="submit" className='button'> {loading ? <span className="spinner"></span> : 'LOGIN'}
+  <div id='login-bttn'>
+    <button type="submit" className='button-login'> {loading ? <span className="spinner"></span> : 'LOGIN'}
     </button>
    </div> 
   </div>
@@ -151,10 +148,11 @@ const Loginpage = () => {
      </form>
   </div>
   </div>
+  </div>
   <div className="footer">
     <p>&copy; 2025 AITS. All rights reserved.</p>
   </div>
-  </div>
+
   </div>
   
   
