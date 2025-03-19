@@ -86,6 +86,7 @@ const StudentIssueReport = () => {
           <div>
           {/* Submit Button */}
           <button type="submit" className="student-issue-report-submit-button">Submit Issue</button>
+          </div>
         </form>
       </div>
       
