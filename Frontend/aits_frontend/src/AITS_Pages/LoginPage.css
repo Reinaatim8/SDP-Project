@@ -1,50 +1,38 @@
-.body{
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-  background-image: url('../images/pic.jpg') blur(5px);
-  background-size: 100%;
-
-  
-}
 .card{
-  width: 500px;
-  height: 680px;
+  width: 400px;
+  /* height: 600px; */
   border-color: 1px solid #333;
   margin: 0 auto;
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   background-color: transparent;
   text-align: center;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: sans-serif;
   page: center;
-  background: rgb(214, 246, 251);
-  background: rgb(228, 249, 252);
+  background: #0f1e2e;
+  /* background-image: linear-gradient(315deg, #f0f0f0 0%, #ffffff 74%); */
   border-style: groove 5px;
+  transform: scale(0.9);
   
 
 }
 .card h1{
   
     font-weight: bolder;
-    color: black;
+    font-size: 45px;
+    color: rgb(255, 255, 255);
     font-style: bold;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;;
-    text-decoration: underline;
     text-shadow: 2px 2px 5px #333;
-    letter-spacing: 5px;
+    margin: 0%;
+    /* letter-spacing: 5px; */
 }
 .card div{
-  margin: 10px 0;
+  /* margin: 10px 0; */
 }
 .right{
-  float: right;
-  size: 50%;
+  /* float: right; */
+  /* size: 50%; */
 }
 .left{
   float: left;
@@ -56,46 +44,51 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: transparent;
+  /* background-color: transparent; */
   padding: 20px;
-  border-radius: 10px;
-  width: 60vh;
-  height: 65.7vh;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-color: black;
-  border-style: groove;
+  /* border-radius: 10px; */
+  /* width: 60vh; */
+  /* height: 65.7vh; */
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+  /* border-color: black; */
+  /* border-style: groove; */
+  margin: 0;
 }
 .card h1{
-  font-size: 4rem;
+  /* font-size: 4rem; */
   font-weight: bold;
-  color:black;
+  color:rgb(238, 230, 230);
   text-shadow: #333;
 }
 .card h2{
-  font-size: 2rem;
+  /* font-size: 2rem; */
   font-weight: bold;
-  color: #333;
+  color: #e7e5e5;
 }
 .card p{
-  font-size: 1.2rem;
-  color: black;
+  /* font-size: 1.2rem; */
+  color: #f3f0ea;
   letter-spacing: 0px;
   font-family: 'Times New Roman', Times, serif;
-  text-decoration: underline black;
   text-align: center;
 }
 
 .footer{
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  background-color: transparent;
-  color: white;
+  color: #dde5eb;
+  justify-content: baseline;
+  padding: 10px 0;
+  place-content: bottom;
+  font-weight: 900;
+  margin-top: 30px;
+  margin-bottom: 0%;
+  font-size: 10px;
   text-align: center;
   padding: 10px 0;
-  place-content: center;
-  font-weight: 900;
+  background-color: transparent;
+  width: 100%;
 }
 .image-container{
  position: relative;
@@ -106,12 +99,12 @@
 
 
 }
-.button{
+.button-login{
   width: 95%;
   padding: 0.5rem;
-  background-color: #3498db;
-  color: white;
-  border: none;
+  background-color: #0f1e2e;
+  color: #f0a500;
+  border: 2px solid #f0a500;
   border-radius: 5px;
   font-size: 25px;
   cursor: pointer;
@@ -120,8 +113,8 @@
   align-items: center;
   font-weight: 900;
 }
-.button:hover{
- background-color: #0d82d0;
+.button-login:hover{
+ background-color: #123f5e;
 }
 .image-container img{
 width: 100%;
@@ -156,8 +149,9 @@ flex-direction: column;
   align-items: center;
   height: 100vh;
   flex-direction: column;
-   background-image: url('../images/pic.jpg') ; 
-  background-size: 100%;
+  background-size: cover;
+  background-image: url('../images/mukone.jpg')  ; 
+
 }
 .spinner {
   width: 20px;
@@ -172,4 +166,32 @@ flex-direction: column;
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.right{
+  margin: 0;
+}
+
+.form-group label{
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: #f0a500;
+}
+
+.form-group input{
+  width: 380px;
+}
+
+#login-bttn{
+text-align: center;
+}
+
+#maklogologin{
+  width: 120px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.dupediv{
+  height:100px;
 }

@@ -1,0 +1,2 @@
+Academic Issue Tracking System (AITS)
+The Academic Issue Tracking System is a web-based application developed using Django, designed to streamline the reporting and resolution of academic-related issues within educational institutions. This system provides a centralized platform where students, faculty, and administrative staff can report, track, and manage academic concerns efficiently.1

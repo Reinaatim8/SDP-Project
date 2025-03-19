@@ -1,8 +1,8 @@
-/* Sidebar Styles */
-.sidebar {
+/* Student Sidebar Styles */
+.student-sidebar {
   width: 250px;
   height: 100vh;
-  background: #36664a;
+  background: #04a652;
   color: white;
   padding: 20px;
   position: fixed;
@@ -11,25 +11,27 @@
   transition: width 0.3s ease;
   overflow: hidden;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  font-weight: bold;
 }
 
-.sidebar.minimized {
-  width: 60px;
+.student-sidebar-minimized {
+  width: 20px;
 }
 
-.sidebar-header {
+.student-sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.sidebar-header h2 {
+.student-sidebar-title {
   font-size: 1.5rem;
   white-space: nowrap;
 }
 
-.minimize-btn {
+.student-sidebar-minimize-btn {
   background: none;
   border: none;
   color: white;
@@ -38,20 +40,21 @@
   transition: transform 0.3s ease;
 }
 
-.minimize-btn:hover {
+.student-sidebar-minimize-btn:hover {
   transform: scale(1.2);
 }
 
-.sidebar-nav ul {
+.student-sidebar-nav ul {
   list-style: none;
   padding: 0;
 }
 
-.sidebar-nav li {
+.student-sidebar-list-item {
   margin: 15px 0;
 }
 
-.sidebar-nav a {
+.student-sidebar-link {
+  
   color: white;
   text-decoration: none;
   font-size: 1.1rem;
@@ -61,8 +64,8 @@
   transition: background 0.3s ease;
 }
 
-.sidebar-nav a:hover {
-  background: #49574b;
+.student-sidebar-link:hover {
+  background: #1abc9c;
 }
 
 /* Adjust content when sidebar is minimized */
@@ -71,14 +74,12 @@
   transition: margin-left 0.3s ease;
 }
 
-.sidebar.minimized + .dashboard-content {
+.student-sidebar-minimized + .dashboard-content {
   margin-left: 60px;
 }
 
-.schoollogo {
-  
+.student-sidebar-schoollogo {
   width: 180px;
   margin-right: 180px;
   margin-left: 30px;
 }
-

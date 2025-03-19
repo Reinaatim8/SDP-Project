@@ -51,9 +51,46 @@ const WelcomePage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="footer">
-        <p>&copy; 2025 AITS. All rights reserved.</p>
+      <footer className="footer-welcome">
+        <div id='footer-daddy'>
+        <div className='footer-div'>
+          <div className='divone' id='divOne'>
+                                    <h2>ABOUT</h2>
+                                    <p>AITS (Academic Issue Tracking System) is operated by the IT Support Unit
+                                    , within the Faculty of Computing and Informatics. This platform is developed and updated by the 
+                                    Systems Administration Team. For more information, please contact us via makerere@mak.ac.ug or
+                                    elearning@mak.ac.ug.You will need a University email address to complete the AITS account creation process. 
+                                    Students without University Email Addresses should write to or visit the College ICT personnel listed here in the College
+                                     Contacts to have a working one created or re-activated to enable you to access AITS with ease.</p>
+                                     </div>
+          <div className='divone'>
+            <h2>INFO</h2>
+            <ul>
+              <li><a href='https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://mak.ac.ug/&ved=2ahUKEwiy9s3XipKMAxUyhf0HHRZFClgQFnoECAwQAQ&usg=AOvVaw3NazKROMvUyH2a4dN4fqCU'>Makerere main site</a></li>
+              <li><a href='https://intranet.mak.ac.ug/'>Intranet</a></li>
+              <li><a href='http://cees.mak.ac.ug/'>College of Education & External Studies</a></li>
+              <li><a href="https://support.mak.ac.ug/">Support DICTS</a></li>
+              <li><a href='#'><strong>credit GroupQ</strong></a></li>
+            </ul>
+            
+            </div>
+
+          <div className='divone'>            
+          <h2>FOLLOW US</h2>
+          <ul>
+            <li><img src='/images/X.png'/></li>
+            <li><img src='/images/whatsapp.png'/></li>
+            <li><img src='images/messenger.png'/></li>
+            <li><img src='/images/instagram.png' id='instagram'/></li>
+          </ul>
+          </div>
+
+
+        </div>
+        </div>
+        <p id='footer-footer'>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
+      
     </div>
   );
 };
