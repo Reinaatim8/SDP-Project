@@ -49,3 +49,17 @@ class Issue(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.status}) - Priority: {self.priority}"
+
+def send_notification(self, subject, message):
+        """Send email notifications to the assigned user and issue creator."""
+        recipients = [self.created_by.email]
+        if self.assigned_to:
+            recipients.append(self.assigned_to.email)
+
+        send_mail(
+            subject,
+            message,
+            'no-reply@aits.com',
+            recipients,
+            fail_silently=True,
+        )
