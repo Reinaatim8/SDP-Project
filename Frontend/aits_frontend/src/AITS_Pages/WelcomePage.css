@@ -135,7 +135,7 @@
 .footer-welcome {
   background-color: #0f1e2e;
   color: white;
-  text-align: center;
+  text-align: center; 
   padding: 0.5rem 0; /* use rem */
   margin-top: auto;
 }

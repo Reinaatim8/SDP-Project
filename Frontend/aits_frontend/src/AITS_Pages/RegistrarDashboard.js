@@ -24,7 +24,7 @@ const RegistrarDashboard = () => {
             </div>
           </div>
           <div className="registrar-dashboard-section registrar-dashboard-course-management">
-            <div className="registrar-dashboard-section-content">
+            <div className="registrar-dashboard-section-content" >
               <h3 className="registrar-dashboard-section-heading">Course Management 🏢</h3>
               <p className="registrar-dashboard-section-text">Oversee course offerings, enrollments, and schedules.</p>
               <button className="registrar-dashboard-btn registrar-dashboard-btn-primary">Manage Courses</button>
@@ -59,6 +59,7 @@ const RegistrarDashboard = () => {
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
     </div>
+  </div>
   );
 };
 
