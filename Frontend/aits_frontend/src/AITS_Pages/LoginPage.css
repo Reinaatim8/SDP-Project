@@ -24,7 +24,7 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   page: center;
   background: rgb(214, 246, 251);
-  background-image: linear-gradient(315deg, #f0f0f0 0%, #ffffff 74%);
+  background: rgb(228, 249, 252);
   border-style: groove 5px;
   
 
@@ -138,6 +138,17 @@ padding: 0;
 display: flex;
 flex-direction: column;
 
+
+}
+.form-group :focus{
+  width: 90%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  border-color: #3498db;
+    outline: none;
 }
 .Login-container{
   display: block;
@@ -145,7 +156,7 @@ flex-direction: column;
   align-items: center;
   height: 100vh;
   flex-direction: column;
-   background-image: url('../images/pic.jpg')  ; 
+   background-image: url('../images/pic.jpg') ; 
   background-size: 100%;
 }
 .spinner {

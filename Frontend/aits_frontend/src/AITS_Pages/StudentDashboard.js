@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import "./StudentDashboard.css";
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
   const handleReportIssue = () => {
     navigate('/issue-report');
   };
@@ -16,7 +23,7 @@ const StudentDashboard = () => {
       <div className="dashboard-content">
         <div className="dashboard-panel">
           <div className="dashboard-header">
-            <h2>Glad to see you back!</h2>
+            <h2>Glad to see you back, {user}!</h2>
             <p className="subtitle">Track your academic progress and stay organized.</p>
           </div>
           <div className="dashboard-buttons">

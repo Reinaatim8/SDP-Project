@@ -19,9 +19,9 @@ const WelcomePage = () => {
           <span className="logo">AITS</span>
         </div>
         <div className="navbar-right">
-          <Link to="/about" className="nav-link">ABOUT</Link>
+          <Link to="/Aboutpage" className="nav-link">ABOUT</Link>
           <Link to="/features" className="nav-link">FEATURES</Link>
-          <Link to="/contact" className="nav-link">CONTACT</Link>
+          <Link to="/Aboutpage" className="nav-link">CONTACT</Link>
         </div>
       </nav>
 

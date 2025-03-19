@@ -25,9 +25,23 @@ const StudentIssueReport = () => {
       <Sidebar />
       <div className="issue-report-content">
         <h1>📩 Report an Issue</h1>
-        <p>Select a lecturer, categorize your issue, and describe it below.</p>
+        <p>Select a lecturer, categorize your issue, provide cousre code and describe it below.</p>
 
         <form className="issue-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+        <label>Issue Title / Subject:</label>
+              <input
+                type="text"
+                placeholder="Issue Title..."
+                value={customTag}
+                onChange={(e) => {
+                  setCustomTag(e.target.value);
+                  setSelectedTag(""); // Clear predefined tags when custom is typed
+                }}
+                className="custom-tag-input"
+              />
+            </div>
+
           {/* Lecturer Selection */}
           <div className="form-group">
             <label>Select Lecturer:</label>
@@ -48,17 +62,20 @@ const StudentIssueReport = () => {
                   {tag}
                 </button>
               ))}
-              <input
+              <div>
+              <label>Course Code:</label>
+              <input className="coursecode-input"
                 type="text"
-                placeholder="Custom tag..."
+                placeholder="Enter the Course Code..."
                 value={customTag}
                 onChange={(e) => {
                   setCustomTag(e.target.value);
                   setSelectedTag(""); // Clear predefined tags when custom is typed
                 }}
-                className="custom-tag-input"
+                
               />
             </div>
+          </div>
           </div>
 
           {/* Issue Description */}
@@ -72,11 +89,21 @@ const StudentIssueReport = () => {
               required
             />
           </div>
-
+          <div>
+              <label>Attachment (Optional)</label>
+              <br></br>
+              <div>
+              <input  className='attachment'type="file" id="myFile" name="filename"></input>
+              </div>
+          </div>
+          <br></br>
+          <div>
           {/* Submit Button */}
           <button type="submit" className="submit-button">Submit Issue</button>
+          </div>
         </form>
       </div>
+      
     </div>
   );
 };

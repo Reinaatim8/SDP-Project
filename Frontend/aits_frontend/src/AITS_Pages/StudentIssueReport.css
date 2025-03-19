@@ -40,6 +40,7 @@
   
   .form-group {
     margin-bottom: 15px;
+    width: 100%;
   }
   
   .form-group label {
@@ -69,6 +70,7 @@
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
+    width:23%;
   }
   
   .tag-button.selected {
@@ -76,11 +78,22 @@
     color: white;
   }
   
-  .custom-tag-input {
-    flex-grow: 1;
+  .coursecode-input {
+  
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 100%;
+  }
+  .coursecode-input:focus {
+    border-color: #007bff;
+  }
+  .attachment {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+
   }
   
   /* Submit Button */

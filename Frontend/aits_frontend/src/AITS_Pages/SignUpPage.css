@@ -49,6 +49,7 @@
   .form-group {
     margin-bottom: 1rem;
     text-align: left;
+    width: 90%;
   }
   
   .form-group label {
@@ -83,7 +84,7 @@
   }
   
   .form-field input {
-    width: 100%;
+    width: 90%;
   }
   
   .error {

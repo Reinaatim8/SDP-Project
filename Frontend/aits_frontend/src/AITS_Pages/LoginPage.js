@@ -111,7 +111,7 @@ const Loginpage = () => {
         <input 
         type="text" 
         name="username" 
-        placeholder="Username" 
+        placeholder="Enter your Username" 
         value={username}
         onChange={(e) => setUsername(e.target.value)} required/>
     </div>
@@ -121,7 +121,7 @@ const Loginpage = () => {
       <input 
       type="password" 
       name="password" 
-      placeholder="Password" 
+      placeholder="Enter your Password" 
       value={password}
       onChange={(e) => setPassword(e.target.value)}required
       />
