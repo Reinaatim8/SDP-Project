@@ -31,13 +31,13 @@ const SignUpPage = () => {
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
 
+
 //To valiadte and ensure a strong password is created by the user
   const validatePassword = (password) => {
     const minLength = 8;
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumbers = /[0-9]/.test(password);
-    const hasSpecialCharacters = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
+   
     if (password.length < minLength) {
       return `Password must be at least ${minLength} characters long.`;
     }
@@ -46,9 +46,6 @@ const SignUpPage = () => {
     }
     if (!hasNumbers) {
       return 'Password must contain at least one number.';
-    }
-    if (!hasSpecialCharacters) {
-      return 'Password must contain at least one special character.';
     }
 
     return null; // Password is strong enough to continue

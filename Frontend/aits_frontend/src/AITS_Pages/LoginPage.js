@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.css';
@@ -9,7 +9,6 @@ const Loginpage = () => {
   const [password, setPassword] = useState(''); // Controlled input for password
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
   // Handle form submission
@@ -32,11 +31,6 @@ const Loginpage = () => {
       // Save the token in local storage
       localStorage.setItem('token', response.data.access_token);
       
-      //To rememebr login details of user
-      if (rememberMe) {
-        localStorage.setItem('rememberMe', 'true');
-      }
-    
       // Determine the user's role and navigate accordingly
       const user_type = response.data.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
@@ -126,15 +120,10 @@ const Loginpage = () => {
       name="password" 
       placeholder="Password" 
       value={password}
-      onChange={(e) => setPassword(e.target.value)}required/>
+      onChange={(e) => setPassword(e.target.value)}required
+      />
     </div>
-    <div>
-    <label htmlFor="rememberMe" input style={{fontWeight: 'bold'}} type="checkbox"
-       id="rememberMe"
-       checked={rememberMe}
-       onChange={(e) => setRememberMe(e.target.checked)}
-    >Remember Me</label>
-      </div>
+    
   <br/>
   <div id='login-bttn'>
     <button type="submit" className='button-login'> {loading ? <span className="spinner"></span> : 'LOGIN'}

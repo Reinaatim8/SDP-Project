@@ -5,7 +5,7 @@ class User(AbstractUser):
     USER_TYPES = (
         ('student', 'Student'),
         ('lecturer', 'Lecturer'),
-        # ('admin', 'Admin')
+        ('admin', 'Admin')
     )
     
     user_type = models.CharField(max_length=30, choices=USER_TYPES)
@@ -26,6 +26,8 @@ class Student(models.Model):
     
     class Meta:
         db_table = 'students'
+           #Defines student model with unique ID.
+
 
 class Lecturer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
