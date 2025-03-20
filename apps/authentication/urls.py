@@ -18,5 +18,5 @@ urlpatterns = [
     path('auth-token/', obtain_auth_token, name='auth-token'),
     path('test', TestView.as_view(), name='test-view'),
     path('register/admin', AdminRegistrationView.as_view(), name='register-admin'),
-     path('', my_view, name="auth_home"),
+    path('', my_view, name="auth_home"),
 ]

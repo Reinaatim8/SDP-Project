@@ -1,5 +1,14 @@
 from pathlib import Path
 import os
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,6 +22,14 @@ DEBUG =True
 #ALLOWED_HOSTS = ['kennedymutebi.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 # Application definition
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
+EMAIL_PORT = 587  # Typically 587 for TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kennedymutebi7@gmail.com'  # Replace with your email
+EMAIL_HOST_PASSWORD = 'PSS@12345'  # Replace with your password
+DEFAULT_FROM_EMAIL = 'kennedymutebi7@gmail.com'  # Replace with your from email
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework.authtoken',
+    
+    'whitenoise.runserver_nostatic',
+    
+
+    
+
     
 
 
@@ -30,18 +52,28 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     "drf_spectacular",
+    'rest_framework.authtoken',
     
     
     # Local apps
     'apps.authentication',
     'apps.issues',
+    
     'apps.notifications',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
-    ]
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
+    
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,11 +110,11 @@ WSGI_APPLICATION = 'aits_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bsbsospksvhgffxmycgectdm',
-        'USER': 'xrpkupbggoygzcxj',
-        'PASSWORD': 'Dm_#GSYN-MoJhk2V9L=FgRV0%8B,n<10',
-        'HOST': '102.134.147.233',
-        'PORT': '32764',
+        'NAME': 'aits',
+        'USER': 'root',
+        'PASSWORD': 'PSS@12345',
+        'HOST': 'localhost',
+        'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
             'charset': 'utf8mb4',
@@ -138,12 +170,15 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',  # Optionally include this
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated'
+
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
 
