@@ -161,4 +161,21 @@
   #department{
     width: 500px;
   }
-  
+  #username{
+    width: 500px;
+  }
+  #email{
+    width: 500px;
+  }
+  #program{
+    width: 500px;
+  }
+  #student_id{
+    width: 500px;
+  }
+  #year_of_study{
+    width: 500px;
+  }
+  #user_type{
+    width: 500px;
+  }

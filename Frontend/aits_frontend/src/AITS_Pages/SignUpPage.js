@@ -221,7 +221,7 @@ const SignUpPage = () => {
               {errors.password && <span className="error">{errors.password}</span>}
             </div>
             <div className="form-field">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label id='username' htmlFor="confirmPassword">Confirm Password</label>
               <input
                 type="password"
                 id="confirmPassword"
