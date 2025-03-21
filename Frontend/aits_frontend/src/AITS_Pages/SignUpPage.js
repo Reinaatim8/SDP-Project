@@ -156,6 +156,7 @@ const SignUpPage = () => {
     <div className="signup-panel">
     <div className="signup-container">
       <div className="signup-card">
+        <img src='/images/nobgmaklogo.png'alt='maklogo'/ >
         <h2 className="signup-title">Sign Up To Start</h2>
         <form onSubmit={handleSubmit}>
 
@@ -220,7 +221,7 @@ const SignUpPage = () => {
               {errors.password && <span className="error">{errors.password}</span>}
             </div>
             <div className="form-field">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label id='username' htmlFor="confirmPassword">Confirm Password</label>
               <input
                 type="password"
                 id="confirmPassword"
@@ -281,7 +282,7 @@ const SignUpPage = () => {
             )}
 
             {/* Year of Study */}
-            <div className="form-group">
+            <div className="form-group" id='year'>
               <label htmlFor="year_of_study">Year of Study (Optional)</label>
               <input
                 type="text"
@@ -309,7 +310,7 @@ const SignUpPage = () => {
           </div>
 
           {/* Department */}
-          <div className="form-group">
+          <div className="form-group" id='department'>
             <label htmlFor="department">Department (Optional)</label>
             <input
               type="text"
