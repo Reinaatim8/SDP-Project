@@ -50,7 +50,7 @@ const StudentIssueReport = () => {
               ))}
               <div>
               <label>Course Code:</label>
-              <input className="coursecode-input"
+              <input 
                 type="text"
                 placeholder="Enter the Course Code..."
                 value={customTag}
