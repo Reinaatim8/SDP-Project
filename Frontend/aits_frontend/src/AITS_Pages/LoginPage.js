@@ -98,7 +98,7 @@ const Loginpage = () => {
     <p style={{color:'white'}}>"Submit, track, and resolve academic matters seamlessly."</p>
     
     {/* Display error message if exists */}
-    {error && <p style={{ color: 'white',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '15px', textDecoration: 'none', content: 'open-quote', content: 'close-quote' }}>{error}</p>}
+    {error && <p style={{ color: 'red',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '15px', textDecoration: 'none', content: 'open-quote', content: 'close-quote' }}>{error}</p>}
 
    {/*Form for the user to input their login details*/}
     <form onSubmit={handleSubmit}>

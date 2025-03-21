@@ -59,7 +59,7 @@ const RegistrarDashboard = () => {
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
     </div>
-  </div>
+  
   );
 };
 
