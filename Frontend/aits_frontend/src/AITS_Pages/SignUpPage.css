@@ -55,6 +55,7 @@
   .form-group {
     margin-bottom: 1rem;
     text-align: left;
+    width: 90%;
   }
   
   .form-group label {

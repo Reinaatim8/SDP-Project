@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const LecturerDropdown = ({ onSelect }) => {
-  const lecturers = ["Dr. Smith", "Prof. Jane Doe", "Mr. John Doe"]; // 🔥 Replace with real data later
+  const lecturers = ["Dr. Smith", "Prof. Jane Doe", "Mr. John Doe"]; //lecturers list
   const [selectedLecturer, setSelectedLecturer] = useState('');
 
   const handleChange = (e) => {

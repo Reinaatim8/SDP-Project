@@ -48,9 +48,11 @@ const StudentIssueReport = () => {
                   {tag}
                 </button>
               ))}
-              <input
+              <div>
+              <label>Course Code:</label>
+              <input 
                 type="text"
-                placeholder="Custom tag..."
+                placeholder="Enter the Course Code..."
                 value={customTag}
                 onChange={(e) => {
                   setCustomTag(e.target.value);
@@ -59,6 +61,7 @@ const StudentIssueReport = () => {
                 className="student-issue-report-custom-tag-input"
               />
             </div>
+          </div>
           </div>
 
           {/* Issue Description */}
@@ -72,11 +75,21 @@ const StudentIssueReport = () => {
               required
             />
           </div>
-
+          <div>
+              <label>Attachment (Optional)</label>
+              <br></br>
+              <div>
+              <input  className='attachment'type="file" id="myFile" name="filename"></input>
+              </div>
+          </div>
+          <br></br>
+          <div>
           {/* Submit Button */}
           <button type="submit" className="student-issue-report-submit-button">Submit Issue</button>
+          </div>
         </form>
       </div>
+      
     </div>
   );
 };

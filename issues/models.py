@@ -1,12 +1,65 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+# User Roles
+class CustomUser(AbstractUser):
+    # Define your custom fields here, if any
+    role = models.CharField(max_length=50, blank=True, null=True)
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_set',  # Use a unique related_name
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_permissions',  # Use a unique related_name
+        blank=True
+    )
+
+    
+
+# Issue Tracking Model
 class Issue(models.Model):
+    OPEN = 'open'
+    CLOSED = 'closed'
+    
+    STATUS_CHOICES = [
+        (OPEN, 'Open'),
+        (CLOSED, 'Closed')
+    ]
+    
+    LOW = 'low'
+    MEDIUM = 'medium'
+    HIGH = 'high'
+    
+    PRIORITY_CHOICES = [
+        (LOW, 'Low'),
+        (MEDIUM, 'Medium'),
+        (HIGH, 'High')
+    ]
+
     title = models.CharField(max_length=200)
     description = models.TextField()
+    created_by = models.ForeignKey(CustomUser, on_delete=models.SET_DEFAULT, default=True)  
+    assigned_to = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='issues_assigned')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=50, choices=[('open', 'Open'), ('closed', 'Closed')], default='open')
-    priority = models.CharField(max_length=50, choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], default='medium')
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=OPEN)
+    priority = models.CharField(max_length=50, choices=PRIORITY_CHOICES, default=MEDIUM)
 
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.status}) - Priority: {self.priority}"
+
+def send_notification(self, subject, message):
+        """Send email notifications to the assigned user and issue creator."""
+        recipients = [self.created_by.email]
+        if self.assigned_to:
+            recipients.append(self.assigned_to.email)
+
+        send_mail(
+            subject,
+            message,
+            'no-reply@aits.com',
+            recipients,
+            fail_silently=True,
+        )

@@ -8,7 +8,7 @@ const RegistrarDashboard = () => {
       <RegistrarSidebar />
       <div className="registrar-dashboard-content">
         <div className="registrar-dashboard-header">
-        <img src='/images/registrarlogo.png' alt='registrarlogo'/ >
+        <img src='/images/registrarlogo.png' alt="registrarlogo"/ >
           <h2 className="registrar-dashboard-title">Registrar Dashboard</h2>
           <p className="registrar-dashboard-subtitle">Welcome! Manage student records and administrative tasks.</p>
         </div>
@@ -59,6 +59,7 @@ const RegistrarDashboard = () => {
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
     </div>
+  
   );
 };
 

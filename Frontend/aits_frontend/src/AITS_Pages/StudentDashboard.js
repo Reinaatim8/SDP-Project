@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
 import "./StudentDashboard.css";
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
   const handleReportIssue = () => {
     navigate('/issue-report');
   };
