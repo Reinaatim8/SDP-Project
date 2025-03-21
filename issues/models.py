@@ -49,17 +49,13 @@ class Issue(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.status}) - Priority: {self.priority}"
-
-def send_notification(self, subject, message):
-        """Send email notifications to the assigned user and issue creator."""
-        recipients = [self.created_by.email]
-        if self.assigned_to:
-            recipients.append(self.assigned_to.email)
-
-        send_mail(
-            subject,
-            message,
-            'no-reply@aits.com',
-            recipients,
-            fail_silently=True,
-        )
+    
+    # Notification Model
+class Notification(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notifications")
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Notification for {self.user.username} - {self.message[:50]}"
