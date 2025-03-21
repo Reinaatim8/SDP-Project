@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 # User Roles
 class CustomUser(AbstractUser):
     # Define your custom fields here, if any
@@ -16,7 +17,6 @@ class CustomUser(AbstractUser):
         blank=True
     )
 
-    
 
 # Issue Tracking Model
 class Issue(models.Model):
@@ -52,6 +52,8 @@ class Issue(models.Model):
     
     # Notification Model
 class Notification(models.Model):
+    def some_function():
+        from .models import Notification
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notifications")
     message = models.TextField()
     is_read = models.BooleanField(default=False)

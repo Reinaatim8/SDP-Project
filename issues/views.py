@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Issue
 from .forms import IssueForm
-from .models import Notification
+from issues.models import Notification
 
 @login_required
 def issue_list(request):
