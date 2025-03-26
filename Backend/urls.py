@@ -4,8 +4,6 @@ from . import views
 from rest_framework.authtoken.views import obtain_auth_token
 
 
-
-
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'courses', views.CourseViewSet)
@@ -20,11 +18,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', obtain_auth_token, name='api_token_auth'),
-    
-
-    
-
-
-
-    #path('', views.some_view, name='issues-home'),
+    path('', views.some_view, name='issues-home'),
 ]
