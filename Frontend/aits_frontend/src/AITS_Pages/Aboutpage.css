@@ -6,7 +6,6 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: white;
 }
 .navbar {
   width: 100%;
@@ -56,6 +55,7 @@
   background-color: transparent;
   flex: 1;
   transition: margin-left 0.3s ease-in-out;
+
 }
 .logo {
   justify-content: center;
@@ -69,13 +69,14 @@
   margin-left: 0;
   background-color: rgb(185, 248, 185);
   max-height: none;
-  background-image: url('../images/makivory.png');
+  background-image: url('../images/mukone.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
+  overflow: auto;
 }
 .aboutcard{
-  background-color: rgb(215, 238, 241);
+  background-color: #0f1e2ed5;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -89,7 +90,7 @@
 }
 .contactcard{
   
-  background-color: rgb(215, 238, 241) ;
+  background-color: #0f1e2ed5;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -109,4 +110,14 @@
   width: 100%;
   padding: 0.5rem 0; 
   margin-top: auto;
+}
+
+p{
+  color: white;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+ a{
+  color: #f0a500;
 }
