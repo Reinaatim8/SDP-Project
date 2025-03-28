@@ -71,8 +71,8 @@ const LecturerSidebar = () => {
               </a>
             </li>
             <li className="lecturer-sidebar-list-item">
-              <button className="lecturer-sidebar-link lecturer-sidebar-logout-btn" onClick={handleLogout}>
-                <FaSignOutAlt className="lecturer-sidebar-icon" /> Logout
+              <button className="lecturer-sidebar-link lecturer-sidebar-logout-btn" id="logout-btn" onClick={handleLogout}>
+                <FaSignOutAlt className="lecturer-sidebar-icon" />           Logout
               </button>
             </li>
             <li>

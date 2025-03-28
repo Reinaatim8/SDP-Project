@@ -24,11 +24,12 @@
 .lecturer-dashboard-header {
   text-align: center;
   margin-bottom: 30px;
+  
 }
 
 .lecturer-dashboard-title {
-  font-size: 2.5rem;
-  color: #333;
+  font-size:3rem;
+  color: #f8f8f8;
   margin-bottom: 10px;
 }
 
@@ -85,7 +86,7 @@
 }
 
 .lecturer-dashboard-section {
-  background: #f9f9f9;
+  background: #fbda5ab0;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -171,4 +172,33 @@
   margin: 5px 0;
   font-size: 0.9rem;
   color: #333;
+}
+
+#calendar-gig{
+  width: fit-content;
+}
+.react-calendar {
+  width: 500px;
+  max-width: 100%;
+  background: white;
+  border: 1px solid white;
+  font-family: 'sans-serif', 'Helvetica', sans-serif;
+  line-height: 1.125em;
+  border-radius: 5px;
+
+}
+
+#lecturer-dashboard-header-image{
+  background-image: url('../../public/images/header.jpg');
+  border-radius: 20px;
+  background-size: cover;
+
+}
+
+#lecturer-dashboard-header-image p{
+  color: rgb(0, 0, 0);
+}
+
+#lecturer-dashboard-header-image h1{
+  color: rgb(0, 0, 0);
 }

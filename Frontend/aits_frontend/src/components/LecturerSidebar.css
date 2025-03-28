@@ -133,3 +133,9 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+#logout-btn{
+  width: 250px;
+  color: #2c3e50;
+  border: 0px;
+}
