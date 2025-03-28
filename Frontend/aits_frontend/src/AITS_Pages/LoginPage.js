@@ -30,6 +30,7 @@ const Loginpage = () => {
 
       // Save the token in local storage
       localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
       
       // Determine the user's role and navigate accordingly
       const user_type = response.data.user.user_type; // Assuming the user type is included in the response

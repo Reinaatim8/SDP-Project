@@ -1,4 +1,5 @@
 /* General Layout */
+
 .lecturer-dashboard-container {
   display: flex;
   min-height: 100vh;
@@ -137,4 +138,37 @@
 
 .lecturer-dashboard-teacherlogo {
  width: auto;
+}
+
+/* User Icon */
+.lecturer-dashboard-user-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.lecturer-dashboard-user-icon:hover {
+  color: #007bff;
+}
+
+/* User Details Popup */
+.lecturer-dashboard-user-details {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 200px;
+}
+
+.lecturer-dashboard-user-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333;
 }
