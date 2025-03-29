@@ -8,6 +8,7 @@ import StudentDashboard from './AITS_Pages/StudentDashboard';
 import StudentIssueReport from './AITS_Pages/StudentIssueReport';
 import LecturerDashboard from './AITS_Pages/LecturerDashboard';
 import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
+import RespondToQueries from './AITS_Pages/RespondToQueries';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/StudentIssueReport" element={<StudentIssueReport/>} />
         <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
         <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />
+        <Route path="/RespondToQueries" element={<RespondToQueries />} />
 
       </Routes>
     </Router>

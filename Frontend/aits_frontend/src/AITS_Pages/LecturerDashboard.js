@@ -65,7 +65,7 @@ const LecturerDashboard = () => {
               onMouseEnter={() => setShowUserDetails(true)}
               onMouseLeave={() => setShowUserDetails(false)}
             >
-              <FaUserCircle size={50} style={{padding:"30px"}}/>
+              <FaUserCircle size={50} style={{padding:"10px",paddingLeft:"10px",color:"black"}}/>
               {showUserDetails && user && (
                 <div className="lecturer-dashboard-user-details">
                   <p><strong>Username:</strong> {user.username}</p>

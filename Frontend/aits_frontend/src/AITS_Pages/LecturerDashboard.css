@@ -28,9 +28,11 @@
 }
 
 .lecturer-dashboard-title {
-  font-size:3rem;
-  color: #f8f8f8;
+  font-size:2rem;
+  color: #0e0c08c2;
   margin-bottom: 10px;
+  border-color: #007bff;
+  border: 1px solid rgba(251, 255, 0, 0.568);
 }
 
 .lecturer-dashboard-subtitle {
@@ -148,6 +150,7 @@
   right: 20px;
   cursor: pointer;
   color: #555;
+  overflow: visible;
 }
 
 .lecturer-dashboard-user-icon:hover {
@@ -201,4 +204,10 @@
 
 #lecturer-dashboard-header-image h1{
   color: rgb(0, 0, 0);
+}
+
+
+
+#lecturer-dashboard-user-icon{
+  overflow: 0;
 }
