@@ -59,13 +59,12 @@ const LecturerDashboard = () => {
             <p className="lecturer-dashboard-subtitle">
               Manage your courses, students, and academic tasks efficiently.
             </p>
-            {/* User Icon */}
             <div
               className="lecturer-dashboard-user-icon"
               onMouseEnter={() => setShowUserDetails(true)}
               onMouseLeave={() => setShowUserDetails(false)}
             >
-              <FaUserCircle size={50} style={{padding:"10px",paddingLeft:"10px",color:"black"}}/>
+              <FaUserCircle size={50} style={{ padding: "10px", paddingLeft: "10px", color: "black" }} />
               {showUserDetails && user && (
                 <div className="lecturer-dashboard-user-details">
                   <p><strong>Username:</strong> {user.username}</p>
@@ -75,6 +74,8 @@ const LecturerDashboard = () => {
               )}
             </div>
           </div>
+
+          {/* Buttons */}
           <div className="lecturer-dashboard-buttons">
             <button className="lecturer-dashboard-btn lecturer-dashboard-btn-primary" onClick={handleReportIssue}>
               <span className="lecturer-dashboard-btn-icon">📝</span>
@@ -89,8 +90,14 @@ const LecturerDashboard = () => {
               Schedule Office Hours
             </button>
           </div>
+
+          {/* Sections Grid */}
           <div className="lecturer-dashboard-sections">
+            {/* Issue Tracker Section */}
             <div className="lecturer-dashboard-section lecturer-dashboard-issue-tracker">
+              <div className="section-image-container">
+                <img src="/images/issue-tracker.png" alt="Issue Tracker" className="section-image" />
+              </div>
               <h2 className="lecturer-dashboard-section-title">📌 Issue Tracker</h2>
               <ul className="lecturer-dashboard-issue-list">
                 <li className="lecturer-dashboard-issue-item">
@@ -107,7 +114,12 @@ const LecturerDashboard = () => {
                 </li>
               </ul>
             </div>
+
+            {/* Announcements Section */}
             <div className="lecturer-dashboard-section lecturer-dashboard-announcements">
+              <div className="section-image-container">
+                <img src="/images/announcements.jpeg" alt="Announcements" className="section-image" />
+              </div>
               <h2 className="lecturer-dashboard-section-title">📢 Announcements</h2>
               <input
                 type="text"
@@ -119,68 +131,55 @@ const LecturerDashboard = () => {
               <p className="lecturer-dashboard-announcement">Faculty Meeting: March 15th, 2 PM</p>
               <p className="lecturer-dashboard-announcement">New Course Materials Available</p>
             </div>
+
+            {/* Upcoming Deadlines Section */}
             <div className="lecturer-dashboard-section lecturer-dashboard-deadlines">
+              <div className="section-image-container">
+                <img src="/images/deadlines.jpeg" alt="Deadlines" className="section-image" />
+              </div>
               <h2 className="lecturer-dashboard-section-title">📚 Upcoming Deadlines</h2>
               <p className="lecturer-dashboard-deadline">Grade Submission: March 8th</p>
               <p className="lecturer-dashboard-deadline">Research Proposal: March 22nd</p>
             </div>
-            <div className="lecturer-dashboard-section lecturer-dashboard-quick-links">
-              <h2 className="lecturer-dashboard-section-title">🔗 Quick Links</h2>
-              <ul>
-                <li><a href="/faculty-resources">Faculty Resources</a></li>
-                <li><a href="/academic-calendar">Academic Calendar</a></li>
-                <li><a href="/grading-guidelines">Grading Guidelines</a></li>
-                <li><a href="/support">Support</a></li>
-              </ul>
-            </div>
+          </div>
 
-            {/* Academic Calendar Section */}
-            <div className="lecturer-dashboard-section lecturer-dashboard-calendar" id="calendar-gig">
-              <h2 className="lecturer-dashboard-section-title">📅 Academic Calendar</h2>
-              <Calendar
-                onChange={handleDateChange}
-                value={date}
-                tileContent={({ date }) => {
-                  const eventsForDate = getEventsForDate(date);
-                  return eventsForDate.length > 0 ? (
-                    <div style={{ backgroundColor: "#ffcccb", borderRadius: "50%", padding: "5px" }}>
-                      {eventsForDate.length}
-                    </div>
-                  ) : null;
-                }}
-                style={{
-                  border: "1px solid #ddd",
-                  borderRadius: "8px",
-                  padding: "10px",
-                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                  margin:"0px",
-                }}
+          {/* Calendar Section */}
+          <div className="lecturer-dashboard-calendar-container">
+            <h2 className="lecturer-dashboard-section-title" style={{color:"black"}}>📅 ACADEMIC CALENDAR</h2>
+            <Calendar
+              onChange={handleDateChange}
+              value={date}
+              tileContent={({ date }) => {
+                const eventsForDate = getEventsForDate(date);
+                return eventsForDate.length > 0 ? (
+                  <div style={{ backgroundColor: "#ffcccb", borderRadius: "50%", padding: "5px" }}>
+                    {eventsForDate.length}
+                  </div>
+                ) : null;
+              }}
+              className="lecturer-dashboard-calendar"
+            />
+            <div className="calendar-events">
+              <h3>Events on {date.toDateString()}</h3>
+              <ul>
+                {getEventsForDate(date).map((event, index) => (
+                  <li key={index}>{event.event}</li>
+                ))}
+              </ul>
+              <input
+                type="text"
+                placeholder="Add a new event..."
+                value={newEvent}
+                onChange={(e) => setNewEvent(e.target.value)}
+                style={{ marginRight: "10px", padding: "5px", width: "70%" }}
               />
-              <div style={{ marginTop: "0px" }}>
-                <h3>Events on {date.toDateString()}</h3>
-                <ul>
-                  {getEventsForDate(date).map((event, index) => (
-                    <li key={index}>{event.event}</li>
-                  ))}
-                </ul>
-                <input
-                  type="text"
-                  placeholder="Add a new event..."
-                  value={newEvent}
-                  onChange={(e) => setNewEvent(e.target.value)}
-                  style={{ marginRight: "0px", padding: "5px", width: "70%" }}
-                />
-                <button onClick={handleAddEvent} style={{ padding: "5px 10px",margin:"0px",backgroundColor:"blue",color:"white",border:"0px",marginLeft:"10px"}}>
-                  Add Event
-                </button>
-              </div>
+              <button onClick={handleAddEvent} style={{ padding: "5px 10px", backgroundColor: "blue", color: "white" }}>
+                Add Event
+              </button>
             </div>
-            {/* Quick Links Section */}
           </div>
         </div>
-        
       </div>
-      
     </div>
   );
 };

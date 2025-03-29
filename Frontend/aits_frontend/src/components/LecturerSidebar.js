@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Modal from "react-modal"; // Modal library
 import Select from "react-select"; // Dropdown library
 import { FaHome, FaUser, FaSignOutAlt, FaUsers, FaPhone, FaSearch, FaReply, FaFilter } from 'react-icons/fa'; // Import icons
+import axios from "axios"; // For API requests
 import "./LecturerSidebar.css";
 
 Modal.setAppElement("#root"); // Set the root element for accessibility
@@ -17,6 +18,11 @@ const LecturerSidebar = () => {
   const [filterStatus, setFilterStatus] = useState(null); // State for filter dropdown
   const [response, setResponse] = useState(""); // State for the response input
   const [selectedQuery, setSelectedQuery] = useState(null); // State for the selected query
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false); // State for profile modal visibility
+  const [user, setUser] = useState(null); // State for user details
+  const [editedUser, setEditedUser] = useState(null); // State for editing user details
+  const [error, setError] = useState(""); // State for error messages
+  const [successMessage, setSuccessMessage] = useState(""); // State for success messages
   const navigate = useNavigate();
 
   const toggleMinimize = () => {
@@ -58,6 +64,16 @@ const LecturerSidebar = () => {
     };
 
     fetchQueries();
+  }, []);
+
+  useEffect(() => {
+    // Load user details from localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      setEditedUser(parsedUser);
+    }
   }, []);
 
   const formatTime = (time) => {
@@ -103,6 +119,62 @@ const LecturerSidebar = () => {
     handleCloseModal();
   };
 
+  const handleOpenProfileModal = () => {
+    setIsProfileModalOpen(true);
+  };
+
+  const handleCloseProfileModal = () => {
+    setIsProfileModalOpen(false);
+    setError("");
+    setSuccessMessage("");
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedUser((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSaveProfile = async () => {
+    try {
+      // Use the signup API to "update" the user profile
+      const endpoint = `https://kennedymutebi.pythonanywhere.com/auth/register/${editedUser.user_type}`;
+      const dataToSend = {
+        full_name: editedUser.full_name,
+        user: {
+          username: editedUser.username,
+          password: editedUser.password || "", // Ensure password is included (even if empty)
+          email: editedUser.email,
+          user_type: editedUser.user_type,
+          department: editedUser.department || null, // Optional fields should be null if not provided
+        },
+        staff_id: editedUser.staff_id || null,
+        student_id: editedUser.student_id || null,
+        program: editedUser.program || null,
+        year_of_study: editedUser.year_of_study || null,
+      };
+
+      console.log("Data being sent to API:", dataToSend);
+
+      const response = await axios.post(endpoint, dataToSend, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      // Update the user state and localStorage with the new details
+      setUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      setSuccessMessage("Profile updated successfully!");
+      setTimeout(() => {
+        setIsProfileModalOpen(false); // Close the modal after a delay
+      }, 2000);
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      console.error("Error response:", err.response?.data); // Log the error details
+      setError(
+        err.response?.data?.message || "Failed to update profile. Please try again."
+      );
+    }
+  };
+
   const filterOptions = [
     { value: "Pending", label: "Pending" },
     { value: "Resolved", label: "Resolved" },
@@ -130,12 +202,12 @@ const LecturerSidebar = () => {
               </a>
             </li>
             <li className="lecturer-sidebar-list-item">
-              <a href="#profile" className="lecturer-sidebar-link">
+              <a className="lecturer-sidebar-link" onClick={handleOpenProfileModal}>
                 <FaUser className="lecturer-sidebar-icon" /> Your Profile
               </a>
             </li>
             <li className="lecturer-sidebar-list-item">
-              <a href="#" className="lecturer-sidebar-link">
+              <a href="/AboutPage" className="lecturer-sidebar-link">
                 <FaPhone className="lecturer-sidebar-icon" /> Contact Us
               </a>
             </li>
@@ -230,6 +302,75 @@ const LecturerSidebar = () => {
             </div>
           </div>
         )}
+      </Modal>
+
+      {/* Profile Modal */}
+      <Modal
+        isOpen={isProfileModalOpen}
+        onRequestClose={handleCloseProfileModal}
+        className="profile-modal"
+        overlayClassName="profile-modal-overlay"
+      >
+        <h2>Edit Profile</h2>
+        {error && <p className="error-message">{error}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+        {editedUser && (
+          <form>
+            <label>
+              Full Name:
+              <input
+                type="text"
+                name="full_name"
+                value={editedUser.full_name}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Username:
+              <input
+                type="text"
+                name="username"
+                value={editedUser.username}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Email:
+              <input
+                type="email"
+                name="email"
+                value={editedUser.email}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Password:
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter new password"
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Department:
+              <input
+                type="text"
+                name="department"
+                value={editedUser.department}
+                onChange={handleInputChange}
+              />
+            </label>
+          </form>
+        )}
+        <div className="modal-buttons">
+          <button className="save-profile-button" onClick={handleSaveProfile}>
+            Save Changes
+          </button>
+          <button className="close-modal-button" onClick={handleCloseProfileModal}>
+            Cancel
+          </button>
+        </div>
       </Modal>
     </div>
   );

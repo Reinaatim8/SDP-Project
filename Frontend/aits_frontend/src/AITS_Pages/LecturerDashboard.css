@@ -32,7 +32,7 @@
   color: #0e0c08c2;
   margin-bottom: 10px;
   border-color: #007bff;
-  border: 1px solid rgba(251, 255, 0, 0.568);
+  border: 1px solid rgb(255, 255, 255);
 }
 
 .lecturer-dashboard-subtitle {
@@ -88,7 +88,7 @@
 }
 
 .lecturer-dashboard-section {
-  background: #fbda5ab0;
+  background: #000000;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -98,9 +98,25 @@
 
 .lecturer-dashboard-section-title {
   font-size: 1.8rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 20px;
   text-align: center;
+}
+
+/* Section Image Container */
+.section-image-container {
+  height: 20%; /* Occupies 20% of the section's height */
+  width: 100%; /* Full width of the section */
+  overflow: hidden; /* Ensures the image doesn't overflow */
+  margin-bottom: 10px; /* Adds spacing between the image and the rest of the section */
+}
+
+/* Section Image */
+.section-image {
+  width: 100%; /* Make the image responsive */
+  height: 100%; /* Ensure it fills the container */
+  object-fit: cover; /* Ensures the image scales properly without distortion */
+  border-radius: 8px; /* Optional: Adds rounded corners to the image */
 }
 
 /* Issue Tracker */
@@ -123,14 +139,14 @@
 
 .lecturer-dashboard-issue-text {
   font-size: 1rem;
-  color: #555;
+  color: #ffffff;
 }
 
 /* Announcements and Deadlines */
 .lecturer-dashboard-announcement,
 .lecturer-dashboard-deadline {
   font-size: 1rem;
-  color: #555;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
@@ -140,7 +156,7 @@
 }
 
 .lecturer-dashboard-teacherlogo {
- width: auto;
+ width: 150px;
 }
 
 /* User Icon */
@@ -177,19 +193,6 @@
   color: #333;
 }
 
-#calendar-gig{
-  width: fit-content;
-}
-.react-calendar {
-  width: 500px;
-  max-width: 100%;
-  background: white;
-  border: 1px solid white;
-  font-family: 'sans-serif', 'Helvetica', sans-serif;
-  line-height: 1.125em;
-  border-radius: 5px;
-
-}
 
 #lecturer-dashboard-header-image{
   background-image: url('../../public/images/header.jpg');
@@ -206,8 +209,47 @@
   color: rgb(0, 0, 0);
 }
 
-
-
 #lecturer-dashboard-user-icon{
   overflow: 0;
+}
+
+/* Calendar Container */
+.lecturer-dashboard-calendar-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #b3d32496;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Calendar Styling */
+.lecturer-dashboard-calendar {
+  margin: 20px auto;
+  width: 90%; /* Make the calendar larger */
+  max-width: 800px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Calendar Events */
+.calendar-events {
+  margin-top: 20px;
+}
+
+.calendar-events h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.calendar-events ul {
+  list-style: none;
+  padding: 0;
+}
+
+.calendar-events li {
+  margin-bottom: 5px;
+  font-size: 1rem;
 }

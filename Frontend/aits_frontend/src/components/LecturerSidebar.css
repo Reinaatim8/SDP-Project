@@ -101,8 +101,8 @@
   background: rgba(255, 255, 255, 0.733);
   padding: 20px;
   border-radius: 8px;
-  width: 80%;
-  max-width: 800px;
+  width: 85%;
+  max-width: 900px;
   margin: auto;
   position: relative;
   overflow: auto;
@@ -119,6 +119,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 .respond-to-queries-controls {
@@ -187,12 +188,13 @@
 }
 
 .response-textarea {
-  width: 100%;
+  width: 70%;
   height: 100px;
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  margin-right:15px;
 }
 
 .modal-buttons {
@@ -226,6 +228,81 @@
   background-color: #c82333;
 }
 
-*{
-  overflow: auto;
+/* Profile Modal */
+.profile-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  margin: auto;
+  position: relative;
 }
+
+.profile-modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-modal label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.profile-modal input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-profile-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-profile-button:hover {
+  background-color: #0056b3;
+}
+
+.close-modal-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.close-modal-button:hover {
+  background-color: #c82333;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: green;
+  margin-bottom: 10px;
+}
+
