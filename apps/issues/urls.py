@@ -20,6 +20,8 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', obtain_auth_token, name='api_token_auth'),
+    path('issues/', views.IssueListView.as_view(), name='issue-list'),  # For listing issues
+    path('issues/<int:id>/', views.IssueDetailView.as_view(), name='issue-detail'),
     
 
     

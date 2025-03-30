@@ -17,6 +17,49 @@ from .serializers import (
 )
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from rest_framework import generics, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+from .models import Issue
+from .serializers import IssueSerializer
+
+class IssueListView(generics.ListAPIView):
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Issue.objects.all()
+
+        # Filter by student ID (issues reported by the logged-in student)
+        if user.user_type == 'student':  # Use 'user_type' field for distinguishing user roles
+            queryset = queryset.filter(student_id=user.id)
+        
+        # Filter by assigned lecturer (issues assigned to the lecturer or in their courses)
+        elif user.user_type == 'lecturer':
+            queryset = queryset.filter(course__lecturer=user) | queryset.filter(assigned_to=user)
+        
+        # Filter by status if provided
+        status = self.request.query_params.get('status')
+        if status:
+            queryset = queryset.filter(status=status)
+        
+        # Filter by course ID if provided
+        course_id = self.request.query_params.get('course')
+        if course_id:
+            queryset = queryset.filter(course_id=course_id)
+        
+        return queryset
+
+
+class IssueDetailView(generics.RetrieveAPIView):
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'id'
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -117,7 +160,7 @@ class IssueViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         if user.user_type == 'student':
-            return Issue.objects.filter(student=user.id)
+            return Issue.objects.filter(student_id=user.id)
         elif user.user_type == 'lecturer':
             return Issue.objects.filter(
                 Q(course__lecturer=user) | Q(assigned_to=user)
