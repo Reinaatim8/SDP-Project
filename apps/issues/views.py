@@ -1,4 +1,7 @@
-from rest_framework import viewsets, permissions, status, filters
+from rest_framework import viewsets, status, filters
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import serializers  # Add this import
+import logging
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.utils import timezone
@@ -6,27 +9,14 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.permissions import AllowAny
 from .models import User, Course, Enrollment, IssueCategory, Issue, Comment, AuditLog, Notification
 from .serializers import (
     UserSerializer, CourseSerializer, EnrollmentSerializer, 
     IssueCategorySerializer, IssueSerializer, CommentSerializer,
     AuditLogSerializer, NotificationSerializer
 )
-
-class IsStudentPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.user_type == 'student'
-
-class IsLecturerPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.user_type == 'lecturer'
-
-class IsAdminPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.user_type == 'admin'
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -34,14 +24,11 @@ class UserViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['username', 'email', 'first_name', 'last_name']
     authentication_classes = [TokenAuthentication, SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    
     def get_permissions(self):
-        if self.action in  ['create', 'update', 'partial_update', 'destroy']:
-            return [permissions.IsAdminUser()]
-        return [permissions.IsAuthenticated(), IsAdminPermission()]
+        return []
     
-    
-    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    @action(detail=False, methods=['get'])
     def me(self, request):
         serializer = self.get_serializer(request.user)
         return Response(serializer.data)
@@ -53,11 +40,9 @@ class CourseViewSet(viewsets.ModelViewSet):
     search_fields = ['course_code', 'course_name']
     
     def get_permissions(self):
-        if self.action in ['list', 'retrieve']:
-            return [permissions.IsAuthenticated()]
-        return [permissions.IsAuthenticated(), IsAdminPermission()]
+        return []
     
-    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated, IsLecturerPermission])
+    @action(detail=False, methods=['get'])
     def my_courses(self, request):
         courses = Course.objects.filter(lecturer=request.user)
         serializer = self.get_serializer(courses, many=True)
@@ -68,9 +53,7 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
     serializer_class = EnrollmentSerializer
     
     def get_permissions(self):
-        if self.action in ['create', 'update', 'partial_update', 'destroy']:
-            return [permissions.IsAuthenticated(), IsAdminPermission()]
-        return [permissions.IsAuthenticated()]
+        return []
     
     def get_queryset(self):
         user = self.request.user
@@ -83,27 +66,58 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
 class IssueCategoryViewSet(viewsets.ModelViewSet):
     queryset = IssueCategory.objects.all()
     serializer_class = IssueCategorySerializer
+    permission_classes = [IsAuthenticated]  # Only authenticated users can access
     
-    def get_permissions(self):
-        if self.action in ['create', 'update', 'partial_update', 'destroy']:
-            return [permissions.IsAuthenticated(), IsAdminPermission()]
-        return [permissions.IsAuthenticated()]
+    def get_queryset(self):
+        # Remove the filtering based on 'is_public'
+        return IssueCategory.objects.all()  # Now returns all categories, public or private
+    
+    def perform_create(self, serializer):
+        serializer.save()
+    
+    def perform_update(self, serializer):
+        instance = self.get_object()
+        user = self.request.user
+        if user.user_type == 'student':
+            raise PermissionDenied("You can only update categories you've created.")
+        serializer.save()
+    
+    def perform_destroy(self, instance):
+        user = self.request.user
+        if user.user_type == 'student':
+            raise PermissionDenied("You can only delete categories you've created.")
+        instance.delete()
+    
+    @action(detail=False, methods=['GET'])
+    def my_categories(self, request):
+        my_categories = IssueCategory.objects.all()  # No filter based on 'is_public'
+        serializer = self.get_serializer(my_categories, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['POST'])
+    def duplicate(self, request, pk=None):
+        original_category = self.get_object()
+        duplicate_data = self.get_serializer(original_category).data
+        duplicate_data['id'] = None
+        duplicate_data['name'] = f"Copy of {duplicate_data.get('name', 'Category')}"
+        serializer = self.get_serializer(data=duplicate_data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class IssueViewSet(viewsets.ModelViewSet):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'description', 'status']
-    permission_classes = [IsAuthenticated]
+    
     def get_permissions(self):
-        #if self.action == 'create':
-            #return [permissions.IsAuthenticated(), IsStudentPermission()]
-        return [permissions.IsAuthenticated()]
+        return []
     
     def get_queryset(self):
         user = self.request.user
         if user.user_type == 'student':
-            return Issue.objects.filter(student=user)
+            return Issue.objects.filter(student=user.id)
         elif user.user_type == 'lecturer':
             return Issue.objects.filter(
                 Q(course__lecturer=user) | Q(assigned_to=user)
@@ -111,68 +125,64 @@ class IssueViewSet(viewsets.ModelViewSet):
         return Issue.objects.all()
     
     def perform_create(self, serializer):
-        issue = serializer.save(student=self.request.user)
+        if self.request.user.user_type == 'student':
+            serializer.save(student_id=self.request.user.id)  # Use student_id instead of student
+        else:
+            serializer.save()
         
-        # Create notification for lecturer
+        # Create notification for course lecturer
+        issue = serializer.instance
         if issue.course.lecturer:
             Notification.objects.create(
                 user=issue.course.lecturer,
                 title="New Issue Reported",
-                message=f"A new issue '{issue.title}' has been reported for {issue.course.course_code}",
-                issue=issue
-            )
-        
-        # Create notification for admin
-        admin_users = User.objects.filter(user_type='admin')
-        for admin in admin_users:
-            Notification.objects.create(
-                user=admin,
-                title="New Issue Reported",
-                message=f"A new issue '{issue.title}' has been reported by {issue.student.get_full_name()}",
+                message=f"A new issue '{issue.title}' has been reported for your course {issue.course.course_code}",
                 issue=issue
             )
     
-    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    @action(detail=True, methods=['POST'])
     def assign(self, request, pk=None):
         issue = self.get_object()
-        assigned_to_id = request.data.get('assigned_to')
+        user_id = request.data.get('user_id')
+        
+        if not user_id:
+            return Response({"error": "User ID is required"}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
-            assigned_to = User.objects.get(id=assigned_to_id)
-            if assigned_to.user_type not in ['lecturer', 'admin']:
-                return Response({"error": "Can only assign to lecturers or admins"}, status=status.HTTP_400_BAD_REQUEST)
+            assigned_user = User.objects.get(id=user_id)
+            previous_assigned = issue.assigned_to
             
-            old_assigned = issue.assigned_to
-            issue.assigned_to = assigned_to
+            issue.assigned_to = assigned_user
             issue.save()
             
-            # Create audit log
+            # Log the change
             AuditLog.objects.create(
                 issue=issue,
                 user=request.user,
-                action="Issue assigned",
-                old_value=str(old_assigned) if old_assigned else "None",
-                new_value=str(assigned_to)
+                action="Assigned issue",
+                old_value=str(previous_assigned) if previous_assigned else "None",
+                new_value=str(assigned_user)
             )
             
-            # Create notification
+            # Notify the assigned user
             Notification.objects.create(
-                user=assigned_to,
+                user=assigned_user,
                 title="Issue Assigned",
-                message=f"You have been assigned to issue '{issue.title}'",
+                message=f"You have been assigned to handle the issue '{issue.title}'",
                 issue=issue
             )
             
-            return Response({"success": "Issue assigned successfully"})
+            return Response({"success": f"Issue assigned to {assigned_user}"})
+        
         except User.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
     
-    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    @action(detail=True, methods=['POST'])
     def change_status(self, request, pk=None):
         issue = self.get_object()
         new_status = request.data.get('status')
         
-        if new_status not in [choice[0] for choice in Issue.STATUS_CHOICES]:
+        if new_status not in dict(Issue.STATUS_CHOICES):
             return Response({"error": "Invalid status"}, status=status.HTTP_400_BAD_REQUEST)
         
         old_status = issue.status
@@ -183,91 +193,44 @@ class IssueViewSet(viewsets.ModelViewSet):
         
         issue.save()
         
-        # Create audit log
+        # Log the change
         AuditLog.objects.create(
             issue=issue,
             user=request.user,
-            action="Status changed",
+            action="Changed status",
             old_value=old_status,
             new_value=new_status
         )
         
-        # Create notification for student
-        Notification.objects.create(
-            user=issue.student,
-            title="Issue Status Updated",
-            message=f"Your issue '{issue.title}' status has been updated to {issue.get_status_display()}",
-            issue=issue
-        )
-        
-        # Send email notification
-        if settings.EMAIL_HOST:
-            try:
-                send_mail(
-                    subject=f"Issue Status Update: {issue.title}",
-                    message=f"Your issue '{issue.title}' status has been updated to {issue.get_status_display()}",
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[issue.student.email],
-                    fail_silently=True,
-                )
-            except Exception as e:
-                print(f"Email sending failed: {e}")
-        
-        return Response({"success": "Status updated successfully"})
-    
-    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
-    def update_grade(self, request, pk=None):
-        issue = self.get_object()
-        new_grade = request.data.get('new_grade')
-        
-        if not new_grade:
-            return Response({"error": "New grade is required"}, status=status.HTTP_400_BAD_REQUEST)
-        
+        # Notify the student
         try:
-            new_grade = float(new_grade)
-        except ValueError:
-            return Response({"error": "Invalid grade format"}, status=status.HTTP_400_BAD_REQUEST)
+            student = User.objects.get(id=issue.student)
+            Notification.objects.create(
+                user=student,
+                title="Issue Status Updated",
+                message=f"The status of your issue '{issue.title}' has been changed to {issue.get_status_display()}",
+                issue=issue
+            )
+        except User.DoesNotExist:
+            pass
         
-        old_grade = issue.current_grade
-        issue.current_grade = new_grade
-        issue.save()
-        
-        # Update enrollment grade if it exists
-        if issue.enrollment:
-            issue.enrollment.current_grade = new_grade
-            issue.enrollment.save()
-        
-        # Create audit log
-        AuditLog.objects.create(
-            issue=issue,
-            user=request.user,
-            action="Grade updated",
-            old_value=str(old_grade) if old_grade else "None",
-            new_value=str(new_grade)
-        )
-        
-        # Create notification for student
-        Notification.objects.create(
-            user=issue.student,
-            title="Grade Updated",
-            message=f"Your grade for {issue.course.course_code} has been updated to {new_grade}",
-            issue=issue
-        )
-        
-        return Response({"success": "Grade updated successfully"})
+        return Response({"success": f"Issue status changed to {new_status}"})
+
+
+
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     
     def get_permissions(self):
-        return [permissions.IsAuthenticated()]
+        return []
     
     def get_queryset(self):
         issue_id = self.request.query_params.get('issue', None)
         if issue_id:
             return Comment.objects.filter(issue_id=issue_id)
-        
         user = self.request.user
         if user.user_type == 'student':
             return Comment.objects.filter(issue__student=user)
@@ -275,14 +238,11 @@ class CommentViewSet(viewsets.ModelViewSet):
             return Comment.objects.filter(
                 Q(issue__course__lecturer=user) | Q(issue__assigned_to=user)
             ).distinct()
-        
         return Comment.objects.all()
-    
+
     def perform_create(self, serializer):
         comment = serializer.save(user=self.request.user)
         issue = comment.issue
-        
-        # Create notifications
         if self.request.user != issue.student:
             Notification.objects.create(
                 user=issue.student,
@@ -290,7 +250,6 @@ class CommentViewSet(viewsets.ModelViewSet):
                 message=f"New comment on your issue '{issue.title}'",
                 issue=issue
             )
-        
         if issue.assigned_to and self.request.user != issue.assigned_to:
             Notification.objects.create(
                 user=issue.assigned_to,
@@ -298,7 +257,6 @@ class CommentViewSet(viewsets.ModelViewSet):
                 message=f"New comment on issue '{issue.title}' that you're assigned to",
                 issue=issue
             )
-            
         if issue.course.lecturer and self.request.user != issue.course.lecturer:
             Notification.objects.create(
                 user=issue.course.lecturer,
@@ -312,13 +270,12 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = AuditLogSerializer
     
     def get_permissions(self):
-        return [permissions.IsAuthenticated()]
+        return []
     
     def get_queryset(self):
         issue_id = self.request.query_params.get('issue', None)
         if issue_id:
             return AuditLog.objects.filter(issue_id=issue_id)
-        
         user = self.request.user
         if user.user_type == 'student':
             return AuditLog.objects.filter(issue__student=user)
@@ -326,7 +283,6 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
             return AuditLog.objects.filter(
                 Q(issue__course__lecturer=user) | Q(issue__assigned_to=user)
             ).distinct()
-        
         return AuditLog.objects.all()
 
 class NotificationViewSet(viewsets.ModelViewSet):
@@ -334,19 +290,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
     
     def get_permissions(self):
-        return [permissions.IsAuthenticated()]
+        return []
     
     def get_queryset(self):
-        return Notification.objects.filter(user=self.request.user).order_by('-created_at')
-    
-    @action(detail=True, methods=['post'])
-    def mark_read(self, request, pk=None):
-        notification = self.get_object()
-        notification.is_read = True
-        notification.save()
-        return Response({"success": "Notification marked as read"})
-    
-    @action(detail=False, methods=['post'])
-    def mark_all_read(self, request):
-        Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
-        return Response({"success": "All notifications marked as read"})
+        return Notification.objects.filter()

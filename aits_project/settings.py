@@ -58,8 +58,8 @@ INSTALLED_APPS = [
     # Local apps
     'apps.authentication',
     'apps.issues',
-    
-    'apps.notifications',
+    "apps.notifications"
+
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -109,19 +109,16 @@ WSGI_APPLICATION = 'aits_project.wsgi.application'
 # Database configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aits',
-        'USER': 'root',
-        'PASSWORD': 'PSS@12345',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset': 'utf8mb4',
-        },
-        
+        'ENGINE': 'django.db.backends.mysql',  # Use MySQL backend
+        'NAME': 'sys',  # Replace with your MySQL database name
+        'USER': 'kennedymutebi',  # Replace with your MySQL username
+        'PASSWORD': 'PSS@12345',  # Replace with your MySQL password
+        'HOST': 'localhost',  # Or the hostname of your MySQL server
+        'PORT': '3306',  # Default MySQL port
     }
 }
+
+
 
 # Custom user model
 AUTH_USER_MODEL = 'authentication.User'
