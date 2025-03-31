@@ -58,8 +58,13 @@ INSTALLED_APPS = [
     # Local apps
     'apps.authentication',
     'apps.issues',
+<<<<<<< HEAD
     "apps.notifications"
 
+=======
+    
+    'apps.notifications',
+>>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -81,7 +86,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+<<<<<<< HEAD
     'django.middleware.csrf.CsrfViewMiddleware',
+=======
+>>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
@@ -110,6 +118,7 @@ WSGI_APPLICATION = 'aits_project.wsgi.application'
 # Database configuration
 DATABASES = {
     'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.db.backends.mysql',  # Use MySQL backend
         'NAME': 'sys',  # Replace with your MySQL database name
         'USER': 'kennedymutebi',  # Replace with your MySQL username
@@ -121,6 +130,22 @@ DATABASES = {
 
 
 
+=======
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'aits',
+        'USER': 'root',
+        'PASSWORD': 'PSS@12345',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        },
+        
+    }
+}
+
+>>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
 # Custom user model
 AUTH_USER_MODEL = 'authentication.User'
 

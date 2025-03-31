@@ -9,7 +9,10 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('apps.authentication.urls')),
+<<<<<<< HEAD
     
+=======
+>>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
     path('issues/', include('apps.issues.urls')),
     #path('', include('apps.issues.urls')), 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # ✅ Add this
