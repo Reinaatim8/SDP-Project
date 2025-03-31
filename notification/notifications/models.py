@@ -31,6 +31,8 @@ class Notification(models.Model):
     def __str__(self):
         return f"{self.notification_type} notification for {self.recipient.email}"
 
+
+#Logs email notification delivery status
 class EmailNotificationLog(models.Model):
     notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
     sent_at = models.DateTimeField(default=timezone.now)
