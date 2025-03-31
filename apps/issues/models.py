@@ -11,6 +11,7 @@ class User(AbstractUser):
         ('admin', 'Administrator'),
     ]
     
+    
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     
@@ -57,20 +58,13 @@ class IssueCategory(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     
-<<<<<<< HEAD
     created_at = models.DateTimeField(auto_now_add=True)
     
-=======
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
     def __str__(self):
         return self.name
     
     class Meta:
         verbose_name_plural = "Issue Categories"
-<<<<<<< HEAD
-=======
-
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
 class Issue(models.Model):
     """
     Model to track academic issues reported by students.
@@ -89,21 +83,12 @@ class Issue(models.Model):
         ('urgent', 'Urgent'),
     ]
     
-<<<<<<< HEAD
     student_id = models.IntegerField()  # Now stores student ID as an integer
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_issues')
     title = models.CharField(max_length=200)
     description = models.TextField()
     category = models.ForeignKey(IssueCategory, on_delete=models.CASCADE, related_name='issues')
-=======
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    category = models.ForeignKey(IssueCategory, on_delete=models.CASCADE, related_name='issues')
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_issues',
-                              limit_choices_to={'user_type': 'student'})
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_issues')
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE, related_name='enrollment_issues',
                                   null=True, blank=True)
     

@@ -47,11 +47,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
 class IssueCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = IssueCategory
-<<<<<<< HEAD
         fields = ['name', 'description']
-=======
-        fields = ['id', 'name', 'description']
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
 
 class CommentSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
@@ -62,7 +58,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'issue', 'user', 'user_name', 'user_type', 'content', 'created_at', 'attachment']
 
 class IssueSerializer(serializers.ModelSerializer):
-<<<<<<< HEAD
     student_name = serializers.SerializerMethodField()
     course_code = serializers.CharField(source='course.course_code', read_only=True)
     course_name = serializers.CharField(source='course.course_name', read_only=True)
@@ -91,21 +86,11 @@ class IssueSerializer(serializers.ModelSerializer):
             return f"{obj.assigned_to.first_name} {obj.assigned_to.last_name}"
         return None
 
-=======
-    student_name = serializers.CharField(source='student.get_full_name', read_only=True)
-    course_code = serializers.CharField(source='course.course_code', read_only=True)
-    course_name = serializers.CharField(source='course.course_name', read_only=True)
-    category_name = serializers.CharField(source='category.name', read_only=True)
-    assigned_to_name = serializers.CharField(source='assigned_to.get_full_name', read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
-    
-    class Meta:
-        model = Issue
-        fields = ['id', 'title', 'description', 'category', 'category_name', 'student', 'student_name', 
-                 'course', 'course_code', 'course_name', 'enrollment', 'current_grade', 'expected_grade',
-                 'status', 'priority', 'assigned_to', 'assigned_to_name', 'created_at', 'updated_at', 
-                 'resolved_at', 'attachments', 'comments']
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
+
+
+
+
+
 
 class AuditLogSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
