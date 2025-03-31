@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AITS-Signup page</title>
+
+  <style>
+    .card{
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: transparent;
+      text-align: center;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      page: center;
+      background-color: transparent;
+    }
+  </style>
+</head>
+<body>
+   <!-- Signup Form -->
+   <div class="card">
+    <h2>AITS Sign Up</h2>
+    <div>
+    <label for="username">Username</label><br>
+    <input type="text" id="signup-username" placeholder="Username" required>
+    </div>
+    <br>
+    <div>
+    <label for="password">Password</label><br>
+    <input type="password" id="signup-password" placeholder="Password" required>
+    </div>
+    <br>
+    <div>
+    <label for="role">Role</label><br>
+    <select id="signup-role" required>
+        <option value="Student">Student</option>
+        <option value="Admin">Admin</option>
+        <option value="Lecturer">Lecturer</option>
+    </select>
+    </div>
+    <br>
+    <button onclick="signup()">Sign Up</button>
+    <p>Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
+</div>
+  
+</body>
+<footer>
+  <p>&copy; 2025 AITS. All rights reserved.</p>
+</html>

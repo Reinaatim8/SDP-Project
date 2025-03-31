@@ -1,0 +1,140 @@
+/* General Layout */
+.lecturer-dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+.lecturer-dashboard-content {
+  flex: 1;
+  margin-left: 250px;
+  padding: 30px;
+  transition: margin-left 0.3s ease;
+}
+
+/* Dashboard Panel */
+.lecturer-dashboard-panel {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+.lecturer-dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.lecturer-dashboard-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.lecturer-dashboard-subtitle {
+  font-size: 1.1rem;
+  color: #777;
+}
+
+/* Buttons */
+.lecturer-dashboard-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.lecturer-dashboard-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.lecturer-dashboard-btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.lecturer-dashboard-btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.lecturer-dashboard-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.lecturer-dashboard-btn-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+/* Sections */
+.lecturer-dashboard-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.lecturer-dashboard-section {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.lecturer-dashboard-section-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Issue Tracker */
+.lecturer-dashboard-issue-list {
+  list-style: none;
+  padding: 0;
+}
+
+.lecturer-dashboard-issue-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.lecturer-dashboard-issue-icon {
+  margin-right: 15px;
+  font-size: 1.2rem;
+}
+
+.lecturer-dashboard-issue-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Announcements and Deadlines */
+.lecturer-dashboard-announcement,
+.lecturer-dashboard-deadline {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Sidebar Adjustment */
+.lecturer-dashboard-container.sidebar-minimized .lecturer-dashboard-content {
+  margin-left: 80px;
+}
+
+.lecturer-dashboard-teacherlogo {
+ width: auto;
+}
