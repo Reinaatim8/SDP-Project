@@ -317,8 +317,19 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
     
     def get_queryset(self):
         issue_id = self.request.query_params.get('issue', None)
+        
         if issue_id:
-            return AuditLog.objects.filter(issue_id=issue_id)
+            # Ensure the issue_id is a valid number before querying the database
+            try:
+                # Check if the issue exists by ID
+                issue = Issue.objects.get(id=issue_id)
+                # If the issue exists, filter the AuditLog by this Issue instance
+                return AuditLog.objects.filter(issue=issue)
+            except Issue.DoesNotExist:
+                # Return an empty queryset if no issue is found with this ID
+                return AuditLog.objects.none()
+        
+        # Default filtering based on user roles
         user = self.request.user
         if user.user_type == 'student':
             return AuditLog.objects.filter(issue__student=user)
@@ -326,6 +337,7 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
             return AuditLog.objects.filter(
                 Q(issue__course__lecturer=user) | Q(issue__assigned_to=user)
             ).distinct()
+        
         return AuditLog.objects.all()
 
 class NotificationViewSet(viewsets.ModelViewSet):
