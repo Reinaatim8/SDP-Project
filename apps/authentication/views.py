@@ -174,7 +174,7 @@ class StudentRegistrationView(APIView):
             student = Student.objects.create(user=user, **serializer.validated_data)
 
             return Response(
-                {"message": "Student registered successfully!", "student_id": student.id},
+                {"message": "Student registered indeed successfully!", "student_id": student.id},
                 status=status.HTTP_201_CREATED
             )
 
