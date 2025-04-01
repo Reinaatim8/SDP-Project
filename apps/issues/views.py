@@ -128,7 +128,7 @@ class IssueCategoryViewSet(viewsets.ModelViewSet):
     def perform_destroy(self, instance):
         user = self.request.user
         if user.user_type == 'student':
-            raise PermissionDenied("You can only delete categories you've created.")
+            raise PermissionDenied("You can only delete categories you have  created.")
         instance.delete()
     
     @action(detail=False, methods=['GET'])
