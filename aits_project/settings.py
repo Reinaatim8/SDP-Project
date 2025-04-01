@@ -58,13 +58,8 @@ INSTALLED_APPS = [
     # Local apps
     'apps.authentication',
     'apps.issues',
-<<<<<<< HEAD
-    "apps.notifications"
-
-=======
     
     'apps.notifications',
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -86,10 +81,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-<<<<<<< HEAD
-    'django.middleware.csrf.CsrfViewMiddleware',
-=======
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
@@ -118,21 +109,8 @@ WSGI_APPLICATION = 'aits_project.wsgi.application'
 # Database configuration
 DATABASES = {
     'default': {
-<<<<<<< HEAD
-        'ENGINE': 'django.db.backends.mysql',  # Use MySQL backend
-        'NAME': 'sys',  # Replace with your MySQL database name
-        'USER': 'kennedymutebi',  # Replace with your MySQL username
-        'PASSWORD': 'PSS@12345',  # Replace with your MySQL password
-        'HOST': 'localhost',  # Or the hostname of your MySQL server
-        'PORT': '3306',  # Default MySQL port
-    }
-}
-
-
-
-=======
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aits',
+        'NAME': 'sys',
         'USER': 'root',
         'PASSWORD': 'PSS@12345',
         'HOST': 'localhost',
@@ -145,7 +123,6 @@ DATABASES = {
     }
 }
 
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
 # Custom user model
 AUTH_USER_MODEL = 'authentication.User'
 

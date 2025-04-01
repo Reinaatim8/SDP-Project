@@ -1,12 +1,9 @@
 from rest_framework import serializers
 from .models import User, Course, Enrollment, IssueCategory, Issue, Comment, AuditLog, Notification
-<<<<<<< HEAD
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-=======
->>>>>>> 5588129722b9f7f541cc7e5f166a5668b9b5790c
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
