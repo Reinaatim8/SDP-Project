@@ -1,24 +1,19 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# User Roles
 class CustomUser(AbstractUser):
-    # Define your custom fields here, if any
     role = models.CharField(max_length=50, blank=True, null=True)
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='customuser_set',  # Use a unique related_name
+        related_name='customuser_set',  
         blank=True
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='customuser_permissions',  # Use a unique related_name
+        related_name='customuser_permissions',  
         blank=True
     )
 
-    
-
-# Issue Tracking Model
 class Issue(models.Model):
     OPEN = 'open'
     CLOSED = 'closed'
@@ -40,8 +35,12 @@ class Issue(models.Model):
 
     title = models.CharField(max_length=200)
     description = models.TextField()
-    created_by = models.ForeignKey(CustomUser, on_delete=models.SET_DEFAULT, default=True)  
-    assigned_to = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='issues_assigned')
+    created_by = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name="issues_created"
+    )  # ✅ Fixed default value
+    assigned_to = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='issues_assigned'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=OPEN)
@@ -50,16 +49,27 @@ class Issue(models.Model):
     def __str__(self):
         return f"{self.title} ({self.status}) - Priority: {self.priority}"
 
-def send_notification(self, subject, message):
-        """Send email notifications to the assigned user and issue creator."""
-        recipients = [self.created_by.email]
-        if self.assigned_to:
-            recipients.append(self.assigned_to.email)
+# ✅ Moved Notification Outside Issue Model
+class Notification(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notifications")
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Notification for {self.user.username} - {self.message[:50]}"
 
-        send_mail(
-            subject,
-            message,
-            'no-reply@aits.com',
-            recipients,
-            fail_silently=True,
-        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
