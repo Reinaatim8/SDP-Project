@@ -27,10 +27,10 @@ const StudentSidebar = () => {
               <a href ="StudentDashboard" className="student-sidebar-link">Home</a>
             </li>
             <li className="student-sidebar-list-item">
-              <a href="StudentIssueReport" className="student-sidebar-link">Report an Issue</a>
+              <a href="Enrollment" className="student-sidebar-link">Enroll in a Course</a>
             </li>
             <li className="student-sidebar-list-item">
-              <a href="Enrollment" className="student-sidebar-link">Enroll in a Course</a>
+              <a href="StudentIssueReport" className="student-sidebar-link">Report an Issue</a>
             </li>
             <li className="student-sidebar-list-item">
               <a href="Profile" className="student-sidebar-link">Student Profile</a>
@@ -38,7 +38,7 @@ const StudentSidebar = () => {
             <li className="student-sidebar-list-item">
               <a href="Aboutpage" className="student-sidebar-link">Contact Us 📞</a>
             </li>
-            <li>          <img src="/images/nobgmaklogo.png" className="student-sidebar-schoollogo" alt="Gay" />
+            <li>          <img src="/images/nobgmaklogo.png" className="student-sidebar-schoollogo" alt="logo" />
             </li>
           </ul>
         </nav>

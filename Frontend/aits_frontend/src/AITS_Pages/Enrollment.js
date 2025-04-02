@@ -10,7 +10,7 @@ const Enrollment = () => {
   const [academicYear, setAcademicYear] = useState("");
   
 
-  const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTY4NDc1LCJpYXQiOjE3NDM1NjQ4NzUsImp0aSI6IjUyMDllNTI2NDdiYTQ2OWZiZWJlNDUxMDI3NTVmMTg3IiwidXNlcl9pZCI6Mn0.852mmhnbMlHc2QL6GTnCF8xxQ9K6QK3qUVhtgDz3zxM";
+  const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTkwNDYwLCJpYXQiOjE3NDM1ODY4NjAsImp0aSI6IjIyYWE0OGM2NjAyODRjYTU4YTU4NGUzY2EzOWEzN2IxIiwidXNlcl9pZCI6Mn0.HWCUfP2k_1zR4BFQCWc7fjAo_eL7fhwJyKTdMxs3HOE";
 
   const handleEnrollmentSubmit = async (e) => {
     e.preventDefault();
