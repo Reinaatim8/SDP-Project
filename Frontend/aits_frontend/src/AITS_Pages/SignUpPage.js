@@ -82,10 +82,10 @@ const SignUpPage = () => {
     if (!formData.staff_id && formData.user_type === 'lecturer') {
       newErrors.staff_id = 'Staff ID is required';
     }
-    if (!formData.program && formData.user_type == 'student'){ 
+    if (!formData.program && formData.user_type === 'student'){ 
       newErrors.program = 'Program is required';
     }
-    if (!formData.year_of_study && formData.user_type == 'student'){
+    if (!formData.year_of_study && formData.user_type === 'student'){
       newErrors.year_of_study = 'Year of study is required';
     }
     if (!formData.email) {
