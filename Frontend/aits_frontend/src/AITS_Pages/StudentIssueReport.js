@@ -113,7 +113,8 @@ const StudentIssueReport = () => {
         )}
         {step === 1 && (
           <div>
-        <form className="student-issue-report-form" onSubmit={handleCreateCategory}>
+            
+        <form className="student-issue-report-form2" onSubmit={handleCreateCategory}>
         <p><strong>Step 1:</strong> Create a Category.</p>
         {/* Category and Course Fields */}
          <div className="student-issue-report-form-group">
@@ -136,7 +137,7 @@ const StudentIssueReport = () => {
           </div>
           <button type="submit" className="student-issue-report-submit-button">Create an Issue Category</button>
           </form>
-          <form className="student-issue-report-form" onSubmit={handleCreateCourse}>
+          <form className="student-issue-report-form2" onSubmit={handleCreateCourse}>
             <p><strong>Step 2:</strong>Create a Course</p>
           <div className="student-issue-report-form-group">
             <label className="student-issue-report-label">Course Name:</label>
@@ -155,11 +156,13 @@ const StudentIssueReport = () => {
               onChange={(e) => setSelectedCourseCode(e.target.value)}
               required
             />
+            <div>
+             <button type="submit" className="student-issue-report-submit-button">
+              Create a Course for the Issue
+            </button>
+            </div>
           </div>
           </form>
-          <button type="submit" className="student-issue-report-submit-button">
-              Create a Course
-            </button>
           </div>  
           
           

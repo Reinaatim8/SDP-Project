@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
+import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
 
 const Loginpage = () => {
@@ -16,17 +17,18 @@ const Loginpage = () => {
     setError('');
 
     try {
-      const response = await axios.post(
-        'https://kennedymutebi7.pythonanywhere.com/auth/login',
+      const response = await apiClient.post(
+        'auth/login',
         { username, password },
-        { headers: { 'Content-Type': 'application/json' } }
       );
 
       console.log('API Response:', response.data);
-
+      const token = response.data.token;
       // Save the token in local storage
-      localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem('token', response.data.token);
+      console.log('Token stored:', token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+    
 
       
       // Determine the user's role and navigate accordingly
@@ -61,14 +63,14 @@ const Loginpage = () => {
   };
 
   const setupSessionTimeout = () => {
-    const sessionTimeout = 15 * 60 * 1000; // 15 minutes
+    const sessionTimeout = 10 * 60 * 1000; // 10 minutes
     let timeoutHandle;
 
     const resetTimeout = () => {
       clearTimeout(timeoutHandle);
       timeoutHandle = setTimeout(() => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         navigate('/login');
       }, sessionTimeout);
     };
@@ -97,11 +99,11 @@ const Loginpage = () => {
   <div className="container">
    <div className="card">
     <h1>AITS</h1>
-    <img src='/images/nobgmaklogo.png' id='maklogologin'/>
+    <img src='/images/nobgmaklogo.png' id='maklogologin' alt="logo"/>
     <p style={{color:'white'}}>"Submit, track, and resolve academic matters seamlessly."</p>
     
     {/* Display error message if exists */}
-    {error && <p style={{ color: 'red',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '15px', textDecoration: 'none', content: 'open-quote', content: 'close-quote' }}>{error}</p>}
+    {error && <p style={{ color: 'red',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '15px', textDecoration: 'none', content: 'open-quote'}}>{error}</p>}
 
    {/*Form for the user to input their login details*/}
     <form onSubmit={handleSubmit}>

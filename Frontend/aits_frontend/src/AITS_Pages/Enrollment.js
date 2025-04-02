@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import StudentSidebar from "../components/StudentSidebar";
 import "./Enrollment.css"; // for styling
+import  { createEnrollment as createEnrollmentApi } from "../utils/enrollments";
 
 const Enrollment = () => {
   const [studentId, setStudentId] = useState("");
@@ -10,7 +11,7 @@ const Enrollment = () => {
   const [academicYear, setAcademicYear] = useState("");
   
 
-  const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTkwNDYwLCJpYXQiOjE3NDM1ODY4NjAsImp0aSI6IjIyYWE0OGM2NjAyODRjYTU4YTU4NGUzY2EzOWEzN2IxIiwidXNlcl9pZCI6Mn0.HWCUfP2k_1zR4BFQCWc7fjAo_eL7fhwJyKTdMxs3HOE";
+  //const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTkwNDYwLCJpYXQiOjE3NDM1ODY4NjAsImp0aSI6IjIyYWE0OGM2NjAyODRjYTU4YTU4NGUzY2EzOWEzN2IxIiwidXNlcl9pZCI6Mn0.HWCUfP2k_1zR4BFQCWc7fjAo_eL7fhwJyKTdMxs3HOE";
 
   const handleEnrollmentSubmit = async (e) => {
     e.preventDefault();
@@ -23,16 +24,7 @@ const Enrollment = () => {
     };
 
     try {
-      const response = await axios.post(
-        "https://kennedymutebi7.pythonanywhere.com//issues/api/enrollments/",
-        enrollmentData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiToken}`,
-          },
-        }
-      );
+      const response = await createEnrollmentApi(enrollmentData);
       alert("Enrollment submitted successfully!");
       console.log("API Response:", response.data);
     } catch (error) {
