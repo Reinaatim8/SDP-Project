@@ -324,10 +324,10 @@ const RegistrarSidebar = () => {
       {/* Style for the component */}
       <style jsx>{`
         .registrar-sidebar {
-          width: 280px;
+          width: 300px;
           height: 100vh;
-          background: #fff;
-          color: #333;
+          background: #0f1e2e;
+          color: #fff;
           display: flex;
           flex-direction: column;
           position: fixed;

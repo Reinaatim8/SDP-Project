@@ -1,39 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginPage.css';
 
 const Loginpage = () => {
-  
-  const [username, setUsername] = useState(''); // Controlled input for username
-  const [password, setPassword] = useState(''); // Controlled input for password
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      // Make POST request to login API
       const response = await axios.post(
-        'https://kennedymutebi.pythonanywhere.com/auth/login',
+        'https://kennedymutebi7.pythonanywhere.com/auth/login',
         { username, password },
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      // Log the response for debugging
-      console.log('API Response:',response.data);
+      console.log('API Response:', response.data);
 
-      // Save the token in local storage
-      localStorage.setItem('token', response.data.access_token);
+      // Save both tokens in local storage
+      localStorage.setItem('access_token', response.data.access);
+      localStorage.setItem('refresh_token', response.data.refresh);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      
-      // Determine the user's role and navigate accordingly
-      const user_type = response.data.user.user_type; // Assuming the user type is included in the response
+
+      const user_type = response.data.user.user_type;
       let dashboardPath;
 
       switch (user_type) {
@@ -47,19 +43,22 @@ const Loginpage = () => {
           dashboardPath = '/RegistrarDashboard';
           break;
         default:
-          dashboardPath = '/dashboard'; // Default or error handling path
+          dashboardPath = '/dashboard';
       }
 
-      // Redirect to the right dashboard for a specific user
       navigate(dashboardPath);
     } catch (err) {
-      console.error(err);
-      setError('Incorrect username or password.Please try again!');
+      console.error('Login error:', err);
+      if (err.response && err.response.status === 401) {
+        setError('Incorrect username or password. Please try again!');
+      } else {
+        setError('An error occurred. Please try again later.');
+      }
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  //to redirect the user back to login page if portal is redundant for some time after login
   const setupSessionTimeout = () => {
     const sessionTimeout = 15 * 60 * 1000; // 15 minutes
     let timeoutHandle;
@@ -67,7 +66,8 @@ const Loginpage = () => {
     const resetTimeout = () => {
       clearTimeout(timeoutHandle);
       timeoutHandle = setTimeout(() => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         navigate('/login');
       }, sessionTimeout);
     };
@@ -79,6 +79,7 @@ const Loginpage = () => {
   };
 
   useEffect(() => {
+    setupSessionTimeout();
     return () => {
       window.removeEventListener('mousemove', setupSessionTimeout);
       window.removeEventListener('keypress', setupSessionTimeout);
@@ -86,66 +87,83 @@ const Loginpage = () => {
   }, []);
 
   return (
-   <div className="Login-container">
-   {/*Background picture on login form*/}
+    <div className="Login-container">
+      <div className="right">
+        <div className="container">
+          <div className="card">
+            <h1>AITS</h1>
+            <img src="/images/nobgmaklogo.png" id="maklogologin" alt="Logo" />
+            <p style={{ color: 'white' }}>
+              "Submit, track, and resolve academic matters seamlessly."
+            </p>
 
-    {/*Login form*/}
+            {error && (
+              <p
+                style={{
+                  color: 'white',
+                  fontFamily: 'sans-serif',
+                  fontWeight: 'bold',
+                  fontSize: '15px',
+                  textDecoration: 'none',
+                }}
+              >
+                {error}
+              </p>
+            )}
 
-  <div className='right'>
-  <div className="container">
-   <div className="card">
-    <h1>AITS</h1>
-    <img src='/images/nobgmaklogo.png' id='maklogologin'/>
-    <p style={{color:'white'}}>"Submit, track, and resolve academic matters seamlessly."</p>
-    
-    {/* Display error message if exists */}
-    {error && <p style={{ color: 'white',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '15px', textDecoration: 'none', content: 'open-quote', content: 'close-quote' }}>{error}</p>}
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <div>
+                  <label htmlFor="username" style={{ fontWeight: 'bold' }}>
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Enter your Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </div>
 
-   {/*Form for the user to input their login details*/}
-    <form onSubmit={handleSubmit}>
-     <div className="form-group">
-      <div>
-        <label htmlFor="username" style={{fontWeight: 'bold'}}>Username</label>
-        <input 
-        type="text" 
-        name="username" 
-        placeholder="Enter your Username" 
-        value={username}
-        onChange={(e) => setUsername(e.target.value)} required/>
+                <div>
+                  <label htmlFor="password" style={{ fontWeight: 'bold' }}>
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <br />
+                <div id="login-bttn">
+                  <button type="submit" className="button-login">
+                    {loading ? <span className="spinner"></span> : 'LOGIN'}
+                  </button>
+                </div>
+              </div>
+
+              <p>
+                Don't have an account?{' '}
+                <Link to="/Signup" className="btn">
+                  Sign Up to start
+                </Link>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer className="footer">
+        <p>&copy; 2025 AITS. All rights reserved.</p>
+      </footer>
     </div>
-    
-    <div>
-      <label htmlFor="password" style={{fontWeight: 'bold'}}>Password</label>
-      <input 
-      type="password" 
-      name="password" 
-      placeholder="Enter your Password" 
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}required
-      />
-    </div>
-    
-  <br/>
-  <div id='login-bttn'>
-    <button type="submit" className='button-login'> {loading ? <span className="spinner"></span> : 'LOGIN'}
-    </button>
-   </div> 
-  </div>
-
-      <p>
-         Don't have an account? <Link to="/Signup" className='btn'>Sign Up to start</Link>
-     </p>
-     </form>
-  </div>
-  </div>
-  </div>
-  <footer className="footer">
-    <p>&copy; 2025 AITS. All rights reserved.</p>
-  </footer>
-
-  </div>
-  
-  
   );
-}
+};
+
 export default Loginpage;

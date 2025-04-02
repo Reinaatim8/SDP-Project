@@ -112,7 +112,7 @@ const SignUpPage = () => {
 
       //Endpoint based on user 
       
-      const endpoint = `https://kennedymutebi.pythonanywhere.com/auth/register/${formData.user_type}`;
+      const endpoint = `https://kennedymutebi7.pythonanywhere.com/auth/register/${formData.user_type}`;
       console.log("Registering as:", formData.user_type);
       console.log("Endpoint:", endpoint);
 
