@@ -24,12 +24,13 @@ const Loginpage = () => {
 
       console.log('API Response:', response.data);
 
-      // Save both tokens in local storage
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      // Save the token in local storage
+      localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      const user_type = response.data.user.user_type;
+      
+      // Determine the user's role and navigate accordingly
+      const user_type = response.data.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
 
       switch (user_type) {
@@ -87,67 +88,51 @@ const Loginpage = () => {
   }, []);
 
   return (
-    <div className="Login-container">
-      <div className="right">
-        <div className="container">
-          <div className="card">
-            <h1>AITS</h1>
-            <img src="/images/nobgmaklogo.png" id="maklogologin" alt="Logo" />
-            <p style={{ color: 'white' }}>
-              "Submit, track, and resolve academic matters seamlessly."
-            </p>
+   <div className="Login-container">
+   {/*Background picture on login form*/}
 
-            {error && (
-              <p
-                style={{
-                  color: 'white',
-                  fontFamily: 'sans-serif',
-                  fontWeight: 'bold',
-                  fontSize: '15px',
-                  textDecoration: 'none',
-                }}
-              >
-                {error}
-              </p>
-            )}
+    {/*Login form*/}
 
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <div>
-                  <label htmlFor="username" style={{ fontWeight: 'bold' }}>
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    name="username"
-                    placeholder="Enter your Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                </div>
+  <div className='right'>
+  <div className="container">
+   <div className="card">
+    <h1>AITS</h1>
+    <img src='/images/nobgmaklogo.png' id='maklogologin'/>
+    <p style={{color:'white'}}>"Submit, track, and resolve academic matters seamlessly."</p>
+    
+    {/* Display error message if exists */}
+    {error && <p style={{ color: 'red',fontFamily: 'sans-serif', fontWeight: 'bold',fontSize: '15px', textDecoration: 'none', content: 'open-quote', content: 'close-quote' }}>{error}</p>}
 
-                <div>
-                  <label htmlFor="password" style={{ fontWeight: 'bold' }}>
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Enter your Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <br />
-                <div id="login-bttn">
-                  <button type="submit" className="button-login">
-                    {loading ? <span className="spinner"></span> : 'LOGIN'}
-                  </button>
-                </div>
-              </div>
+   {/*Form for the user to input their login details*/}
+    <form onSubmit={handleSubmit}>
+     <div className="form-group">
+      <div>
+        <label htmlFor="username" style={{fontWeight: 'bold'}}>Username</label>
+        <input 
+        type="text" 
+        name="username" 
+        placeholder="Enter your Username" 
+        value={username}
+        onChange={(e) => setUsername(e.target.value)} required/>
+    </div>
+    
+    <div>
+      <label htmlFor="password" style={{fontWeight: 'bold'}}>Password</label>
+      <input 
+      type="password" 
+      name="password" 
+      placeholder="Enter your Password" 
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}required
+      />
+    </div>
+    
+  <br/>
+  <div id='login-bttn'>
+    <button type="submit" className='button-login'> {loading ? <span className="spinner"></span> : 'LOGIN'}
+    </button>
+   </div> 
+  </div>
 
               <p>
                 Don't have an account?{' '}

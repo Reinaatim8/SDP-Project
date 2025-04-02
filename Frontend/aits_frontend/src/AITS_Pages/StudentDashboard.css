@@ -186,3 +186,19 @@
 .student-dashboard-header img{
   width: 100px;
 }
+.student-dashboard-btn-logout{
+  background: #04a652;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+
+  
+}
+.student-dashboard-btn-logout :hover{
+  background: #0056b3;
+  color: #e9ecef;
+  transform: translateX(5px);
+  
+}

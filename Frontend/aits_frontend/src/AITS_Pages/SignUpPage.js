@@ -11,7 +11,8 @@ const SignUpPage = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    full_name: '',
+    first_name: '',
+    last_name: '',
     user:{
       username: '',
       user_type: '',
@@ -72,7 +73,8 @@ const SignUpPage = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.full_name) newErrors.full_name = 'Full name is required';
+    if (!formData.first_name) newErrors.first_name = 'First name is required';
+    if (!formData.last_name) newErrors.last_name = 'Last name is required';
     if (!formData.username) newErrors.username = 'Username is required';
     if (!formData.student_id && formData.user_type === 'student') {
       newErrors.student_id = 'Student ID is required';
@@ -119,7 +121,8 @@ const SignUpPage = () => {
       
       //Prepare data to be sent to the server
       const dataToSend = {
-        full_name: formData.full_name,
+        first_name: formData.first_name,
+        last_name: formData.last_name,
         user:{
           username: formData.username,
           password: formData.password,
@@ -139,6 +142,21 @@ const SignUpPage = () => {
           headers: { 'Content-Type': 'application/json' }
         });
         console.log("Response:", response.data); // Log response for debugging
+
+        //Storing certain user dteails in local storage for profile display
+        const userProfile = {
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+          username: formData.username,
+          email: formData.email,
+          user_type: formData.user_type,
+          department: formData.department,
+          staff_id: formData.staff_id,
+          student_id: formData.student_id,
+          program: formData.program,
+          year_of_study: formData.year_of_study,
+        };
+        localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
        alert('Sign Up Successful! Please login.');
@@ -160,20 +178,37 @@ const SignUpPage = () => {
         <h2 className="signup-title">Sign Up To Start</h2>
         <form onSubmit={handleSubmit}>
 
-          {/* Full Name */}
+          {/* First Name */}
           <div className="form-group inline-fields">
             <div className="form-field">
-              <label htmlFor="full_name">Full Name</label>
+              <label htmlFor="first_name">First Name</label>
               <input
                 type="text"
-                id="full_name"
-                name="full_name"
+                id="first_name"
+                name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
-                placeholder="Enter your full name"
+                placeholder="Enter your first name"
                 required
               />
               {errors.first_name && <span className="error">{errors.full_name}</span>}
+            </div>
+          </div>
+
+          {/*Last name */}
+          <div className="form-group inline-fields">
+            <div className="form-field">
+              <label htmlFor="last_name">Last Name</label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                placeholder="Enter your last name"
+                required
+              />
+              {errors.last_name && <span className="error">{errors.last_name}</span>}
             </div>
           </div>
 

@@ -1,0 +1,88 @@
+.enrollment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color:linear-gradient(135deg, #f4f6f9, #e0e5ec);
+}
+.enrollment-container2{
+  max-width: 550px;
+  margin: 0px;
+  height: 550px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.enrollment-card {
+  background-color: rgb(161, 159, 159);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  height: 500px;
+  text-align: center;
+  
+}
+.enrollment-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin-top: 20px;
+  height: 350px;
+}
+.enrollment-card h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #333;
+  text-decoration: underline darkgreen;
+  font-weight: bold ;
+}
+
+.enrollment-form-group {
+  margin-bottom: 15px;
+  text-align: left;
+  width: 90%;
+ 
+}
+
+.enrollment-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.enrollment-form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.enrollment-submit-button {
+  width: 90%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.enrollment-submit-button:hover {
+  background-color: #0056b3;
+}
+
+.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
