@@ -16,7 +16,9 @@ const WelcomePage = () => {
       {/* Fixed Navigation Bar */}
       <nav className="navbar">
         <div className="navbar-left">
-          <span className="logo">AITS</span>
+          <span className="logo"> <img src='/images/AITSLOGO.png' alt='logo' style={{width:'100px'}}/>
+          </span>
+
         </div>
         <div className="navbar-right">
           <Link to="/Aboutpage" className="nav-link">ABOUT</Link>
