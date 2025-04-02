@@ -5,9 +5,12 @@ import Aboutpage from './AITS_Pages/Aboutpage';
 import SignUpPage from './AITS_Pages/SignUpPage';
 import Loginpage from './AITS_Pages/LoginPage';
 import StudentDashboard from './AITS_Pages/StudentDashboard'; 
+import Profile from './AITS_Pages/Profile';
+import Enrollment from './AITS_Pages/Enrollment';
 import StudentIssueReport from './AITS_Pages/StudentIssueReport';
 import LecturerDashboard from './AITS_Pages/LecturerDashboard';
 import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
+
 
 
 function App() {
@@ -20,6 +23,8 @@ function App() {
         <Route path="/login" element={<Loginpage />} />
         <Route path="/StudentDashboard" element={<StudentDashboard />} /> 
         <Route path="/StudentIssueReport" element={<StudentIssueReport/>} />
+        <Route path="/Enrollment" element={<Enrollment />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
         <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />
 

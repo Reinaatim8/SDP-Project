@@ -20,7 +20,7 @@ const Loginpage = () => {
     try {
       // Make POST request to login API
       const response = await axios.post(
-        'https://kennedymutebi.pythonanywhere.com/auth/login',
+        'https://kennedymutebi7.pythonanywhere.com/auth/login',
         { username, password },
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -30,6 +30,8 @@ const Loginpage = () => {
 
       // Save the token in local storage
       localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
       
       // Determine the user's role and navigate accordingly
       const user_type = response.data.user.user_type; // Assuming the user type is included in the response

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./StudentSidebar.css";
-import { Link } from 'react-router-dom';
+
 
 const StudentSidebar = () => {
   const [isMinimized, setIsMinimized] = useState(false);
+ 
 
   const toggleMinimize = () => {
     setIsMinimized(!isMinimized);
@@ -23,19 +24,19 @@ const StudentSidebar = () => {
           
           <ul className="student-sidebar-list">
             <li className="student-sidebar-list-item">
-              <a href="StudentDashboard" className="student-sidebar-link">Home</a>
+              <a href ="StudentDashboard" className="student-sidebar-link">Home</a>
             </li>
             <li className="student-sidebar-list-item">
               <a href="StudentIssueReport" className="student-sidebar-link">Report an Issue</a>
             </li>
             <li className="student-sidebar-list-item">
-              <a href="#view-issues" className="student-sidebar-link">View all Issues</a>
+              <a href="Enrollment" className="student-sidebar-link">Enroll in a Course</a>
             </li>
             <li className="student-sidebar-list-item">
-              <a href="#profile" className="student-sidebar-link">Student Profile</a>
+              <a href="Profile" className="student-sidebar-link">Student Profile</a>
             </li>
             <li className="student-sidebar-list-item">
-              <a href="#" className="student-sidebar-link">Contact Us 📞</a>
+              <a href="Aboutpage" className="student-sidebar-link">Contact Us 📞</a>
             </li>
             <li>          <img src="/images/nobgmaklogo.png" className="student-sidebar-schoollogo" alt="Gay" />
             </li>
