@@ -50,7 +50,24 @@ class Enrollment(models.Model):
     
     def __str__(self):
         return f"{self.student.username} - {self.course.course_code} ({self.semester}, {self.academic_year})"
+class Enrollment(models.Model):
+    """
+    Model to represent student enrollment in courses.
+    """
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments', 
+                              limit_choices_to={'user_type': 'student'})
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
+    semester = models.CharField(max_length=20)
+    academic_year = models.CharField(max_length=9)  # Format: 2023/2024
+    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    
+    class Meta:
+        unique_together = ['student', 'course', 'semester', 'academic_year']
+    
+    def __str__(self):
+        return f"{self.student} - {self.course} ({self.academic_year} - {self.semester})"
 
+        
 class IssueCategory(models.Model):
     """
     Model to categorize different types of academic issues.
