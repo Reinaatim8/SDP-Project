@@ -1,0 +1,112 @@
+/*Styling for about page */
+.about-container {
+  max-width: 750px;
+  margin: 50px auto;
+  height: 750px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem; 
+  background-color: #0f1e2e;
+  color: white;
+}
+.logo2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 100px; 
+  margin: 0 300px;
+}
+.navbar_left{
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 10px;
+}
+.navbar-right{
+  display: flex;
+  gap: 1rem; 
+  
+}
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  font-size: 1rem; 
+}
+.nav-link:hover {
+  color: #f0a500;
+}
+/* Styling for the about page */
+.about-content {
+  max-width: 750px;
+  margin: 50px auto;
+  height: 870px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  flex: 1;
+  transition: margin-left 0.3s ease-in-out;
+}
+.logo {
+  justify-content: center;
+  width: 100px; 
+ margin: 0 10px;
+  align-items: center;
+  display: block;
+}
+
+.Page-about {
+  margin-left: 0;
+  background-color: rgb(185, 248, 185);
+  max-height: none;
+  background-image: url('../images/makivory.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+.aboutcard{
+  background-color: rgb(215, 238, 241);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 750px;
+  margin-top: 20px;
+  height: 430px;
+  font-size: 20px;
+  letter-spacing: 3px;
+  
+ 
+}
+.contactcard{
+  
+  background-color: rgb(215, 238, 241) ;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 750px;
+  margin-top: 20px;
+  height: 310px;
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+.footer {
+  background-color:#434343;
+  color: black;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0.5rem 0; 
+  margin-top: auto;
+}

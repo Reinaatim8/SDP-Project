@@ -1,0 +1,85 @@
+/* Student Sidebar Styles */
+.student-sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #04a652;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.student-sidebar-minimized {
+  width: 20px;
+}
+
+.student-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.student-sidebar-title {
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.student-sidebar-minimize-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.student-sidebar-minimize-btn:hover {
+  transform: scale(1.2);
+}
+
+.student-sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.student-sidebar-list-item {
+  margin: 15px 0;
+}
+
+.student-sidebar-link {
+  
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.student-sidebar-link:hover {
+  background: #1abc9c;
+}
+
+/* Adjust content when sidebar is minimized */
+.dashboard-content {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.student-sidebar-minimized + .dashboard-content {
+  margin-left: 60px;
+}
+
+.student-sidebar-schoollogo {
+  width: 180px;
+  margin-right: 180px;
+  margin-left: 30px;
+}

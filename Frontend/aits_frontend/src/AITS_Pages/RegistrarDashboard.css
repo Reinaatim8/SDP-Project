@@ -1,0 +1,138 @@
+/* ... your existing CSS ... */
+
+.registrar-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure container takes full viewport height */
+}
+
+.registrar-dashboard-content {
+  flex: 1; /* Allow content to grow and push footer down */
+  margin-left: 280px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.registrar-dashboard-title {
+  font-size: 2.2rem;
+  color: #2c3e50;
+}
+
+.registrar-dashboard-subtitle {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin-bottom: 40px;
+}
+
+.registrar-dashboard-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  width: 100%;
+}
+
+.registrar-dashboard-section {
+  flex: 1;
+  min-width: 300px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registrar-dashboard-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.registrar-dashboard-section h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.registrar-dashboard-section p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.registrar-dashboard-section .registrar-dashboard-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0a500;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registrar-dashboard-section .registrar-dashboard-btn:hover {
+  background-color: #2c3e50;
+  color: #f0a500;
+}
+
+.registrar-dashboard-footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: transparent;
+  width: 100%;
+}
+
+.registrar-dashboard-section {
+  display: flex; /* Apply Flexbox to all sections */
+  align-items: center;
+  flex: 1;
+  min-width: 300px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registrar-dashboard-section-content {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.registrar-dashboard-section-image {
+  flex: 1;
+}
+
+.registrar-dashboard-section-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.registrar-dashboard-header img {
+ width: 80px;
+ /* display: flex; */
+ align-items: center;
+}
+
+.registrar-dashboard-reports img{
+  width: 200px;
+  
+}
+
+.registrar-dashboard-header{
+  display: block;
+  text-align: center;
+  align-items: center;
+  margin:auto;
+}
+
+body{
+  background-color: beige;
+}
+

@@ -1,0 +1,182 @@
+/* SignUpPage.css */
+.signup-panel{
+  background-image: url('../images/mukone.jpg');
+  background-size: 100%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  overflow: auto;
+}
+
+  .signup-card {
+    background-color: #0f1e2ec9;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 650px;
+    max-width: 550px;
+    text-align: center;
+    /* max-height: 1050px; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    border-color: #f0a500;
+    border-style: groove;
+    width: 650px;
+    /* transform: translate(-50%, -50%); */
+    /*height: 1000px;*/
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transform: scale(0.8);
+    margin: 0px;
+    margin-left: auto;
+    margin-right: auto
+    ;  
+  }
+  
+  .signup-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #d4dce4;
+  }
+  .signup-heading{
+    font-size: 4rem;
+  font-weight: bold;
+  color:black;
+  text-shadow: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+    width: 90%;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #f0a500;
+  }
+  
+  .form-group input,
+  .form-group select {
+    /* width: 90%; */
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  .inline-fields {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 90%;
+  }
+  
+  .form-field {
+    flex: 1;
+  }
+  
+  /* .form-field input {
+    width: 100%;
+  } */
+  
+  .error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: block;
+  }
+  
+  .signup-button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #f0a500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-weight: 900;
+    font-size: 20px;
+  }
+  
+  .signup-button:hover {
+    background-color: #577c1b;
+  }
+  
+  .login-link {
+    margin-top: 1rem;
+    color: #666;
+  }
+  
+  .login-link a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  .form{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 90%;
+    max-height: 550px;
+  }
+  .error{
+    color: red;
+    font-size: 20px;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  .form-group .form-field input{
+    width: 500px;
+  }    /* color: white; */
+
+  .form-group .form-field label{
+    /* color: white; */
+  }
+  .signup-card img{
+    width: 150px;
+  }
+  
+  .login-link{
+    color: white;
+  }
+
+  #department{
+    width: 500px;
+  }
+  #username{
+    width: 500px;
+  }
+  #email{
+    width: 500px;
+  }
+  #program{
+    width: 500px;
+  }
+  #student_id{
+    width: 500px;
+  }
+  #year_of_study{
+    width: 500px;
+  }
+  #user_type{
+    width: 500px;
+  }
