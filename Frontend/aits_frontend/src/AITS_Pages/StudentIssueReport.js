@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import StudentSidebar from "../components/StudentSidebar";
 import LecturerDropdown from "../components/LecturerDropdown";
 import "./StudentIssueReport.css";
+import { submitIssue} from "../utils/issues";
+import { createCategory  as createCategoryApi} from "../utils/categories";
+import { createCourse as createCourseApi } from "../utils/courses";
 
 const StudentIssueReport = () => {
   const [step, setStep] = useState(1); // to track issue submission steps
@@ -21,7 +24,7 @@ const StudentIssueReport = () => {
 
 
   //API key or token
-   const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTkwNDYwLCJpYXQiOjE3NDM1ODY4NjAsImp0aSI6IjIyYWE0OGM2NjAyODRjYTU4YTU4NGUzY2EzOWEzN2IxIiwidXNlcl9pZCI6Mn0.HWCUfP2k_1zR4BFQCWc7fjAo_eL7fhwJyKTdMxs3HOE";
+ //  const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTkwNDYwLCJpYXQiOjE3NDM1ODY4NjAsImp0aSI6IjIyYWE0OGM2NjAyODRjYTU4YTU4NGUzY2EzOWEzN2IxIiwidXNlcl9pZCI6Mn0.HWCUfP2k_1zR4BFQCWc7fjAo_eL7fhwJyKTdMxs3HOE";
   
 
 
@@ -33,19 +36,11 @@ const StudentIssueReport = () => {
     setSelectedCourseCode(courseCode);
   };
 
-  const createCategory = async () => {
+  const handleCreateCategory = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://kennedymutebi7.pythonanywhere.com//issues/api/categories/",
-        { name: categoryName, description: categoryDescription},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiToken}`,
-          },
-        }
-      );
-      const categoryId = response.data.id;
+      const categoryResponse = await createCategoryApi({ name: categoryName, description: categoryDescription});
+      const categoryId = categoryResponse.data.id;
       setCategoryId(categoryId);
       alert(`Category created successfully! ID: ${categoryId}. Please copy this ID for the next step.`);
       setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
@@ -54,19 +49,11 @@ const StudentIssueReport = () => {
      alert("Failed to create category. Please try again.");
     }
   };
-  const createCourse = async () => {
+  const handleCreateCourse = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://kennedymutebi7.pythonanywhere.com/issues/api/courses/",
-        { course_name: courseName, course_code: selectedCourseCode },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiToken}`,
-          },
-        }
-      );
-      const courseId = response.data.id;
+      const courseResponse = await createCourseApi({ course_name: courseName, course_code: selectedCourseCode });
+      const courseId = courseResponse.data.id;
       setCourseId(courseId);
       alert(`Course created successfully! ID: ${courseId}. Please copy this ID for the next step.`);
       setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
@@ -77,11 +64,6 @@ const StudentIssueReport = () => {
     }
   };
 
-  const handleCategoryAndCourseCreation = async (e) => {
-    e.preventDefault();
-    await createCategory();
-    await createCourse();
-  };
 
   const handleFileChange = (event)  => {
     setFile(event.target.files[0]);
@@ -90,17 +72,6 @@ const StudentIssueReport = () => {
 
   const handleIssueSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate issue details
-  // alert(`ISSUE SUMMARY:
-   // \nIssue Title: ${issueTitle}
-    //\nLecturer: ${selectedLecturer}
-   // \nCategory: ${categoryName}
-   // \nCourseCode: ${selectedCourseCode}
-  //  \nIssue Description: ${issueDescription}
-  //  \nStudent_ID: ${selectedStudent}
-   // \nCourse_ID: ${selectedCourse}
-   // \nAttachment: ${file ? file.name : "None"}`);
 
     // Submit issue to API
     const formData =  new FormData();
@@ -116,20 +87,10 @@ const StudentIssueReport = () => {
     }
     console.log("Submitting issue...");
       try {
-        const response = await axios.post(
-          "https://kennedymutebi7.pythonanywhere.com//issues/api/issues/",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Authorization": `Bearer ${apiToken}`,
-            },
-          }
-        );
-        alert("Issue submitted successfully!");
+        const response = await submitIssue(formData);
+         alert("Issue submitted successfully!");
         // Clear form fields
         //navigate to the student dashboard
-
         console.log("API Response:", response.data);
       } catch (error) {
         console.error("Failed to submit issue:", error.response ? error.response.data : error);
@@ -151,8 +112,9 @@ const StudentIssueReport = () => {
           </div>
         )}
         {step === 1 && (
-        <form className="student-issue-report-form" onSubmit={handleCategoryAndCourseCreation }>
-        <p><strong>Step 1:</strong> Please categorize your issue by creating a category and course.</p>
+          <div>
+        <form className="student-issue-report-form" onSubmit={handleCreateCategory}>
+        <p><strong>Step 1:</strong> Create a Category.</p>
         {/* Category and Course Fields */}
          <div className="student-issue-report-form-group">
             <label className="student-issue-report-label">Issue Category Name:</label>
@@ -172,6 +134,10 @@ const StudentIssueReport = () => {
               required
             />
           </div>
+          <button type="submit" className="student-issue-report-submit-button">Create an Issue Category</button>
+          </form>
+          <form className="student-issue-report-form" onSubmit={handleCreateCourse}>
+            <p><strong>Step 2:</strong>Create a Course</p>
           <div className="student-issue-report-form-group">
             <label className="student-issue-report-label">Course Name:</label>
             <input
@@ -190,10 +156,13 @@ const StudentIssueReport = () => {
               required
             />
           </div>
-          <button type="submit" className="student-issue-report-submit-button">
-              Create Category and Course
-            </button>
           </form>
+          <button type="submit" className="student-issue-report-submit-button">
+              Create a Course
+            </button>
+          </div>  
+          
+          
         )}
         {step === 2 && (
         <form className="student-issue-report-form" onSubmit={handleIssueSubmit}>

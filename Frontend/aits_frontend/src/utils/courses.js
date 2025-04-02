@@ -9,3 +9,13 @@ export const createCourse = async (courseData) => {
     return error.response.data;
   }
 };
+
+//function to get all courses
+export const getCourses = async () => {
+  try {
+    const response = await apiClient.get("/courses/");
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
