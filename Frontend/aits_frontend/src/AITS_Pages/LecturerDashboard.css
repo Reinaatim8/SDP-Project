@@ -1,4 +1,5 @@
 /* General Layout */
+
 .lecturer-dashboard-container {
   display: flex;
   min-height: 100vh;
@@ -23,12 +24,15 @@
 .lecturer-dashboard-header {
   text-align: center;
   margin-bottom: 30px;
+  
 }
 
 .lecturer-dashboard-title {
-  font-size: 2.5rem;
-  color: #333;
+  font-size:2rem;
+  color: #0e0c08c2;
   margin-bottom: 10px;
+  border-color: #007bff;
+  border: 1px solid rgb(255, 255, 255);
 }
 
 .lecturer-dashboard-subtitle {
@@ -84,7 +88,7 @@
 }
 
 .lecturer-dashboard-section {
-  background: #f9f9f9;
+  background: #000000;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -94,9 +98,25 @@
 
 .lecturer-dashboard-section-title {
   font-size: 1.8rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 20px;
   text-align: center;
+}
+
+/* Section Image Container */
+.section-image-container {
+  height: 20%; /* Occupies 20% of the section's height */
+  width: 100%; /* Full width of the section */
+  overflow: hidden; /* Ensures the image doesn't overflow */
+  margin-bottom: 10px; /* Adds spacing between the image and the rest of the section */
+}
+
+/* Section Image */
+.section-image {
+  width: 100%; /* Make the image responsive */
+  height: 100%; /* Ensure it fills the container */
+  object-fit: cover; /* Ensures the image scales properly without distortion */
+  border-radius: 8px; /* Optional: Adds rounded corners to the image */
 }
 
 /* Issue Tracker */
@@ -119,14 +139,14 @@
 
 .lecturer-dashboard-issue-text {
   font-size: 1rem;
-  color: #555;
+  color: #ffffff;
 }
 
 /* Announcements and Deadlines */
 .lecturer-dashboard-announcement,
 .lecturer-dashboard-deadline {
   font-size: 1rem;
-  color: #555;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
@@ -136,5 +156,100 @@
 }
 
 .lecturer-dashboard-teacherlogo {
- width: auto;
+ width: 150px;
+}
+
+/* User Icon */
+.lecturer-dashboard-user-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: #555;
+  overflow: visible;
+}
+
+.lecturer-dashboard-user-icon:hover {
+  color: #007bff;
+}
+
+/* User Details Popup */
+.lecturer-dashboard-user-details {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 200px;
+}
+
+.lecturer-dashboard-user-details p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+
+#lecturer-dashboard-header-image{
+  background-image: url('../../public/images/header.jpg');
+  border-radius: 20px;
+  background-size: cover;
+
+}
+
+#lecturer-dashboard-header-image p{
+  color: rgb(0, 0, 0);
+}
+
+#lecturer-dashboard-header-image h1{
+  color: rgb(0, 0, 0);
+}
+
+#lecturer-dashboard-user-icon{
+  overflow: 0;
+}
+
+/* Calendar Container */
+.lecturer-dashboard-calendar-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #b3d32496;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Calendar Styling */
+.lecturer-dashboard-calendar {
+  margin: 20px auto;
+  width: 90%; /* Make the calendar larger */
+  max-width: 800px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Calendar Events */
+.calendar-events {
+  margin-top: 20px;
+}
+
+.calendar-events h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.calendar-events ul {
+  list-style: none;
+  padding: 0;
+}
+
+.calendar-events li {
+  margin-bottom: 5px;
+  font-size: 1rem;
 }

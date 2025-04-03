@@ -37,7 +37,7 @@ from django.conf.urls.static import static
 
 
 router = DefaultRouter()
-router.register(r'', NotificationViewSet, basename='notification')
+router.register(r'notifications', NotificationViewSet, basename='notification')
 
 urlpatterns = [
 
@@ -50,8 +50,8 @@ urlpatterns = [
     
     path('admin/',admin.site.urls),
     path('', lambda r: HttpResponse("Welcome"), name='home'),
-    path('unread/', NotificationViewSet.as_view({'get': 'unread'}), name='notification-unread'),
-    path('mark-all-read/', NotificationViewSet.as_view({'post': 'mark_all_as_read'}), name='notification-mark-all-read'),
+    path('notifications/unread/', NotificationViewSet.as_view({'get': 'unread'}), name='notification-unread'),
+    path('notifications/mark-all-read/', NotificationViewSet.as_view({'post': 'mark_all_as_read'}), name='notification-mark-all-read'),
     path('api/token/',obtain_auth_token, name='api_token_auth'),
     #path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     #path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
