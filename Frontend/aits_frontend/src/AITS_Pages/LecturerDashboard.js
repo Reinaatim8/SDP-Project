@@ -52,7 +52,7 @@ const LecturerDashboard = () => {
       <div className="lecturer-dashboard-content">
         <div className="lecturer-dashboard-panel">
           <div className="lecturer-dashboard-header" id="lecturer-dashboard-header-image">
-            <img src="/images/AITSLOGO.png" style={{width:'250px'}} alt="teacherlogo" className="lecturer-dashboard-teacherlogo" />
+            <img src="/images/AITSLOGO.png" style={{width:'350px'}} alt="teacherlogo" className="lecturer-dashboard-teacherlogo" />
             <h2 className="lecturer-dashboard-title">
               {user ? `Welcome back, ${user.username}` : "Welcome back!"}
             </h2>
@@ -145,7 +145,7 @@ const LecturerDashboard = () => {
 
           {/* Calendar Section */}
           <div className="lecturer-dashboard-calendar-container">
-            <h2 className="lecturer-dashboard-section-title" style={{color:"black"}}>📅 ACADEMIC CALENDAR</h2>
+            <h2 className="lecturer-dashboard-section-title" style={{color:"white"}}>📅 ACADEMIC CALENDAR</h2>
             <Calendar
               onChange={handleDateChange}
               value={date}

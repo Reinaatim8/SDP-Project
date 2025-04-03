@@ -19,6 +19,8 @@
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: 40px;
+  background-image:url(../../public/images/chalk.jpg);
+  background-size: cover;
 }
 
 .lecturer-dashboard-header {
@@ -29,7 +31,7 @@
 
 .lecturer-dashboard-title {
   font-size:2rem;
-  color: #0e0c08c2;
+  color: #ffffff;
   margin-bottom: 10px;
   border-color: #007bff;
   border: 1px solid rgb(255, 255, 255);
@@ -88,7 +90,7 @@
 }
 
 .lecturer-dashboard-section {
-  background: #b3d32496;
+  background: #ffffff96;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

@@ -187,6 +187,7 @@ const RegistrarDashboard = () => {
 
         {/* Stats Overview */}
         <div className="stats-overview">
+          <div className='stat-cardd'><img src='images/AITSLOGO.png' style={{width:'200px'}}/></div>
           <div className="stat-card">
             <div className="stat-icon">
               <FiUser size={24} />
@@ -475,14 +476,16 @@ const RegistrarDashboard = () => {
                   <div className="report-card">
                     <h4>Enrollment Trends</h4>
                     <div className="chart-placeholder">
-                      <img src='/images/enrollment-trends.png' alt="chart-placeholder" style={{width:'100%'}}/>
+                      <FiBarChart2 size={48}/>
+                      <p>charts will appear here</p>
                     </div>
                     <button className="btn-outline">Generate Report</button>
                   </div>
                   <div className="report-card">
                     <h4>Graduation Analysis</h4>
                     <div className="chart-placeholder">
-                    <img src='/images/graduation.jpg' alt="chart-placeholder" style={{width:'100%',height:'100%'}}/>
+                    <FiAward size={48}/>
+                    <p>Graduation Analysis will appear here</p>
                     </div>
                     <button className="btn-outline">Generate Report</button>
                   </div>

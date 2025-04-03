@@ -143,7 +143,7 @@ const StudentIssueReport = () => {
       <StudentSidebar />
       <div className="student-issue-report-content">
         <h1 className="student-issue-report-title">📩 REPORT AN ISSUE</h1>
-        <p className="student-issue-report-description">Select a lecturer, categorize your issue, and describe it below. You can also attach any relevant files.</p>
+        <p className="student-issue-report-description" style={{color:'white'}}>Select a lecturer, categorize your issue, and describe it below. You can also attach any relevant files.</p>
         <hr className="student-issue-report-divider" />
         {alert && (
           <div className="alert">
