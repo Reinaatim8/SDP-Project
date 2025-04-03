@@ -17,22 +17,32 @@ const Loginpage = () => {
     setError('');
 
     try {
-      const response = await apiClient.post(
-        'auth/login',
-        { username, password },
+      // Step 1: Authenticate the user
+      const authResponse = await apiClient.post(
+        'auth/login/', // API for authentication
+        { username, password }
       );
 
-      console.log('API Response:', response.data);
-      const token = response.data.token;
+      console.log('Auth API Response:', authResponse.data);
+
+      // Step 2: Generate tokens using the second API
+      const tokenResponse = await apiClient.post(
+        'api/token/', // API for generating tokens
+        { username, password }
+      );
+
+      console.log('Token API Response:', tokenResponse.data);
+
       // Save the token in local storage
-      localStorage.setItem('token', response.data.token);
-      console.log('Token stored:', token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem('access_token', tokenResponse.data.access);
+      console.log('access_token', tokenResponse.data.access);
+      console.log('refresh_token', tokenResponse.data.refresh);
+      localStorage.setItem("user", JSON.stringify(authResponse.data.user));
     
 
       
       // Determine the user's role and navigate accordingly
-      const user_type = response.data.user.user_type; // Assuming the user type is included in the response
+      const user_type = authResponse.data.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
 
       switch (user_type) {
@@ -69,7 +79,8 @@ const Loginpage = () => {
     const resetTimeout = () => {
       clearTimeout(timeoutHandle);
       timeoutHandle = setTimeout(() => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         localStorage.removeItem('user');
         navigate('/login');
       }, sessionTimeout);

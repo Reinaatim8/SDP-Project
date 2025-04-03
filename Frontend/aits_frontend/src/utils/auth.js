@@ -3,11 +3,11 @@ import apiClient from "./axiosInstance";
 //function to handle login
 export const login = async (username, password) => {
   try {
-    const response = await apiClient.post("/auth/login", {
+    const response = await apiClient.post("api/token/", {
       username: username,
       password: password,
     });
-    localStorage.setItem("token", response.data.Token);//store token in local storage
+    localStorage.setItem("access", response.data.access);//store token in local storage
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -16,6 +16,6 @@ export const login = async (username, password) => {
 
 //function to handle user logout
 export const logout =() => {
-  localStorage.removeItem("authtoken");
+  localStorage.removeItem("access");
 };
 

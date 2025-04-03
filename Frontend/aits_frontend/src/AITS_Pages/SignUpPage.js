@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
+import {toast} from "react-toastify";
+
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -159,7 +161,7 @@ const SignUpPage = () => {
         localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
-       alert('Sign Up Successful! Please login.');
+       toast.success('Sign Up Successful! Please login.');
        navigate('/login');
      } catch (error) {
        console.error('Sign up error:', error);
