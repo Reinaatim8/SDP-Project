@@ -176,7 +176,7 @@ const SignUpPage = () => {
     <div className="signup-panel">
     <div className="signup-container">
       <div className="signup-card">
-        <img src='/images/nobgmaklogo.png'alt='maklogo'/ >
+        <img src='/images/nobgmaklogo.png'alt='maklogo' />
         <h2 className="signup-title">Sign Up To Start</h2>
         <form onSubmit={handleSubmit}>
 
