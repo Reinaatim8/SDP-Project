@@ -125,7 +125,7 @@ const RegistrarSidebar = () => {
       <div className="sidebar-header">
         {isExpanded && (
           <div className="logo-container">
-            <h2>REGISTRAR HUB</h2>
+            <h2 style={{color:'#f0a500'}}>REGISTRAR HUB</h2>
           </div>
         )}
         <button className="toggle-btn" onClick={toggleSidebar}>

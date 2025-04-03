@@ -476,15 +476,13 @@ const RegistrarDashboard = () => {
                     <h4>Enrollment Trends</h4>
                     <div className="chart-placeholder">
                       <img src='/images/enrollment-trends.png' alt="chart-placeholder" style={{width:'100%'}}/>
-                      <p>Enrollment trends chart will appear here</p>
                     </div>
                     <button className="btn-outline">Generate Report</button>
                   </div>
                   <div className="report-card">
                     <h4>Graduation Analysis</h4>
                     <div className="chart-placeholder">
-                      <FiAward size={48} />
-                      <p>Graduation analysis chart will appear here</p>
+                    <img src='/images/graduation.jpg' alt="chart-placeholder" style={{width:'100%',height:'100%'}}/>
                     </div>
                     <button className="btn-outline">Generate Report</button>
                   </div>

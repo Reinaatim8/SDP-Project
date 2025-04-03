@@ -88,7 +88,7 @@
 }
 
 .lecturer-dashboard-section {
-  background: #000000;
+  background: #b3d32496;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -98,7 +98,7 @@
 
 .lecturer-dashboard-section-title {
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -139,14 +139,14 @@
 
 .lecturer-dashboard-issue-text {
   font-size: 1rem;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Announcements and Deadlines */
 .lecturer-dashboard-announcement,
 .lecturer-dashboard-deadline {
   font-size: 1rem;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 10px;
 }
 

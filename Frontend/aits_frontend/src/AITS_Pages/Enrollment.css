@@ -4,25 +4,32 @@
   align-items: center;
   height: 100vh;
   background-color:linear-gradient(135deg, #f4f6f9, #e0e5ec);
+  background-image: url(../../public/images/studentwallpaper.jpg);
+
 }
 .enrollment-container2{
-  max-width: 550px;
   margin: 0px;
-  height: 550px;
+  height: fit-content;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: white;
+  background-image: url(../../public/images/enrollmentwallpaper.jpg);
+
 }
 
 .enrollment-card {
-  background-color: rgb(161, 159, 159);
+  background-color: rgba(161, 159, 159, 0.66);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 500px;
-  height: 500px;
+  width: 690px;
+  height: fit-content;
   text-align: center;
+  scale: 0.88;
+  
+  
+
   
 }
 .enrollment-form {
@@ -32,13 +39,12 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   margin-top: 20px;
-  height: 350px;
+  height: fit-content;
 }
 .enrollment-card h2 {
   margin-top: 20px;
   margin-bottom: 20px;
-  color: #333;
-  text-decoration: underline darkgreen;
+  color: #ffffff;
   font-weight: bold ;
 }
 
