@@ -19,6 +19,8 @@
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: 40px;
+  background-image:url(../../public/images/chalk.jpg);
+  background-size: cover;
 }
 
 .lecturer-dashboard-header {
@@ -29,7 +31,7 @@
 
 .lecturer-dashboard-title {
   font-size:2rem;
-  color: #0e0c08c2;
+  color: #ffffff;
   margin-bottom: 10px;
   border-color: #007bff;
   border: 1px solid rgb(255, 255, 255);
@@ -88,7 +90,7 @@
 }
 
 .lecturer-dashboard-section {
-  background: #000000;
+  background: #ffffff96;
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -98,7 +100,7 @@
 
 .lecturer-dashboard-section-title {
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -139,14 +141,14 @@
 
 .lecturer-dashboard-issue-text {
   font-size: 1rem;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Announcements and Deadlines */
 .lecturer-dashboard-announcement,
 .lecturer-dashboard-deadline {
   font-size: 1rem;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 10px;
 }
 

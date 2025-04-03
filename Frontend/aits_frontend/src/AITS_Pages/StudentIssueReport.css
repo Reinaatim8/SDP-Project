@@ -2,28 +2,30 @@
 .student-issue-report-container {
   max-width: 750px;
   margin: 50px auto;
-  height: 877px;
+  height: fit-content;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: white;
+  background-image: url(../../public/images/enrollmentwallpaper.jpg);
+  margin-left: 320px;
 }
 .student-issue-report-title {
   
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
-  text-decoration: underline darkgreen;
+  color: white;
 }
 
 .student-issue-report-content {
   max-width: 750px;
   margin: 0px;
-  height: 840px;
+  height: fit-content;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: rgb(161, 159, 159);
+  background-color: rgba(161, 159, 159, 0.59);
   flex: 1;
   transition: margin-left 0.3s ease-in-out;
 }
@@ -41,7 +43,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   /*max-width: 750px;*/
   margin-top: 20px;
-  height: 610px;
+  height: fit-content;
 }
 .student-issue-report-form2{
   background-color: white;
@@ -149,3 +151,6 @@
     margin-left: 0;
   }
 }*/
+body{
+  background-image: url(../../public/images/studentwallpaper.jpg);
+}

@@ -39,7 +39,7 @@ useEffect(() => {
       <div className="student-dashboard-content">
         <div className="student-dashboard-panel">
           <div className="student-dashboard-header">
-            <img src="/images/academician.png" alt="student logo"/>
+            <img src="/images/AITSLOGO.png"style={{width:"350px"}} alt="student logo"/>
             <h2 className="student-dashboard-title">
             {user ? `Welcome, Glad to see you back ${user.username}! 👋`: ""}
             </h2>
