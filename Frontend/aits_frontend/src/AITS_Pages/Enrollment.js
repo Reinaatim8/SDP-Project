@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import axios from "axios";
 import StudentSidebar from "../components/StudentSidebar";
 import "./Enrollment.css"; // for styling
 import  { createEnrollment as createEnrollmentApi } from "../utils/enrollments";
@@ -10,8 +9,6 @@ const Enrollment = () => {
   const [semester, setSemester] = useState("");
   const [academicYear, setAcademicYear] = useState("");
   
-
-  //const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTkwNDYwLCJpYXQiOjE3NDM1ODY4NjAsImp0aSI6IjIyYWE0OGM2NjAyODRjYTU4YTU4NGUzY2EzOWEzN2IxIiwidXNlcl9pZCI6Mn0.HWCUfP2k_1zR4BFQCWc7fjAo_eL7fhwJyKTdMxs3HOE";
 
   const handleEnrollmentSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +24,10 @@ const Enrollment = () => {
       const response = await createEnrollmentApi(enrollmentData);
       alert("Enrollment submitted successfully!");
       console.log("API Response:", response.data);
+      setStudentId("");
+      setCourseId("");
+      setSemester("");
+      setAcademicYear("");
     } catch (error) {
       console.error("Failed to submit enrollment:", error.response ? error.response.data : error);
       alert("Failed to submit enrollment. Please try again.");

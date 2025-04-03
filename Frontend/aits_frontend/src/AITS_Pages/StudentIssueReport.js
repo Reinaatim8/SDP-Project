@@ -23,11 +23,6 @@ const StudentIssueReport = () => {
  
 
 
-  //API key or token
- //  const apiToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzNTkwNDYwLCJpYXQiOjE3NDM1ODY4NjAsImp0aSI6IjIyYWE0OGM2NjAyODRjYTU4YTU4NGUzY2EzOWEzN2IxIiwidXNlcl9pZCI6Mn0.HWCUfP2k_1zR4BFQCWc7fjAo_eL7fhwJyKTdMxs3HOE";
-  
-
-
   const handleLecturerSelection = (lecturer) => {
     setSelectedLecturer(lecturer);
   };
@@ -40,7 +35,7 @@ const StudentIssueReport = () => {
     e.preventDefault();
     try {
       const categoryResponse = await createCategoryApi({ name: categoryName, description: categoryDescription});
-      const categoryId = categoryResponse.data.id;
+      const categoryId = categoryResponse.id;
       setCategoryId(categoryId);
       alert(`Category created successfully! ID: ${categoryId}. Please copy this ID for the next step.`);
       setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
@@ -53,7 +48,7 @@ const StudentIssueReport = () => {
     e.preventDefault();
     try {
       const courseResponse = await createCourseApi({ course_name: courseName, course_code: selectedCourseCode });
-      const courseId = courseResponse.data.id;
+      const courseId = courseResponse.id;
       setCourseId(courseId);
       alert(`Course created successfully! ID: ${courseId}. Please copy this ID for the next step.`);
       setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
@@ -88,6 +83,14 @@ const StudentIssueReport = () => {
     console.log("Submitting issue...");
       try {
         const response = await submitIssue(formData);
+        console.log("Issue submitted successfully:", response);
+        // Handle success (e.g., show a success message, clear form fields, etc.)
+        //resetFormFields();
+        setIssueTitle("");
+        setIssueDescription("");
+        setSelectedCourseCode("");
+        setSelectedLecturer("");
+        setSelectedStudent("");
          alert("Issue submitted successfully!");
         // Clear form fields
         //navigate to the student dashboard

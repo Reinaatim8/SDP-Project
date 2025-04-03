@@ -1,6 +1,6 @@
-import React, {useEffect,useState} from "react";
+import React, { useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+//import axios from "axios";
 import StudentSidebar from "../components/StudentSidebar";
 import "./StudentDashboard.css";
 
@@ -10,21 +10,20 @@ const StudentDashboard = () => {
   const [issues, setIssues] = useState([]); 
 
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem(
-      "user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    axios.get("https://kennedymutebi7.pythonanywhere.com/issues/api/issues/")
-    
-    .then(response => {
-      setIssues(response.data);
-    })
-    .catch(error => {
-      console.error("Error fetching issues:", error);
-    });
-  }, []);
+//load user from local storage
+useEffect(() => {
+  try{
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) {
+    setUser(JSON.parse(storedUser));
+  }  
+  } catch (error) {
+    console.error("Error loading user from local storage:", error);
+    setUser(null);
+  } 
+}, []);
+
+  
   const handleReportIssue = () => {
     navigate('/StudentIssueReport');
   };

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../utils/auth'; // Import the login function from your utils
 //import axios from 'axios';
-import apiClient from '../utils/axiosInstance';
+//import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
 
 const Loginpage = () => {
+  //const [step, setStep] = useState(1); //step 1 for initial login and step 2 for generating session token
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,31 +20,19 @@ const Loginpage = () => {
 
     try {
       // Step 1: Authenticate the user
-      const authResponse = await apiClient.post(
-        'auth/login/', // API for authentication
-        { username, password }
-      );
+      const response = await login( username, password );
 
-      console.log('Auth API Response:', authResponse.data);
-
-      // Step 2: Generate tokens using the second API
-      const tokenResponse = await apiClient.post(
-        'api/token/', // API for generating tokens
-        { username, password }
-      );
-
-      console.log('Token API Response:', tokenResponse.data);
-
-      // Save the token in local storage
-      localStorage.setItem('access_token', tokenResponse.data.access);
-      console.log('access_token', tokenResponse.data.access);
-      console.log('refresh_token', tokenResponse.data.refresh);
-      localStorage.setItem("user", JSON.stringify(authResponse.data.user));
-    
-
+      if (response.tokens) {
+        console.log('Login successful:', response);
+      }
+      if (!response || !response.user) {
+        setError('Invalid username or password. Please try again.');
+        return;
+      }
       
       // Determine the user's role and navigate accordingly
-      const user_type = authResponse.data.user.user_type; // Assuming the user type is included in the response
+      const user = response.user; // Assuming the user object is included in the response
+      const user_type = response.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
 
       switch (user_type) {
