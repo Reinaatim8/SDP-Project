@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css'; //for styling
+import StudentSidebar from '../components/StudentSidebar';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -12,6 +13,8 @@ const Profile = () => {
   }, []);
 
   return (
+    <div className="profile-page">
+      <StudentSidebar />
     <div className="profile-container">
      
       {userData ? (
@@ -31,6 +34,7 @@ const Profile = () => {
       ) : (
         <p>Loading profile...</p>
       )}
+    </div>
     </div>
   );
 };

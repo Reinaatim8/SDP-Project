@@ -57,7 +57,7 @@ useEffect(() => {
             </button>
             <button className="student-dashboard-btn student-dashboard-btn-secondary">
               <span className="student-dashboard-btn-icon">📞</span>
-              Contact Lecturer
+              Contact Us
             </button>
             </div>
             {/*  Logout Button */}
