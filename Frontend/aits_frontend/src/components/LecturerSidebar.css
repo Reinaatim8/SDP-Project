@@ -177,6 +177,7 @@
 .respond-button {
   background-color: #007bff;
   color: white;
+<<<<<<< HEAD
   border: none;
   padding: 5px 10px;
   cursor: pointer;
@@ -306,3 +307,13 @@
   margin-bottom: 10px;
 }
 
+=======
+  transform: rotateY(180deg);
+}
+
+#logout-btn{
+  width: 250px;
+  color: #2c3e50;
+  border: 0px;
+}
+>>>>>>> aa15005 (lecturer dashboard)
