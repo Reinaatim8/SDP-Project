@@ -14,7 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 from django.http import HttpResponse
 from django.urls import path, include
 from rest_framework.permissions import AllowAny
@@ -42,6 +43,11 @@ urlpatterns = [
 
     
     # Additional custom endpoints
+    path('favicon.ico', RedirectView.as_view(
+        url=staticfiles_storage.url('img/favicon.ico')),
+        name="favicon"
+    ),
+    
     path('admin/',admin.site.urls),
     path('', lambda r: HttpResponse("Welcome"), name='home'),
     path('unread/', NotificationViewSet.as_view({'get': 'unread'}), name='notification-unread'),
