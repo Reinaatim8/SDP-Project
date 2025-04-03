@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
-import {toast} from "react-toastify";
+
 
 
 const SignUpPage = () => {
@@ -161,7 +161,7 @@ const SignUpPage = () => {
         localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
-       toast.success('Sign Up Successful! Please login.');
+       alert('Sign Up Successful! Please login.');
        navigate('/login');
      } catch (error) {
        console.error('Sign up error:', error);
@@ -183,7 +183,7 @@ const SignUpPage = () => {
           {/* First Name */}
           <div className="form-group inline-fields">
             <div className="form-field">
-              <label htmlFor="first_name">First Name</label>
+              <label htmlFor="first_name" style={{color:"#f0a500"}}>First Name</label>
               <input
                 type="text"
                 id="first_name"
@@ -200,7 +200,7 @@ const SignUpPage = () => {
           {/*Last name */}
           <div className="form-group inline-fields">
             <div className="form-field">
-              <label htmlFor="last_name">Last Name</label>
+              <label htmlFor="last_name" style={{color:"#f0a500"}}>Last Name</label>
               <input
                 type="text"
                 id="last_name"
@@ -216,7 +216,7 @@ const SignUpPage = () => {
 
           {/* Username */}
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username" style={{color:"#f0a500"}}>Username</label>
             <input
               type="text"
               id="username"
@@ -230,7 +230,7 @@ const SignUpPage = () => {
 
           {/* Email */}
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email" style={{color:"#f0a500"}}>Email Address</label>
             <input
               type="email"
               id="email"
@@ -245,7 +245,7 @@ const SignUpPage = () => {
           {/* Password  and confirm password*/}
           <div className="form-group inline-fields">
             <div className="form-field">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
               <input
                 type="password"
                 id="password"
@@ -258,7 +258,7 @@ const SignUpPage = () => {
               {errors.password && <span className="error">{errors.password}</span>}
             </div>
             <div className="form-field">
-              <label id='username' htmlFor="confirmPassword">Confirm Password</label>
+              <label id='username' htmlFor="confirmPassword" style={{color:"#f0a500"}}>Confirm Password</label>
               <input
                 type="password"
                 id="confirmPassword"
@@ -274,7 +274,7 @@ const SignUpPage = () => {
 
           {/* Program */}
           <div className="form-group">
-              <label htmlFor="program">Program (Optional)</label>
+              <label htmlFor="program" style={{color:"#f0a500"}}>Program (Optional)</label>
               <input
                 type="text"
                 id="program"
@@ -288,7 +288,7 @@ const SignUpPage = () => {
             {/* Student ID */}
             {formData.user_type === 'student' && (
               <div className="form-group">
-                <label htmlFor="student_id">Student ID</label>
+                <label htmlFor="student_id" style={{color:"#f0a500"}}>Student ID</label>
                 <input
                   type="text"
                   id="student_id"
@@ -304,7 +304,7 @@ const SignUpPage = () => {
              {/* Staff ID */}
             {formData.user_type === 'lecturer' && (
               <div className="form-group">
-                <label htmlFor="staff_id">Staff ID</label>
+                <label htmlFor="staff_id" style={{color:"#f0a500"}}>Staff ID</label>
                 <input
                   type="text"
                   id="staff_id"
@@ -320,7 +320,7 @@ const SignUpPage = () => {
 
             {/* Year of Study */}
             <div className="form-group" id='year'>
-              <label htmlFor="year_of_study">Year of Study (Optional)</label>
+              <label htmlFor="year_of_study" style={{color:"#f0a500"}}>Year of Study (Optional)</label>
               <input
                 type="text"
                 id="year_of_study"
@@ -333,7 +333,7 @@ const SignUpPage = () => {
 
           {/* User Type */}
           <div className="form-group">
-            <label htmlFor="user_type">User Type</label>
+            <label htmlFor="user_type" style={{color:"#f0a500"}}>User Type</label>
             <select
               id="user_type"
               name="user_type"
@@ -348,7 +348,7 @@ const SignUpPage = () => {
 
           {/* Department */}
           <div className="form-group" id='department'>
-            <label htmlFor="department">Department (Optional)</label>
+            <label htmlFor="department" style={{color:"#f0a500"}}>Department (Optional)</label>
             <input
               type="text"
               id="department"

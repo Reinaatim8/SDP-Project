@@ -110,7 +110,7 @@ const Loginpage = () => {
     <form onSubmit={handleSubmit}>
      <div className="form-group">
       <div>
-        <label htmlFor="username" style={{fontWeight: 'bold'}}>Username</label>
+        <label htmlFor="username"style={{color:"#f0a500"}}>Username</label>
         <input 
         type="text" 
         name="username" 
@@ -120,7 +120,7 @@ const Loginpage = () => {
     </div>
     
     <div>
-      <label htmlFor="password" style={{fontWeight: 'bold'}}>Password</label>
+      <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
       <input 
       type="password" 
       name="password" 
