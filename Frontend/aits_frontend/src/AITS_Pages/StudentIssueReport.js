@@ -215,7 +215,7 @@ const StudentIssueReport = () => {
             <label className="student-issue-report-label">Student ID:</label>
             <input
               type="text"
-              placeholder="Enter Student ID (system given)..Please enter 2..."
+              placeholder="Enter Student ID (system given)..Please enter NO. 2..."
               value={selectedStudent || ""}
               onChange={(event) => setSelectedStudent(event.target.value)}
               required
