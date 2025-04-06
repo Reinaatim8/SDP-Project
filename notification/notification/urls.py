@@ -38,7 +38,7 @@ from django.conf.urls.static import static
 
 router = DefaultRouter()
 router.register(r'', NotificationViewSet, basename='notification')
-
+#urls
 urlpatterns = [
 
     
