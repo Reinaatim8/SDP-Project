@@ -140,7 +140,7 @@ EMAIL_HOST_USER = 'mwanjesimonpeter732@gmail.com'
 EMAIL_HOST_PASSWORD = 'synUpbownio@$9'
 DEFAULT_FROM_EMAIL = 'noreply@aits.example.com'
 
-
+#JWT, Session, Token Auth
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
