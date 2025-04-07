@@ -163,7 +163,7 @@ class IssueViewSet(viewsets.ModelViewSet):
                 issue=issue
             )
             
-            return Response({"success": "Issue assigned successfully indeed"})
+            return Response({"success": "Issue assigned successfully "})
         except User.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
     
