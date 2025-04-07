@@ -14,7 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 from django.http import HttpResponse
 from django.urls import path, include
 from rest_framework.permissions import AllowAny
@@ -36,16 +37,21 @@ from django.conf.urls.static import static
 
 
 router = DefaultRouter()
-router.register(r'', NotificationViewSet, basename='notification')
+router.register(r'notifications', NotificationViewSet, basename='notification')
 
 urlpatterns = [
 
     
     # Additional custom endpoints
+    path('favicon.ico', RedirectView.as_view(
+        url=staticfiles_storage.url('img/favicon.ico')),
+        name="favicon"
+    ),
+    
     path('admin/',admin.site.urls),
     path('', lambda r: HttpResponse("Welcome"), name='home'),
-    path('unread/', NotificationViewSet.as_view({'get': 'unread'}), name='notification-unread'),
-    path('mark-all-read/', NotificationViewSet.as_view({'post': 'mark_all_as_read'}), name='notification-mark-all-read'),
+    path('notifications/unread/', NotificationViewSet.as_view({'get': 'unread'}), name='notification-unread'),
+    path('notifications/mark-all-read/', NotificationViewSet.as_view({'post': 'mark_all_as_read'}), name='notification-mark-all-read'),
     path('api/token/',obtain_auth_token, name='api_token_auth'),
     #path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     #path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
