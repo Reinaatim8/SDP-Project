@@ -226,7 +226,7 @@ class IssueViewSet(viewsets.ModelViewSet):
         try:
             new_grade = float(new_grade)
         except ValueError:
-            return Response({"error": "Invalid grade format"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Invalid grade format please try again"}, status=status.HTTP_400_BAD_REQUEST)
         
         old_grade = issue.current_grade
         issue.current_grade = new_grade
