@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     # Local apps
     'apps.authentication',
     'apps.issues',
-    'apps.notifications',
+    
+
+
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

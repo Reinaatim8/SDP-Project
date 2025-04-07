@@ -196,7 +196,7 @@ class IssueViewSet(viewsets.ModelViewSet):
         Notification.objects.create(
             user=issue.student,
             title="Issue Status Updated",
-            message=f"Your issue '{issue.title}' status has been updated and to {issue.get_status_display()}",
+            message=f"Your issue '{issue.title}' status has been updated  to {issue.get_status_display()}",
             issue=issue
         )
         
