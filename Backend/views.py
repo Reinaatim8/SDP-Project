@@ -163,7 +163,7 @@ class IssueViewSet(viewsets.ModelViewSet):
                 issue=issue
             )
             
-            return Response({"success": "Issue assigned successfully "})
+            return Response({"success": "Issue assigned successfully  "})
         except User.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
     
@@ -196,7 +196,7 @@ class IssueViewSet(viewsets.ModelViewSet):
         Notification.objects.create(
             user=issue.student,
             title="Issue Status Updated",
-            message=f"Your issue '{issue.title}' status has been updated to {issue.get_status_display()}",
+            message=f"Your issue '{issue.title}' status has been updated and to {issue.get_status_display()}",
             issue=issue
         )
         
