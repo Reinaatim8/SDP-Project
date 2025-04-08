@@ -62,7 +62,7 @@ class IssueSerializer(serializers.ModelSerializer):
         model = Issue
         fields = ['id', 'title', 'description', 'category', 'category_name', 'student', 'student_name', 
                  'course', 'course_code', 'course_name', 'enrollment', 'current_grade', 'expected_grade',
-                 'status', 'priority', 'assigned_to',  'assigned_to_name', 'created_at', 'updated_at', 
+                 'status', 'priority', 'assigned_to', 'assigned_to_name', 'created_at', 'updated_at', 
                  'resolved_at', 'attachments',  'comments']
 
 class AuditLogSerializer(serializers.ModelSerializer):
