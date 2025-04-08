@@ -63,7 +63,7 @@ class IssueSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'description', 'category', 'category_name', 'student', 'student_name', 
                  'course', 'course_code', 'course_name', 'enrollment', 'current_grade', 'expected_grade',
                  'status', 'priority', 'assigned_to', 'assigned_to_name', 'created_at', 'updated_at', 
-                 'resolved_at', 'attachments', 'comments']
+                 'resolved_at', 'attachments',  'comments']
 
 class AuditLogSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
