@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-tle74x8ha%*5!n#+jikg^+g7a#p@unqoriialyjt_z-#nv2z&('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'corsheaders',
     'notifications',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -149,12 +151,35 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAdminUser'
     ]
 }
 
 
 from datetime import timedelta
+
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
 }
+
+
+#CORS_ALLOW_ALL_ORIGINS = True 
+#CORS_ALLOWED_ORIGINS = [
+    #"https://your-frontend-domain.com",
+    #"http://localhost:3000",  
+#]
+#CORS_ALLOW_HEADERS = [
+    #'accept',
+    #'accept-encoding',
+    #'authorization',  
+    #'content-type',
+    #'dnt',
+    #'origin',
+    #'user-agent',
+    #'x-csrftoken',
+    #'x-requested-with',
+#]
+#CORS_ALLOW_CREDENTIALS = True

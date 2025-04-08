@@ -163,7 +163,7 @@ class IssueViewSet(viewsets.ModelViewSet):
                 issue=issue
             )
             
-            return Response({"success": "Issue assigned successfully"})
+            return Response({"success": "Issue assigned successfully  "})
         except User.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
     
@@ -196,7 +196,7 @@ class IssueViewSet(viewsets.ModelViewSet):
         Notification.objects.create(
             user=issue.student,
             title="Issue Status Updated",
-            message=f"Your issue '{issue.title}' status has been updated to {issue.get_status_display()}",
+            message=f"Your issue '{issue.title}' status has been updated  to {issue.get_status_display()}",
             issue=issue
         )
         
@@ -226,7 +226,7 @@ class IssueViewSet(viewsets.ModelViewSet):
         try:
             new_grade = float(new_grade)
         except ValueError:
-            return Response({"error": "Invalid grade format"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Invalid grade format please try again"}, status=status.HTTP_400_BAD_REQUEST)
         
         old_grade = issue.current_grade
         issue.current_grade = new_grade
@@ -349,4 +349,4 @@ class NotificationViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'])
     def mark_all_read(self, request):
         Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
-        return Response({"success": "All notifications marked as read"})
+        return Response({"success": "All notifications marked as add read "})

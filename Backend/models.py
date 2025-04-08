@@ -142,13 +142,11 @@ class AuditLog(models.Model):
         return f"{self.action} by {self.user.username} on {self.timestamp}"
 
 class Notification(models.Model):
-    """
-    Model to handle system notifications for users.
-    """
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
     title = models.CharField(max_length=100)
     message = models.TextField()
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='issue_notifications', null=True, blank=True)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE,  related_name='issue_notifications', null=True, blank=True)
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     
