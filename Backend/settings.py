@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'aits_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aits',
+        'NAME': 'aits ',
         'USER': 'root',
         'PASSWORD': 'PSS@12345',
         'HOST': 'localhost',
