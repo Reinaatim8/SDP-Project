@@ -146,7 +146,7 @@ class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
     title = models.CharField(max_length=100)
     message = models.TextField()
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='issue_notifications', null=True, blank=True)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE,  related_name='issue_notifications', null=True, blank=True)
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     
