@@ -66,9 +66,7 @@ class IssueCategory(models.Model):
 
 
 class Issue(models.Model):
-    """
-    Model to track academic issues reported by students.
-    """
+  
     STATUS_CHOICES = [
         ('pending', 'Pending Review'),
         ('in_progress', 'In Progress'),
