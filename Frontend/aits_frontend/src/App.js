@@ -12,12 +12,25 @@ import LecturerDashboard from './AITS_Pages/LecturerDashboard';
 import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
 import RespondToQueries from './AITS_Pages/RespondToQueries';
 import ViewIssues from './AITS_Pages/ViewIssues';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 function App() {
   return (
     <Router>
+      <ToastContainer
+       position='center'
+       autoClose={5000}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       pauseOnFocusLoss
+       draggable
+       pauseOnHover
+       />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/Aboutpage" element={<Aboutpage />} />

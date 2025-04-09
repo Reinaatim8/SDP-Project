@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
-import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import {success} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { FaEye,FaEyeSlash } from 'react-icons/fa';
 
 
 
@@ -35,6 +37,14 @@ const SignUpPage = () => {
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () =>{
+    setShowConfirmPassword(!showConfirmPassword)
+  };
 
 
 //To valiadte and ensure a strong password is created by the user
@@ -149,7 +159,7 @@ const SignUpPage = () => {
         });
         console.log("Response:", response.data); // Log response for debugging
 
-        //Storing certain user dteails in local storage for profile display
+        //Storing certain user details in local storage for profile display
         const userProfile = {
           first_name: formData.first_name,
           last_name: formData.last_name,
@@ -166,6 +176,7 @@ const SignUpPage = () => {
         
        //Handling response on successful registration
        toast.success('Sign Up Successful! Please login.');
+       
        navigate('/login');
      } catch (error) {
        console.error('Sign up error:', error);
@@ -246,13 +257,28 @@ const SignUpPage = () => {
             />
             {errors.email && <span className="error">{errors.email}</span>}
           </div>
+             {/* User Type */}
+             <div className="form-group">
+            <label htmlFor="user_type" style={{color:"#f0a500"}}>Type Of User</label>
+            <select
+              id="user_type"
+              name="user_type"
+              value={formData.user_type}
+              onChange={handleChange}
+            >
+              <option value="student">Student</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="admin">Admin/Registrar</option>
+            </select>
+          </div>
 
           {/* Password  and confirm password*/}
           <div className="form-group inline-fields">
             <div className="form-field">
               <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
+              <div className='password-input-container'>
               <input
-                type="password"
+                type={showPassword ? 'text': 'password'}
                 id="password"
                 name="password"
                 value={formData.password}
@@ -260,12 +286,15 @@ const SignUpPage = () => {
                 placeholder="Enter your password"
                 required
               />
+              <button type="button" className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash/>:<FaEye/>}</button>
               {errors.password && <span className="error">{errors.password}</span>}
+              </div>
             </div>
             <div className="form-field">
+              <div className='password-input-container'>
               <label id='username' htmlFor="confirmPassword" style={{color:"#f0a500"}}>Confirm Password</label>
               <input
-                type="password"
+                type={showConfirmPassword ? 'text':'password'}
                 id="confirmPassword"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -273,7 +302,9 @@ const SignUpPage = () => {
                 placeholder="Confirm your password"
                 required
               />
+              <button type="button" className='password-toggle-button' onClick={toggleConfirmPasswordVisibility}>{showConfirmPassword ?<FaEyeSlash/>:<FaEye/>}</button>
               {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+              </div>
             </div>
           </div>
 
@@ -336,20 +367,6 @@ const SignUpPage = () => {
               />
             </div>
 
-          {/* User Type */}
-          <div className="form-group">
-            <label htmlFor="user_type" style={{color:"#f0a500"}}>User Type</label>
-            <select
-              id="user_type"
-              name="user_type"
-              value={formData.user_type}
-              onChange={handleChange}
-            >
-              <option value="student">Student</option>
-              <option value="lecturer">Lecturer</option>
-              <option value="admin">Admin/Registrar</option>
-            </select>
-          </div>
 
           {/* Department */}
           <div className="form-group" id='department'>
@@ -376,10 +393,18 @@ const SignUpPage = () => {
         <p className="login-link">
           Already have an account? <Link to="/login">Log In</Link>
         </p>
-        <div>
-    {/*Toastify container */}
-    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
-    </div>
+        <ToastContainer  
+        position='center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
+     
       </div>
     </div>
     </div>

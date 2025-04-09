@@ -4,12 +4,19 @@ import { login } from '../utils/auth'; // Import the login function from your ut
 //import axios from 'axios';
 //import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {
   //const [step, setStep] = useState(1); //step 1 for initial login and step 2 for generating session token
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword,setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () =>{
+    setShowPassword(!showPassword);
+  }
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -29,7 +36,7 @@ const Loginpage = () => {
       }
       if (!response || !response.user) {
         setError('Invalid username or password. Please try again.');
-        toast.error('Invalid username or password. Please try again.');
+        toast.warning('Invalid username or password. Please try again.');
         return;
       }
       
@@ -57,8 +64,10 @@ const Loginpage = () => {
       console.error('Login error:', err);
       if (err.response && err.response.status === 401) {
         setError('Incorrect username or password. Please try again!');
+        toast.warning('Incorrect username or password. Please try again!');
       } else {
         setError('An error occurred. Please try again later.');
+        toast.warning('An error occurred. Please try again later.');
       }
     } finally {
       setLoading(false);
@@ -122,15 +131,16 @@ const Loginpage = () => {
         onChange={(e) => setUsername(e.target.value)} required/>
     </div>
     
-    <div>
+    <div className='password-input-container'>
       <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
       <input 
-      type="password" 
+      type={showPassword ? 'text':'password'}
       name="password" 
       placeholder="Enter your Password" 
       value={password}
-      onChange={(e) => setPassword(e.target.value)}required
-      />
+      onChange={(e) => setPassword(e.target.value)}required/>
+      <button type='button' className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash/>:<FaEye/>}</button>
+     
     </div>
     
   <br/>
@@ -149,13 +159,21 @@ const Loginpage = () => {
             </form>
           </div>
         </div>
-        <div>
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
-        </div>
       </div>
       <footer className="footer">
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
+      <ToastContainer style={{position:'fixed', top:'50%', bottom:'50%', transform:'translate(-50%,-50%)'}}
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
