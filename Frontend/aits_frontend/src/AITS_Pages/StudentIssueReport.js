@@ -6,6 +6,7 @@ import "./StudentIssueReport.css";
 import { submitIssue} from "../utils/issues";
 import { createCategory  as createCategoryApi} from "../utils/categories";
 import { createCourse as createCourseApi } from "../utils/courses";
+import {toast} from 'react-toastify';
 
 const StudentIssueReport = () => {
   const [step, setStep] = useState(1); // to track issue submission steps
@@ -37,11 +38,11 @@ const StudentIssueReport = () => {
       const categoryResponse = await createCategoryApi({ name: categoryName, description: categoryDescription});
       const categoryId = categoryResponse.id;
       setCategoryId(categoryId);
-      alert(`Category created successfully! ID: ${categoryId}. Please copy this ID for the next step.`);
-      setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
+      toast.success(`Category created successfully! ID: ${categoryId}. Please copy this ID for the next step.`);
+      //setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
     } catch (error) {
       console.error("Failed to create category:", error);
-     alert("Failed to create category. Please try again.");
+     toast.error("Failed to create category. Please try again.");
     }
   };
   const handleCreateCourse = async (e) => {
@@ -50,12 +51,12 @@ const StudentIssueReport = () => {
       const courseResponse = await createCourseApi({ course_name: courseName, course_code: selectedCourseCode });
       const courseId = courseResponse.id;
       setCourseId(courseId);
-      alert(`Course created successfully! ID: ${courseId}. Please copy this ID for the next step.`);
-      setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
+      toast.success(`Course created successfully! ID: ${courseId}. Please copy this ID for the next step.`);
+      //setTimeout(() => toast.success(""), 9000); // Clear alert after 9 seconds
       setStep(2); // Move to the next step
     } catch (error) {
       console.error("Failed to create course:", error);
-      alert("Failed to create course. Please try again.");
+      toast.error("Failed to create course. Please try again.");
     }
   };
 
@@ -91,13 +92,13 @@ const StudentIssueReport = () => {
         setSelectedCourseCode("");
         setSelectedLecturer("");
         setSelectedStudent("");
-         alert("Issue submitted successfully!");
+         toast.success("Issue submitted successfully!");
         // Clear form fields
         //navigate to the student dashboard
         console.log("API Response:", response.data);
       } catch (error) {
         console.error("Failed to submit issue:", error.response ? error.response.data : error);
-        alert("Failed to submit issue. Please try again.");
+        toast.error("Failed to submit issue. Please try again.");
       }
     };
 
