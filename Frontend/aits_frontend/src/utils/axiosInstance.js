@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //create an axios instance
 const  apiClient = axios.create({
-    baseURL: 'http://kennedymutebi7.pythonanywhere.com/',
+    baseURL: 'https://kennedymutebi7.pythonanywhere.com/',
     headers: {
         'Content-Type': 'application/json',
     }
