@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Toast from "../components/ToastContainer";
 import { toast } from "react-toastify";
 import StudentSidebar from "../components/StudentSidebar"; 
 import "./ViewIssues.css"; // for styles
@@ -57,6 +58,7 @@ const ViewIssues = () => {
             </tbody>
           </table>
         )}
+        <Toast/>
       </div>
     </div>
   );

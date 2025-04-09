@@ -4,7 +4,8 @@ import { login } from '../utils/auth'; // Import the login function from your ut
 //import axios from 'axios';
 //import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
-import { toast,ToastContainer } from 'react-toastify';
+import Toast from '../components/ToastContainer';
+import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
@@ -163,19 +164,7 @@ const Loginpage = () => {
       <footer className="footer">
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
-      <ToastContainer 
-      position='top-right'
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        fontWeight='bold'
-      />
+      <Toast/> 
     </div>
   );
 };
