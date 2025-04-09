@@ -113,9 +113,7 @@ class Issue(models.Model):
 
 
 class Comment(models.Model):
-    """
-    Model to track comments and updates on issues.
-    """
+   
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
     content = models.TextField()
