@@ -163,7 +163,8 @@ const Loginpage = () => {
       <footer className="footer">
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
-      <ToastContainer style={{position:'fixed', top:'50%', bottom:'50%', transform:'translate(-50%,-50%)'}}
+      <ToastContainer 
+      position='top-right'
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -173,6 +174,7 @@ const Loginpage = () => {
         draggable
         pauseOnHover
         theme="light"
+        fontWeight='bold'
       />
     </div>
   );
