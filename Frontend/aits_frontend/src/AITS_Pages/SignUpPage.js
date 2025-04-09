@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -103,7 +105,9 @@ const SignUpPage = () => {
       newErrors.confirmPassword = 'Passwords do not match!';
     }
     setErrors(newErrors);
+    toast.warning('Please fix the highlighted errors before submiting.')
     return Object.keys(newErrors).length === 0;
+    
   };
 
   // To handle form on submission
@@ -161,12 +165,13 @@ const SignUpPage = () => {
         localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
-       alert('Sign Up Successful! Please login.');
+       toast.success('Sign Up Successful! Please login.');
        navigate('/login');
      } catch (error) {
        console.error('Sign up error:', error);
        setApiError(
         error.response?.data?.message ||'Sign up failed! Please check your details and try again.');
+        toast.error(error.response?.data?.message || 'Sign up failed! Please check your details and try again.');
      } finally {
      setLoading(false);
    }
@@ -193,7 +198,7 @@ const SignUpPage = () => {
                 placeholder="Enter your first name"
                 required
               />
-              {errors.first_name && <span className="error">{errors.full_name}</span>}
+              {errors.first_name && <span className="error">{errors.first_name}</span>}
             </div>
           </div>
 
@@ -371,9 +376,14 @@ const SignUpPage = () => {
         <p className="login-link">
           Already have an account? <Link to="/login">Log In</Link>
         </p>
+        <div>
+    {/*Toastify container */}
+    <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+    </div>
       </div>
     </div>
     </div>
+
   );
 };
 export default SignUpPage;

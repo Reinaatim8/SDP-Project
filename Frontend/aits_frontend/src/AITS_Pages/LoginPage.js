@@ -4,6 +4,7 @@ import { login } from '../utils/auth'; // Import the login function from your ut
 //import axios from 'axios';
 //import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Loginpage = () => {
   //const [step, setStep] = useState(1); //step 1 for initial login and step 2 for generating session token
@@ -24,9 +25,11 @@ const Loginpage = () => {
 
       if (response.tokens) {
         console.log('Login successful:', response);
+        toast.success('Login successful!');
       }
       if (!response || !response.user) {
         setError('Invalid username or password. Please try again.');
+        toast.error('Invalid username or password. Please try again.');
         return;
       }
       
@@ -145,6 +148,9 @@ const Loginpage = () => {
               </p>
             </form>
           </div>
+        </div>
+        <div>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
         </div>
       </div>
       <footer className="footer">
