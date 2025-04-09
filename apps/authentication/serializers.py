@@ -69,7 +69,7 @@ class IssueSerializer(serializers.ModelSerializer):
             validated_data.pop('student')
         
         issue = Issue.objects.create(**validated_data)
-        return issue
+        return  issue
 
 class AuditLogSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
