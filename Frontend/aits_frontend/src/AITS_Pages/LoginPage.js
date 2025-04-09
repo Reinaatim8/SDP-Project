@@ -26,7 +26,7 @@ const Loginpage = () => {
     if (location.pathname=== '/StudentDashboard'
       || location.pathname=== '/LecturerDashboard'
       || location.pathname=== '/RegistrarDashboard'){
-        toast.success('Login Successful!',{
+        toast.info('Login Successful!',{
           autoClose:60000,
         });
       }

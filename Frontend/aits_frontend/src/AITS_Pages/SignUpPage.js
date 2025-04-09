@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
 import { toast, ToastContainer } from "react-toastify";
-import {success} from 'react-toastify';
+//import {success} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye,FaEyeSlash } from 'react-icons/fa';
 
@@ -54,13 +54,17 @@ const SignUpPage = () => {
     const hasNumbers = /[0-9]/.test(password);
    
     if (password.length < minLength) {
+      toast.warning(`Password must be at least ${minLength} characters long.`);
       return `Password must be at least ${minLength} characters long.`;
     }
     if (!hasLowerCase) {
+      toast.warning('Password must contain at least one lowercase letter.');
       return 'Password must contain at least one lowercase letter.';
     }
     if (!hasNumbers) {
+      toast.warning('Password must contain at least one number.');
       return 'Password must contain at least one number.';
+      
     }
 
     return null; // Password is strong enough to continue
@@ -101,11 +105,13 @@ const SignUpPage = () => {
     }
     if (!formData.year_of_study && formData.user_type === 'student'){
       newErrors.year_of_study = 'Year of study is required';
+      toast.warning('Year of study must be an figure');
     }
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email has an invalid format';
+      toast.warning('Email has an invalid format');
     }
     const passwordError = validatePassword(formData.password);
     if (passwordError) { newErrors.password = passwordError;  
@@ -175,14 +181,15 @@ const SignUpPage = () => {
         localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
-       toast.success('Sign Up Successful! Please login.');
+       toast.info('Sign Up Successful! Please login.');
+       //alert('SIGNUP SUCCESSFUL');
        
        navigate('/login');
      } catch (error) {
        console.error('Sign up error:', error);
        setApiError(
         error.response?.data?.message ||'Sign up failed! Please check your details and try again.');
-        toast.error(error.response?.data?.message || 'Sign up failed! Please check your details and try again.');
+        toast.warning(error.response?.data?.message || 'Sign up failed! Please check your details and try again.');
      } finally {
      setLoading(false);
    }
@@ -288,6 +295,7 @@ const SignUpPage = () => {
               />
               <button type="button" className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash/>:<FaEye/>}</button>
               {errors.password && <span className="error">{errors.password}</span>}
+
               </div>
             </div>
             <div className="form-field">
