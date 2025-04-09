@@ -106,8 +106,7 @@ class IssueViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         issue = serializer.save(student=self.request.user)
         
-        # Create notification for admin users only
-        # (removing the course-dependent notification logic)
+       
         admin_users = User.objects.filter(user_type='admin')
         for admin in admin_users:
             Notification.objects.create(
