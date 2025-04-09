@@ -394,8 +394,8 @@ const SignUpPage = () => {
           Already have an account? <Link to="/login">Log In</Link>
         </p>
         <ToastContainer  
-        position='center'
-        autoClose={5000}
+        position='top-center'
+        autoClose={60000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

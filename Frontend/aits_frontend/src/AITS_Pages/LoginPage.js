@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { login } from '../utils/auth'; // Import the login function from your utils
 //import axios from 'axios';
 //import apiClient from '../utils/axiosInstance';
@@ -10,18 +10,29 @@ import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toas
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {
-  //const [step, setStep] = useState(1); //step 1 for initial login and step 2 for generating session token
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword,setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () =>{
     setShowPassword(!showPassword);
-  }
+  };
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
+  useEffect(() =>{
+    if (location.pathname=== '/StudentDashboard'
+      || location.pathname=== '/LecturerDashboard'
+      || location.pathname=== '/RegistrarDashboard'){
+        toast.success('Login Successful!',{
+          autoClose:60000,
+        });
+      }
+      },[location]);
+      
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -30,19 +41,8 @@ const Loginpage = () => {
     try {
       // Step 1: Authenticate the user
       const response = await login( username, password );
-
       if (response.tokens) {
-        console.log('Login successful:', response);
-        toast.success('Login successful!');
-      }
-      if (!response || !response.user) {
-        setError('Invalid username or password. Please try again.');
-        toast.warning('Invalid username or password. Please try again.');
-        return;
-      }
-      
-      // Determine the user's role and navigate accordingly
-      const user = response.user; // Assuming the user object is included in the response
+        // Determine the user's role and navigate accordingly
       const user_type = response.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
 
@@ -59,8 +59,13 @@ const Loginpage = () => {
         default:
           dashboardPath = '/dashboard';
       }
-
       navigate(dashboardPath);
+    }
+    if (!response|| !response.user){
+        setError('Invalid username or password. Please try again.');
+        toast.warning('Invalid username or password. Please try again.');
+        return;
+      }
     } catch (err) {
       console.error('Login error:', err);
       if (err.response && err.response.status === 401) {
@@ -103,7 +108,8 @@ const Loginpage = () => {
     };
   }, []);
 
-  return (
+
+   return (
    <div className="Login-container">
    {/*Background picture on login form*/}
 
