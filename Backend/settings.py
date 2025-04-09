@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     # Local apps
     'apps.authentication',
     'apps.issues',
-    'apps.notifications',
+    
+
+
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -49,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware ',
 ]
 
 ROOT_URLCONF = 'aits_project.urls'
@@ -76,9 +78,9 @@ WSGI_APPLICATION = 'aits_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aits',
+        'NAME': 'aits ',
         'USER': 'root',
-        'PASSWORD': 'PSS@12345',
+        'PASSWORD':'PSS@12345',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {

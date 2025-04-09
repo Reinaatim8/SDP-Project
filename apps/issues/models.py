@@ -11,6 +11,7 @@ class User(AbstractUser):
         ('admin', 'Administrator'),
     ]
     
+    
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     
@@ -49,7 +50,24 @@ class Enrollment(models.Model):
     
     def __str__(self):
         return f"{self.student.username} - {self.course.course_code} ({self.semester}, {self.academic_year})"
+class Enrollment(models.Model):
+    """
+    Model to represent student enrollment in courses.
+    """
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments', 
+                              limit_choices_to={'user_type': 'student'})
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
+    semester = models.CharField(max_length=20)
+    academic_year = models.CharField(max_length=9)  # Format: 2023/2024
+    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    
+    class Meta:
+        unique_together = ['student', 'course', 'semester', 'academic_year']
+    
+    def __str__(self):
+        return f"{self.student} - {self.course} ({self.academic_year} - {self.semester})"
 
+        
 class IssueCategory(models.Model):
     """
     Model to categorize different types of academic issues.
@@ -57,12 +75,13 @@ class IssueCategory(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.name
     
     class Meta:
         verbose_name_plural = "Issue Categories"
-
 class Issue(models.Model):
     """
     Model to track academic issues reported by students.
@@ -81,12 +100,12 @@ class Issue(models.Model):
         ('urgent', 'Urgent'),
     ]
     
+    student_id = models.IntegerField()  # Now stores student ID as an integer
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_issues')
     title = models.CharField(max_length=200)
     description = models.TextField()
     category = models.ForeignKey(IssueCategory, on_delete=models.CASCADE, related_name='issues')
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reported_issues',
-                              limit_choices_to={'user_type': 'student'})
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_issues')
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE, related_name='enrollment_issues',
                                   null=True, blank=True)
     
@@ -142,11 +161,13 @@ class AuditLog(models.Model):
         return f"{self.action} by {self.user.username} on {self.timestamp}"
 
 class Notification(models.Model):
-    
+    """
+    Model to handle system notifications for users.
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
     title = models.CharField(max_length=100)
     message = models.TextField()
-    issue = models.ForeignKey(Issue, on_delete=models.CASCADE,  related_name='issue_notifications', null=True, blank=True)
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='issue_notifications', null=True, blank=True)
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     

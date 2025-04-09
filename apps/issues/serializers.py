@@ -1,5 +1,9 @@
 from rest_framework import serializers
 from .models import User, Course, Enrollment, IssueCategory, Issue, Comment, AuditLog, Notification
+from django.db.models import Q
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,7 +44,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
 class IssueCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = IssueCategory
-        fields = ['id', 'name', 'description']
+        fields = ['name', 'description']
 
 class CommentSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
@@ -51,19 +55,39 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['id', 'issue', 'user', 'user_name', 'user_type', 'content', 'created_at', 'attachment']
 
 class IssueSerializer(serializers.ModelSerializer):
-    student_name = serializers.CharField(source='student.get_full_name', read_only=True)
+    student_name = serializers.SerializerMethodField()
     course_code = serializers.CharField(source='course.course_code', read_only=True)
     course_name = serializers.CharField(source='course.course_name', read_only=True)
     category_name = serializers.CharField(source='category.name', read_only=True)
-    assigned_to_name = serializers.CharField(source='assigned_to.get_full_name', read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
+    assigned_to_name = serializers.SerializerMethodField()
+    status_display = serializers.CharField(source='get_status_display', read_only=True)
+    priority_display = serializers.CharField(source='get_priority_display', read_only=True)
     
     class Meta:
         model = Issue
-        fields = ['id', 'title', 'description', 'category', 'category_name', 'student', 'student_name', 
-                 'course', 'course_code', 'course_name', 'enrollment', 'current_grade', 'expected_grade',
-                 'status', 'priority', 'assigned_to', 'assigned_to_name', 'created_at', 'updated_at', 
-                 'resolved_at', 'attachments',  'comments']
+        fields = ['id', 'student_id', 'student_name', 'course', 'course_code', 'course_name',
+                 'title', 'description', 'category', 'category_name', 'enrollment',
+                 'current_grade', 'expected_grade', 'status', 'status_display',
+                 'priority', 'priority_display', 'assigned_to', 'assigned_to_name',
+                 'created_at', 'updated_at', 'resolved_at', 'attachments']
+    
+    def get_student_name(self, obj):
+        try:
+            student = User.objects.get(id=obj.student_id)
+            return f"{student.first_name} {student.last_name}"
+        except User.DoesNotExist:
+            return None
+    
+    def get_assigned_to_name(self, obj):
+        if obj.assigned_to:
+            return f"{obj.assigned_to.first_name} {obj.assigned_to.last_name}"
+        return None
+
+
+
+
+
+
 
 class AuditLogSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
@@ -78,4 +102,4 @@ class NotificationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Notification
-        fields = ['id' , 'user', 'title', 'message', 'issue', 'issue_title', 'is_read', 'created_at']
+        fields = ['id', 'user', 'title', 'message', 'issue', 'issue_title', 'is_read', 'created_at']
