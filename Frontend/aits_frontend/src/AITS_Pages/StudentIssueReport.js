@@ -38,7 +38,7 @@ const StudentIssueReport = () => {
       const categoryResponse = await createCategoryApi({ name: categoryName, description: categoryDescription});
       const categoryId = categoryResponse.id;
       setCategoryId(categoryId);
-      toast.success(`Category created successfully! ID: ${categoryId}. Please copy this ID for the next step.`);
+      toast.success(`Category created successfully!`);
       //setTimeout(() => alert(""), 9000); // Clear alert after 9 seconds
     } catch (error) {
       console.error("Failed to create category:", error);
@@ -51,7 +51,7 @@ const StudentIssueReport = () => {
       const courseResponse = await createCourseApi({ course_name: courseName, course_code: selectedCourseCode });
       const courseId = courseResponse.id;
       setCourseId(courseId);
-      toast.success(`Course created successfully! ID: ${courseId}. Please copy this ID for the next step.`);
+      toast.success(`Course created successfully! `);
       //setTimeout(() => toast.success(""), 9000); // Clear alert after 9 seconds
       setStep(2); // Move to the next step
     } catch (error) {
