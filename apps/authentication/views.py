@@ -1,199 +1,347 @@
-from django.http import JsonResponse, HttpResponse
-from django.contrib.auth import authenticate, login, logout
-from django.views import View
-from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import viewsets, permissions, status, filters
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework import status
-from django.contrib.auth.views import LogoutView
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from drf_spectacular.utils import extend_schema, OpenApiResponse
-from apps.authentication.models import Student  # Import your Student model
-from rest_framework import generics
-from django.contrib.auth.hashers import make_password  # Import password hashing
-from django.contrib.auth import get_user_model, authenticate, login
-from django.contrib.auth.hashers import check_password
-from rest_framework.response import Response
-from rest_framework import status
+from django.utils import timezone
+from django.db.models import Q
+from django.core.mail import send_mail
+from django.conf import settings
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.views import APIView
-from .serializers import StudentRegistrationSerializer, LecturerRegistrationSerializer, LoginSerializer, UserSerializer
-from .models import Lecturer
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-from django.contrib.auth import get_user_model  # Import User model dynamically
-from .serializers import AdminRegistrationSerializer
-from django.shortcuts import render
-import logging
-logger = logging.getLogger(__name__)
-def home_view(request):
-    return render(request, 'home.html') 
-@csrf_exempt
+from .models import User, Course, Enrollment, Issue, Comment, AuditLog, Notification
+from .serializers import (
+    UserSerializer, CourseSerializer, EnrollmentSerializer 
+    , IssueSerializer, CommentSerializer,
+    AuditLogSerializer, NotificationSerializer
+)
+
+class IsStudentPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.user_type == 'student'
+
+class IsLecturerPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.user_type == 'lecturer'
+
+class IsAdminPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user.user_type == 'admin'
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username', 'email', 'first_name', 'last_name']
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    def get_permissions(self):
+        if self.action in  ['create', 'update', 'partial_update', 'destroy']:
+            return [permissions.IsAdminUser()]
+        return [permissions.IsAuthenticated(), IsAdminPermission()]
+    
+    
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    def me(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)
+
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['course_code', 'course_name']
+    
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [permissions.IsAuthenticated()]
+        return [permissions.IsAuthenticated(), IsAdminPermission()]
+    
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated, IsLecturerPermission])
+    def my_courses(self, request):
+        courses = Course.objects.filter(lecturer=request.user)
+        serializer = self.get_serializer(courses, many=True)
+        return Response(serializer.data)
+
+class EnrollmentViewSet(viewsets.ModelViewSet):
+    queryset = Enrollment.objects.all()
+    serializer_class = EnrollmentSerializer
+    
+    def get_permissions(self):
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            return [permissions.IsAuthenticated(), IsAdminPermission()]
+        return [permissions.IsAuthenticated()]
+    
+    def get_queryset(self):
+        user = self.request.user
+        if user.user_type == 'student':
+            return Enrollment.objects.filter(student=user)
+        elif user.user_type == 'lecturer':
+            return Enrollment.objects.filter(course__lecturer=user)
+        return Enrollment.objects.all()
 
 
 
-
-def my_view(request):
-    logger.info(f"Request path: {request.path}")
-    return render(request, "my_template.html", {"name": "John"})
-
-
-  # Ensure 'name' is passed
-
-  
-
-@method_decorator(csrf_exempt, name='dispatch')
-class MyAPIView(View):
-    def post(self, request):
-        return JsonResponse({"message": "CSRF disabled"})
-
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class LoginView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        if serializer.is_valid():
-            username = serializer.validated_data["username"]
-            password = serializer.validated_data["password"]
-            
-            print(f"Login attempt for username: {username}")
-            
-            # Get the User model
-            User = get_user_model()
-            
-            try:
-                user_obj = User.objects.get(username=username)
-                print("User found in database")
-
-                if check_password(user_obj.password, password):
-                    print("✅ Password is correct!")
-                else:
-                    print("❌ Password does not match")  
-                # Check if password matches
-                if not check_password(password, user_obj.password):
-                    print("Incorrect password")
-                    return Response(
-                        {"message": "Invalid credentials", "detail": "Incorrect password."},
-                        status=status.HTTP_401_UNAUTHORIZED
-                    )
+class IssueViewSet(viewsets.ModelViewSet):
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'description', 'status']
+    permission_classes = [IsAuthenticated]
+    def get_permissions(self):
+        #if self.action == 'create':
+            #return [permissions.IsAuthenticated(), IsStudentPermission()]
+        return [permissions.IsAuthenticated()]
+    
+    def get_queryset(self):
+        user = self.request.user
+        if user.user_type == 'student':
+            return Issue.objects.filter(student=user)
+        elif user.user_type == 'lecturer':
+            return Issue.objects.filter(
+                Q(course__lecturer=user) | Q(assigned_to=user)
+            ).distinct()
+        return Issue.objects.all()
+    
+    def perform_create(self, serializer):
+        issue = serializer.save(student=self.request.user)
+        
+       
+        admin_users = User.objects.filter(user_type='admin')
+        for admin in admin_users:
+            Notification.objects.create(
+                user=admin,
+                title="New Issue Reported",
+                message=f"A new issue '{issue.title}' has been reported by {issue.student.get_full_name()}",
+                issue=issue
+            )
                 
-            except User.DoesNotExist:
-                print("User not found in database")
-                return Response(
-                    {"message": "Invalid credentials", "detail": "User not found."},
-                    status=status.HTTP_401_UNAUTHORIZED
+        
+        # Create notification for admin
+        admin_users = User.objects.filter(user_type='admin')
+        for admin in admin_users:
+            Notification.objects.create(
+                user=admin,
+                title="New Issue Reported",
+                message=f"A new issue '{issue.title}' has been reported by {issue.student.get_full_name()}",
+                issue=issue
+            )
+    
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def assign(self, request, pk=None):
+        issue = self.get_object()
+        assigned_to_id = request.data.get('assigned_to')
+        
+        try:
+            assigned_to = User.objects.get(id=assigned_to_id)
+            if assigned_to.user_type not in ['lecturer', 'admin']:
+                return Response({"error": "Can only assign to lecturers or admins"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            old_assigned = issue.assigned_to
+            issue.assigned_to = assigned_to
+            issue.save()
+            
+            # Create audit log
+            AuditLog.objects.create(
+                issue=issue,
+                user=request.user,
+                action="Issue assigned",
+                old_value=str(old_assigned) if old_assigned else "None",
+                new_value=str(assigned_to)
+            )
+            
+            # Create notification
+            Notification.objects.create(
+                user=assigned_to,
+                title="Issue Assigned",
+                message=f"You have been assigned to issue '{issue.title}'",
+                issue=issue
+            )
+            
+            return Response({"success": "Issue assigned successfully"})
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def change_status(self, request, pk=None):
+        issue = self.get_object()
+        new_status = request.data.get('status')
+        
+        if new_status not in [choice[0] for choice in Issue.STATUS_CHOICES]:
+            return Response({"error": "Invalid status"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        old_status = issue.status
+        issue.status = new_status
+        
+        if new_status == 'resolved':
+            issue.resolved_at = timezone.now()
+        
+        issue.save()
+        
+        # Create audit log
+        AuditLog.objects.create(
+            issue=issue,
+            user=request.user,
+            action="Status changed",
+            old_value=old_status,
+            new_value=new_status
+        )
+        
+        # Create notification for student
+        Notification.objects.create(
+            user=issue.student,
+            title="Issue Status Updated",
+            message=f"Your issue '{issue.title}' status has been updated to {issue.get_status_display()}",
+            issue=issue
+        )
+        
+        # Send email notification
+        if settings.EMAIL_HOST:
+            try:
+                send_mail(
+                    subject=f"Issue Status Update: {issue.title}",
+                    message=f"Your issue '{issue.title}' status has been updated to {issue.get_status_display()}",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[issue.student.email],
+                    fail_silently=True,
                 )
-            
-            # Authenticate user
-            user = authenticate(username=username, password=password)
-            
-            if user is not None:
-                login(request, user)
-                return Response({
-                    "message": "Login successful",
-                    "user": {
-                        "id": user.id,
-                        "username": user.username,
-                        "email": user.email,
-                        "user_type": user.user_type,
-                        "first_name": user.first_name,
-                        "last_name": user.last_name,
-                    },
-                })
-            
-            return Response(
-                {"message": "Invalid credentials", "detail": "Authentication failed."},
-                status=status.HTTP_401_UNAUTHORIZED
+            except Exception as e:
+                print(f"Email sending failed: {e}")
+        
+        return Response({"success": "Status updated successfully"})
+    
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def update_grade(self, request, pk=None):
+        issue = self.get_object()
+        new_grade = request.data.get('new_grade')
+        
+        if not new_grade:
+            return Response({"error": "New grade is required"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            new_grade = float(new_grade)
+        except ValueError:
+            return Response({"error": "Invalid grade format"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        old_grade = issue.current_grade
+        issue.current_grade = new_grade
+        issue.save()
+        
+        # Update enrollment grade if it exists
+        if issue.enrollment:
+            issue.enrollment.current_grade = new_grade
+            issue.enrollment.save()
+        
+        # Create audit log
+        AuditLog.objects.create(
+            issue=issue,
+            user=request.user,
+            action="Grade updated",
+            old_value=str(old_grade) if old_grade else "None",
+            new_value=str(new_grade)
+        )
+        
+        # Create notification for student
+        Notification.objects.create(
+            user=issue.student,
+            title="Grade Updated",
+            message=f"Your grade for {issue.course.course_code} has been updated to {new_grade}",
+            issue=issue
+        )
+        
+        return Response({"success": "Grade updated successfully"})
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    
+    def get_permissions(self):
+        return [permissions.IsAuthenticated()]
+    
+    def get_queryset(self):
+        issue_id = self.request.query_params.get('issue', None)
+        if issue_id:
+            return Comment.objects.filter(issue_id=issue_id)
+        
+        user = self.request.user
+        if user.user_type == 'student':
+            return Comment.objects.filter(issue__student=user)
+        elif user.user_type == 'lecturer':
+            return Comment.objects.filter(
+                Q(issue__course__lecturer=user) | Q(issue__assigned_to=user)
+            ).distinct()
+        
+        return Comment.objects.all()
+    
+    def perform_create(self, serializer):
+        comment = serializer.save(user=self.request.user)
+        issue = comment.issue
+        
+        # Create notifications
+        if self.request.user != issue.student:
+            Notification.objects.create(
+                user=issue.student,
+                title="New Comment",
+                message=f"New comment on your issue '{issue.title}'",
+                issue=issue
             )
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-# views.py
-class AdminRegistrationView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = AdminRegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            return Response(
-                {"message": "Admin registered successfully!", "admin_id": user.id},
-                status=status.HTTP_201_CREATED
+        if issue.assigned_to and self.request.user != issue.assigned_to:
+            Notification.objects.create(
+                user=issue.assigned_to,
+                title="New Comment",
+                message=f"New comment on issue '{issue.title}' that you're assigned to",
+                issue=issue
             )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-class LecturerRegistrationView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = LecturerRegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            # Extract user data
-            user_data = serializer.validated_data.pop('user')
-
-            # Ensure password is hashed before saving
-            User = get_user_model()  # Dynamically get the User model
-            user = User.objects.create_user(**user_data)  # Use create_user to ensure password hashing
             
-            # Create lecturer
-            lecturer = Lecturer.objects.create(user=user, **serializer.validated_data)
-
-            return Response(
-                {"message": "Lecturer registered successfully!", "lecturer_id": lecturer.id},
-                status=status.HTTP_201_CREATED
+        if issue.course.lecturer and self.request.user != issue.course.lecturer:
+            Notification.objects.create(
+                user=issue.course.lecturer,
+                title="New Comment",
+                message=f"New comment on issue '{issue.title}' for your course {issue.course.course_code}",
+                issue=issue
             )
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-from django.contrib.auth.hashers import make_password
-
-class StudentRegistrationView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = StudentRegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            user_data = serializer.validated_data.pop('user')  # Extract user data
-
-            # ✅ Use create_user() to ensure password hashing
-            from django.contrib.auth import get_user_model
-            User = get_user_model()
-            user = User.objects.create_user(**user_data)  
-
-            # ✅ Create the student profile
-            student = Student.objects.create(user=user, **serializer.validated_data)
-
-            return Response(
-                {"message": "Student registered indeed successfully!", "student_id": student.id},
-                status=status.HTTP_201_CREATED
-            )
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = AuditLog.objects.all()
+    serializer_class = AuditLogSerializer
     
+    def get_permissions(self):
+        return [permissions.IsAuthenticated()]
+    
+    def get_queryset(self):
+        issue_id = self.request.query_params.get('issue', None)
+        if issue_id:
+            return AuditLog.objects.filter(issue_id=issue_id)
+        
+        user = self.request.user
+        if user.user_type == 'student':
+            return AuditLog.objects.filter(issue__student=user)
+        elif user.user_type == 'lecturer':
+            return AuditLog.objects.filter(
+                Q(issue__course__lecturer=user) | Q(issue__assigned_to=user)
+            ).distinct()
+        
+        return AuditLog.objects.all()
 
-class TestView(View):
-    def get(self, request):
-        return JsonResponse({"message": "Test view working!"})
-
-
-class CustomLogoutView(LogoutView):
-    """
-    Custom logout view to handle logging out a user and returning a message.
-    Inherits from Django's built-in LogoutView.
-    """
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        # Optionally, you can return a custom message here
-        return JsonResponse({"message": "Successfully logged out!"}, status=status.HTTP_200_OK)
+class NotificationViewSet(viewsets.ModelViewSet):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
+    
+    def get_permissions(self):
+        return [permissions.IsAuthenticated()]
+    
+    def get_queryset(self):
+        return Notification.objects.filter(user=self.request.user).order_by('-created_at')
+    
+    @action(detail=True, methods=['post'])
+    def mark_read(self, request, pk=None):
+        notification = self.get_object()
+        notification.is_read = True
+        notification.save()
+        return Response({"success": "Notification marked as read"})
+    
+    @action(detail=False, methods=['post'])
+    def mark_all_read(self, request):
+        Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
+        return Response({"success": "All notifications marked as read"})
