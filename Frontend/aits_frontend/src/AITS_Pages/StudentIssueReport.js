@@ -148,7 +148,7 @@ const StudentIssueReport = () => {
             <input
               type="text"
               value={courseName}
-              placeholder="Enter the Course Name..."
+              placeholder="Enter the Course Unit Name..."
               onChange={(e) => setCourseName(e.target.value)}
               required
             />
