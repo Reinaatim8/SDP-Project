@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 //import {success} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye,FaEyeSlash } from 'react-icons/fa';
@@ -318,14 +318,14 @@ const SignUpPage = () => {
 
           {/* Program */}
           <div className="form-group">
-              <label htmlFor="program" style={{color:"#f0a500"}}>Program (Optional)</label>
+              <label htmlFor="program" style={{color:"#f0a500"}}>Program (Compulsory for Student users)</label>
               <input
                 type="text"
                 id="program"
                 name="program"
                 value={formData.program}
                 onChange={handleChange}
-                placeholder="Enter your program"
+                placeholder="Enter your program e.g BSCS, IT, etc"
               />
             </div>
 
@@ -364,7 +364,7 @@ const SignUpPage = () => {
 
             {/* Year of Study */}
             <div className="form-group" id='year'>
-              <label htmlFor="year_of_study" style={{color:"#f0a500"}}>Year of Study (Optional)</label>
+              <label htmlFor="year_of_study" style={{color:"#f0a500"}}>Year of Study (Compulsory for Student users)</label>
               <input
                 type="text"
                 id="year_of_study"
@@ -378,14 +378,14 @@ const SignUpPage = () => {
 
           {/* Department */}
           <div className="form-group" id='department'>
-            <label htmlFor="department" style={{color:"#f0a500"}}>Department (only CS available)</label>
+            <label htmlFor="department" style={{color:"#f0a500"}}>Department (like CS )</label>
             <input
               type="text"
               id="department"
               name="department"
               value={formData.department}
               onChange={handleChange}
-              placeholder="Enter your department"
+              placeholder="Enter your department e.g CS, IT, etc"
             />
           </div>
 
@@ -401,17 +401,7 @@ const SignUpPage = () => {
         <p className="login-link">
           Already have an account? <Link to="/login">Log In</Link>
         </p>
-        <ToastContainer  
-        position='top-center'
-        autoClose={60000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        />
+       
      
       </div>
     </div>
