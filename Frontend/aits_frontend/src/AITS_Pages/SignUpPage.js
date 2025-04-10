@@ -348,7 +348,7 @@ const SignUpPage = () => {
 
           {/* Department */}
           <div className="form-group" id='department'>
-            <label htmlFor="department" style={{color:"#f0a500"}}>Department (Optional)</label>
+            <label htmlFor="department" style={{color:"#f0a500"}}>Department (only CS available)</label>
             <input
               type="text"
               id="department"
