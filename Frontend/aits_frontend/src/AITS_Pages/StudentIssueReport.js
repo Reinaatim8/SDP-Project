@@ -142,9 +142,9 @@ const StudentIssueReport = () => {
           <button type="submit" className="student-issue-report-submit-button">Create an Issue Category</button>
           </form>
           <form className="student-issue-report-form2" onSubmit={handleCreateCourse}>
-            <p><strong>Step 2:</strong>Create a Course</p>
+            <p><strong>Step 2:</strong>Fill in  Course Unit Details for the Issue</p>
           <div className="student-issue-report-form-group">
-            <label className="student-issue-report-label">Course Name:</label>
+            <label className="student-issue-report-label">Course Unit Name:</label>
             <input
               type="text"
               value={courseName}
@@ -152,7 +152,7 @@ const StudentIssueReport = () => {
               onChange={(e) => setCourseName(e.target.value)}
               required
             />
-            <label className="student-issue-report-label">Course Code:</label>
+            <label className="student-issue-report-label">Course Unit Code:</label>
             <input
               type="text"
               value={selectedCourseCode}
