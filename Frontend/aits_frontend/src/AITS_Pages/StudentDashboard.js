@@ -16,7 +16,7 @@ useEffect(() => {
   const storedUser = localStorage.getItem("user");
   if (storedUser) {
     setUser(JSON.parse(storedUser));
-    toast.success('Login Successful!',{autoClose:60000});
+    toast.success('Hello Again!',{autoClose:60000});
     //alert("Login Successful!");
   }  
   } catch (error) {

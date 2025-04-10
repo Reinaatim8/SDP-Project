@@ -4,9 +4,9 @@ import { login } from '../utils/auth'; // Import the login function from your ut
 //import axios from 'axios';
 //import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
-import Toast from '../components/ToastContainer';
+//import Toast from '../components/ToastContainer';
 import { toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
+//import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {
@@ -26,7 +26,7 @@ const Loginpage = () => {
     if (location.pathname=== '/StudentDashboard'
       || location.pathname=== '/LecturerDashboard'
       || location.pathname=== '/RegistrarDashboard'){
-        toast.info('Login Successful!',{
+        toast.success('Login Successful!',{
           autoClose:60000,
         });
       }
@@ -73,7 +73,7 @@ const Loginpage = () => {
         toast.warning('Incorrect username or password. Please try again!');
       } else {
         setError('An error occurred. Please try again later.');
-        toast.warning('An error occurred. Please try again later.');
+        toast.warning('An error occurred. Please try again later.',{autoClose:60000,});
       }
     } finally {
       setLoading(false);
@@ -170,7 +170,7 @@ const Loginpage = () => {
       <footer className="footer">
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
-      <Toast/> 
+     {/*<Toast/>*/} 
     </div>
   );
 };
