@@ -260,11 +260,17 @@ const SignUpPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email" required
+              placeholder="Enter your email"
+              required
             />
             {errors.email && <span className="error">{errors.email}</span>}
           </div>
-             {/* User Type */}
+          {formData.user_type === 'student' && !formData.email.endsWith('@students.mak.ac.ug') && (
+            <span className="error">Student email must end with @students.mak.ac.ug</span>
+          )}
+          {formData.user_type === 'lecturer' && !formData.email.endsWith('@mak.ac.ug') && (
+            <span className="error">Lecturer email must end with @mak.ac.ug</span>
+          )}}
              <div className="form-group">
             <label htmlFor="user_type" style={{color:"#f0a500"}}>Type Of User</label>
             <select
