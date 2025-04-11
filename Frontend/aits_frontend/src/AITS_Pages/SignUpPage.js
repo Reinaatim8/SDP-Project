@@ -377,7 +377,7 @@ const SignUpPage = () => {
               </div>
             )}
 
-            {/* Year of Study */}
+            {/* Year of Study  */}
             <div className="form-group" id='year'>
               <label htmlFor="year_of_study" style={{color:"#f0a500"}}>Year of Study (Compulsory for Student users)</label>
               <input
@@ -390,21 +390,20 @@ const SignUpPage = () => {
               />
             </div>
 
+                    {/* Department */}
+                  <div className="form-group" id='department'>
+                    <label htmlFor="department" style={{color:"#f0a500"}}>Department</label>
+                    <select
+                    id="department"
+                    name="department"
+                    value={formData.department}
+                    onChange={handleChange}
+                    >
+                    <option value="CS">computer science(default)</option>
+                    </select>
+                  </div>
 
-          {/* Department */}
-          <div className="form-group" id='department'>
-            <label htmlFor="department" style={{color:"#f0a500"}}>Department (like CS )</label>
-            <input
-              type="text"
-              id="department"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-              placeholder="Enter your department e.g CS, IT, etc"
-            />
-          </div>
-
-          {/* API Error Display */}
+                  {/* API Error Display */}}
           {apiError && <p className="error">{apiError}</p>}
 
           {/* Submit Button */}
