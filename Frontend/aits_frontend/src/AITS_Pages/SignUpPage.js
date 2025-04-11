@@ -237,42 +237,53 @@ const SignUpPage = () => {
             </div>
           </div>
 
-          {/* Username */}
+          /* Username */}
           <div className="form-group">
-            <label htmlFor="username" style={{color:"#f0a500"}}>Username</label>
+            <label htmlFor="username" style={{ color: "#f0a500" }}>Username</label>
             <input
               type="text"
               id="username"
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder="Enter your Username"required
+              onBlur={() => setErrors({ ...errors, username: !formData.username ? 'Username is required' : '' })}
+              placeholder="Enter your Username"
+              required
             />
             {errors.username && <span className="error">{errors.username}</span>}
           </div>
 
           {/* Email */}
           <div className="form-group">
-            <label htmlFor="email" style={{color:"#f0a500"}}>Email Address</label>
+            <label htmlFor="email" style={{ color: "#f0a500" }}>Email Address</label>
             <input
               type="email"
               id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              onBlur={() => {
+                const emailError = !formData.email
+                  ? 'Email is required'
+                  : !/\S+@\S+\.\S+/.test(formData.email)
+                  ? 'Email has an invalid format'
+                  : '';
+                setErrors({ ...errors, email: emailError });
+              }}
               placeholder="Enter your email"
               required
             />
             {errors.email && <span className="error">{errors.email}</span>}
+            {formData.user_type === 'student' && formData.email && !formData.email.endsWith('@students.mak.ac.ug') && (
+              <span className="error">Student email must end with @students.mak.ac.ug</span>
+            )}
+            {formData.user_type === 'lecturer' && formData.email && !formData.email.endsWith('@mak.ac.ug') && (
+              <span className="error">Lecturer email must end with @mak.ac.ug</span>
+            )}
           </div>
-          {formData.user_type === 'student' && !formData.email.endsWith('@students.mak.ac.ug') && (
-            <span className="error">Student email must end with @students.mak.ac.ug</span>
-          )}
-          {formData.user_type === 'lecturer' && !formData.email.endsWith('@mak.ac.ug') && (
-            <span className="error">Lecturer email must end with @mak.ac.ug</span>
-          )}}
-             <div className="form-group">
-            <label htmlFor="user_type" style={{color:"#f0a500"}}>Type Of User</label>
+
+          <div className="form-group">
+            <label htmlFor="user_type" style={{ color: "#f0a500" }}>Type Of User</label>
             <select
               id="user_type"
               name="user_type"
@@ -283,9 +294,7 @@ const SignUpPage = () => {
               <option value="lecturer">Lecturer</option>
               <option value="admin">Admin/Registrar</option>
             </select>
-          </div>
-
-          {/* Password  and confirm password*/}
+          </div>}
           <div className="form-group inline-fields">
             <div className="form-field">
               <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
