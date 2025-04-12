@@ -12,6 +12,7 @@ import LecturerDashboard from './AITS_Pages/LecturerDashboard';
 import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
 import RespondToQueries from './AITS_Pages/RespondToQueries';
 import ViewIssues from './AITS_Pages/ViewIssues';
+import StudentHistory from './AITS_Pages/StudentHistory';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
         <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />
         <Route path="/RespondToQueries" element={<RespondToQueries />} />
+        <Route path="/StudentHistory" element={<StudentHistory />} />
 
       </Routes>
     </Router>

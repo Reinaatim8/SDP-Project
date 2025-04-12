@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./StudentSidebar.css";
 import {Search, X} from 'lucide-react';
-import { FaHome, FaUser, FaSignOutAlt, FaUsers, FaPhone, FaSearch, FaReply, FaFilter, FaAddressCard, FaDatabase } from 'react-icons/fa'; // Import icons
+import { FaHome, FaUser, FaSignOutAlt, FaUsers, FaPhone, FaSearch, FaReply, FaFilter, FaAddressCard, FaDatabase, FaHistory } from 'react-icons/fa'; // Import icons
 
 
 const StudentSidebar = () => {
@@ -54,9 +54,9 @@ const StudentSidebar = () => {
             <li className="student-sidebar-list-item">  
               <a href="StudentIssueReport" className="student-sidebar-link"><FaDatabase/>  Report an Issue</a>
             </li>
-            {/*<li className="student-sidebar-list-item">
-              <a href ="ViewIssues" className="student-sidebar-link">View Your Issues</a>
-            </li>*/}
+            <li className="student-sidebar-list-item">
+              <a href ="StudentHistory" className="student-sidebar-link"><FaHistory/>  History</a>
+            </li>
             <li className="student-sidebar-list-item">
               <a href="Profile" className="student-sidebar-link"><FaUser/> Student Profile</a>
             </li>

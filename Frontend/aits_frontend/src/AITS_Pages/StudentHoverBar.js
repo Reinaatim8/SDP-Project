@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"; // Import useLocation
 import "./StudentHoverBar.css";
 import {
   FaHome, FaUser, FaSignOutAlt, FaUsers, FaPhone,
-  FaAddressCard, FaDatabase
+  FaAddressCard,FaHistory, FaDatabase
 } from "react-icons/fa";
 
 const StudentHoverBar = () => {
@@ -40,6 +40,9 @@ const StudentHoverBar = () => {
             </a>
             <a href="/StudentIssueReport" className={isActive("/StudentIssueReport") ? "active" : ""}>
               <FaDatabase /> Issues
+            </a>
+            <a href="/StudentHistory" className={isActive("/StudentHistory") ? "active" : ""}>
+              <FaHistory /> History
             </a>
             <a href="/Profile" className={isActive("/Profile") ? "active" : ""}>
               <FaUser /> Profile
