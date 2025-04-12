@@ -37,69 +37,119 @@ useEffect(() => {
 
 
   return (
-    <div className="student-dashboard-container">
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <StudentSidebar />
-      <div className="student-dashboard-content">
-        <div className="student-dashboard-panel">
-          <div className="student-dashboard-header">
-            <img src="/images/AITSLOGO.png"style={{width:"350px"}} alt="student logo"/>
-            <h2 className="student-dashboard-title">
-            {user ? `Welcome, Glad to see you back ${user.username}! 👋`: ""}
-            </h2>
-            <p className="student-dashboard-subtitle">Track your academic progress and stay organized.</p>
-          </div>
-          
-          <div className="student-dashboard-buttons">
-            <button className="student-dashboard-btn student-dashboard-btn-primary" onClick={handleReportIssue}>
-              <span className="student-dashboard-btn-icon">📩</span>
-              Report an Issue
-            </button>
-            <button className="student-dashboard-btn student-dashboard-btn-secondary">
-              <span className="student-dashboard-btn-icon">📅</span>
-              View Course Schedule
-            </button>
-            <button className="student-dashboard-btn student-dashboard-btn-secondary">
-              <span className="student-dashboard-btn-icon">📞</span>
-              Contact Us
-            </button>
-            </div>
-            {/*  Logout Button */}
-           <button className="student-dashboard-btn-logout" onClick={handleLogout}>
-            Logout
+      <div style={{ maxWidth: "1200px", width: "80%", backgroundColor: "#f9f9f9",marginLeft:"320px", scale:"0.9", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", padding: "20px" }}>
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <img src="/images/AITSLOGO.png" style={{ width: "300px", marginBottom: "10px" }} alt="student logo" />
+          <h2 style={{ color: "#333", fontSize: "24px" }}>
+            {user ? `Welcome, Glad to see you back ${user.username}! 👋` : ""}
+          </h2>
+          <p style={{ color: "#666", fontSize: "16px" }}>Track your academic progress and stay organized.</p>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
+          <button
+            style={{
+              backgroundColor: "#007bff",
+              color: "#fff",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+            onClick={handleReportIssue}
+          >
+            📩 Report an Issue
           </button>
-          
-          <div className="student-dashboard-sections">
-            <div className="student-dashboard-section student-dashboard-issue-tracker">
-              <h2 className="student-dashboard-section-title">📌 Issue Tracker</h2>
-              <ul className="student-dashboard-issue-list">
+          <button
+            style={{
+              backgroundColor: "#28a745",
+              color: "#fff",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            📅 View Course Schedule
+          </button>
+          <button
+            style={{
+              backgroundColor: "#ffc107",
+              color: "#fff",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "16px",
+            }}
+          >
+            📞 Contact Us
+          </button>
+        </div>
+
+        <button
+          style={{
+            backgroundColor: "#dc3545",
+            color: "#fff",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontSize: "16px",
+            marginBottom: "20px",
+          }}
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "20px" }}>
+          <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
+            <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📌 Issue Tracker</h2>
+            <ul style={{ listStyle: "none", padding: "0" }}>
               {issues.length > 0 ? (
-                  issues.map((issue, index) => (
-                    <li key={index} className="student-dashboard-issue-item">
-                      <span className="student-dashboard-issue-icon">
-                        {issue.status === "Pending" ? "⚠️" : issue.status === "Resolved" ? "✅" : "🔄"}
-                      </span>
-                      <span className="student-dashboard-issue-text">
-                        {issue.title} - {issue.status}
-                      </span>
-                    </li>
-                  ))
-                ) : (
-                  <li>No issues reported yet.</li>
-                )}
-               
-              </ul>
-            </div>
-            <div className="student-dashboard-section student-dashboard-announcements">
-              <h2 className="student-dashboard-section-title">📢 Announcements</h2>
-              <p className="student-dashboard-announcement">Midterm results will be released on March 10th.</p>
-              <p className="student-dashboard-announcement">Course registration closes soon.</p>
-            </div>
-            <div className="student-dashboard-section student-dashboard-deadlines">
-              <h2 className="student-dashboard-section-title">📚 Upcoming Deadlines</h2>
-              <p className="student-dashboard-deadline">Assignment 3 - Due March 5th</p>
-              <p className="student-dashboard-deadline">Final Project - Due March 20th</p>
-            </div>
+                issues.map((issue, index) => (
+                  <li key={index} style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
+                    <span style={{ marginRight: "10px" }}>
+                      {issue.status === "Pending" ? "⚠️" : issue.status === "Resolved" ? "✅" : "🔄"}
+                    </span>
+                    <span>{issue.title} - {issue.status}</span>
+                  </li>
+                ))
+              ) : (
+                <li>No issues reported yet.</li>
+              )}
+            </ul>
           </div>
+
+          <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
+            <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📢 Announcements</h2>
+            <p>Midterm results will be released on March 10th.</p>
+            <p>Course registration closes soon.</p>
+          </div>
+
+          <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
+            <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📚 Upcoming Deadlines</h2>
+            <p>Assignment 3 - Due March 5th</p>
+            <p>Final Project - Due March 20th</p>
+          </div>
+        </div>
+
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>🎓 Academic Progress</h2>
+          <p style={{ color: "#666" }}>Your GPA: 3.8</p>
+          <p style={{ color: "#666" }}>Credits Earned: 45</p>
+        </div>
+
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>🌟 Quick Links</h2>
+          <a href="/library" style={{ marginRight: "10px", color: "#007bff", textDecoration: "none" }}>Library</a>
+          <a href="/timetable" style={{ marginRight: "10px", color: "#007bff", textDecoration: "none" }}>Timetable</a>
+          <a href="/resources" style={{ color: "#007bff", textDecoration: "none" }}>Resources</a>
         </div>
       </div>
     </div>

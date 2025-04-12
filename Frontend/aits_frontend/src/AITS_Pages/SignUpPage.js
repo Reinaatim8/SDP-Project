@@ -237,7 +237,7 @@ const SignUpPage = () => {
             </div>
           </div>
 
-          /* Username */}
+          {/* Username  */}
           <div className="form-group">
             <label htmlFor="username" style={{ color: "#f0a500" }}>Username</label>
             <input
