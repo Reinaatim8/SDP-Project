@@ -19,7 +19,7 @@
   border-radius: 15px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   padding: 40px;
-  background-image:url(../../public/images/chalk.jpg);
+  /* background-image:url(../../public/images/chalk.jpg); */
   background-size: cover;
 }
 
