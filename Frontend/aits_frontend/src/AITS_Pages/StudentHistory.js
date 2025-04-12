@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import StudentHoverBar from './StudentHoverBar';
 // Mock data - replace with API calls in the future
 const mockIssues = {
   resolved: [
@@ -123,6 +123,7 @@ const History = () => {
 
     return (
       <div className="history-table-container">
+        <StudentHoverBar/ >
         <table className="history-table">
           <thead className="history-table-header">
             <tr>
@@ -244,7 +245,9 @@ const History = () => {
           background-color: white;
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
           overflow: hidden;
+          margin:40px;
           border-radius: 0.5rem;
+          margin-bottom: 210px;
         }
         
         /* Header styles */
