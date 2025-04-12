@@ -75,14 +75,23 @@
   }
   
   .tab-icons a {
-    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
     text-decoration: none;
-    transition: transform 0.2s ease;
-    padding:15px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .tab-icons a.active {
+    background-color: #f0a500;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
   }
   
   .tab-icons a:hover {
-    transform: scale(1.2);
-    color: #f0a500;
+    background-color: #f0a500;
+    color: white;
   }
-  

@@ -7,6 +7,7 @@ import { submitIssue} from "../utils/issues";
 import { createCategory  as createCategoryApi} from "../utils/categories";
 import { createCourse as createCourseApi } from "../utils/courses";
 import {toast} from 'react-toastify';
+import StudentHoverBar from "./StudentHoverBar";
 
 const StudentIssueReport = () => {
   const [step, setStep] = useState(1); // to track issue submission steps
@@ -105,7 +106,7 @@ const StudentIssueReport = () => {
 
   return (
     <div className="student-issue-report-container">
-      <StudentSidebar />
+      <StudentHoverBar />
       <div className="student-issue-report-content">
         <h1 className="student-issue-report-title">📩 REPORT AN ISSUE</h1>
         <p className="student-issue-report-description" style={{color:'white'}}>Select a lecturer, categorize your issue, and describe it below. You can also attach any relevant files.</p>
