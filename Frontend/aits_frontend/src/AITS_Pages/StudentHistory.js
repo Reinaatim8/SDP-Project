@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './StudentHistory.css';
 
 // Mock data - replace with API calls in the future
 const mockIssues = {
@@ -67,13 +66,13 @@ const History = () => {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'resolved':
-        return 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-status-badge history-status-resolved';
       case 'unresolved':
-        return 'bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-status-badge history-status-unresolved';
       case 'draft':
-        return 'bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-status-badge history-status-draft';
       default:
-        return 'bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-status-badge';
     }
   };
 
@@ -81,24 +80,24 @@ const History = () => {
   const getPriorityBadge = (priority) => {
     switch (priority) {
       case 'High':
-        return 'bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-priority-badge history-priority-high';
       case 'Medium':
-        return 'bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-priority-badge history-priority-medium';
       case 'Low':
-        return 'bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-priority-badge history-priority-low';
       default:
-        return 'bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs font-medium';
+        return 'history-priority-badge';
     }
   };
 
   // Function to render appropriate table based on active tab
   const renderTable = () => {
     if (isLoading) {
-      return <div className="flex justify-center py-10"><div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div></div>;
+      return <div className="history-loading"><div className="history-spinner"></div></div>;
     }
 
     if (error) {
-      return <div className="bg-red-50 p-4 rounded-md text-red-700">{error}</div>;
+      return <div className="history-error">{error}</div>;
     }
 
     let dataToRender = [];
@@ -119,60 +118,60 @@ const History = () => {
     }
 
     if (dataToRender.length === 0) {
-      return <div className="text-center py-10 text-gray-500">No issues found</div>;
+      return <div className="history-empty">No issues found</div>;
     }
 
     return (
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="history-table-container">
+        <table className="history-table">
+          <thead className="history-table-header">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Issue</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th scope="col" className="history-table-th">Issue</th>
+              <th scope="col" className="history-table-th">Category</th>
+              <th scope="col" className="history-table-th">Date</th>
+              <th scope="col" className="history-table-th">Status</th>
+              <th scope="col" className="history-table-th">Priority</th>
+              <th scope="col" className="history-table-th">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="history-table-body">
             {dataToRender.map((issue) => (
-              <tr key={issue.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">{issue.title}</div>
-                  <div className="text-sm text-gray-500">ID: {issue.id}</div>
+              <tr key={issue.id} className="history-table-row">
+                <td className="history-table-cell">
+                  <div className="history-issue-title">{issue.title}</div>
+                  <div className="history-issue-id">ID: {issue.id}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{issue.category}</div>
+                <td className="history-table-cell">
+                  <div className="history-category">{issue.category}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
+                <td className="history-table-cell">
+                  <div className="history-date">
                     {issue.status === 'draft' 
                       ? `Last edited: ${formatDate(issue.lastEdited)}` 
                       : `Submitted: ${formatDate(issue.dateSubmitted)}`}
                   </div>
                   {issue.dateResolved && (
-                    <div className="text-sm text-gray-500">
+                    <div className="history-date-secondary">
                       Resolved: {formatDate(issue.dateResolved)}
                     </div>
                   )}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="history-table-cell">
                   <span className={getStatusBadge(issue.status)}>
                     {issue.status.charAt(0).toUpperCase() + issue.status.slice(1)}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="history-table-cell">
                   {issue.priority && (
                     <span className={getPriorityBadge(issue.priority)}>
                       {issue.priority}
                     </span>
                   )}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button className="text-blue-600 hover:text-blue-900 mr-3">View</button>
+                <td className="history-table-cell history-actions-cell">
+                  <button className="history-action-btn history-view-btn">View</button>
                   {issue.status === 'draft' && (
-                    <button className="text-green-600 hover:text-green-900">Edit</button>
+                    <button className="history-action-btn history-edit-btn">Edit</button>
                   )}
                 </td>
               </tr>
@@ -184,75 +183,314 @@ const History = () => {
   };
 
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-      <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">Issue History</h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">
+    <div className="history-container">
+      <div className="history-header">
+        <h3 className="history-title">Issue History</h3>
+        <p className="history-subtitle">
           View and manage all your submitted issues
         </p>
       </div>
       
       {/* Tabs */}
-      <div className="border-b border-gray-200">
-        <nav className="flex px-4 -mb-px" aria-label="Tabs">
+      <div className="history-tabs-container">
+        <nav className="history-tabs" aria-label="Tabs">
           <button
             onClick={() => setActiveTab('all')}
-            className={`${
-              activeTab === 'all'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            } whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm`}
+            className={`history-tab ${activeTab === 'all' ? 'history-tab-active' : ''}`}
           >
             All
           </button>
           <button
             onClick={() => setActiveTab('resolved')}
-            className={`${
-              activeTab === 'resolved'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            } whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm`}
+            className={`history-tab ${activeTab === 'resolved' ? 'history-tab-active' : ''}`}
           >
             Resolved 
-            <span className="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">
+            <span className="history-tab-count">
               {issues.resolved.length}
             </span>
           </button>
           <button
             onClick={() => setActiveTab('unresolved')}
-            className={`${
-              activeTab === 'unresolved'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            } whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm`}
+            className={`history-tab ${activeTab === 'unresolved' ? 'history-tab-active' : ''}`}
           >
             Unresolved
-            <span className="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">
+            <span className="history-tab-count">
               {issues.unresolved.length}
             </span>
           </button>
           <button
             onClick={() => setActiveTab('drafts')}
-            className={`${
-              activeTab === 'drafts'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            } whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm`}
+            className={`history-tab ${activeTab === 'drafts' ? 'history-tab-active' : ''}`}
           >
             Drafts
-            <span className="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">
+            <span className="history-tab-count">
               {issues.drafts.length}
             </span>
           </button>
         </nav>
       </div>
       
-      <div className="px-4 py-5 sm:px-6">
+      <div className="history-content">
         {/* Filter and search options could be added here */}
         
         {/* Table */}
         {renderTable()}
       </div>
+
+      {/* CSS for the component */}
+      <style jsx>{`
+        /* Container styles */
+        .history-container {
+          background-color: white;
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+          overflow: hidden;
+          border-radius: 0.5rem;
+        }
+        
+        /* Header styles */
+        .history-header {
+          padding: 1.25rem 1rem;
+        }
+        
+        .history-title {
+          font-size: 1.125rem;
+          font-weight: 500;
+          color: #111827;
+        }
+        
+        .history-subtitle {
+          margin-top: 0.25rem;
+          font-size: 0.875rem;
+          color: #6B7280;
+        }
+        
+        /* Tabs styling */
+        .history-tabs-container {
+          border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .history-tabs {
+          display: flex;
+          padding: 0 1rem;
+        }
+        
+        .history-tab {
+          padding: 1rem;
+          border-bottom: 2px solid transparent;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #6B7280;
+          background: none;
+          cursor: pointer;
+        }
+        
+        .history-tab:hover {
+          color: #374151;
+          border-bottom-color: #D1D5DB;
+        }
+        
+        .history-tab-active {
+          border-bottom-color: #3B82F6;
+          color: #3B82F6;
+        }
+        
+        .history-tab-count {
+          margin-left: 0.5rem;
+          background-color: #F3F4F6;
+          color: #4B5563;
+          padding: 0.125rem 0.5rem;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+        }
+        
+        /* Content area */
+        .history-content {
+          padding: 1.25rem 1rem;
+        }
+        
+        /* Loading state */
+        .history-loading {
+          display: flex;
+          justify-content: center;
+          padding: 2.5rem 0;
+        }
+        
+        .history-spinner {
+          animation: spin 1s linear infinite;
+          height: 2.5rem;
+          width: 2.5rem;
+          border-radius: 9999px;
+          border: 2px solid #E5E7EB;
+          border-top-color: #3B82F6;
+        }
+        
+        @keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        /* Error state */
+        .history-error {
+          background-color: #FEF2F2;
+          padding: 1rem;
+          border-radius: 0.375rem;
+          color: #B91C1C;
+        }
+        
+        /* Empty state */
+        .history-empty {
+          text-align: center;
+          padding: 2.5rem 0;
+          color: #6B7280;
+        }
+        
+        /* Table styles */
+        .history-table-container {
+          overflow-x: auto;
+        }
+        
+        .history-table {
+          min-width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
+        }
+        
+        .history-table-header {
+          background-color: #F9FAFB;
+        }
+        
+        .history-table-th {
+          padding: 0.75rem 1.5rem;
+          text-align: left;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #6B7280;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+        
+        .history-table-body {
+          background-color: white;
+        }
+        
+        .history-table-row {
+          border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .history-table-row:hover {
+          background-color: #F9FAFB;
+        }
+        
+        .history-table-cell {
+          padding: 1rem 1.5rem;
+          white-space: nowrap;
+        }
+        
+        .history-issue-title {
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #111827;
+        }
+        
+        .history-issue-id {
+          font-size: 0.875rem;
+          color: #6B7280;
+        }
+        
+        .history-category {
+          font-size: 0.875rem;
+          color: #111827;
+        }
+        
+        .history-date {
+          font-size: 0.875rem;
+          color: #111827;
+        }
+        
+        .history-date-secondary {
+          font-size: 0.875rem;
+          color: #6B7280;
+        }
+        
+        /* Status badges */
+        .history-status-badge {
+          padding: 0.25rem 0.5rem;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+          font-weight: 500;
+          display: inline-block;
+        }
+        
+        .history-status-resolved {
+          background-color: #D1FAE5;
+          color: #065F46;
+        }
+        
+        .history-status-unresolved {
+          background-color: #FEF3C7;
+          color: #92400E;
+        }
+        
+        .history-status-draft {
+          background-color: #F3F4F6;
+          color: #4B5563;
+        }
+        
+        /* Priority badges */
+        .history-priority-badge {
+          padding: 0.25rem 0.5rem;
+          border-radius: 9999px;
+          font-size: 0.75rem;
+          font-weight: 500;
+          display: inline-block;
+        }
+        
+        .history-priority-high {
+          background-color: #FEE2E2;
+          color: #991B1B;
+        }
+        
+        .history-priority-medium {
+          background-color: #DBEAFE;
+          color: #1E40AF;
+        }
+        
+        .history-priority-low {
+          background-color: #D1FAE5;
+          color: #065F46;
+        }
+        
+        /* Action buttons */
+        .history-actions-cell {
+          text-align: right;
+        }
+        
+        .history-action-btn {
+          font-size: 0.875rem;
+          font-weight: 500;
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+        
+        .history-view-btn {
+          color: #2563EB;
+          margin-right: 0.75rem;
+        }
+        
+        .history-view-btn:hover {
+          color: #1D4ED8;
+        }
+        
+        .history-edit-btn {
+          color: #059669;
+        }
+        
+        .history-edit-btn:hover {
+          color: #047857;
+        }
+      `}</style>
     </div>
   );
 };
