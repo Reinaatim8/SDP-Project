@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import StudentSidebar from "../components/StudentSidebar";
 import "./Enrollment.css"; // for styling
 import  { createEnrollment as createEnrollmentApi } from "../utils/enrollments";
+import StudentHoverBar from "./StudentHoverBar";
 
 const Enrollment = () => {
   const [studentId, setStudentId] = useState("");
@@ -37,7 +37,7 @@ const Enrollment = () => {
   return (
     <div className="enrollment-container">
       <div className="enrollment-container2">
-      <StudentSidebar />
+      <StudentHoverBar/>
       <div className="enrollment-card">
         <h2>ENROLLING IN A COURSE </h2>
         {alert && (
