@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
 import "./StudentDashboard.css";
 import { toast } from "react-toastify";
+import StudentHoverBar from "./StudentHoverBar";
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
@@ -37,8 +38,10 @@ useEffect(() => {
 
 
   return (
+    
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <StudentSidebar />
+      <StudentHoverBar/>
       <div style={{ maxWidth: "1200px", width: "80%", backgroundColor: "#f9f9f9",marginLeft:"320px", scale:"0.9", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", padding: "20px" }}>
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <img src="/images/AITSLOGO.png" style={{ width: "300px", marginBottom: "10px" }} alt="student logo" />
