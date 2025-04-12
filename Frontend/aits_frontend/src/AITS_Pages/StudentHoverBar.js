@@ -18,19 +18,16 @@ const StudentHoverBar = () => {
     <div className={`floating-tabbar-container ${isMinimized ? 'minimized' : ''}`}>
       <div className="floating-tabbar-header">
         <button className="minimize-btn" onClick={toggleMinimize}>
-          {isMinimized ? '🔼' : '🔽'}
+        {isMinimized ? (
+  <img src="/images/AITSLOGO.png" alt="Arrow Up" style={{width: "120px"}}/>
+) : (
+  <img src="/images/AITSLOGO.png" alt="Arrow Down" style={{width: "120px"}}/>
+)}
         </button>
       </div>
 
       {!isMinimized && (
         <div className="floating-tabbar-content">
-          <div className="search-box">
-            {searchQuery && (
-              <button className="clear-search" onClick={() => setSearchQuery('')}>
-                <X size={14} />
-              </button>
-            )}
-          </div>
 
           <div className="tab-icons">
             <a href="StudentDashboard"><FaHome />Home</a>
