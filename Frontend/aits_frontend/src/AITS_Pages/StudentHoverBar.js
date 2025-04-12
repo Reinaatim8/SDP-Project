@@ -25,14 +25,6 @@ const StudentHoverBar = () => {
       {!isMinimized && (
         <div className="floating-tabbar-content">
           <div className="search-box">
-            <Search size={16} className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-            />
             {searchQuery && (
               <button className="clear-search" onClick={() => setSearchQuery('')}>
                 <X size={14} />
@@ -41,11 +33,11 @@ const StudentHoverBar = () => {
           </div>
 
           <div className="tab-icons">
-            <a href="StudentDashboard"><FaHome /></a>
-            <a href="Enrollment"><FaAddressCard /></a>
-            <a href="StudentIssueReport"><FaDatabase /></a>
-            <a href="Profile"><FaUser /></a>
-            <a href="Aboutpage"><FaPhone /></a>
+            <a href="StudentDashboard"><FaHome />Home</a>
+            <a href="Enrollment"><FaAddressCard />Enroll</a>
+            <a href="StudentIssueReport"><FaDatabase />Issues</a>
+            <a href="Profile"><FaUser />Profile</a>
+            <a href="Aboutpage"><FaPhone />contact us</a>
           </div>
         </div>
       )}
