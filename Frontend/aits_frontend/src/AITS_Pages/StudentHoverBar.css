@@ -3,7 +3,7 @@
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: #00572a;
+    background: #00572aed;
     border-radius: 30px;
     padding: 10px 20px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
@@ -83,6 +83,8 @@
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
     font-family: sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
   }
   
   .tab-icons a.active {
