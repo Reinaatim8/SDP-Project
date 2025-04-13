@@ -22,6 +22,7 @@
   .minimized {
     height: auto;
     width: auto;
+    left: 35%;;
   }
   
   .floating-tabbar-header {
