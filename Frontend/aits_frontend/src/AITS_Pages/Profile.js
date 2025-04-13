@@ -183,7 +183,10 @@ const Profile = () => {
           <div style={{
             maxWidth: "800px",
             margin: "0 auto",
+            backgroundImage: "url(../../public/images/studentwallpaper.jpg)",
+
             backgroundColor: "white",
+
             borderRadius: "24px",
             boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
             overflow: "hidden",
