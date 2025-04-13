@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import StudentSidebar from '../components/StudentSidebar';
 import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate, FaUniversity, FaBuilding, FaCalendarAlt } from "react-icons/fa";
 import { toast } from 'react-toastify';
+import StudentHoverBar from './StudentHoverBar.js'
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -146,7 +146,6 @@ const Profile = () => {
   if (loading) {
     return (
       <div style={{ display: "flex", height: "100vh" }}>
-        <StudentSidebar />
         <div style={{
           flexGrow: 1,
           display: "flex",
@@ -170,9 +169,11 @@ const Profile = () => {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fa" }}>
-      <StudentSidebar />
+    <div style={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fa" ,  backgroundImage: "url(../../public/images/studentwallpaper.jpg)"
+    }}>
+      <StudentHoverBar/>
       <div style={{
+        backgroundImage: "url(../../public/images/studentwallpaper.jpg)",
         flexGrow: 1,
         background: "linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%)",
         padding: "40px",
