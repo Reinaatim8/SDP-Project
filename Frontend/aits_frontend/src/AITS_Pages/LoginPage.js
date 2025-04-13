@@ -7,7 +7,7 @@ import './LoginPage.css';
 //import Toast from '../components/ToastContainer';
 import { toast} from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaMehRollingEyes, FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {
   const [username, setUsername] = useState('');
@@ -146,7 +146,7 @@ const Loginpage = () => {
       placeholder="Enter your Password" 
       value={password}
       onChange={(e) => setPassword(e.target.value)}required/>
-      <button type='button' className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash/>:<FaEye/>}</button>
+      <button type='button' className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaRegEye/>:<FaRegEyeSlash/>}</button>
      
     </div>
     
