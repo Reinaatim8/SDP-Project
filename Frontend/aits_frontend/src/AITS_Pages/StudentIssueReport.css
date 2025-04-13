@@ -1,14 +1,14 @@
 /* Layout */
 .student-issue-report-container {
   max-width: 750px;
-  margin: 50px auto;
+  /* margin: 50px auto; */
   height: fit-content;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: white;
-  background-image: url(../../public/images/enrollmentwallpaper.jpg);
-  margin-left: 320px;
+  /* background-image: url(../../public/images/enrollmentwallpaper.jpg); */
+  /* margin-left: 320px; */
 }
 .student-issue-report-title {
   
