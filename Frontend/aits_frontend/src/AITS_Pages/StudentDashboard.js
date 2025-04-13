@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
 import "./StudentDashboard.css";
 import { toast } from "react-toastify";
+import { FaPowerOff } from "react-icons/fa";
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
@@ -90,7 +91,6 @@ useEffect(() => {
           >
             📞 Contact Us
           </button>
-        </div>
 
         <button
           style={{
@@ -100,13 +100,13 @@ useEffect(() => {
             border: "none",
             borderRadius: "5px",
             cursor: "pointer",
-            fontSize: "16px",
-            marginBottom: "20px",
-          }}
+            fontSize: "16px",          }}
           onClick={handleLogout}
         >
-          Logout
+          Logout <FaPowerOff/>
         </button>
+        </div>
+
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "20px" }}>
           <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
