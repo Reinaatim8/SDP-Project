@@ -201,10 +201,12 @@ const SignUpPage = () => {
       <div className="signup-card">
         <img src='/images/nobgmaklogo.png'alt='maklogo' />
         <h2 className="signup-title">Sign Up To Start</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{display:"ruby"}}>
 
-          {/* First Name */}
+<div id='geraltA' style={{display:"block"}}>
+            {/* First Name */}
           <div className="form-group inline-fields">
+            
             <div className="form-field">
               <label htmlFor="first_name" style={{color:"#f0a500"}}>First Name</label>
               <input
@@ -281,6 +283,19 @@ const SignUpPage = () => {
               <span className="error">Lecturer email must end with @mak.ac.ug</span>
             )}
           </div>
+                              {/* Department */}
+                              <div className="form-group" id='department'>
+                    <label htmlFor="department" style={{color:"#f0a500"}}>Department</label>
+                    <select
+                    id="department"
+                    name="department"
+                    value={formData.department}
+                    onChange={handleChange}
+                    >
+                    <option value="CS">computer science(default)</option>
+                    </select>
+                  </div>
+
 
           <div className="form-group">
             <label htmlFor="user_type" style={{ color: "#f0a500" }}>Type Of User</label>
@@ -294,7 +309,8 @@ const SignUpPage = () => {
               <option value="lecturer">Lecturer</option>
               <option value="admin">Admin/Registrar</option>
             </select>
-          </div>}
+          </div></div>
+          <div id='RiviaB' style={{display:"block",margin:"30px"}}>
           <div className="form-group inline-fields">
             <div className="form-field">
               <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
@@ -330,6 +346,7 @@ const SignUpPage = () => {
               </div>
             </div>
           </div>
+          
 
           {/* Program */}
           <div className="form-group">
@@ -389,26 +406,16 @@ const SignUpPage = () => {
                 placeholder="Enter your year of study"
               />
             </div>
+                      {/* Submit Button */}
+          <button type="submit" className="signup-button" disabled={loading}>{loading ? <span className='spinner'></span>: 'SIGN UP'}
+          </button>
 
-                    {/* Department */}
-                  <div className="form-group" id='department'>
-                    <label htmlFor="department" style={{color:"#f0a500"}}>Department</label>
-                    <select
-                    id="department"
-                    name="department"
-                    value={formData.department}
-                    onChange={handleChange}
-                    >
-                    <option value="CS">computer science(default)</option>
-                    </select>
-                  </div>
+
+</div>
 
                   {/* API Error Display */}}
           {apiError && <p className="error">{apiError}</p>}
 
-          {/* Submit Button */}
-          <button type="submit" className="signup-button" disabled={loading}>{loading ? <span className='spinner'></span>: 'SIGN UP'}
-          </button>
         </form>
 
         {/* Link to Login Page */}
