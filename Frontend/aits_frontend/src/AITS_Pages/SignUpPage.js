@@ -201,7 +201,7 @@ const SignUpPage = () => {
       <div className="signup-card">
         <img src='/images/nobgmaklogo.png'alt='maklogo' />
         <h2 className="signup-title">Sign Up To Start</h2>
-        <form onSubmit={handleSubmit} style={{display:"ruby"}}>
+        <form onSubmit={handleSubmit} style={{display:"flex"}}>
 
 <div id='geraltA' style={{display:"block"}}>
             {/* First Name */}
@@ -310,7 +310,7 @@ const SignUpPage = () => {
               <option value="admin">Admin/Registrar</option>
             </select>
           </div></div>
-          <div id='RiviaB' style={{display:"block",margin:"30px"}}>
+          <div id='RiviaB' style={{display:"block",marginLeft:"30px"}}>
           <div className="form-group inline-fields">
             <div className="form-field">
               <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
@@ -324,7 +324,7 @@ const SignUpPage = () => {
                 placeholder="Enter your password"
                 required
               />
-              <button type="button" className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash/>:<FaEye/>}</button>
+              <button type="button" className='password-toggle-button' style={{position: "absolute",right:" 5px",top: "60%",bottom: "70%",transform: "translateY(-50%)",backgroundColor:" transparent",cursor: "pointer",padding: "0",marginTop:"5px"}} onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash style={{marginTop:"50px"}}/>:<FaEye/>}</button>
               {errors.password && <span className="error">{errors.password}</span>}
 
               </div>
