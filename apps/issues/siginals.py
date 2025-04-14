@@ -28,7 +28,7 @@ def comment_created_notification(sender, instance, created, **kwargs):
                     message=f"A new comment has been added to your issue '{issue.title}' by {instance.user.get_full_name()}.\n\nComment: {instance.content}",
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[issue.student.email],
-                    fail_silently=False,
+                    fail_silently=True,
                 )
             except Exception as e:
                 print(f"Email sending failed: {e}")
