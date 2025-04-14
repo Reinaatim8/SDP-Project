@@ -2,11 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate, FaUniversity, FaBuilding, FaCalendarAlt } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import StudentHoverBar from './StudentHoverBar.js'
+import NotificationsModal from '../components/NotificationsModal';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('personal');
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [notifications] = useState([
+    { id: 1, message: "Your profile has been updated.", type: "success" },
+    { id: 2, message: "New course materials are available.", type: "info" },
+    { id: 3, message: "Your password will expire soon.", type: "warning" },
+  ]);
 
   // Simulated loading with animation
   useEffect(() => {
@@ -504,6 +511,26 @@ const Profile = () => {
           `
         }} />
       </div>
+      <button onClick={() => setShowNotifications(true)} style={{
+        position: "fixed",
+        top: "20px",
+        right: "20px",
+        padding: "10px 20px",
+        backgroundColor: "#0a2463",
+        color: "white",
+        border: "none",
+        borderRadius: "5px",
+        cursor: "pointer"
+      }}>
+        View Notifications
+      </button>
+
+      {showNotifications && (
+        <NotificationsModal
+          notifications={notifications}
+          onClose={() => setShowNotifications(false)}
+        />
+      )}
     </div>
   );
 };
