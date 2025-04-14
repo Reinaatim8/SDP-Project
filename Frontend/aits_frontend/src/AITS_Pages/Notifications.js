@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaCheckCircle, FaInfoCircle, FaExclamationTriangle, FaTimesCircle } from 'react-icons/fa';
 
 const NotificationsPage = () => {
   const [notifications, setNotifications] = useState([]);
@@ -23,18 +24,20 @@ const NotificationsPage = () => {
       maxWidth: "600px",
       margin: "40px auto",
       backgroundColor: "white",
-      borderRadius: "12px",
-      boxShadow: "0 8px 16px rgba(0,0,0,0.1)",
-      fontFamily: "'Arial', sans-serif"
+      borderRadius: "16px",
+      boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+      fontFamily: "'Arial', sans-serif",
+      animation: "fadeIn 0.5s ease-in-out"
     }}>
       <h2 style={{
         marginBottom: "20px",
         color: "#0a2463",
-        fontSize: "24px",
+        fontSize: "28px",
         fontWeight: "bold",
         textAlign: "center",
         borderBottom: "2px solid #e5e5e5",
-        paddingBottom: "10px"
+        paddingBottom: "10px",
+        letterSpacing: "1px"
       }}>
         Notifications
       </h2>
@@ -43,7 +46,7 @@ const NotificationsPage = () => {
           <div key={notification.id} style={{
             padding: "15px",
             marginBottom: "15px",
-            borderRadius: "8px",
+            borderRadius: "12px",
             backgroundColor: notification.type === "success" ? "#d4edda" :
                              notification.type === "info" ? "#d1ecf1" :
                              notification.type === "warning" ? "#fff3cd" : "#f8d7da",
@@ -53,20 +56,32 @@ const NotificationsPage = () => {
             boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
             display: "flex",
             alignItems: "center",
-            gap: "10px"
+            gap: "15px",
+            animation: "slideIn 0.5s ease-in-out"
           }}>
             <div style={{
-              width: "10px",
-              height: "10px",
+              width: "40px",
+              height: "40px",
               borderRadius: "50%",
               backgroundColor: notification.type === "success" ? "#28a745" :
                                notification.type === "info" ? "#17a2b8" :
                                notification.type === "warning" ? "#ffc107" : "#dc3545",
-              flexShrink: 0
-            }}></div>
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+              boxShadow: "0 2px 4px rgba(0,0,0,0.2)"
+            }}>
+              {notification.type === "success" && <FaCheckCircle color="white" size={20} />}
+              {notification.type === "info" && <FaInfoCircle color="white" size={20} />}
+              {notification.type === "warning" && <FaExclamationTriangle color="white" size={20} />}
+              {notification.type === "error" && <FaTimesCircle color="white" size={20} />}
+            </div>
             <span style={{
               fontSize: "16px",
-              fontWeight: "500"
+              fontWeight: "500",
+              lineHeight: "1.5",
+              flex: 1
             }}>
               {notification.message}
             </span>
@@ -76,12 +91,26 @@ const NotificationsPage = () => {
         <p style={{
           color: "#6c757d",
           textAlign: "center",
-          fontSize: "16px",
-          fontStyle: "italic"
+          fontSize: "18px",
+          fontStyle: "italic",
+          animation: "fadeIn 0.5s ease-in-out"
         }}>
           No notifications available.
         </p>
       )}
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+        `}
+      </style>
     </div>
   );
 };
