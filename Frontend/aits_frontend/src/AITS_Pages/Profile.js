@@ -169,24 +169,29 @@ const Profile = () => {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh", backgroundColor: "#f8f9fa" ,  backgroundImage: "url(../../public/images/studentwallpaper.jpg)"
+    <div style={{
+      display: "flex",
+      height: "100vh",
+      background: "url(/images/studentwallpaper.jpg) no-repeat center center / cover" ,// Fixed background image
+      marginBottom: "",
     }}>
-      <StudentHoverBar/>
+      <div style={{marginLeft:"8%",marginBottom:"10%"}}>
+      <StudentHoverBar />
+      </div>
       <div style={{
-        backgroundImage: "url(../../public/images/studentwallpaper.jpg)",
         flexGrow: 1,
-        background: "linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%)",
+        // backgroundColor: "rgba(255, 255, 255, 0.8)", // Optional overlay for better readability
         padding: "40px",
-        overflowY: "auto"
+        overflowY: "auto",
+        marginLeft:"6%",
+        
       }}>
         {userData ? (
           <div style={{
-            maxWidth: "800px",
+            marginLeft:"0",
+            maxWidth: "1000px",
             margin: "0 auto",
-            backgroundImage: "url(../../public/images/studentwallpaper.jpg)",
-
             backgroundColor: "white",
-
             borderRadius: "24px",
             boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
             overflow: "hidden",
@@ -412,7 +417,8 @@ const Profile = () => {
               borderTop: "1px solid rgba(0,0,0,0.1)",
               display: "flex",
               justifyContent: "space-between",
-              background: colors.light
+              background: colors.light,
+              marginBottom: "10%",
             }}>
               <button style={{
                 background: "transparent",
