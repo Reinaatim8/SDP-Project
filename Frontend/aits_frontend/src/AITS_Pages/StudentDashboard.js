@@ -35,6 +35,12 @@ const StudentDashboard = () => {
 const handleQuickIssue = (category) => {
   navigate('/StudentIssueReport', { state: { category } });
 };
+const [searchTerm, setSearchTerm] = useState("");
+
+// Add a function to handle search
+const handleSearch = (e) => {
+  setSearchTerm(e.target.value);
+};
 
   //load user from local storage
   useEffect(() => {
@@ -93,6 +99,39 @@ const handleQuickIssue = (category) => {
       </div>
       <div>Resolved</div>
     </div>
+  </div>
+</div>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔍 Search Issues</h2>
+  <div style={{ display: "flex", marginBottom: "15px" }}>
+    <input
+      type="text"
+      placeholder="Search for previously reported issues..."
+      value={searchTerm}
+      onChange={handleSearch}
+      style={{
+        flex: 1,
+        padding: "8px 12px",
+        border: "1px solid #ced4da",
+        borderRadius: "4px 0 0 4px",
+        fontSize: "14px",
+      }}
+    />
+    <button
+      style={{
+        padding: "8px 16px",
+        backgroundColor: "#007bff",
+        color: "#fff",
+        border: "none",
+        borderRadius: "0 4px 4px 0",
+        cursor: "pointer",
+      }}
+    >
+      Search
+    </button>
+  </div>
+  <div style={{ fontSize: "14px", color: "#6c757d" }}>
+    Try searching for keywords like "wifi", "grades", or "classroom"
   </div>
 </div>
 <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
