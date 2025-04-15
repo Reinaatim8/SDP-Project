@@ -9,7 +9,10 @@ import { FaPowerOff } from "react-icons/fa";
 const StudentDashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [issues, setIssues] = useState([]);
+  const [issues, setIssues] = useState([
+    { id: 1, title: "Computer Lab Access", description: "Unable to login to computer lab workstations", status: "Pending", priority: "High", reportedDate: "Apr 13, 2025" },
+    { id: 2, title: "Missing Assignment Grades", description: "Assignment 2 grades not showing in system", status: "In Progress", priority: "Medium", reportedDate: "Apr 10, 2025" }
+  ]);  
   const [showNotifications, setShowNotifications] = useState(false);
   const [activities, setActivities] = useState([
     { id: 1, title: "Network Issue", description: "Lecturer responded to your ticket", type: "response", time: "Today, 2:30 PM" },
@@ -107,6 +110,39 @@ const StudentDashboard = () => {
     </ul>
   ) : (
     <p>No recent activity.</p>
+  )}
+</div>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⚠️ Priority Issues</h2>
+  {issues.filter(issue => issue.priority === "High").length > 0 ? (
+    <ul style={{ listStyle: "none", padding: "0" }}>
+      {issues
+        .filter(issue => issue.priority === "High")
+        .slice(0, 3)
+        .map((issue, index) => (
+          <li key={index} style={{ 
+            padding: "10px", 
+            backgroundColor: "#fff3cd", 
+            border: "1px solid #ffeeba", 
+            borderRadius: "4px",
+            marginBottom: "8px"
+          }}>
+            <div style={{ fontWeight: "bold" }}>{issue.title}</div>
+            <div style={{ fontSize: "14px", marginTop: "5px" }}>{issue.description}</div>
+            <div style={{ 
+              display: "flex", 
+              justifyContent: "space-between", 
+              fontSize: "12px", 
+              marginTop: "8px" 
+            }}>
+              <span>Status: {issue.status}</span>
+              <span>Reported: {issue.reportedDate}</span>
+            </div>
+          </li>
+        ))}
+    </ul>
+  ) : (
+    <p>No high priority issues at the moment.</p>
   )}
 </div>
 
