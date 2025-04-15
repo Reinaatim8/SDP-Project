@@ -11,10 +11,16 @@ const StudentDashboard = () => {
   const [user, setUser] = useState(null);
   const [issues, setIssues] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [activities, setActivities] = useState([
+    { id: 1, title: "Network Issue", description: "Lecturer responded to your ticket", type: "response", time: "Today, 2:30 PM" },
+    { id: 2, title: "Library Access", description: "Status changed to In Progress", type: "status_change", time: "Yesterday, 4:15 PM" },
+    { id: 3, title: "Course Material Error", description: "New issue reported", type: "new", time: "Apr 14, 10:00 AM" }
+  ]);
   const [notifications] = useState([
     { id: 1, message: "Your profile has been updated.", type: "success" },
     { id: 2, message: "New course materials are available.", type: "info" },
     { id: 3, message: "Your password will expire soon.", type: "warning" },
+    
   ]);
 
   //load user from local storage
@@ -75,6 +81,33 @@ const StudentDashboard = () => {
       <div>Resolved</div>
     </div>
   </div>
+</div>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔔 Recent Activity</h2>
+  {activities.length > 0 ? (
+    <ul style={{ listStyle: "none", padding: "0" }}>
+      {activities.slice(0, 5).map((activity, index) => (
+        <li key={index} style={{ 
+          padding: "8px", 
+          borderLeft: `4px solid ${
+            activity.type === "response" ? "#28a745" : 
+            activity.type === "status_change" ? "#ffc107" : "#007bff"
+          }`,
+          marginBottom: "8px",
+          backgroundColor: "#f8f9fa"
+        }}>
+          <div style={{ fontSize: "14px", color: "#495057" }}>
+            <span style={{ fontWeight: "bold" }}>{activity.title}</span> - {activity.description}
+          </div>
+          <div style={{ fontSize: "12px", color: "#6c757d", marginTop: "4px" }}>
+            {activity.time}
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>No recent activity.</p>
+  )}
 </div>
 
         <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
