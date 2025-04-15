@@ -138,28 +138,6 @@ const handleSearch = (e) => {
   </div>
 </div>
 <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🏢 Filter by Department</h2>
-  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-    {departments.map((dept, index) => (
-      <button
-        key={index}
-        onClick={() => setSelectedDepartment(dept)}
-        style={{
-          padding: "6px 12px",
-          backgroundColor: selectedDepartment === dept ? "#007bff" : "#e9ecef",
-          color: selectedDepartment === dept ? "#fff" : "#212529",
-          border: "1px solid #ced4da",
-          borderRadius: "20px",
-          cursor: "pointer",
-          fontSize: "14px",
-        }}
-      >
-        {dept}
-      </button>
-    ))}
-  </div>
-</div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔔 Recent Activity</h2>
   {activities.length > 0 ? (
     <ul style={{ listStyle: "none", padding: "0" }}>
