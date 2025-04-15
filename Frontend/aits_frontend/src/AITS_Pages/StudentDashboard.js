@@ -25,6 +25,11 @@ const StudentDashboard = () => {
     { id: 3, message: "Your password will expire soon.", type: "warning" },
     
   ]);
+  const [responseMetrics, setResponseMetrics] = useState({
+    averageResponse: "4 hours",
+    averageResolution: "2 days",
+    responseRate: "92%"
+  });
 
   //load user from local storage
   useEffect(() => {
@@ -144,6 +149,23 @@ const StudentDashboard = () => {
   ) : (
     <p>No high priority issues at the moment.</p>
   )}
+</div>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⏱️ Response Time Metrics</h2>
+  <div style={{ display: "flex", justifyContent: "space-around" }}>
+    <div style={{ textAlign: "center", padding: "10px" }}>
+      <div style={{ fontSize: "14px", color: "#666" }}>Avg. First Response</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold", color: "#004085" }}>{responseMetrics.averageResponse}</div>
+    </div>
+    <div style={{ textAlign: "center", padding: "10px" }}>
+      <div style={{ fontSize: "14px", color: "#666" }}>Avg. Resolution Time</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold", color: "#004085" }}>{responseMetrics.averageResolution}</div>
+    </div>
+    <div style={{ textAlign: "center", padding: "10px" }}>
+      <div style={{ fontSize: "14px", color: "#666" }}>Response Rate</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold", color: "#004085" }}>{responseMetrics.responseRate}</div>
+    </div>
+  </div>
 </div>
 
         <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
