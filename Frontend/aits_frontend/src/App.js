@@ -11,21 +11,36 @@ import StudentIssueReport from './AITS_Pages/StudentIssueReport';
 import LecturerDashboard from './AITS_Pages/LecturerDashboard';
 import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
 import RespondToQueries from './AITS_Pages/RespondToQueries';
+import ViewIssues from './AITS_Pages/ViewIssues';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 function App() {
   return (
     <Router>
+      <ToastContainer
+       position='top-center'
+       autoClose={60000}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       pauseOnFocusLoss
+       draggable
+       pauseOnHover
+       />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/Aboutpage" element={<Aboutpage />} />
-        <Route path="/signup" element={<SignUpPage />} />//
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/StudentDashboard" element={<StudentDashboard />} /> 
         <Route path="/StudentIssueReport" element={<StudentIssueReport/>} />
         <Route path="/Enrollment" element={<Enrollment />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/ViewIssues" element={<ViewIssues/>} />
         <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
         <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />
         <Route path="/RespondToQueries" element={<RespondToQueries />} />

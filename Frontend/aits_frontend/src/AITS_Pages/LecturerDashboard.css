@@ -17,7 +17,7 @@
 .lecturer-dashboard-panel {
   background: white;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   padding: 40px;
   background-image:url(../../public/images/chalk.jpg);
   background-size: cover;
@@ -25,7 +25,7 @@
 
 .lecturer-dashboard-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   
 }
 
@@ -74,7 +74,7 @@
 
 .lecturer-dashboard-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .lecturer-dashboard-btn-icon {

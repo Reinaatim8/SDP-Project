@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { login } from '../utils/auth'; // Import the login function from your utils
 //import axios from 'axios';
 //import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
+//import Toast from '../components/ToastContainer';
+import { toast} from 'react-toastify';
+//import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {
-  //const [step, setStep] = useState(1); //step 1 for initial login and step 2 for generating session token
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword,setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () =>{
+    setShowPassword(!showPassword);
+  };
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
+  useEffect(() =>{
+    if (location.pathname=== '/StudentDashboard'
+      || location.pathname=== '/LecturerDashboard'
+      || location.pathname=== '/RegistrarDashboard'){
+        toast.success('Login Successful!',{
+          autoClose:60000,
+        });
+      }
+      },[location]);
+      
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -21,17 +41,8 @@ const Loginpage = () => {
     try {
       // Step 1: Authenticate the user
       const response = await login( username, password );
-
       if (response.tokens) {
-        console.log('Login successful:', response);
-      }
-      if (!response || !response.user) {
-        setError('Invalid username or password. Please try again.');
-        return;
-      }
-      
-      // Determine the user's role and navigate accordingly
-      const user = response.user; // Assuming the user object is included in the response
+        // Determine the user's role and navigate accordingly
       const user_type = response.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
 
@@ -48,14 +59,21 @@ const Loginpage = () => {
         default:
           dashboardPath = '/dashboard';
       }
-
       navigate(dashboardPath);
+    }
+    if (!response|| !response.user){
+        setError('Invalid username or password. Please try again.');
+        toast.warning('Invalid username or password. Please try again.');
+        return;
+      }
     } catch (err) {
       console.error('Login error:', err);
       if (err.response && err.response.status === 401) {
         setError('Incorrect username or password. Please try again!');
+        toast.warning('Incorrect username or password. Please try again!');
       } else {
         setError('An error occurred. Please try again later.');
+        toast.warning('An error occurred. Please try again later.',{autoClose:60000,});
       }
     } finally {
       setLoading(false);
@@ -90,7 +108,8 @@ const Loginpage = () => {
     };
   }, []);
 
-  return (
+
+   return (
    <div className="Login-container">
    {/*Background picture on login form*/}
 
@@ -119,15 +138,16 @@ const Loginpage = () => {
         onChange={(e) => setUsername(e.target.value)} required/>
     </div>
     
-    <div>
+    <div className='password-input-container'>
       <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
       <input 
-      type="password" 
+      type={showPassword ? 'text':'password'}
       name="password" 
       placeholder="Enter your Password" 
       value={password}
-      onChange={(e) => setPassword(e.target.value)}required
-      />
+      onChange={(e) => setPassword(e.target.value)}required/>
+      <button type='button' className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash/>:<FaEye/>}</button>
+     
     </div>
     
   <br/>
@@ -150,6 +170,7 @@ const Loginpage = () => {
       <footer className="footer">
         <p>&copy; 2025 AITS. All rights reserved.</p>
       </footer>
+     {/*<Toast/>*/} 
     </div>
   );
 };
