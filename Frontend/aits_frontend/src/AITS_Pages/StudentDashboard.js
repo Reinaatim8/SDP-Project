@@ -44,6 +44,12 @@ const [searchTerm, setSearchTerm] = useState("");
 const handleSearch = (e) => {
   setSearchTerm(e.target.value);
 };
+const [issueStats, setIssueStats] = useState({
+  totalReported: 24,
+  totalResolved: 19,
+  averageIssuesPerWeek: 5,
+  mostCommonCategory: "Technical Issues"
+});
 
   //load user from local storage
   useEffect(() => {
@@ -237,6 +243,27 @@ const handleSearch = (e) => {
       </button>
     ))}
   </div>
+  <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📈 Issue Statistics</h2>
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
+    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
+      <div style={{ fontSize: "14px", color: "#6c757d" }}>Total Issues Reported</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.totalReported}</div>
+    </div>
+    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
+      <div style={{ fontSize: "14px", color: "#6c757d" }}>Issues Resolved</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.totalResolved}</div>
+    </div>
+    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
+      <div style={{ fontSize: "14px", color: "#6c757d" }}>Issues Per Week</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.averageIssuesPerWeek}</div>
+    </div>
+    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
+      <div style={{ fontSize: "14px", color: "#6c757d" }}>Most Common Issue</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.mostCommonCategory}</div>
+    </div>
+  </div>
+</div>
 </div>
 
         <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
@@ -364,6 +391,7 @@ const handleSearch = (e) => {
         />
       )}
     </div>
+    
     
     
   );
