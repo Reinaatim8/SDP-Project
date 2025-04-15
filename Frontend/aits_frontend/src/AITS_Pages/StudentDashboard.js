@@ -30,6 +30,11 @@ const StudentDashboard = () => {
     averageResolution: "2 days",
     responseRate: "92%"
   });
+  const quickIssueCategories = ["Technical Issue", "Course Content", "Administrative", "Facility Problem"];
+
+const handleQuickIssue = (category) => {
+  navigate('/StudentIssueReport', { state: { category } });
+};
 
   //load user from local storage
   useEffect(() => {
@@ -165,6 +170,30 @@ const StudentDashboard = () => {
       <div style={{ fontSize: "14px", color: "#666" }}>Response Rate</div>
       <div style={{ fontSize: "20px", fontWeight: "bold", color: "#004085" }}>{responseMetrics.responseRate}</div>
     </div>
+  </div>
+</div>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🚀 Quick Issue Report</h2>
+  <p style={{ marginBottom: "10px" }}>Select an issue category to report:</p>
+  <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+    {quickIssueCategories.map((category, index) => (
+      <button
+        key={index}
+        onClick={() => handleQuickIssue(category)}
+        style={{
+          padding: "8px 12px",
+          backgroundColor: "#e9ecef",
+          border: "1px solid #ced4da",
+          borderRadius: "4px",
+          cursor: "pointer",
+          transition: "all 0.2s ease",
+          fontSize: "14px",
+          ":hover": { backgroundColor: "#dee2e6" }
+        }}
+      >
+        {category}
+      </button>
+    ))}
   </div>
 </div>
 
