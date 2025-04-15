@@ -42,6 +42,7 @@ const StudentDashboard = () => {
   };
 
   return (
+
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <StudentSidebar />
       <div style={{ maxWidth: "1200px", width: "80%", backgroundColor: "#f9f9f9", marginLeft: "320px", scale: "0.9", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", padding: "20px" }}>
@@ -52,6 +53,29 @@ const StudentDashboard = () => {
           </h2>
           <p style={{ color: "#666", fontSize: "16px" }}>Track your academic progress and stay organized.</p>
         </div>
+<div style={{ marginTop: "20px", backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📊 Issue Status Summary</h2>
+  <div style={{ display: "flex", justifyContent: "space-around" }}>
+    <div style={{ textAlign: "center" }}>
+      <div style={{ fontSize: "24px", fontWeight: "bold", color: "#dc3545" }}>
+        {issues.filter(issue => issue.status === "Pending").length || 0}
+      </div>
+      <div>Pending</div>
+    </div>
+    <div style={{ textAlign: "center" }}>
+      <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ffc107" }}>
+        {issues.filter(issue => issue.status === "In Progress").length || 0}
+      </div>
+      <div>In Progress</div>
+    </div>
+    <div style={{ textAlign: "center" }}>
+      <div style={{ fontSize: "24px", fontWeight: "bold", color: "#28a745" }}>
+        {issues.filter(issue => issue.status === "Resolved").length || 0}
+      </div>
+      <div>Resolved</div>
+    </div>
+  </div>
+</div>
 
         <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
           <button
@@ -178,6 +202,8 @@ const StudentDashboard = () => {
         />
       )}
     </div>
+    
+    
   );
 };
 
