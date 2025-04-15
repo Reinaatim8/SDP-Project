@@ -50,6 +50,21 @@ const [issueStats, setIssueStats] = useState({
   averageIssuesPerWeek: 5,
   mostCommonCategory: "Technical Issues"
 });
+// Add this state to your component
+const [faqs, setFaqs] = useState([
+  { 
+    question: "How do I reset my password?", 
+    answer: "Go to the login page and click on 'Forgot Password'. Follow the instructions sent to your email." 
+  },
+  { 
+    question: "How long does it take to resolve technical issues?", 
+    answer: "Most technical issues are resolved within 24-48 hours of reporting." 
+  },
+  { 
+    question: "Where can I find my student ID?", 
+    answer: "Your student ID is shown on your profile page and student card." 
+  }
+]);
 
   //load user from local storage
   useEffect(() => {
@@ -266,6 +281,7 @@ const [issueStats, setIssueStats] = useState({
 </div>
 </div>
 
+
         <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
           <button
             style={{
@@ -361,6 +377,20 @@ const [issueStats, setIssueStats] = useState({
           <p style={{ color: "#666" }}>Your GPA: 3.8</p>
           <p style={{ color: "#666" }}>Credits Earned: 45</p>
         </div>
+        // Add this to your return statement
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <h2 style={{ fontSize: "18px", marginBottom: "15px" }}>❓ Frequently Asked Questions</h2>
+  {faqs.map((faq, index) => (
+    <div key={index} style={{ marginBottom: "15px", borderBottom: index < faqs.length - 1 ? "1px solid #dee2e6" : "none", paddingBottom: "15px" }}>
+      <div style={{ fontSize: "16px", fontWeight: "bold", color: "#343a40", marginBottom: "5px" }}>
+        {faq.question}
+      </div>
+      <div style={{ fontSize: "14px", color: "#495057" }}>
+        {faq.answer}
+      </div>
+    </div>
+  ))}
+</div>
 
         <div style={{ marginTop: "20px", textAlign: "center" }}>
           <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>🌟 Quick Links</h2>
@@ -369,6 +399,7 @@ const [issueStats, setIssueStats] = useState({
           <a href="/resources" style={{ color: "#007bff", textDecoration: "none" }}>Resources</a>
         </div>
       </div>
+      
 
       <button onClick={() => setShowNotifications(true)} style={{
         position: "fixed",
@@ -390,6 +421,7 @@ const [issueStats, setIssueStats] = useState({
           onClose={() => setShowNotifications(false)}
         />
       )}
+      
     </div>
     
     
