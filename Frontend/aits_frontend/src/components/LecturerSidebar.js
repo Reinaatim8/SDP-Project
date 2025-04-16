@@ -213,11 +213,7 @@ const LecturerSidebar = () => {
             </li>
             <li className="lecturer-sidebar-list-item">
               <button className="lecturer-sidebar-link lecturer-sidebar-logout-btn" id="logout-btn" onClick={handleLogout}>
-<<<<<<< HEAD
-                <FaSignOutAlt className="lecturer-sidebar-icon" /> Logout
-=======
                 <FaSignOutAlt className="lecturer-sidebar-icon" />           Logout
->>>>>>> aa15005 (lecturer dashboard)
               </button>
             </li>
             <li>
