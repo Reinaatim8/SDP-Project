@@ -13,7 +13,7 @@ router.register(r'enrollments', views.EnrollmentViewSet)
 router.register(r'categories', views.IssueCategoryViewSet)
 router.register(r'issues', views.IssueViewSet)
 router.register(r'comments', views.CommentViewSet)
-router.register(r'audit-logs', views.AuditLogViewSet)
+router.register(r' audit-logs', views.AuditLogViewSet)
 router.register(r'notifications', views.NotificationViewSet)
 
 urlpatterns = [

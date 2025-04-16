@@ -24,7 +24,7 @@ class Course(models.Model):
     """
     Model to represent academic courses in the system.
     """
-    course_code = models.CharField(max_length=10, unique=True)
+    course_code = models.CharField(max_length=20, unique=True)
     course_name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     lecturer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='taught_courses', 
@@ -94,7 +94,7 @@ class Issue(models.Model):
     expected_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
     
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, 
                                   related_name='assigned_issues')
