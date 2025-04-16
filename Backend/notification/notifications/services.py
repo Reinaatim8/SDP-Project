@@ -40,7 +40,7 @@ class NotificationService:
                 'site_name': 'Academic Issue Tracking System'
             })
             plain_message = strip_tags(html_message)
-            #send email with formatting
+            
             send_mail(
                 subject=subject,
                 message=plain_message,
