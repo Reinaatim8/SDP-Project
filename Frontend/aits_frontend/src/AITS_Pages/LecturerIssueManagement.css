@@ -5,6 +5,10 @@
     margin: 0 auto;
     padding: 20px;
     color: #333;
+    background-color: #f5f7fa; /* Added background color for the main container */
+    min-height: 100vh; /* Ensure it covers the full viewport height */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   }
   
   /* Header Styles */
@@ -15,6 +19,10 @@
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff; /* Added white background to header */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
   }
   
   .header-left h1 {
@@ -83,6 +91,10 @@
     margin-bottom: 20px;
     flex-wrap: wrap;
     gap: 15px;
+    background-color: #ffffff; /* Added white background */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
   }
   
   .search-bar {
@@ -272,6 +284,8 @@
     padding: 40px;
     color: #7f8c8d;
     font-size: 1.1rem;
+    background-color: white; /* Added white background */
+    border-radius: 8px;
   }
   
   /* Detailed Issue View */
@@ -485,6 +499,9 @@
     padding: 40px;
     color: #7f8c8d;
     font-size: 1.1rem;
+    background-color: white; /* Added white background */
+    border-radius: 8px;
+    margin: 20px 0;
   }
   
   .error-message {
@@ -495,6 +512,14 @@
     background-color: #fadbd8;
     border-radius: 8px;
     margin: 20px 0;
+  }
+  
+  /* For the entire body and html to ensure full coverage */
+  body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #e9ecef; /* Light gray background for the entire page */
+    min-height: 100%;
   }
   
   /* Responsive Adjustments */
