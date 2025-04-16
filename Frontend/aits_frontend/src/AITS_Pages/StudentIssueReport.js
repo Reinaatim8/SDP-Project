@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-//import axios from "axios";
 import StudentSidebar from "../components/StudentSidebar";
 import LecturerDropdown from "../components/LecturerDropdown";
-import Categorydropdown from "../components/Categorydropdown";
 import "./StudentIssueReport.css";
 import { submitIssue} from "../utils/issues";
 import {toast} from 'react-toastify';

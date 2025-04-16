@@ -3,9 +3,9 @@ import axios from 'axios';
 //create an axios instance
 const  apiClient = axios.create({
     baseURL: 'https://kennedymutebi7.pythonanywhere.com/',
-    headers: {
-        'Content-Type': 'application/json',
-    }
+    //headers: {
+       // 'Content-Type': 'application/json',
+   // }
 });
 
 //add the token to the header
