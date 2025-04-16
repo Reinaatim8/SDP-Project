@@ -1,6 +1,7 @@
+// Add at the TOP of the file
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUserCircle, FaFilter, FaSearch, FaComments, FaEdit, FaCheck } from "react-icons/fa";
+import { FaUserCircle, FaFilter, FaSearch, FaComments, FaEdit } from "react-icons/fa";
 import axios from "axios";
 import "./LecturerIssueManagement.css";
 
@@ -41,33 +42,24 @@ const LecturerIssueManagement = () => {
   };
 
   return (
-    <div className="issues-container">
-      <div className="issues-toolbar">
-        <div className="search-bar">
-          <FaSearch />
-          <input
-            type="text"
-            placeholder="Search issues..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+    <div className="lecturer-issue-management">
+      {/* Header will go here in next commit */}
+      <div className="issues-container">
+        {loading ? (
+          <div className="loading-spinner">Loading issues...</div>
+        ) : error ? (
+          <div className="error-message">{error}</div>
+        ) : (
+          <div className="issue-list">
+            {issues.map((issue) => (
+              <div key={issue.id} className="issue-card">
+                <h3>{issue.title}</h3>
+                <p>{issue.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    
-      {loading ? (
-        <div className="loading-spinner">Loading issues...</div>
-      ) : error ? (
-        <div className="error-message">{error}</div>
-      ) : (
-        <div className="issue-list">
-          {issues.map((issue) => (
-            <div key={issue.id} className="issue-card">
-              <h3>{issue.title}</h3>
-              <p>{issue.description}</p>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
