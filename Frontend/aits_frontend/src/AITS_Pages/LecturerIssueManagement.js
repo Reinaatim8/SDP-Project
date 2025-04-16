@@ -41,8 +41,33 @@ const LecturerIssueManagement = () => {
   };
 
   return (
-    <div className="lecturer-issue-management">
-      {/* Basic component structure */}
+    <div className="issues-container">
+      <div className="issues-toolbar">
+        <div className="search-bar">
+          <FaSearch />
+          <input
+            type="text"
+            placeholder="Search issues..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+    
+      {loading ? (
+        <div className="loading-spinner">Loading issues...</div>
+      ) : error ? (
+        <div className="error-message">{error}</div>
+      ) : (
+        <div className="issue-list">
+          {issues.map((issue) => (
+            <div key={issue.id} className="issue-card">
+              <h3>{issue.title}</h3>
+              <p>{issue.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
