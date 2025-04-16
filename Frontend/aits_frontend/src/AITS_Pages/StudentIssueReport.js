@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
 import LecturerDropdown from "../components/LecturerDropdown";
 import "./StudentIssueReport.css";
@@ -12,7 +13,17 @@ const StudentIssueReport = () => {
   const [issueDescription, setIssueDescription] = useState("");
   const [selectedLecturer, setSelectedLecturer] = useState("");
   const [file, setFile] = useState(null);
- 
+  const [isSubmitting,setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
+
+  // Check for authentication on component mount
+  useEffect(() => {
+    const accessToken = localStorage.getItem('access');
+    if (!accessToken) {
+      toast.error("Please login to submit an issue");
+      navigate('/login');
+    }
+  }, [navigate]);
   const handleLecturerSelection = (lecturer) => {
     setSelectedLecturer(lecturer);
   };
@@ -23,7 +34,15 @@ const StudentIssueReport = () => {
 
   const handleIssueSubmit = async (e) => {
     e.preventDefault();
-
+   // Prevent double submission
+   if (isSubmitting) return;
+   setIsSubmitting(true);
+    // Validate form
+    if (!issueTitle || !category || !courseUnitName || !issueDescription || !selectedLecturer) {
+      toast.error("Please fill in all required fields");
+      setIsSubmitting(false);
+      return;
+    }
     // Submit issue to API
     const formData =  new FormData();
     formData.append("title", issueTitle);
@@ -39,6 +58,7 @@ const StudentIssueReport = () => {
       try {
         const response = await submitIssue(formData);
         console.log("Issue submitted successfully:", response);
+        alert("Issue submitted succesfully!")
         toast.success("Issue submitted successfully!");
         // Handle success (e.g., show a success message, clear form fields, etc.)
         //resetFormFields();
@@ -49,11 +69,25 @@ const StudentIssueReport = () => {
         setSelectedLecturer("");
          toast.success("Issue submitted successfully!");
         // Clear form fields
-        //navigate to the student dashboard
+        //navigate to the student dashboard after short delay
+        setTimeout(() => {
+          navigate('/StudentDashboard');
+        },1500);
+
         console.log("API Response:", response.data);
       } catch (error) {
         console.error("Failed to submit issue:", error.response ? error.response.data : error);
         toast.error("Failed to submit issue. Please try again.");
+
+        if (error.response && error.response.status === 401) {
+          toast.error("Your session has expired. Please login again.");
+          navigate('/login');
+        } else {
+          toast.error("Failed to submit issue. Please try again.");
+        }
+      } finally {
+        setIsSubmitting(false);
+      
       }
     };
 
@@ -135,7 +169,8 @@ const StudentIssueReport = () => {
           <br></br>
           <div>
           {/*Submit Button */}
-          <button type="submit" className="student-issue-report-submit-button">Submit Issue</button>
+          <button type="submit" className="student-issue-report-submit-button" disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...':'Submit Issue' }</button>
           </div>
         </form>
         

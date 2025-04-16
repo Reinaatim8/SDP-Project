@@ -27,11 +27,52 @@ const Loginpage = () => {
       || location.pathname=== '/LecturerDashboard'
       || location.pathname=== '/RegistrarDashboard'){
         toast.success('Login Successful!',{
-          autoClose:60000,
+          autoClose:40000,
         });
       }
       },[location]);
       
+      useEffect(() => {
+        // Setup session timeout on component mount only
+        const sessionTimeout = 25 * 60 * 1000; // 25 minutes
+        let timeoutId = null;
+    
+        const resetTimeout = () => {
+          if (timeoutId) clearTimeout(timeoutId);
+          
+          timeoutId = setTimeout(() => {
+            // Only log out if the user is logged in
+            const hasToken = localStorage.getItem('access');
+            if (hasToken) {
+              localStorage.removeItem('access');
+              localStorage.removeItem('refresh');
+              localStorage.removeItem('user');
+              toast.info('Your session has expired. Please login again.');
+              navigate('/login');
+            }
+          }, sessionTimeout);
+        };
+    
+        // Add event listeners for user activity
+        const handleUserActivity = () => {
+          resetTimeout();
+        };
+    
+        // Only set up the session timeout if the user is logged in
+        if (localStorage.getItem('access')) {
+          window.addEventListener('mousemove', handleUserActivity);
+          window.addEventListener('keypress', handleUserActivity);
+          resetTimeout(); // Initial timeout setup
+        }
+    
+        // Cleanup function
+        return () => {
+          window.removeEventListener('mousemove', handleUserActivity);
+          window.removeEventListener('keypress', handleUserActivity);
+          if (timeoutId) clearTimeout(timeoutId);
+        };
+      }, []); // Empty dependency array so this runs once on mount
+    
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,9 +86,8 @@ const Loginpage = () => {
         // Save tokens to localStorage
         localStorage.setItem('access', response.tokens.access);
         localStorage.setItem('refresh', response.tokens.refresh);
-        localStorage.setItem('user', JSON.stringify(response.user));}
+        localStorage.setItem('user', JSON.stringify(response.user));
 
-      if (response.tokens) {
         // Determine the user's role and navigate accordingly
       const user_type = response.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
@@ -85,35 +125,6 @@ const Loginpage = () => {
       setLoading(false);
     }
   };
-
-  const setupSessionTimeout = () => {
-    const sessionTimeout = 25 * 60 * 1000; // 10 minutes
-    let timeoutHandle;
-
-    const resetTimeout = () => {
-      clearTimeout(timeoutHandle);
-      timeoutHandle = setTimeout(() => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('user');
-        navigate('/login');
-      }, sessionTimeout);
-    };
-
-    window.addEventListener('mousemove', resetTimeout);
-    window.addEventListener('keypress', resetTimeout);
-
-    resetTimeout();
-  };
-
-  useEffect(() => {
-    setupSessionTimeout();
-    return () => {
-      window.removeEventListener('mousemove', setupSessionTimeout);
-      window.removeEventListener('keypress', setupSessionTimeout);
-    };
-  }, []);
-
 
    return (
    <div className="Login-container">
