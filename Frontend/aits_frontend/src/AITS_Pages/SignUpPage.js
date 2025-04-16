@@ -123,7 +123,7 @@ const SignUpPage = () => {
       newErrors.confirmPassword = 'Passwords do not match!';
     }
     setErrors(newErrors);
-    toast.warning('Please fix the highlighted errors before submiting.')
+    //toast.warning('Please fix the highlighted errors before submiting.')
     return Object.keys(newErrors).length === 0;
     
   };
