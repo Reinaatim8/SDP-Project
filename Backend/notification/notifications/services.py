@@ -23,7 +23,7 @@ class NotificationService:
             action_url=action_url
         )
         
-        # Send email notification
+        
         NotificationService.send_email_notification(notification)
         
         return notification
