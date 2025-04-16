@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './SignUpPage.css';
+import { toast } from "react-toastify";
+//import {success} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { FaEye,FaEyeSlash } from 'react-icons/fa';
+
+
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -31,6 +37,14 @@ const SignUpPage = () => {
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () =>{
+    setShowConfirmPassword(!showConfirmPassword)
+  };
 
 
 //To valiadte and ensure a strong password is created by the user
@@ -40,13 +54,17 @@ const SignUpPage = () => {
     const hasNumbers = /[0-9]/.test(password);
    
     if (password.length < minLength) {
+      toast.warning(`Password must be at least ${minLength} characters long.`);
       return `Password must be at least ${minLength} characters long.`;
     }
     if (!hasLowerCase) {
+      toast.warning('Password must contain at least one lowercase letter.');
       return 'Password must contain at least one lowercase letter.';
     }
     if (!hasNumbers) {
+      toast.warning('Password must contain at least one number.');
       return 'Password must contain at least one number.';
+      
     }
 
     return null; // Password is strong enough to continue
@@ -82,16 +100,18 @@ const SignUpPage = () => {
     if (!formData.staff_id && formData.user_type === 'lecturer') {
       newErrors.staff_id = 'Staff ID is required';
     }
-    if (!formData.program && formData.user_type == 'student'){ 
+    if (!formData.program && formData.user_type === 'student'){ 
       newErrors.program = 'Program is required';
     }
-    if (!formData.year_of_study && formData.user_type == 'student'){
+    if (!formData.year_of_study && formData.user_type === 'student'){
       newErrors.year_of_study = 'Year of study is required';
+      toast.warning('Year of study must be an figure');
     }
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email has an invalid format';
+      toast.warning('Email has an invalid format');
     }
     const passwordError = validatePassword(formData.password);
     if (passwordError) { newErrors.password = passwordError;  
@@ -101,7 +121,9 @@ const SignUpPage = () => {
       newErrors.confirmPassword = 'Passwords do not match!';
     }
     setErrors(newErrors);
+    toast.warning('Please fix the highlighted errors before submiting.')
     return Object.keys(newErrors).length === 0;
+    
   };
 
   // To handle form on submission
@@ -143,7 +165,7 @@ const SignUpPage = () => {
         });
         console.log("Response:", response.data); // Log response for debugging
 
-        //Storing certain user dteails in local storage for profile display
+        //Storing certain user details in local storage for profile display
         const userProfile = {
           first_name: formData.first_name,
           last_name: formData.last_name,
@@ -159,12 +181,15 @@ const SignUpPage = () => {
         localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
-       alert('Sign Up Successful! Please login.');
+       toast.info('Sign Up Successful! Please login.');
+       //alert('SIGNUP SUCCESSFUL');
+       
        navigate('/login');
      } catch (error) {
        console.error('Sign up error:', error);
        setApiError(
         error.response?.data?.message ||'Sign up failed! Please check your details and try again.');
+        toast.warning(error.response?.data?.message || 'Sign up failed! Please check your details and try again.');
      } finally {
      setLoading(false);
    }
@@ -174,14 +199,14 @@ const SignUpPage = () => {
     <div className="signup-panel">
     <div className="signup-container">
       <div className="signup-card">
-        <img src='/images/nobgmaklogo.png'alt='maklogo'/ >
+        <img src='/images/nobgmaklogo.png'alt='maklogo' />
         <h2 className="signup-title">Sign Up To Start</h2>
         <form onSubmit={handleSubmit}>
 
           {/* First Name */}
           <div className="form-group inline-fields">
             <div className="form-field">
-              <label htmlFor="first_name">First Name</label>
+              <label htmlFor="first_name" style={{color:"#f0a500"}}>First Name</label>
               <input
                 type="text"
                 id="first_name"
@@ -191,14 +216,14 @@ const SignUpPage = () => {
                 placeholder="Enter your first name"
                 required
               />
-              {errors.first_name && <span className="error">{errors.full_name}</span>}
+              {errors.first_name && <span className="error">{errors.first_name}</span>}
             </div>
           </div>
 
           {/*Last name */}
           <div className="form-group inline-fields">
             <div className="form-field">
-              <label htmlFor="last_name">Last Name</label>
+              <label htmlFor="last_name" style={{color:"#f0a500"}}>Last Name</label>
               <input
                 type="text"
                 id="last_name"
@@ -214,7 +239,7 @@ const SignUpPage = () => {
 
           {/* Username */}
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username" style={{color:"#f0a500"}}>Username</label>
             <input
               type="text"
               id="username"
@@ -228,7 +253,7 @@ const SignUpPage = () => {
 
           {/* Email */}
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email" style={{color:"#f0a500"}}>Email Address</label>
             <input
               type="email"
               id="email"
@@ -239,13 +264,28 @@ const SignUpPage = () => {
             />
             {errors.email && <span className="error">{errors.email}</span>}
           </div>
+             {/* User Type */}
+             <div className="form-group">
+            <label htmlFor="user_type" style={{color:"#f0a500"}}>Type Of User</label>
+            <select
+              id="user_type"
+              name="user_type"
+              value={formData.user_type}
+              onChange={handleChange}
+            >
+              <option value="student">Student</option>
+              <option value="lecturer">Lecturer</option>
+              <option value="admin">Admin/Registrar</option>
+            </select>
+          </div>
 
           {/* Password  and confirm password*/}
           <div className="form-group inline-fields">
             <div className="form-field">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" style={{color:"#f0a500"}}>Password</label>
+              <div className='password-input-container'>
               <input
-                type="password"
+                type={showPassword ? 'text': 'password'}
                 id="password"
                 name="password"
                 value={formData.password}
@@ -253,12 +293,16 @@ const SignUpPage = () => {
                 placeholder="Enter your password"
                 required
               />
+              <button type="button" className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash/>:<FaEye/>}</button>
               {errors.password && <span className="error">{errors.password}</span>}
+
+              </div>
             </div>
             <div className="form-field">
-              <label id='username' htmlFor="confirmPassword">Confirm Password</label>
+              <div className='password-input-container'>
+              <label id='username' htmlFor="confirmPassword" style={{color:"#f0a500"}}>Confirm Password</label>
               <input
-                type="password"
+                type={showConfirmPassword ? 'text':'password'}
                 id="confirmPassword"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -266,27 +310,29 @@ const SignUpPage = () => {
                 placeholder="Confirm your password"
                 required
               />
+              <button type="button" className='password-toggle-button' onClick={toggleConfirmPasswordVisibility}>{showConfirmPassword ?<FaEyeSlash/>:<FaEye/>}</button>
               {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+              </div>
             </div>
           </div>
 
           {/* Program */}
           <div className="form-group">
-              <label htmlFor="program">Program (Optional)</label>
+              <label htmlFor="program" style={{color:"#f0a500"}}>Program (Compulsory for Student users)</label>
               <input
                 type="text"
                 id="program"
                 name="program"
                 value={formData.program}
                 onChange={handleChange}
-                placeholder="Enter your program"
+                placeholder="Enter your program e.g BSCS, IT, etc"
               />
             </div>
 
             {/* Student ID */}
             {formData.user_type === 'student' && (
               <div className="form-group">
-                <label htmlFor="student_id">Student ID</label>
+                <label htmlFor="student_id" style={{color:"#f0a500"}}>Student ID</label>
                 <input
                   type="text"
                   id="student_id"
@@ -302,7 +348,7 @@ const SignUpPage = () => {
              {/* Staff ID */}
             {formData.user_type === 'lecturer' && (
               <div className="form-group">
-                <label htmlFor="staff_id">Staff ID</label>
+                <label htmlFor="staff_id" style={{color:"#f0a500"}}>Staff ID</label>
                 <input
                   type="text"
                   id="staff_id"
@@ -318,7 +364,7 @@ const SignUpPage = () => {
 
             {/* Year of Study */}
             <div className="form-group" id='year'>
-              <label htmlFor="year_of_study">Year of Study (Optional)</label>
+              <label htmlFor="year_of_study" style={{color:"#f0a500"}}>Year of Study (Compulsory for Student users)</label>
               <input
                 type="text"
                 id="year_of_study"
@@ -329,31 +375,17 @@ const SignUpPage = () => {
               />
             </div>
 
-          {/* User Type */}
-          <div className="form-group">
-            <label htmlFor="user_type">User Type</label>
-            <select
-              id="user_type"
-              name="user_type"
-              value={formData.user_type}
-              onChange={handleChange}
-            >
-              <option value="student">Student</option>
-              <option value="lecturer">Lecturer</option>
-              <option value="admin">Admin/Registrar</option>
-            </select>
-          </div>
 
           {/* Department */}
           <div className="form-group" id='department'>
-            <label htmlFor="department">Department (Optional)</label>
+            <label htmlFor="department" style={{color:"#f0a500"}}>Department (like CS )</label>
             <input
               type="text"
               id="department"
               name="department"
               value={formData.department}
               onChange={handleChange}
-              placeholder="Enter your department"
+              placeholder="Enter your department e.g CS, IT, etc"
             />
           </div>
 
@@ -369,10 +401,12 @@ const SignUpPage = () => {
         <p className="login-link">
           Already have an account? <Link to="/login">Log In</Link>
         </p>
+       
+     
       </div>
     </div>
     </div>
+
   );
 };
-
 export default SignUpPage;

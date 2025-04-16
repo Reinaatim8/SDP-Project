@@ -6,7 +6,7 @@ from .models import CustomUser, Issue
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'role', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'role', 'password1', 'password2']
 
 # Issue Form
 class IssueForm(forms.ModelForm):

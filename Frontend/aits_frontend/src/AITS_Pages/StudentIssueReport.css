@@ -45,10 +45,21 @@
   margin-top: 20px;
   height: fit-content;
 }
+.student-issue-report-form2{
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /*max-width: 750px;*/
+  margin-top: 20px;
+  height: 250px;
+  width: 96%;
+}
 
-.student-issue-report-form-group {
+.student-issue-report-form-group input {
   margin-bottom: 15px;
   width:96%;
+  padding: 5px;
 }
 .student-issue-report-form input {
   width: 96%;
@@ -129,7 +140,7 @@
   background: #0056b3;
 }
 .attachment {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
   width: 96%;
 }
