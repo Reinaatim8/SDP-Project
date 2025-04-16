@@ -52,7 +52,7 @@ const LecturerDashboard = () => {
       <div className="lecturer-dashboard-content">
         <div className="lecturer-dashboard-panel">
           <div className="lecturer-dashboard-header" id="lecturer-dashboard-header-image">
-            <img src="/images/AITSLOGO.png" style={{width:'350px'}} alt="teacherlogo" className="lecturer-dashboard-teacherlogo" />
+            <img src="/images/teacherlogo.png" alt="teacherlogo" className="lecturer-dashboard-teacherlogo" />
             <h2 className="lecturer-dashboard-title">
               {user ? `Welcome back, ${user.username}` : "Welcome back!"}
             </h2>
@@ -141,45 +141,63 @@ const LecturerDashboard = () => {
               <p className="lecturer-dashboard-deadline">Grade Submission: March 8th</p>
               <p className="lecturer-dashboard-deadline">Research Proposal: March 22nd</p>
             </div>
-          </div>
-
-          {/* Calendar Section */}
-          <div className="lecturer-dashboard-calendar-container">
-            <h2 className="lecturer-dashboard-section-title" style={{color:"white"}}>📅 ACADEMIC CALENDAR</h2>
-            <Calendar
-              onChange={handleDateChange}
-              value={date}
-              tileContent={({ date }) => {
-                const eventsForDate = getEventsForDate(date);
-                return eventsForDate.length > 0 ? (
-                  <div style={{ backgroundColor: "#ffcccb", borderRadius: "50%", padding: "5px" }}>
-                    {eventsForDate.length}
-                  </div>
-                ) : null;
-              }}
-              className="lecturer-dashboard-calendar"
-            />
-            <div className="calendar-events">
-              <h3>Events on {date.toDateString()}</h3>
+            <div className="lecturer-dashboard-section lecturer-dashboard-quick-links">
+              <h2 className="lecturer-dashboard-section-title">🔗 Quick Links</h2>
               <ul>
-                {getEventsForDate(date).map((event, index) => (
-                  <li key={index}>{event.event}</li>
-                ))}
+                <li><a href="/faculty-resources">Faculty Resources</a></li>
+                <li><a href="/academic-calendar">Academic Calendar</a></li>
+                <li><a href="/grading-guidelines">Grading Guidelines</a></li>
+                <li><a href="/support">Support</a></li>
               </ul>
-              <input
-                type="text"
-                placeholder="Add a new event..."
-                value={newEvent}
-                onChange={(e) => setNewEvent(e.target.value)}
-                style={{ marginRight: "10px", padding: "5px", width: "70%" }}
-              />
-              <button onClick={handleAddEvent} style={{ padding: "5px 10px", backgroundColor: "blue", color: "white" }}>
-                Add Event
-              </button>
             </div>
+
+            {/* Academic Calendar Section */}
+            <div className="lecturer-dashboard-section lecturer-dashboard-calendar" id="calendar-gig">
+              <h2 className="lecturer-dashboard-section-title">📅 Academic Calendar</h2>
+              <Calendar
+                onChange={handleDateChange}
+                value={date}
+                tileContent={({ date }) => {
+                  const eventsForDate = getEventsForDate(date);
+                  return eventsForDate.length > 0 ? (
+                    <div style={{ backgroundColor: "#ffcccb", borderRadius: "50%", padding: "5px" }}>
+                      {eventsForDate.length}
+                    </div>
+                  ) : null;
+                }}
+                style={{
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                  padding: "10px",
+                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                  margin:"0px",
+                }}
+              />
+              <div style={{ marginTop: "0px" }}>
+                <h3>Events on {date.toDateString()}</h3>
+                <ul>
+                  {getEventsForDate(date).map((event, index) => (
+                    <li key={index}>{event.event}</li>
+                  ))}
+                </ul>
+                <input
+                  type="text"
+                  placeholder="Add a new event..."
+                  value={newEvent}
+                  onChange={(e) => setNewEvent(e.target.value)}
+                  style={{ marginRight: "0px", padding: "5px", width: "70%" }}
+                />
+                <button onClick={handleAddEvent} style={{ padding: "5px 10px",margin:"0px",backgroundColor:"blue",color:"white",border:"0px",marginLeft:"10px"}}>
+                  Add Event
+                </button>
+              </div>
+            </div>
+            {/* Quick Links Section */}
           </div>
         </div>
+        
       </div>
+      
     </div>
   );
 };

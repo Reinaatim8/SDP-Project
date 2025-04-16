@@ -10,7 +10,7 @@ export const login = async (username, password) => {
     console.log("Login response:", authResponse.data);
     localStorage.setItem("user",JSON.stringify( authResponse.data.user));
 
-    const tokenResponse = await apiClient.post("api/token/", {
+    const tokenResponse = await apiClient.post("issues/api/token/", {
       username: username,
       password: password,
     });

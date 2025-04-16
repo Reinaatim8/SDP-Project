@@ -60,7 +60,7 @@
   display: block;
   padding: 10px;
   border-radius: 5px;
-  transition: background 0.3s ease;
+  /*transition: background 0.3s ease;*/
 }
 
 .lecturer-sidebar-link:hover {
@@ -306,3 +306,11 @@
   margin-bottom: 10px;
 }
 
+ 
+
+
+#logout-btn{
+  width: 250px;
+  color: #2c3e50;
+  border: 0px;
+}

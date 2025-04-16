@@ -39,8 +39,14 @@ const Loginpage = () => {
     setError('');
 
     try {
-      // Step 1: Authenticate the user
+      //  Authenticate the user
       const response = await login( username, password );
+      if (response.tokens && response.user) {
+        // Save tokens to localStorage
+        localStorage.setItem('access', response.tokens.access);
+        localStorage.setItem('refresh', response.tokens.refresh);
+        localStorage.setItem('user', JSON.stringify(response.user));}
+
       if (response.tokens) {
         // Determine the user's role and navigate accordingly
       const user_type = response.user.user_type; // Assuming the user type is included in the response
@@ -81,7 +87,7 @@ const Loginpage = () => {
   };
 
   const setupSessionTimeout = () => {
-    const sessionTimeout = 10 * 60 * 1000; // 10 minutes
+    const sessionTimeout = 25 * 60 * 1000; // 10 minutes
     let timeoutHandle;
 
     const resetTimeout = () => {
