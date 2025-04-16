@@ -43,7 +43,33 @@ const LecturerIssueManagement = () => {
 
   return (
     <div className="lecturer-issue-management">
-      {/* Header will go here in next commit */}
+      <div className="issue-management-header">
+  <div className="header-left">
+    <h1>Academic Issue Management</h1>
+    <p>Track, respond to, and resolve student academic concerns</p>
+  </div>
+  <div className="header-right">
+    <div
+      className="user-profile"
+      onMouseEnter={() => setShowUserDetails(true)}
+      onMouseLeave={() => setShowUserDetails(false)}
+    >
+      <FaUserCircle size={40} />
+      <span>{user?.username || "Lecturer"}</span>
+      {showUserDetails && user && (
+        <div className="user-details-popup">
+          <p><strong>Username:</strong> {user.username}</p>
+          <p><strong>Email:</strong> {user.email}</p>
+          <p><strong>Role:</strong> {user.user_type || "Lecturer"}</p>
+        </div>
+      )}
+    </div>
+    <button className="back-button" onClick={() => navigate('/lecturer-dashboard')}>
+      Back to Dashboard
+    </button>
+  </div>
+</div>
+
       <div className="issues-container">
         {loading ? (
           <div className="loading-spinner">Loading issues...</div>
@@ -61,6 +87,7 @@ const LecturerIssueManagement = () => {
         )}
       </div>
     </div>
+    
   );
 };
 
