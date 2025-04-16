@@ -14,11 +14,13 @@ const StudentIssueReport = () => {
   //const [categoryName, setCategoryName] = useState("");
   //const [categoryDescription, setCategoryDescription] = useState("");
   const [issueTitle, setIssueTitle] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+ // const [selectedCategory, setSelectedCategory] = useState("");
+  const [category, setCategory] = useState("");
+  const [courseUnitName,setCourseUnitName] = useState("");
   const [issueDescription, setIssueDescription] = useState("");
   //const [selectedCourseCode, setSelectedCourseCode] = useState("");
   const [selectedLecturer, setSelectedLecturer] = useState("");
-  const [courseName, setCourseName] = useState("");
+  //const [courseName, setCourseName] = useState("");
   //const [selectedStudent, setSelectedStudent] = useState(null);
   const [file, setFile] = useState(null);
  // const [categoryId, setCategoryId] = useState(null);
@@ -29,9 +31,9 @@ const StudentIssueReport = () => {
   const handleLecturerSelection = (lecturer) => {
     setSelectedLecturer(lecturer);
   };
-  const handleCategorySelection = (category) => {
-    setSelectedCategory(category);
-  };
+ // const handleCategorySelection = (category) => {
+   // setSelectedCategory(category);
+  //};
 
   //const handleCourseCodeSelection = (courseCode) => {
   //  setSelectedCourseCode(courseCode);
@@ -78,7 +80,8 @@ const StudentIssueReport = () => {
     const formData =  new FormData();
     formData.append("title", issueTitle);
     formData.append("lecturer", selectedLecturer);
-    formData.append("category", selectedCategory);
+    formData.append("category", category);
+    formData.append("course_unit_name",courseUnitName)
     formData.append("description", issueDescription);
    // formData.append("Course", selectedCourseCode);
    // formData.append("student", selectedStudent? parseInt(selectedStudent): null);
@@ -94,7 +97,8 @@ const StudentIssueReport = () => {
         //resetFormFields();
         setIssueTitle("");
         setIssueDescription("");
-        setSelectedCategory("");
+        setCourseUnitName("");
+        setCategory("");
         setSelectedLecturer("");
         //setSelectedStudent("");
          toast.success("Issue submitted successfully!");
@@ -197,13 +201,13 @@ const StudentIssueReport = () => {
             />
           </div>
          {/*Category dropdownn list*/}
-         <div
-         className="student-issue-report-form-group">
-          <label
-          className="student-issue-report-label">Select your Issue category below:</label>
-          <Categorydropdown onSelect={handleCategorySelection}
-          />
-          
+         <div className="student-issue-report-form-group">
+          <label className="student-issue-report-label">Issue category </label>
+          <input type="text"
+           placeholder="Enter an issue category e.g WRONG MARKS, MISSING MARKS, MARKING COMPLAINT, NON-ACADEMIC etc."
+           value={category}
+           onChange={(e) => setCategory(e.target.value)}
+           required />
          </div>
   
           {/*Course Unit Name */}
