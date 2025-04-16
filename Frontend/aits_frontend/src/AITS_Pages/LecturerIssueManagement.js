@@ -71,6 +71,46 @@ const LecturerIssueManagement = () => {
 </div>
 
       <div className="issues-container">
+      <div className="issues-toolbar">
+  <div className="search-bar">
+    <FaSearch />
+    <input
+      type="text"
+      placeholder="Search issues..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  </div>
+  <div className="filter-controls">
+    <div className="filter-item">
+      <label>Status:</label>
+      <select
+        value={statusFilter}
+        onChange={(e) => setStatusFilter(e.target.value)}
+      >
+        <option value="all">All</option>
+        <option value="pending">Pending</option>
+        <option value="in_progress">In Progress</option>
+        <option value="resolved">Resolved</option>
+      </select>
+    </div>
+    <div className="filter-item">
+      <label>Priority:</label>
+      <select
+        value={priorityFilter}
+        onChange={(e) => setPriorityFilter(e.target.value)}
+      >
+        <option value="all">All</option>
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+    </div>
+    <button className="refresh-button" onClick={fetchIssues}>
+      Refresh
+    </button>
+  </div>
+</div>
         {loading ? (
           <div className="loading-spinner">Loading issues...</div>
         ) : error ? (
