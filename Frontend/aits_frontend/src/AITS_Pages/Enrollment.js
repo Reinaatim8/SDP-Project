@@ -46,7 +46,7 @@ const Enrollment = () => {
       <div className="enrollment-container2">
       <StudentSidebar />
       <div className="enrollment-card">
-        <h2>ENROLLING IN A COURSE AS A STUDENT.</h2>
+        <h2>ENROLLING IN A COURSE </h2>
         {alert && (
           <div className="alert">
             {alert}

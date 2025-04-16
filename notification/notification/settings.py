@@ -92,7 +92,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
+#Enforces strong password policies
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -142,7 +142,7 @@ EMAIL_HOST_USER = 'mwanjesimonpeter732@gmail.com'
 EMAIL_HOST_PASSWORD = 'synUpbownio@$9'
 DEFAULT_FROM_EMAIL = 'noreply@aits.example.com'
 
-
+#JWT, Session, Token Auth
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -157,12 +157,13 @@ REST_FRAMEWORK = {
 
 
 from datetime import timedelta
-
+#JWT token lifetime settingss
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
+    'ALGORITHM': 'HS256',
 }
 
 

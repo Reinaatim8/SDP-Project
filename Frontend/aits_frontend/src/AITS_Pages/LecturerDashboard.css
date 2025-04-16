@@ -19,6 +19,8 @@
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: 40px;
+  background-image:url(../../public/images/chalk.jpg);
+  background-size: cover;
 }
 
 .lecturer-dashboard-header {
@@ -28,8 +30,13 @@
 }
 
 .lecturer-dashboard-title {
+<<<<<<< HEAD
   font-size:2rem;
-  color: #0e0c08c2;
+  color: #ffffff;
+=======
+  font-size:3rem;
+  color: #f8f8f8;
+>>>>>>> aa15005 (lecturer dashboard)
   margin-bottom: 10px;
   border-color: #007bff;
   border: 1px solid rgb(255, 255, 255);
@@ -88,7 +95,11 @@
 }
 
 .lecturer-dashboard-section {
-  background: #000000;
+<<<<<<< HEAD
+  background: #ffffff96;
+=======
+  background: #fbda5ab0;
+>>>>>>> aa15005 (lecturer dashboard)
   border-radius: 10px;
   padding: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -98,7 +109,7 @@
 
 .lecturer-dashboard-section-title {
   font-size: 1.8rem;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -139,14 +150,14 @@
 
 .lecturer-dashboard-issue-text {
   font-size: 1rem;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Announcements and Deadlines */
 .lecturer-dashboard-announcement,
 .lecturer-dashboard-deadline {
   font-size: 1rem;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 10px;
 }
 
@@ -193,6 +204,22 @@
   color: #333;
 }
 
+<<<<<<< HEAD
+=======
+#calendar-gig{
+  width: fit-content;
+}
+.react-calendar {
+  width: 500px;
+  max-width: 100%;
+  background: white;
+  border: 1px solid white;
+  font-family: 'sans-serif', 'Helvetica', sans-serif;
+  line-height: 1.125em;
+  border-radius: 5px;
+
+}
+>>>>>>> aa15005 (lecturer dashboard)
 
 #lecturer-dashboard-header-image{
   background-image: url('../../public/images/header.jpg');
@@ -207,6 +234,7 @@
 
 #lecturer-dashboard-header-image h1{
   color: rgb(0, 0, 0);
+<<<<<<< HEAD
 }
 
 #lecturer-dashboard-user-icon{
@@ -252,4 +280,6 @@
 .calendar-events li {
   margin-bottom: 5px;
   font-size: 1rem;
+=======
+>>>>>>> aa15005 (lecturer dashboard)
 }

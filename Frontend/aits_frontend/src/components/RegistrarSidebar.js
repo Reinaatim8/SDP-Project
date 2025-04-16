@@ -125,8 +125,7 @@ const RegistrarSidebar = () => {
       <div className="sidebar-header">
         {isExpanded && (
           <div className="logo-container">
-            <img src="/api/placeholder/40/40" alt="Logo" className="logo" />
-            <h2>REGISTRAR HUB</h2>
+            <h2 style={{color:'#f0a500'}}>REGISTRAR HUB</h2>
           </div>
         )}
         <button className="toggle-btn" onClick={toggleSidebar}>
@@ -374,8 +373,8 @@ const RegistrarSidebar = () => {
         }
         
         .logo {
-          width: 32px;
-          height: 32px;
+          // width: 32px;
+          // height: 32px;
           border-radius: 8px;
         }
         

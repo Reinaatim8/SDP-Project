@@ -9,17 +9,19 @@
 /* Content Area */
 .student-dashboard-content {
   flex: 1;
-  margin-left: 250px;
+  margin-left: 300px;
   padding: 40px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   overflow-y: auto;
+  background-image: url(../../public/images/studentwallpaper.jpg);
+
 }
 
 /* Dashboard Panel */
 .student-dashboard-panel {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0);
   backdrop-filter: blur(20px);
   padding: 20px;
   border-radius: 15px;
