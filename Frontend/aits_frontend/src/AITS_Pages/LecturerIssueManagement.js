@@ -6,6 +6,9 @@ import axios from "axios";
 import "./LecturerIssueManagement.css";
 
 const LecturerIssueManagement = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [priorityFilter, setPriorityFilter] = useState("all");
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [issues, setIssues] = useState([]);
@@ -41,6 +44,28 @@ const LecturerIssueManagement = () => {
     }
   };
 
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case "high": return "#FF4D4D";
+      case "medium": return "#FFA64D";
+      case "low": return "#4DA6FF";
+      default: return "#808080";
+    }
+  };
+  
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "pending": return "#FFA64D";
+      case "in_progress": return "#4D94FF";
+      case "resolved": return "#4DFF88";
+      default: return "#808080";
+    }
+  };
+  
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
   return (
     <div className="lecturer-issue-management">
       <div className="issue-management-header">
@@ -117,13 +142,29 @@ const LecturerIssueManagement = () => {
           <div className="error-message">{error}</div>
         ) : (
           <div className="issue-list">
-            {issues.map((issue) => (
-              <div key={issue.id} className="issue-card">
-                <h3>{issue.title}</h3>
-                <p>{issue.description}</p>
-              </div>
-            ))}
-          </div>
+{issues.map((issue) => (
+  <div key={issue.id} className="issue-card">
+    <div className="issue-header">
+      <h3>{issue.title}</h3>
+      <div 
+        className="priority-indicator" 
+        style={{ backgroundColor: getPriorityColor(issue.priority) }}
+      >
+        {issue.priority}
+      </div>
+    </div>
+    <p className="issue-description">{issue.description}</p>
+    <div className="issue-meta">
+      <div className="status-pill" style={{ backgroundColor: getStatusColor(issue.status) }}>
+        {issue.status}
+      </div>
+      <span className="comment-count">
+        <FaComments /> {issue.comments ? issue.comments.length : 0}
+      </span>
+      <span className="date-created">Created: {formatDate(issue.created_at)}</span>
+    </div>
+  </div>
+))}          </div>
         )}
       </div>
     </div>
