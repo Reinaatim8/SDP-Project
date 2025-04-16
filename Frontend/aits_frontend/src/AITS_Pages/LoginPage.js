@@ -81,7 +81,7 @@ const Loginpage = () => {
   };
 
   const setupSessionTimeout = () => {
-    const sessionTimeout = 10 * 60 * 1000; // 10 minutes
+    const sessionTimeout = 25 * 60 * 1000; // 10 minutes
     let timeoutHandle;
 
     const resetTimeout = () => {
