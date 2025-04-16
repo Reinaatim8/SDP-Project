@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.utils import timezone
 from django.db import models
+from django.conf import settings
 class User(AbstractUser):
     """
     Extended User model to handle different user types in the system.
@@ -10,7 +11,6 @@ class User(AbstractUser):
         ('lecturer', 'Lecturer'),
         ('admin', 'Administrator'),
     ]
-    
     
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
@@ -50,38 +50,10 @@ class Enrollment(models.Model):
     
     def __str__(self):
         return f"{self.student.username} - {self.course.course_code} ({self.semester}, {self.academic_year})"
-class Enrollment(models.Model):
-    """
-    Model to represent student enrollment in courses.
-    """
-    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments', 
-                              limit_choices_to={'user_type': 'student'})
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
-    semester = models.CharField(max_length=20)
-    academic_year = models.CharField(max_length=9)  # Format: 2023/2024
-    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    
-    class Meta:
-        unique_together = ['student', 'course', 'semester', 'academic_year']
-    
-    def __str__(self):
-        return f"{self.student} - {self.course} ({self.academic_year} - {self.semester})"
 
-        
-class IssueCategory(models.Model):
-    """
-    Model to categorize different types of academic issues.
-    """
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name_plural = "Issue Categories"
+
+
+
 class Issue(models.Model):
     """
     Model to track academic issues reported by students.
@@ -100,14 +72,12 @@ class Issue(models.Model):
         ('urgent', 'Urgent'),
     ]
     
-    student_id = models.IntegerField()  # Now stores student ID as an integer
-
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_issues')
     title = models.CharField(max_length=200)
     description = models.TextField()
-    category = models.ForeignKey(IssueCategory, on_delete=models.CASCADE, related_name='issues')
-    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE, related_name='enrollment_issues',
-                                  null=True, blank=True)
+    category = models.CharField(max_length=100)  # Free text for category
+    student = models.ForeignKey(User,null=True, on_delete=models.CASCADE, related_name='reported_issues')
+
+
     
     current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     expected_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
@@ -115,8 +85,7 @@ class Issue(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
     
-    assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, 
-                                  related_name='assigned_issues')
+    assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_issues')
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -133,12 +102,18 @@ class Issue(models.Model):
         self.resolved_at = timezone.now()
         self.save()
 
+
 class Comment(models.Model):
     """
     Model to track comments and updates on issues.
     """
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,  # Use this instead of direct User import
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comments')
+    
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     attachment = models.FileField(upload_to='comment_attachments/', null=True, blank=True)
