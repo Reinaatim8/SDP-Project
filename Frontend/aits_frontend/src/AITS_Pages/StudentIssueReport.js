@@ -10,7 +10,7 @@ import {toast} from 'react-toastify';
 const StudentIssueReport = () => {
   const [issueTitle, setIssueTitle] = useState("");
   const [category, setCategory] = useState("");
-  //const [selectedCategory, setSelectedCategory] =useState("");
+  const [courseCode, setCourseCode] = useState("");
   const [courseUnitName,setCourseUnitName] = useState("");
   const [issueDescription, setIssueDescription] = useState("");
   const [selectedLecturer, setSelectedLecturer] = useState("");
@@ -45,6 +45,7 @@ const StudentIssueReport = () => {
       issueTitle,
       category,
       courseUnitName,
+      courseCode,
       issueDescription,
       selectedLecturer,
       file: file? file.name :"No file"
@@ -53,7 +54,7 @@ const StudentIssueReport = () => {
    if (isSubmitting) return;
    setIsSubmitting(true);
     // Validate form
-    if (!issueTitle || !category || !courseUnitName || !issueDescription || !selectedLecturer ) {
+    if (!issueTitle || !category || !courseUnitName || !courseCode||!issueDescription || !selectedLecturer ) {
       toast.error("Please fill in all required fields");
       setIsSubmitting(false);
       return;
@@ -63,7 +64,8 @@ const StudentIssueReport = () => {
     formData.append("title", issueTitle);
     formData.append("lecturer", selectedLecturer);
     formData.append("category", category);
-    formData.append("course_unit_name",courseUnitName)
+    formData.append("course_unit_name",courseUnitName);
+    formData.append("courseCode",courseCode);
     formData.append("description", issueDescription);
   
     if (file) {
@@ -80,6 +82,7 @@ const StudentIssueReport = () => {
         setIssueTitle("");
         setIssueDescription("");
         setCourseUnitName("");
+        setCourseCode("");
         setCategory("");
         setSelectedLecturer("");
          toast.success("Issue submitted successfully!");
@@ -121,9 +124,9 @@ const StudentIssueReport = () => {
 
           {/* Issue Title */}
           <div className="student-issue-report-form-group">
-            <label className="student-issue-report-label">Issue Title:</label>
+            <label className="student-issue-report-label">Issue Subject:</label>
             <input type="text"
-             placeholder="Enter the Issue Title..." 
+             placeholder="Enter the Issue Subject..." 
               value={issueTitle}
               onChange={(e) => setIssueTitle(e.target.value)}
              required />
