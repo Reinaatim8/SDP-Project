@@ -185,7 +185,7 @@ const SignUpPage = () => {
         localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
-       toast.info('Sign Up Successful! Please login.');
+       toast.success('Sign Up Successful! Please login.');
        //alert('SIGNUP SUCCESSFUL');
        
        navigate('/login');
