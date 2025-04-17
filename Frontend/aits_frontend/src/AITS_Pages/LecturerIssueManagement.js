@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUserCircle, FaFilter, FaSearch, FaComments, FaEdit, FaCheck } from "react-icons/fa";
+import { FaUserCircle,  FaSearch, FaComments, FaEdit, } from "react-icons/fa";
 import axios from "axios";
 import LecturerHoverBar from "../components/LecturerHoverBar";
 import "./LecturerIssueManagement.css";
