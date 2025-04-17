@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation
-import "./StudentHoverBar.css";
+import "LecturerHoverBar.css";
 import {
   FaHome, FaUser, FaSignOutAlt, FaUsers, FaPhone,
   FaAddressCard,FaHistory, FaDatabase, FaBell
