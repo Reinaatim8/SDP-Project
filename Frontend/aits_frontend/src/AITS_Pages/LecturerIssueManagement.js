@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaFilter, FaSearch, FaComments, FaEdit, FaCheck } from "react-icons/fa";
 import axios from "axios";
-import StudentHoverBar from "./StudentHoverBar";
+import LecturerHoverBar from "../components/LecturerHoverBar";
 import "./LecturerIssueManagement.css";
 
 const LecturerIssueManagement = () => {
@@ -185,7 +185,7 @@ const LecturerIssueManagement = () => {
   return (
     <div className="lecturer-issue-management">
       <div>
-      <StudentHoverBar style={{marginLeft:"0px"}}/>
+      <LecturerHoverBar style={{marginLeft:"0px"}}/>
       </div>
       <div className="issue-management-header">
         <div className="header-left">
