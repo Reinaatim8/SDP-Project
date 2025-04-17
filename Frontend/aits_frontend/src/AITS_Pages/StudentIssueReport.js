@@ -34,6 +34,15 @@ const StudentIssueReport = () => {
 
   const handleIssueSubmit = async (e) => {
     e.preventDefault();
+    console.log("===FORM SUBMISSION STARTED===");
+    console.log("Form Data:",{
+      issueTitle,
+      category,
+      courseUnitName,
+      issueDescription,
+      selectedLecturer,
+      file: file? file.name :"No file"
+    });
    // Prevent double submission
    if (isSubmitting) return;
    setIsSubmitting(true);

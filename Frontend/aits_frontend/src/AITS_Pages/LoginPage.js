@@ -42,10 +42,9 @@ const Loginpage = () => {
           
           timeoutId = setTimeout(() => {
             // Only log out if the user is logged in
-            const hasToken = localStorage.getItem('access');
-            if (hasToken) {
+            const token = localStorage.getItem('access');
+            if (token) {
               localStorage.removeItem('access');
-              localStorage.removeItem('refresh');
               localStorage.removeItem('user');
               toast.info('Your session has expired. Please login again.');
               navigate('/login');
@@ -82,10 +81,9 @@ const Loginpage = () => {
     try {
       //  Authenticate the user
       const response = await login( username, password );
-      if (response.tokens && response.user) {
+      if (response.token && response.user) {
         // Save tokens to localStorage
-        localStorage.setItem('access', response.tokens.access);
-        localStorage.setItem('refresh', response.tokens.refresh);
+        localStorage.setItem('access', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
 
         // Determine the user's role and navigate accordingly
