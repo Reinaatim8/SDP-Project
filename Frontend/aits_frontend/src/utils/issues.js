@@ -1,14 +1,5 @@
 import apiClient from "./axiosInstance";
 
-//function to submit a new issue
-//export const submitIssue = async (issueData) => {
-  //try {
-   // const response = await apiClient.post("issues/api/issues/", issueData);
-   // return response.data;
- // } catch (error) {
-//    return error.response.data;
- // }
-//}
 export const submitIssue = async (formData) => {
   console.log("=== SUBMIT ISSUE FUNCTION CALLED ===");
   try {
@@ -28,7 +19,7 @@ export const submitIssue = async (formData) => {
     const response = await apiClient.post('issues/api/issues/', formData, {
       headers: {
         'Authorization': `Bearer ${access}`,
-       // 'Content-Type': 'multipart/form-data',
+       
       },
     });
     console.log("API Response:", response);
@@ -40,10 +31,11 @@ export const submitIssue = async (formData) => {
       data: error.response?.data,
       message: error.message
     });
+
    //handle specific error cases
    if (error.response?.status === 401) {
     console.log("Authentication error - token may be invalid or expired");
-    // You could trigger a token refresh here or redirect to login
+    
   }
 
     throw error;

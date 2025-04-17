@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { login } from '../utils/auth'; // Import the login function from your utils
-//import axios from 'axios';
-//import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
-//import Toast from '../components/ToastContainer';
 import { toast} from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {

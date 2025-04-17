@@ -25,45 +25,4 @@ apiClient.interceptors.request.use(
     }
 );
 
-
-//response interceptor to handle token expiration
-//apiClient.interceptors.response.use(
-  //response =>  response,
-  //async error => {
-    //const originalRequest = error.config;
-      // console.log('Response error:', {
-      //      status: error.response?.status,
-        //    message: error.message,
-          //  url: originalRequest?.url
-        //});
-
-        // If token expired, attempt to refresh it
-        //if (error.response && error.response.status === 401 && !originalRequest._retry) {
-      //      originalRequest._retry = true;
-            //try {
-               // const refresh = localStorage.getItem('refresh'); // Get refresh token
-                //if (!refresh) {
-                  //  console.error("No refresh token found. Redirecting to login...");
-                    //localStorage.clear();
-                   // window.location.href = "/login"; // Redirect to login
-                   // return Promise.reject(error);
-               // }
-
-                 // Request new access token
-            //    const response = await axios.post('http://kennedymutebi7.pythonanywhere.com/api/token/refresh/', { refresh });
-             //   localStorage.setItem('access', response.data.access); // Store new access token
-
-                // Retry the failed request with the new token
-              //  originalRequest.headers.Authorization = `Bearer${response.//data.access}`;
-             //   return apiClient(originalRequest);
-             //  } catch (err) {
-               // console.error("Token refresh failed. Logging out...");
-
-             //   localStorage.clear();
-             //  window.location.href = "/login"; // Redirect to login
-
-              //  return Promise.reject(err);}
-           // }
-           // return Promise.reject(error);
-       // });
 export default apiClient;
