@@ -134,7 +134,7 @@ const StudentIssueReport = () => {
           
           {/* Lecturer Selection */}
           <div className="student-issue-report-form-group">
-            <label className="student-issue-report-label">Select Lecturer:</label>
+            <label className="student-issue-report-label">Select Lecturer of the Course Unit:</label>
             <LecturerDropdown onSelect={handleLecturerSelection}
             />
           </div>
@@ -162,7 +162,7 @@ const StudentIssueReport = () => {
            <label className="student-issue-report-label">Course Unit Code:</label>
            <input
             type="text"
-            placeholder="Enter the code of the course unit..."
+            placeholder="Enter the Code of the Course Unit..."
             value={courseCode}
             onChange={(e) => setCourseCode(e.target.value)}
             required
@@ -175,7 +175,7 @@ const StudentIssueReport = () => {
             <textarea
               className="student-issue-report-textarea"
               rows="5"
-              placeholder="Describe your issue here..."
+              placeholder="Describe your Issue here..."
               value={issueDescription}
               onChange={(e) => setIssueDescription(e.target.value)}
               required

@@ -77,17 +77,20 @@
 }
 .aboutcard{
   background-color: #0f1e2ed5;
-  padding: 20px;
+  padding:10px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 750px;
-  margin-top: 20px;
+  margin-top: 0px;
   height: 430px;
   font-size: 20px;
   letter-spacing: 3px;
   color: white;
   
  
+}
+.aboutcard h1{
+  padding: 0px;
 }
 .contactcard{
   
