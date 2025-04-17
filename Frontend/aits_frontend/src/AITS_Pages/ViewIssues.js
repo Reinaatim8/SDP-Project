@@ -1,65 +1,90 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Toast from "../components/ToastContainer";
-import { toast } from "react-toastify";
-import StudentSidebar from "../components/StudentSidebar"; 
-import "./ViewIssues.css"; // for styles
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import apiClient from '../utils/axiosInstance';
+import './ViewIssues.css'; // Optional styling file
+import { toast } from 'react-toastify';
+import StudentSidebar from '../components/StudentSidebar';
 
 const ViewIssues = () => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+   
+  //const user = JSON.parse(localStorage.getItem("user"));
+  //const id = user?.id;
 
-  const fetchIssues = async () => {
-    try {
-      const response = await axios.get("http://kennedymutebi7.pythonanywhere.com//issues/api/issues/"); 
-      setIssues(response.data);
-      toast.success("Issues loaded successfully!");
-    } catch (error) {
-      console.error("Error fetching issues:", error);
-      toast.error("Failed to load issues. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
+    const fetchIssues = async () => {
+      const token = localStorage.getItem('access');
+
+      if (!token) {
+        toast.error("You must be logged in to view issues");
+        navigate('/login');
+        return;
+      }
+
+      try {
+        const response = await apiClient.get('issues/api/issues/');
+        const allIssues = response.data.results;
+        
+        // Filter only issues created by this user
+       // const userIssues = allIssues.filter(issue => issue.created_by === id);
+
+        setIssues(allIssues);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching issues:", error.response?.data || error);
+        toast.error("Failed to fetch issues");
+        setLoading(false);
+
+        if (error.response?.status === 401) {
+          toast.warning("Session expired. Please login again.");
+          navigate('/login');
+        }
+      }
+    };
+
     fetchIssues();
-  }, []);
+  }, [navigate]);
+
+  if (loading) return <p>Loading issues...</p>;
 
   return (
     <div className="view-issues-container">
-      <StudentSidebar />
-      <div className="view-issues-content">
-        <h2 className="view-issues-title">📄 REPORTED ISSUES</h2>
-        {loading ? (
-          <p>Loading issues...</p>
-        ) : (
-          <table className="issues-table">
-            <thead>
-              <tr>
-                <th>Issue Title</th>
-                <th>Issue Description</th>
-                <th>Course Code</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Attachment</th>
-              </tr>
-            </thead>
-            <tbody>
-              {issues.map((issue) => (
-                <tr key={issue.id}>
-                  <td>{issue.title}</td>
-                  <td>{issue.lecturer_name || issue.lecturer}</td>
-                  <td>{issue.course_name || issue.course}</td>
-                  <td>{issue.status}</td>
-                  <td>{new Date(issue.created_at).toLocaleDateString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-        <Toast/>
-      </div>
+      <StudentSidebar/>
+      <h1 style={{textAlign:"center", backgroundColor:"white"}}>📋 SUBMITTED ISSUES</h1>
+
+      {issues.length === 0 ? (
+        <p>No issues found.</p>
+      ) : (
+        <table className="issues-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Assigned To</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody>
+          {issues.map((issue) => (
+            <tr key={issue.id}>
+              <td>{issue.title}</td>
+              <td>{issue.description}</td>
+              <td>{issue.category}</td>
+              <td>{issue.status}</td>
+              <td>{issue.priority}</td>
+              <td>{issue.assigned_to_name}</td>
+              <td>{new Date(issue.created_at).toLocaleString()}</td>
+            </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
