@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
 import LecturerDropdown from "../components/LecturerDropdown";
+import Categorydropdown from "../components/Categorydropdown"
 import "./StudentIssueReport.css";
 import { submitIssue} from "../utils/issues";
 import {toast} from 'react-toastify';
@@ -9,6 +10,7 @@ import {toast} from 'react-toastify';
 const StudentIssueReport = () => {
   const [issueTitle, setIssueTitle] = useState("");
   const [category, setCategory] = useState("");
+  //const [selectedCategory, setSelectedCategory] =useState("");
   const [courseUnitName,setCourseUnitName] = useState("");
   const [issueDescription, setIssueDescription] = useState("");
   const [selectedLecturer, setSelectedLecturer] = useState("");
@@ -27,6 +29,10 @@ const StudentIssueReport = () => {
   const handleLecturerSelection = (lecturer) => {
     setSelectedLecturer(lecturer);
   };
+
+  const handleCategorySelection = (value) => {
+    setCategory (value);
+  }
 
   const handleFileChange = (event)  => {
     setFile(event.target.files[0]);
@@ -47,7 +53,7 @@ const StudentIssueReport = () => {
    if (isSubmitting) return;
    setIsSubmitting(true);
     // Validate form
-    if (!issueTitle || !category || !courseUnitName || !issueDescription || !selectedLecturer) {
+    if (!issueTitle || !category || !courseUnitName || !issueDescription || !selectedLecturer ) {
       toast.error("Please fill in all required fields");
       setIsSubmitting(false);
       return;
@@ -67,7 +73,7 @@ const StudentIssueReport = () => {
       try {
         const response = await submitIssue(formData);
         console.log("Issue submitted successfully:", response);
-        alert("Issue submitted succesfully!")
+        //alert("Issue submitted succesfully!")
         toast.success("Issue submitted successfully!");
         // Handle success (e.g., show a success message, clear form fields, etc.)
         //resetFormFields();
@@ -111,7 +117,7 @@ const StudentIssueReport = () => {
 
        {/*FORM FIELDS FOR THE ISSUE */}
         <form className="student-issue-report-form" onSubmit={handleIssueSubmit}>
-        <p style={{fontWeight:"bolder", textDecoration:" underline darkgreen"}}>SUBMIT YOUR ISSUE.</p>
+        <p style={{fontWeight:"bolder", textDecoration:" underline darkgreen", textAlign:"center",fontSize:"25px"}}>SUBMIT YOUR ISSUE.</p>
 
           {/* Issue Title */}
           <div className="student-issue-report-form-group">
@@ -131,11 +137,9 @@ const StudentIssueReport = () => {
           </div>
          {/*Category dropdownn list*/}
          <div className="student-issue-report-form-group">
-          <label className="student-issue-report-label">Issue category </label>
-          <input type="text"
-           placeholder="Enter an issue category e.g WRONG MARKS, MISSING MARKS, MARKING COMPLAINT, NON-ACADEMIC etc."
+          <label className="student-issue-report-label">Select Issue category: </label>
+          <Categorydropdown onSelect={handleCategorySelection}
            value={category}
-           onChange={(e) => setCategory(e.target.value)}
            required />
          </div>
   
@@ -150,6 +154,17 @@ const StudentIssueReport = () => {
                 required
               />
             </div>
+           {/*Course code */} 
+           <div className="student-issue-report-form-group">
+           <label className="student-issue-report-label">Course Unit Code:</label>
+           <input
+            type="text"
+            placeholder="Enter the code of the course unit..."
+            value={courseCode}
+            onChange={(e) => setCourseCode(e.target.value)}
+            required
+            />
+           </div>
          
           {/* Issue Description */}
           <div className="student-issue-report-form-group">
