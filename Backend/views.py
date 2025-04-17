@@ -254,7 +254,7 @@ class IssueViewSet(viewsets.ModelViewSet):
             issue=issue
         )
         
-        return Response({"success": "Grade updated successfully"})
+        return Response({"success": "Update successfull"})
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
