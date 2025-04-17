@@ -18,7 +18,7 @@ const StudentHoverBar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className={`floating-tabbar-container ${isMinimized ? "minimized" : ""}`}>
+    <div className={`lecturer-floating-tabbar-container ${isMinimized ? "minimized" : ""}`}>
       <div className="floating-tabbar-header">
         <button className="minimize-btn" onClick={toggleMinimize}>
           {isMinimized ? (
