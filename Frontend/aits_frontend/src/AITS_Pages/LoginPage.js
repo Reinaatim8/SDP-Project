@@ -3,7 +3,7 @@ import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { login } from '../utils/auth'; // Import the login function from your utils
 import './LoginPage.css';
 import { toast} from 'react-toastify';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {
   const [username, setUsername] = useState('');
