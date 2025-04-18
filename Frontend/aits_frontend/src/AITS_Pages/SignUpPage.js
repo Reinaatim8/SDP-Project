@@ -251,4 +251,353 @@ const SignUpPage = () => {
   // Render form step content
   const renderStepContent = () => {
     switch(step) {
-    
+      case 1:
+        return (
+          <div className="step-content fade-in">
+            <h3 className="step-title">Personal Information</h3>
+            
+            <div className="form-group inline-fields">
+              <div className="form-field">
+                <label htmlFor="first_name" style={{color:"#f0a500"}}>
+                  <FaUser className="input-icon" /> First Name
+                </label>
+                <input
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  placeholder="Enter your first name"
+                  required
+                />
+                {errors.first_name && <span className="error">{errors.first_name}</span>}
+              </div>
+              
+              <div className="form-field">
+                <label htmlFor="last_name" style={{color:"#f0a500"}}>
+                  <FaUser className="input-icon" /> Last Name
+                </label>
+                <input
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  placeholder="Enter your last name"
+                  required
+                />
+                {errors.last_name && <span className="error">{errors.last_name}</span>}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="user_type" style={{ color: "#f0a500" }}>
+                <FaIdCard className="input-icon" /> I am a...
+              </label>
+              <select
+                id="user_type"
+                name="user_type"
+                value={formData.user_type}
+                onChange={handleChange}
+              >
+                <option value="student">Student</option>
+                <option value="lecturer">Lecturer</option>
+                <option value="admin">Admin/Registrar</option>
+              </select>
+            </div>
+          </div>
+        );
+        
+      case 2:
+        return (
+          <div className="step-content fade-in">
+            <h3 className="step-title">Account Information</h3>
+            
+            <div className="form-group">
+              <label htmlFor="username" style={{ color: "#f0a500" }}>
+                <FaUser className="input-icon" /> Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                placeholder="Enter your username"
+                required
+              />
+              {errors.username && <span className="error">{errors.username}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email" style={{ color: "#f0a500" }}>
+                <FaEnvelope className="input-icon" /> Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+              />
+              {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="phone_number" style={{ color: "#f0a500" }}>
+                <FaEnvelope className="input-icon" /> Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone_number"
+                name="phone_number"
+                value={formData.phone_number}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
+                required
+              />
+              {errors.phone_number && <span className="error">{errors.phone_number}</span>}
+            </div>
+          </div>
+        );
+        
+      case 3:
+        return (
+          <div className="step-content fade-in">
+            <h3 className="step-title">Security</h3>
+            
+            <div className="form-group">
+              <label htmlFor="password" style={{color:"#f0a500"}}>
+                <FaLock className="input-icon" /> Password
+              </label>
+              <div className="password-input-container">
+                <input
+                  type={showPassword ? 'text': 'password'}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Enter your password"
+                  required
+                />
+                <button 
+                  type="button" 
+                  className="password-toggle-button" 
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              {errors.password && <span className="error">{errors.password}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirmPassword" style={{color:"#f0a500"}}>
+                <FaLock className="input-icon" /> Confirm Password
+              </label>
+              <div className="password-input-container">
+                <input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm your password"
+                  required
+                />
+                <button 
+                  type="button" 
+                  className="password-toggle-button" 
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+            </div>
+            
+            <div className="password-requirements">
+              <p>Password must:</p>
+              <ul>
+                <li className={formData.password && formData.password.length >= 8 ? 'met' : ''}>
+                  Be at least 8 characters
+                </li>
+                <li className={formData.password && /[a-z]/.test(formData.password) ? 'met' : ''}>
+                  Include lowercase letters
+                </li>
+                <li className={formData.password && /[0-9]/.test(formData.password) ? 'met' : ''}>
+                  Include at least one number
+                </li>
+              </ul>
+            </div>
+          </div>
+        );
+        
+      case 4:
+        return (
+          <div className="step-content fade-in">
+            <h3 className="step-title">
+              {formData.user_type === 'student' ? 'Academic Information' : 
+               formData.user_type === 'lecturer' ? 'Faculty Information' : 'Admin Information'}
+            </h3>
+            
+            <div className="form-group">
+              <label htmlFor="department" style={{color:"#f0a500"}}>
+                <FaBuilding className="input-icon" /> Department
+              </label>
+              <select
+                id="department"
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
+              >
+                <option value="">Select Department</option>
+                <option value="CS">Computer Science</option>
+                <option value="IT">Information Technology</option>
+                <option value="SE">Software Engineering</option>
+                <option value="IS">Information Systems</option>
+              </select>
+              {errors.department && <span className="error">{errors.department}</span>}
+            </div>
+
+            {formData.user_type === 'student' && (
+              <>
+                <div className="form-group">
+                  <label htmlFor="student_id" style={{color:"#f0a500"}}>
+                    <FaIdCard className="input-icon" /> Student ID
+                  </label>
+                  <input
+                    type="text"
+                    id="student_id"
+                    name="student_id"
+                    value={formData.student_id}
+                    onChange={handleChange}
+                    placeholder="Enter your student ID"
+                    required
+                  />
+                  {errors.student_id && <span className="error">{errors.student_id}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="program" style={{color:"#f0a500"}}>
+                    <FaUserGraduate className="input-icon" /> Program
+                  </label>
+                  <input
+                    type="text"
+                    id="program"
+                    name="program"
+                    value={formData.program}
+                    onChange={handleChange}
+                    placeholder="Enter your program e.g BSCS, IT, etc"
+                    required
+                  />
+                  {errors.program && <span className="error">{errors.program}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="year_of_study" style={{color:"#f0a500"}}>
+                    <FaUserGraduate className="input-icon" /> Year of Study
+                  </label>
+                  <input
+                    type="text"
+                    id="year_of_study"
+                    name="year_of_study"
+                    value={formData.year_of_study}
+                    onChange={handleChange}
+                    placeholder="Enter your year of study"
+                    required
+                  />
+                  {errors.year_of_study && <span className="error">{errors.year_of_study}</span>}
+                </div>
+              </>
+            )}
+
+            {formData.user_type === 'lecturer' && (
+              <div className="form-group">
+                <label htmlFor="staff_id" style={{color:"#f0a500"}}>
+                  <FaIdCard className="input-icon" /> Staff ID
+                </label>
+                <input
+                  type="text"
+                  id="staff_id"
+                  name="staff_id"
+                  value={formData.staff_id}
+                  onChange={handleChange}
+                  placeholder="Enter your staff ID"
+                  required
+                />
+                {errors.staff_id && <span className="error">{errors.staff_id}</span>}
+              </div>
+            )}
+          </div>
+        );
+        
+      default:
+        return null;
+    }
+  };
+
+  // Navigation buttons
+  const renderNavButtons = () => {
+    return (
+      <div className="form-navigation">
+        {step > 1 && (
+          <button 
+            type="button" 
+            onClick={prevStep} 
+            className="nav-button back-button"
+          >
+            Back
+          </button>
+        )}
+        
+        {step < totalSteps ? (
+          <button 
+            type="button" 
+            onClick={nextStep} 
+            className="nav-button next-button"
+          >
+            Next
+          </button>
+        ) : (
+          <button 
+            type="submit" 
+            className="nav-button submit-button" 
+            disabled={loading}
+          >
+            {loading ? <span className="spinner"></span> : 'Complete Signup'}
+          </button>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <div className="signup-panel">
+      <div className="signup-container wizard-container">
+        <div className="signup-card wizard-card">
+          <img src="/images/nobgmaklogo.png" alt="maklogo" className="logo" />
+          <h2 className="signup-title">Sign Up To Start</h2>
+          
+          {renderProgress()}
+          
+          <form onSubmit={handleSubmit}>
+            {renderStepContent()}
+            
+            {apiError && <p className="error api-error">{apiError}</p>}
+            
+            {renderNavButtons()}
+          </form>
+          
+          <p className="login-link">
+            Already have an account? <Link to="/login">Log In</Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignUpPage;
