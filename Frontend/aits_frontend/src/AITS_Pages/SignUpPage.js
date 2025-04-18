@@ -25,6 +25,7 @@ const SignUpPage = () => {
       email: '',
       password: '',
       department: '',
+      phone_number: '',
     },
     staff_id: '',
     student_id: '',
@@ -94,6 +95,7 @@ const SignUpPage = () => {
     if (!formData.first_name) newErrors.first_name = 'First name is required';
     if (!formData.last_name) newErrors.last_name = 'Last name is required';
     if (!formData.username) newErrors.username = 'Username is required';
+    if (!formData.phone_number)newErrors.phone_number = 'Please enter yout telephone number.'
     if (!formData.student_id && formData.user_type === 'student') {
       newErrors.student_id = 'Student ID is required';
     }
@@ -121,7 +123,7 @@ const SignUpPage = () => {
       newErrors.confirmPassword = 'Passwords do not match!';
     }
     setErrors(newErrors);
-    toast.warning('Please fix the highlighted errors before submiting.')
+    //toast.warning('Please fix the highlighted errors before submiting.')
     return Object.keys(newErrors).length === 0;
     
   };
@@ -151,6 +153,7 @@ const SignUpPage = () => {
           email: formData.email,
           user_type: formData.user_type,
           department: formData.department,
+          phone_number: formData.phone_number
         },
         staff_id: formData.staff_id,
         student_id: formData.student_id,
@@ -172,6 +175,7 @@ const SignUpPage = () => {
           username: formData.username,
           email: formData.email,
           user_type: formData.user_type,
+          phone_number: formData.phone_number,
           department: formData.department,
           staff_id: formData.staff_id,
           student_id: formData.student_id,
@@ -181,7 +185,7 @@ const SignUpPage = () => {
         localStorage.setItem('user', JSON.stringify(userProfile));
         
        //Handling response on successful registration
-       toast.info('Sign Up Successful! Please login.');
+       toast.success('Sign Up Successful! Please login.');
        //alert('SIGNUP SUCCESSFUL');
        
        navigate('/login');
@@ -413,7 +417,7 @@ const SignUpPage = () => {
 
 </div>
 
-                  {/* API Error Display */}}
+                  {/* API Error Display */}
           {apiError && <p className="error">{apiError}</p>}
 
         </form>

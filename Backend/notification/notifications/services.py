@@ -1,4 +1,4 @@
-# notifications/services.py
+
 from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -7,7 +7,7 @@ from .models import Notification, EmailNotificationLog
 import logging
 
 logger = logging.getLogger(__name__)
-
+#create and store notification
 class NotificationService:
     @staticmethod
     def create_notification(recipient, notification_type, title, message, sender=None, action_url=None):
@@ -23,7 +23,7 @@ class NotificationService:
             action_url=action_url
         )
         
-        # Send email notification
+        
         NotificationService.send_email_notification(notification)
         
         return notification
@@ -64,3 +64,4 @@ class NotificationService:
                 status='failed',
                 error_message=str(e)
             )
+            
