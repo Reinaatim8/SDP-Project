@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUserCircle,  FaSearch, FaComments, FaEdit, } from "react-icons/fa";
+import { FaUserCircle, FaSearch, FaComments, FaEdit } from "react-icons/fa";
 import axios from "axios";
 import LecturerHoverBar from "../components/LecturerHoverBar";
 import "./LecturerIssueManagement.css";
@@ -13,7 +13,6 @@ const LecturerIssueManagement = () => {
   const [error, setError] = useState(null);
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [newComment, setNewComment] = useState("");
-  const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
@@ -21,7 +20,9 @@ const LecturerIssueManagement = () => {
   const [updatingStatus, setUpdatingStatus] = useState(false);
   const [newStatus, setNewStatus] = useState("");
 
-  const API_URL = "https://kennedymutebi7.pythonanywhere.com/issues/api/issues/";
+  const API_BASE_URL = "https://kennedymutebi7.pythonanywhere.com";
+  const API_URL = `${API_BASE_URL}/issues/api/issues/`;
+  const COMMENTS_URL = `${API_BASE_URL}/issues/api/comments/`;
   const API_TOKEN = "b0377bfb90173aac2ebd1b106a93dec811de90ab";
 
   useEffect(() => {
@@ -50,31 +51,57 @@ const LecturerIssueManagement = () => {
   };
 
   const handleIssueClick = (issue) => {
-    setSelectedIssue(issue);
+    // Fetch the issue with all comments if they're not already loaded
+    if (!issue.comments || issue.comments.length === 0) {
+      fetchIssueDetails(issue.id);
+    } else {
+      setSelectedIssue(issue);
+    }
+  };
+
+  const fetchIssueDetails = async (issueId) => {
+    try {
+      const response = await axios.get(`${API_URL}${issueId}/`, {
+        headers: {
+          Authorization: `Token ${API_TOKEN}`,
+        },
+      });
+      setSelectedIssue(response.data);
+    } catch (err) {
+      console.error("Error fetching issue details:", err);
+      alert("Failed to fetch issue details. Please try again.");
+    }
   };
 
   const handleAddComment = async () => {
     if (!newComment.trim()) return;
 
     try {
+      const commentData = {
+        content: newComment,
+        issue: selectedIssue.id,
+        user: user.id,
+      };
+
+      console.log("Posting comment with data:", commentData);
+      
       const response = await axios.post(
-        `${API_URL}${selectedIssue.id}/comments/`,
-        {
-          content: newComment,
-          issue: selectedIssue.id,
-          user: user.id,
-        },
+        COMMENTS_URL,
+        commentData,
         {
           headers: {
             Authorization: `Token ${API_TOKEN}`,
+            'Content-Type': 'application/json',
           },
         }
       );
       
+      console.log("Comment post response:", response.data);
+      
       // Update the local state with the new comment
       const updatedIssue = {
         ...selectedIssue,
-        comments: [...selectedIssue.comments, response.data],
+        comments: selectedIssue.comments ? [...selectedIssue.comments, response.data] : [response.data],
       };
       
       setSelectedIssue(updatedIssue);
@@ -88,8 +115,8 @@ const LecturerIssueManagement = () => {
       
       setNewComment("");
     } catch (err) {
-      console.error("Error adding comment:", err);
-      alert("Failed to add comment. Please try again.");
+      console.error("Error adding comment:", err.response || err);
+      alert("Failed to add comment. Please try again. Error: " + (err.response?.data?.detail || err.message));
     }
   };
 
@@ -128,7 +155,7 @@ const LecturerIssueManagement = () => {
       setNewStatus("");
     } catch (err) {
       console.error("Error updating status:", err);
-      alert("Failed to update status. Please try again.");
+      alert("Failed to update status. Please try again. Error: " + (err.response?.data?.detail || err.message));
     }
   };
 
