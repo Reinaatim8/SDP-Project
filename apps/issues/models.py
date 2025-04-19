@@ -75,7 +75,7 @@ class Issue(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     category = models.CharField(max_length=100)  # Free text for category
-    student = models.ForeignKey(User,null=True, on_delete=models.CASCADE, related_name='reported_issues')
+    student =  models.ForeignKey(User,null=True, on_delete=models.CASCADE, related_name='reported_issues')
 
 
     
