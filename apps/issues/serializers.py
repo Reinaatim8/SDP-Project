@@ -66,7 +66,7 @@ class IssueSerializer(serializers.ModelSerializer):
                    'current_grade', 'expected_grade', 'status', 'priority',
                   'assigned_to', 'assigned_to_name', 'created_at', 'updated_at', 
                   'resolved_at', 'attachments', 'comments',]
-        read_only_fields = ['student']
+        read_only_fields =  ['student']
 
     def get_assigned_to_name(self, obj):
         if obj.assigned_to:
