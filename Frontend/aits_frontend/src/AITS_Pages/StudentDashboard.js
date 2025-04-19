@@ -1,6 +1,8 @@
 import React, { useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
+//import InAppNotifications from "../components/InAppNotifications";
+//import EmailNotifications from "../components/EmailNotifications";
 import "./StudentDashboard.css";
 import { toast } from "react-toastify";
 
@@ -39,6 +41,9 @@ useEffect(() => {
   return (
     <div className="student-dashboard-container">
       <StudentSidebar />
+
+     {/*} <EmailNotifications />
+     {/* <InAppNotifications />*/}
       <div className="student-dashboard-content">
         <div className="student-dashboard-panel">
           <div className="student-dashboard-header">

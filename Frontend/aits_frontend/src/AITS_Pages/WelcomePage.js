@@ -22,7 +22,6 @@ const WelcomePage = () => {
         </div>
         <div className="navbar-right">
           <Link to="/Aboutpage" className="nav-link">ABOUT</Link>
-          <Link to="/features" className="nav-link">FEATURES</Link>
           <Link to="/Aboutpage" className="nav-link">CONTACT</Link>
         </div>
       </nav>
@@ -70,8 +69,8 @@ const WelcomePage = () => {
             <ul>
               <li><a href='https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://mak.ac.ug/&ved=2ahUKEwiy9s3XipKMAxUyhf0HHRZFClgQFnoECAwQAQ&usg=AOvVaw3NazKROMvUyH2a4dN4fqCU'>Makerere main site</a></li>
               <li><a href='https://intranet.mak.ac.ug/'>Intranet</a></li>
-              <li><a href='http://cees.mak.ac.ug/'>College of Education & External Studies</a></li>
-              <li><a href="https://support.mak.ac.ug/">Support DICTS</a></li>
+              <li><a href='http://cees.mak.ac.ug/'>COCIS</a></li>
+              <li><a href="https://support.mak.ac.ug/">Support COCIS</a></li>
               <li><a href='#'><strong>credit GroupQ</strong></a></li>
             </ul>
             

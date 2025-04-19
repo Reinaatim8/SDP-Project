@@ -11,7 +11,7 @@ const LecturerDropdown = ({ onSelect }) => {
 
   return (
     <select className="lecturer-dropdown" value={selectedLecturer} onChange={handleChange}>
-      <option value="">Select Lecturer</option>
+      <option value="">Select Lecturer of the Course Unit:</option>
       {lecturers.map((lecturer, index) => (
         <option key={index} value={lecturer}>{lecturer}</option>
       ))}

@@ -3,12 +3,21 @@ import { Modal, Tabs, Tab, Badge, Alert, ProgressBar } from 'react-bootstrap';
 import RegistrarSidebar from '../components/RegistrarSidebar';
 import './RegistrarDashboard.css';
 import { FiRefreshCw, FiPlus, FiSearch, FiDownload, FiPrinter, FiEdit, FiTrash2, FiUser, FiBook, FiCalendar, FiAward, FiBarChart2, FiMail, FiBell } from 'react-icons/fi';
+import AuditLogsTab from '../components/AuditLogsTab';
 
 const RegistrarDashboard = () => {
   // State for various components
   const [enrollments, setEnrollments] = useState([]);
   const [students, setStudents] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUer = localStorage.getItem('user');
+    if (storedUer) {
+      setUser(JSON.parse(storedUer));
+    }
+  }, []);
   const [loading, setLoading] = useState({
     enrollments: false,
     students: false,
@@ -160,29 +169,16 @@ const RegistrarDashboard = () => {
       <div className="registrar-dashboard-content">
         {/* Header Section */}
         <div className="registrar-dashboard-header">
-          <div className="header-left">
+          <div className="header">
             <img src="/images/registrarlogo.png" alt="registrarlogo" className="logo" />
             <div>
-              <h2 className="registrar-dashboard-title">Registrar Dashboard</h2>
+              <h2 className="registrar-dashboard-title">Registrar Dashboard <br/> Welcome back, {user?.username || 'Registrar'}!</h2>
               <p className="registrar-dashboard-subtitle">
-                Welcome back! Manage student records, courses, and academic administration.
+                <br/> Manage student records, courses, and academic administration.
               </p>
             </div>
           </div>
-          <div className="header-right">
-            <button className="icon-button">
-              <FiBell size={20} />
-              <span className="badge">3</span>
-            </button>
-            <button className="icon-button">
-              <FiMail size={20} />
-              <span className="badge">5</span>
-            </button>
-            <div className="user-profile">
-              <FiUser size={24} />
-              <span>Registrar</span>
-            </div>
-          </div>
+
         </div>
 
         {/* Stats Overview */}
@@ -267,6 +263,11 @@ const RegistrarDashboard = () => {
             onSelect={(k) => setActiveTab(k)}
             className="dashboard-tabs"
           >
+            <Tab eventKey="audit-logs" title="Audit Logs">
+              <div className="tab-content">
+                <AuditLogsTab />
+              </div>
+            </Tab>
             <Tab eventKey="enrollments" title="Enrollments">
               <div className="tab-content">
                 {loading.enrollments ? (
@@ -506,7 +507,7 @@ const RegistrarDashboard = () => {
         {/* Footer */}
         <footer className="registrar-dashboard-footer">
           <div className="footer-content">
-            <p>&copy; 2025 Academic Institution Management System. All rights reserved.</p>
+            <p>&copy; 2025 AITS System. All rights reserved.</p>
             <div className="footer-links">
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Service</a>

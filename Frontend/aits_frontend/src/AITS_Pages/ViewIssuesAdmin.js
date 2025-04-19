@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../utils/axiosInstance';
-import './ViewIssues.css'; // Optional styling file
+import './ViewIssuesAdmin.css'; // Optional styling file
 import { toast } from 'react-toastify';
-import StudentSidebar from '../components/StudentSidebar';
+import RegistrarSidebar from '../components/RegistrarSidebar';
 
-const ViewIssues = () => {
+const ViewIssuesAdmin = () => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-   
-  //const user = JSON.parse(localStorage.getItem("user"));
-  //const id = user?.id;
+
 
 
   useEffect(() => {
@@ -48,12 +46,12 @@ const ViewIssues = () => {
     fetchIssues();
   }, [navigate]);
 
-  if (loading) return <p>Loading issues...</p>;
+  //if (loading) return <p>Loading issues...</p>;
 
   return (
     <div className="view-issues-container">
-      <StudentSidebar/>
-      <h1 style={{textAlign:"center", backgroundColor:"white"}}>📋 SUBMITTED ISSUES</h1>
+      <RegistrarSidebar/>
+      <h1 style={{textAlign:"center", backgroundColor:"white"}}>📋 ALL STUDENT SUBMITTED ISSUES</h1>
 
       {issues.length === 0 ? (
         <p>No issues found.</p>
@@ -89,4 +87,4 @@ const ViewIssues = () => {
   );
 };
 
-export default ViewIssues;
+export default ViewIssuesAdmin;
