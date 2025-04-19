@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 const RegistrarDashboard = () => {
   // State for various components
+  const [enrollments, setEnrollments] = useState([]);
   const [students, setStudents] = useState([]);
   const [courses, setCourses] = useState([]);
   const [user, setUser] = useState(null);
