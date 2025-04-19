@@ -106,7 +106,6 @@ const CourseManagement = () => {
               <th>Code</th>
               <th>Name</th>
               <th>Description</th>
-              <th>Lecturer</th>
             </tr>
           </thead>
           <tbody>
@@ -115,7 +114,7 @@ const CourseManagement = () => {
                 <td>{course.course_code}</td>
                 <td>{course.course_name}</td>
                 <td>{course.description }</td>
-                <td>{course.lecturer_name || lecturerName}</td>
+                
               </tr>
             ))}
           </tbody>

@@ -164,7 +164,7 @@ const RegistrarDashboard = () => {
 
   return (
     <div className="registrar-dashboard-container">
-      <RegistrarSidebar />
+      <RegistrarSidebar className="sidebar" />
       
       <div className="registrar-dashboard-content">
         {/* Header Section */}
@@ -424,81 +424,6 @@ const RegistrarDashboard = () => {
                     )}
                   </>
                 )}
-              </div>
-            </Tab>
-
-            <Tab eventKey="courses" title="Courses">
-              <div className="tab-content">
-                {loading.courses ? (
-                  <div className="loading-spinner">Loading courses...</div>
-                ) : (
-                  <>
-                    <div className="courses-grid">
-                      {courses.map((course) => (
-                        <div key={course.id} className="course-card">
-                          <div className="course-header">
-                            <h4>{course.code}: {course.name}</h4>
-                            <Badge bg="info">{course.credits} Credits</Badge>
-                          </div>
-                          <div className="course-body">
-                            <p>{course.description || 'No description available.'}</p>
-                            <div className="course-meta">
-                              <span><FiUser /> {course.instructor || 'TBA'}</span>
-                              <span><FiCalendar /> {course.semester_offered.join(', ')}</span>
-                            </div>
-                          </div>
-                          <div className="course-footer">
-                            <Badge bg="secondary">{course.enrollment_count} Enrollments</Badge>
-                            <div className="course-actions">
-                              <button className="action-btn edit-btn">
-                                <FiEdit />
-                              </button>
-                              <button className="action-btn delete-btn">
-                                <FiTrash2 />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    {courses.length === 0 && (
-                      <div className="no-results">
-                        <p>No courses found. You may need to add courses to the system.</p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            </Tab>
-
-            <Tab eventKey="reports" title="Reports">
-              <div className="tab-content">
-                <div className="reports-container">
-                  <div className="report-card">
-                    <h4>Enrollment Trends</h4>
-                    <div className="chart-placeholder">
-                      <FiBarChart2 size={48}/>
-                      <p>charts will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                  <div className="report-card">
-                    <h4>Graduation Analysis</h4>
-                    <div className="chart-placeholder">
-                    <FiAward size={48}/>
-                    <p>Graduation Analysis will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                  <div className="report-card">
-                    <h4>Course Popularity</h4>
-                    <div className="chart-placeholder">
-                      <FiBook size={48} />
-                      <p>Course popularity chart will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                </div>
               </div>
             </Tab>
           </Tabs>

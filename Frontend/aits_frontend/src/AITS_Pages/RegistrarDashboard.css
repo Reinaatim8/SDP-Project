@@ -1,10 +1,15 @@
-/* ... your existing CSS ... */
+
 
 .registrar-dashboard-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure container takes full viewport height */
+  min-height: 100vh; 
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+  
 }
+
 
 .registrar-dashboard-content {
   flex: 1; /* Allow content to grow and push footer down */
@@ -14,11 +19,17 @@
   flex-direction: column;
   align-items: flex-start;
   overflow-y: auto;
+  background-image: url(../../public/images/studentwallpaper.jpg);
+  
 }
+
 
 .registrar-dashboard-title {
   font-size: 2.2rem;
   color: #2c3e50;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(20px);
+  
 }
 
 .registrar-dashboard-subtitle {
@@ -339,6 +350,7 @@ body{
   padding: 1.5rem 2rem;
   background-color: #f5f7fa;
   width: 100%;
+  margin-top: 20px;
 }
 
 /* Action Bar */
