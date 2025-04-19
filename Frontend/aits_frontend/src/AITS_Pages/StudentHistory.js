@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import StudentHoverBar from './StudentHoverBar';
-// Mock data - replace with API calls in the future
-const mockIssues = {
-  resolved: [
-    { id: 1, title: 'Assignment submission error', category: 'Technical', dateSubmitted: '2025-03-15', dateResolved: '2025-03-17', priority: 'High' },
-    { id: 2, title: 'Course material access issue', category: 'Access', dateSubmitted: '2025-03-10', dateResolved: '2025-03-12', priority: 'Medium' },
-    { id: 3, title: 'Grade discrepancy in Math 101', category: 'Academic', dateSubmitted: '2025-02-28', dateResolved: '2025-03-05', priority: 'High' },
-    { id: 4, title: 'Video playback not working', category: 'Technical', dateSubmitted: '2025-02-20', dateResolved: '2025-02-22', priority: 'Low' },
-  ],
-  unresolved: [
-    { id: 5, title: 'Cannot access lab simulation', category: 'Technical', dateSubmitted: '2025-04-01', priority: 'High' },
-    { id: 6, title: 'Missing feedback on project', category: 'Academic', dateSubmitted: '2025-03-25', priority: 'Medium' },
-  ],
-  drafts: [
-    { id: 7, title: 'Question about final exam', category: 'Academic', lastEdited: '2025-04-10' },
-    { id: 8, title: 'Request for extension', category: 'Administrative', lastEdited: '2025-04-08' },
-  ]
-};
+
+// Common utility functions
+import { formatDate, getStatusBadge, getPriorityBadge } from '../utils/formatters';
+
+const API_BASE_URL = "https://kennedymutebi7.pythonanywhere.com";
+const API_URL = `${API_BASE_URL}/issues/api/issues/`;
 
 const History = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('all');
   const [issues, setIssues] = useState({
     resolved: [],
@@ -27,77 +19,134 @@ const History = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedIssue, setSelectedIssue] = useState(null);
+  const [newComment, setNewComment] = useState("");
 
-  // Function to fetch actual data from API when available
+  // Fetch issues from the API
   const fetchIssues = async () => {
     setIsLoading(true);
     try {
-      // FUTURE API IMPLEMENTATION:
-      // const response = await fetch('api/student/issues');
-      // const data = await response.json();
-      // setIssues(data);
+      const token = localStorage.getItem('access');
+      if (!token) {
+        throw new Error('No authentication token found');
+      }
       
-      // Using mock data for now
-      setIssues(mockIssues);
+      const response = await axios.get(API_URL, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      
+      // Filter issues based on student ownership
+      const studentId = getUserIdFromToken(token);
+      const studentIssues = response.data.results.filter(issue => issue.student === studentId);
+      
+      // Categorize issues
+      const categorizedIssues = {
+        resolved: studentIssues.filter(issue => issue.status === 'resolved' || issue.status === 'closed'),
+        unresolved: studentIssues.filter(issue => issue.status === 'pending' || issue.status === 'in_progress'),
+        drafts: studentIssues.filter(issue => issue.status === 'draft')
+      };
+      
+      setIssues(categorizedIssues);
       setIsLoading(false);
     } catch (err) {
       setError('Failed to load issues. Please try again later.');
       setIsLoading(false);
+      console.error('Error fetching issues:', err);
+      
+      // Redirect to login if unauthorized
+      if (err.response && err.response.status === 401) {
+        navigate('/login');
+      }
     }
+  };
+
+  // Get user ID from token (placeholder - implement proper token decoding)
+  const getUserIdFromToken = (token) => {
+    // In a production environment, you would decode the token properly
+    // For now, retrieve user ID from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user ? user.id : null;
   };
 
   useEffect(() => {
-    // This will be replaced with real API call
     fetchIssues();
-    
-    // Optional: Clean-up function
-    return () => {
-      // Any clean-up code if needed
-    };
   }, []);
 
-  // Helper function to format dates
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
-  // Get appropriate status badge styling
-  const getStatusBadge = (status) => {
-    switch (status) {
-      case 'resolved':
-        return 'history-status-badge history-status-resolved';
-      case 'unresolved':
-        return 'history-status-badge history-status-unresolved';
-      case 'draft':
-        return 'history-status-badge history-status-draft';
-      default:
-        return 'history-status-badge';
+  // Fetch a specific issue with all its details
+  const fetchIssueDetails = async (issueId) => {
+    try {
+      const token = localStorage.getItem('access');
+      const response = await axios.get(`${API_URL}${issueId}/`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      setSelectedIssue(response.data);
+    } catch (err) {
+      console.error('Error fetching issue details:', err);
+      setError('Failed to fetch issue details');
     }
   };
 
-  // Get priority badge styling
-  const getPriorityBadge = (priority) => {
-    switch (priority) {
-      case 'High':
-        return 'history-priority-badge history-priority-high';
-      case 'Medium':
-        return 'history-priority-badge history-priority-medium';
-      case 'Low':
-        return 'history-priority-badge history-priority-low';
-      default:
-        return 'history-priority-badge';
+  // Handle clicking on an issue to view details
+  const handleIssueClick = (issueId) => {
+    fetchIssueDetails(issueId);
+  };
+
+  // Add a comment to an issue
+  const handleAddComment = async () => {
+    if (!newComment.trim()) return;
+
+    try {
+      const token = localStorage.getItem('access');
+      const user = JSON.parse(localStorage.getItem('user'));
+      
+      const commentData = {
+        content: newComment,
+        issue: selectedIssue.id,
+        user: user.id
+      };
+      
+      const response = await axios.post(
+        `${API_BASE_URL}/issues/api/comments/`,
+        commentData,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      
+      // Update the selected issue with the new comment
+      const updatedIssue = {
+        ...selectedIssue,
+        comments: [...(selectedIssue.comments || []), response.data],
+      };
+      
+      setSelectedIssue(updatedIssue);
+      setNewComment("");
+    } catch (err) {
+      console.error('Error adding comment:', err);
+      alert('Failed to add comment. Please try again.');
     }
+  };
+
+  // Return to the issues list
+  const handleBackToList = () => {
+    setSelectedIssue(null);
   };
 
   // Function to render appropriate table based on active tab
   const renderTable = () => {
     if (isLoading) {
-      return <div className="history-loading"><div className="history-spinner"></div></div>;
+      return <div>Loading issues...</div>;
     }
 
     if (error) {
-      return <div className="history-error">{error}</div>;
+      return <div>{error}</div>;
     }
 
     let dataToRender = [];
@@ -105,74 +154,72 @@ const History = () => {
     // Determine which data to display based on active tab
     if (activeTab === 'all') {
       dataToRender = [
-        ...issues.resolved.map(issue => ({ ...issue, status: 'resolved' })),
-        ...issues.unresolved.map(issue => ({ ...issue, status: 'unresolved' })),
-        ...issues.drafts.map(issue => ({ ...issue, status: 'draft' }))
+        ...issues.resolved.map(issue => ({ ...issue, status: issue.status })),
+        ...issues.unresolved.map(issue => ({ ...issue, status: issue.status })),
+        ...issues.drafts.map(issue => ({ ...issue, status: issue.status }))
       ];
     } else if (activeTab === 'resolved') {
-      dataToRender = issues.resolved.map(issue => ({ ...issue, status: 'resolved' }));
+      dataToRender = issues.resolved;
     } else if (activeTab === 'unresolved') {
-      dataToRender = issues.unresolved.map(issue => ({ ...issue, status: 'unresolved' }));
+      dataToRender = issues.unresolved;
     } else if (activeTab === 'drafts') {
-      dataToRender = issues.drafts.map(issue => ({ ...issue, status: 'draft' }));
+      dataToRender = issues.drafts;
     }
 
     if (dataToRender.length === 0) {
-      return <div className="history-empty">No issues found</div>;
+      return <div>No issues found</div>;
     }
 
     return (
-      <div className="history-table-container">
-        <StudentHoverBar/ >
-        <table className="history-table">
-          <thead className="history-table-header">
+      <div>
+        <StudentHoverBar />
+        <table>
+          <thead>
             <tr>
-              <th scope="col" className="history-table-th">Issue</th>
-              <th scope="col" className="history-table-th">Category</th>
-              <th scope="col" className="history-table-th">Date</th>
-              <th scope="col" className="history-table-th">Status</th>
-              <th scope="col" className="history-table-th">Priority</th>
-              <th scope="col" className="history-table-th">Actions</th>
+              <th>Issue</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody className="history-table-body">
+          <tbody>
             {dataToRender.map((issue) => (
-              <tr key={issue.id} className="history-table-row">
-                <td className="history-table-cell">
-                  <div className="history-issue-title">{issue.title}</div>
-                  <div className="history-issue-id">ID: {issue.id}</div>
+              <tr key={issue.id}>
+                <td>
+                  <div>{issue.title}</div>
+                  <div>ID: {issue.id}</div>
                 </td>
-                <td className="history-table-cell">
-                  <div className="history-category">{issue.category}</div>
+                <td>
+                  <div>{issue.category}</div>
                 </td>
-                <td className="history-table-cell">
-                  <div className="history-date">
-                    {issue.status === 'draft' 
-                      ? `Last edited: ${formatDate(issue.lastEdited)}` 
-                      : `Submitted: ${formatDate(issue.dateSubmitted)}`}
+                <td>
+                  <div>
+                    Submitted: {formatDate(issue.created_at)}
                   </div>
-                  {issue.dateResolved && (
-                    <div className="history-date-secondary">
-                      Resolved: {formatDate(issue.dateResolved)}
+                  {issue.status === 'resolved' && issue.updated_at && (
+                    <div>
+                      Resolved: {formatDate(issue.updated_at)}
                     </div>
                   )}
                 </td>
-                <td className="history-table-cell">
+                <td>
                   <span className={getStatusBadge(issue.status)}>
-                    {issue.status.charAt(0).toUpperCase() + issue.status.slice(1)}
+                    {issue.status.replace('_', ' ').charAt(0).toUpperCase() + issue.status.replace('_', ' ').slice(1)}
                   </span>
                 </td>
-                <td className="history-table-cell">
+                <td>
                   {issue.priority && (
                     <span className={getPriorityBadge(issue.priority)}>
                       {issue.priority}
                     </span>
                   )}
                 </td>
-                <td className="history-table-cell history-actions-cell">
-                  <button className="history-action-btn history-view-btn">View</button>
+                <td>
+                  <button onClick={() => handleIssueClick(issue.id)}>View</button>
                   {issue.status === 'draft' && (
-                    <button className="history-action-btn history-edit-btn">Edit</button>
+                    <button onClick={() => navigate(`/edit-issue/${issue.id}`)}>Edit</button>
                   )}
                 </td>
               </tr>
@@ -183,317 +230,138 @@ const History = () => {
     );
   };
 
-  return (
-    <div className="history-container">
-      <div className="history-header">
-        <h3 className="history-title">Issue History</h3>
-        <p className="history-subtitle">
-          View and manage all your submitted issues
-        </p>
-      </div>
-      
-      {/* Tabs */}
-      <div className="history-tabs-container">
-        <nav className="history-tabs" aria-label="Tabs">
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`history-tab ${activeTab === 'all' ? 'history-tab-active' : ''}`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setActiveTab('resolved')}
-            className={`history-tab ${activeTab === 'resolved' ? 'history-tab-active' : ''}`}
-          >
-            Resolved 
-            <span className="history-tab-count">
-              {issues.resolved.length}
-            </span>
-          </button>
-          <button
-            onClick={() => setActiveTab('unresolved')}
-            className={`history-tab ${activeTab === 'unresolved' ? 'history-tab-active' : ''}`}
-          >
-            Unresolved
-            <span className="history-tab-count">
-              {issues.unresolved.length}
-            </span>
-          </button>
-          <button
-            onClick={() => setActiveTab('drafts')}
-            className={`history-tab ${activeTab === 'drafts' ? 'history-tab-active' : ''}`}
-          >
-            Drafts
-            <span className="history-tab-count">
-              {issues.drafts.length}
-            </span>
-          </button>
-        </nav>
-      </div>
-      
-      <div className="history-content">
-        {/* Filter and search options could be added here */}
+  // Render detailed issue view
+  const renderIssueDetail = () => {
+    if (!selectedIssue) return null;
+    
+    return (
+      <div>
+        <button onClick={handleBackToList}>Back to Issues</button>
         
-        {/* Table */}
-        {renderTable()}
+        <div>
+          <h2>{selectedIssue.title}</h2>
+          <div>
+            <span className={getStatusBadge(selectedIssue.status)}>
+              {selectedIssue.status.replace('_', ' ').charAt(0).toUpperCase() + selectedIssue.status.replace('_', ' ').slice(1)}
+            </span>
+            {selectedIssue.priority && (
+              <span className={getPriorityBadge(selectedIssue.priority)}>
+                {selectedIssue.priority}
+              </span>
+            )}
+          </div>
+        </div>
+        
+        <div>
+          <div>
+            <p><strong>Issue ID:</strong> #{selectedIssue.id}</p>
+            <p><strong>Category:</strong> {selectedIssue.category}</p>
+            <p><strong>Created:</strong> {formatDate(selectedIssue.created_at)}</p>
+            <p><strong>Last Updated:</strong> {formatDate(selectedIssue.updated_at)}</p>
+            {selectedIssue.course_unit_name && (
+              <p><strong>Course Unit:</strong> {selectedIssue.course_unit_name}</p>
+            )}
+            {selectedIssue.courseCode && (
+              <p><strong>Course Code:</strong> {selectedIssue.courseCode}</p>
+            )}
+          </div>
+          
+          <div>
+            <h3>Issue Description</h3>
+            <p>{selectedIssue.description}</p>
+          </div>
+          
+          <div>
+            <h3>Comments ({selectedIssue.comments ? selectedIssue.comments.length : 0})</h3>
+            
+            <div>
+              {selectedIssue.comments && selectedIssue.comments.length > 0 ? (
+                selectedIssue.comments.map((comment) => (
+                  <div key={comment.id}>
+                    <div>
+                      <span>
+                        {comment.user_name || `User #${comment.user}`}
+                      </span>
+                      <span>{formatDate(comment.created_at)}</span>
+                    </div>
+                    <p>{comment.content}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No comments yet</p>
+              )}
+            </div>
+            
+            <div>
+              <textarea
+                placeholder="Add your comment here..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+              <button onClick={handleAddComment}>Post Comment</button>
+            </div>
+          </div>
+        </div>
       </div>
+    );
+  };
 
-      {/* CSS for the component */}
-      <style jsx>{`
-        /* Container styles */
-        .history-container {
-          background-color: white;
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-          overflow: hidden;
-          margin:40px;
-          border-radius: 0.5rem;
-          margin-bottom: 210px;
-        }
-        
-        /* Header styles */
-        .history-header {
-          padding: 1.25rem 1rem;
-        }
-        
-        .history-title {
-          font-size: 1.125rem;
-          font-weight: 500;
-          color: #111827;
-        }
-        
-        .history-subtitle {
-          margin-top: 0.25rem;
-          font-size: 0.875rem;
-          color: #6B7280;
-        }
-        
-        /* Tabs styling */
-        .history-tabs-container {
-          border-bottom: 1px solid #E5E7EB;
-        }
-        
-        .history-tabs {
-          display: flex;
-          padding: 0 1rem;
-        }
-        
-        .history-tab {
-          padding: 1rem;
-          border-bottom: 2px solid transparent;
-          font-size: 0.875rem;
-          font-weight: 500;
-          color: #6B7280;
-          background: none;
-          cursor: pointer;
-        }
-        
-        .history-tab:hover {
-          color: #374151;
-          border-bottom-color: #D1D5DB;
-        }
-        
-        .history-tab-active {
-          border-bottom-color: #3B82F6;
-          color: #3B82F6;
-        }
-        
-        .history-tab-count {
-          margin-left: 0.5rem;
-          background-color: #F3F4F6;
-          color: #4B5563;
-          padding: 0.125rem 0.5rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-        }
-        
-        /* Content area */
-        .history-content {
-          padding: 1.25rem 1rem;
-        }
-        
-        /* Loading state */
-        .history-loading {
-          display: flex;
-          justify-content: center;
-          padding: 2.5rem 0;
-        }
-        
-        .history-spinner {
-          animation: spin 1s linear infinite;
-          height: 2.5rem;
-          width: 2.5rem;
-          border-radius: 9999px;
-          border: 2px solid #E5E7EB;
-          border-top-color: #3B82F6;
-        }
-        
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        
-        /* Error state */
-        .history-error {
-          background-color: #FEF2F2;
-          padding: 1rem;
-          border-radius: 0.375rem;
-          color: #B91C1C;
-        }
-        
-        /* Empty state */
-        .history-empty {
-          text-align: center;
-          padding: 2.5rem 0;
-          color: #6B7280;
-        }
-        
-        /* Table styles */
-        .history-table-container {
-          overflow-x: auto;
-        }
-        
-        .history-table {
-          min-width: 100%;
-          border-collapse: separate;
-          border-spacing: 0;
-        }
-        
-        .history-table-header {
-          background-color: #F9FAFB;
-        }
-        
-        .history-table-th {
-          padding: 0.75rem 1.5rem;
-          text-align: left;
-          font-size: 0.75rem;
-          font-weight: 500;
-          color: #6B7280;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-        
-        .history-table-body {
-          background-color: white;
-        }
-        
-        .history-table-row {
-          border-bottom: 1px solid #E5E7EB;
-        }
-        
-        .history-table-row:hover {
-          background-color: #F9FAFB;
-        }
-        
-        .history-table-cell {
-          padding: 1rem 1.5rem;
-          white-space: nowrap;
-        }
-        
-        .history-issue-title {
-          font-size: 0.875rem;
-          font-weight: 500;
-          color: #111827;
-        }
-        
-        .history-issue-id {
-          font-size: 0.875rem;
-          color: #6B7280;
-        }
-        
-        .history-category {
-          font-size: 0.875rem;
-          color: #111827;
-        }
-        
-        .history-date {
-          font-size: 0.875rem;
-          color: #111827;
-        }
-        
-        .history-date-secondary {
-          font-size: 0.875rem;
-          color: #6B7280;
-        }
-        
-        /* Status badges */
-        .history-status-badge {
-          padding: 0.25rem 0.5rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 500;
-          display: inline-block;
-        }
-        
-        .history-status-resolved {
-          background-color: #D1FAE5;
-          color: #065F46;
-        }
-        
-        .history-status-unresolved {
-          background-color: #FEF3C7;
-          color: #92400E;
-        }
-        
-        .history-status-draft {
-          background-color: #F3F4F6;
-          color: #4B5563;
-        }
-        
-        /* Priority badges */
-        .history-priority-badge {
-          padding: 0.25rem 0.5rem;
-          border-radius: 9999px;
-          font-size: 0.75rem;
-          font-weight: 500;
-          display: inline-block;
-        }
-        
-        .history-priority-high {
-          background-color: #FEE2E2;
-          color: #991B1B;
-        }
-        
-        .history-priority-medium {
-          background-color: #DBEAFE;
-          color: #1E40AF;
-        }
-        
-        .history-priority-low {
-          background-color: #D1FAE5;
-          color: #065F46;
-        }
-        
-        /* Action buttons */
-        .history-actions-cell {
-          text-align: right;
-        }
-        
-        .history-action-btn {
-          font-size: 0.875rem;
-          font-weight: 500;
-          background: none;
-          border: none;
-          cursor: pointer;
-        }
-        
-        .history-view-btn {
-          color: #2563EB;
-          margin-right: 0.75rem;
-        }
-        
-        .history-view-btn:hover {
-          color: #1D4ED8;
-        }
-        
-        .history-edit-btn {
-          color: #059669;
-        }
-        
-        .history-edit-btn:hover {
-          color: #047857;
-        }
-      `}</style>
+  return (
+    <div>
+      <div>
+        <h3>Issue History</h3>
+        <p>View and manage all your submitted issues</p>
+      </div>
+      
+      {!selectedIssue ? (
+        <>
+          {/* Tabs */}
+          <div>
+            <nav aria-label="Tabs">
+              <button
+                onClick={() => setActiveTab('all')}
+                className={activeTab === 'all' ? 'active' : ''}
+              >
+                All
+              </button>
+              <button
+                onClick={() => setActiveTab('resolved')}
+                className={activeTab === 'resolved' ? 'active' : ''}
+              >
+                Resolved 
+                <span>
+                  {issues.resolved.length}
+                </span>
+              </button>
+              <button
+                onClick={() => setActiveTab('unresolved')}
+                className={activeTab === 'unresolved' ? 'active' : ''}
+              >
+                Unresolved
+                <span>
+                  {issues.unresolved.length}
+                </span>
+              </button>
+              <button
+                onClick={() => setActiveTab('drafts')}
+                className={activeTab === 'drafts' ? 'active' : ''}
+              >
+                Drafts
+                <span>
+                  {issues.drafts.length}
+                </span>
+              </button>
+            </nav>
+          </div>
+          
+          <div>
+            <button onClick={fetchIssues}>Refresh</button>
+            {renderTable()}
+          </div>
+        </>
+      ) : (
+        renderIssueDetail()
+      )}
     </div>
   );
 };
