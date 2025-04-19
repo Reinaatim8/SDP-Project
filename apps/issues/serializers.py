@@ -33,7 +33,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
     student_name = serializers.CharField(source='student.get_full_name', read_only=True)
     
     class Meta:
-        model = Enrollment
+        model =  Enrollment
         fields = [
             'id',
             'student_name',
