@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './ProfileAdmin.css'; //for styling
 import RegistrarSidebar from '../components/RegistrarSidebar';
 import { FaUserCircle } from "react-icons/fa"; // Import user icon
-import { toast } from 'react-toastify'; // Import toast for notifications
+
 
 const ProfileAdmin = () => {
   const [userData, setUserData] = useState(null);
@@ -28,8 +28,7 @@ const ProfileAdmin = () => {
           <div className="profile-icon">
             <FaUserCircle size={100} color="#2c3e50"  />
           </div>
-          {/*<p><strong>First Name:</strong> {userData.first_name}</p>
-          <p><strong>Last Name:</strong> {userData.last_name}</p>*/}
+
           <p><strong>Username:</strong> {userData.username}</p>
           <p><strong>Email:</strong> {userData.email}</p>
           <p><strong>User Type:</strong> {userData.user_type}</p>
