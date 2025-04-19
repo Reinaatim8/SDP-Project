@@ -17,7 +17,7 @@ const RegistrarDashboard = () => {
     const storedUer = localStorage.getItem('user');
     if (storedUer) {
       setUser(JSON.parse(storedUer));
-      toast.success('Hello Again!', { autoClose: 10000 });
+      //toast.success('Hello Again!', { autoClose: 10000 });
     }
   }, []);
   const [loading, setLoading] = useState({

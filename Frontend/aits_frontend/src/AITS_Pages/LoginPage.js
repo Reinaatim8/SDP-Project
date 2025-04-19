@@ -81,6 +81,9 @@ const Loginpage = () => {
         // Save tokens to localStorage
         localStorage.setItem('access', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
+        toast.success('Login Successful!', {
+          autoClose: 40000,
+        });
 
         // Determine the user's role and navigate accordingly
       const user_type = response.user.user_type; // Assuming the user type is included in the response
