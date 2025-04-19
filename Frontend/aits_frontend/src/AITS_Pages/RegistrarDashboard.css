@@ -213,10 +213,11 @@ body{
   width: 100%;
 }
 
-.header-left {
+.header {
   display: flex;
   align-items: center;
   gap: 1rem;
+  
 }
 
 .logo {
@@ -289,10 +290,10 @@ body{
   gap: 1.5rem;
   padding: 1.5rem 2rem;
   background-color: #fff;
-  margin: 0.5rem 2rem;
+ margin-top: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-  width: 90%;
+  width: 100%;
 }
 
 .stat-card {
