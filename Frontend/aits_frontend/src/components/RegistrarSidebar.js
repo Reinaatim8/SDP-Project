@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navigate, NavLink, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { 
   Menu, FileText, Bell, Home, BarChart2,Search,ChevronRight,LogOut,User,Moon,Sun,Calendar,Clock,X,
@@ -33,6 +34,7 @@ const RegistrarSidebar = () => {
 
     navigate('/login');
     console.log("User logged out");
+    toast.success("Logout successful. Login Again to continue.");
   };
   useEffect(() => {
     const timer = setInterval(() => {

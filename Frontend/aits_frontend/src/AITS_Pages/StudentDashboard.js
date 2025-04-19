@@ -35,6 +35,8 @@ useEffect(() => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
+    console.log("User logged out");
+    toast.success('Logout Successful! Login Again to continue.',{autoClose:60000});
   };
 
 
