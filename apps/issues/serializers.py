@@ -93,7 +93,7 @@ class AuditLogSerializer(serializers.ModelSerializer):
         ]
 class NotificationSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
-    issue_title = serializers.CharField(source='issue.title', read_only=True)
+    issue_title =  serializers.CharField(source='issue.title', read_only=True)
 
     class Meta:
         model = Notification
