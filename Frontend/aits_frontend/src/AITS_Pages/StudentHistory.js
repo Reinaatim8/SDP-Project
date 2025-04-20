@@ -64,10 +64,14 @@ const History = () => {
 
   // Get user ID from token (placeholder - implement proper token decoding)
   const getUserIdFromToken = (token) => {
-    // In a production environment, you would decode the token properly
-    // For now, retrieve user ID from localStorage
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user ? user.id : null;
+    // Get user ID from localStorage more reliably
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      return user ? user.id : null;
+    } catch (e) {
+      console.error("Error parsing user from localStorage:", e);
+      return null;
+    }
   };
 
   useEffect(() => {

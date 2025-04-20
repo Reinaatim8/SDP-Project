@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaSearch, FaComments, FaEdit } from "react-icons/fa";
 import axios from "axios";
 import LecturerHoverBar from "../components/LecturerHoverBar";
-import { StatusBadge } from "../components/StatusBadge";
-import { PriorityBadge } from "../components/PriorityBadge";
-import { formatDate } from "../utils/formatters";
-import ConfirmationDialog from "../components/ConfirmationDialog";
+import { StatusBadge } from "../components/StatusBadge.js";
+import { PriorityBadge } from "../components/PriorityBadge.js";
+import { formatDate } from "../utils/formatters.js";
+import ConfirmationDialog from "../components/ConfirmationDialogue.js";
 
 const API_BASE_URL = "https://kennedymutebi7.pythonanywhere.com";
 const API_URL = `${API_BASE_URL}/issues/api/issues/`;
