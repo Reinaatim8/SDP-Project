@@ -38,46 +38,44 @@ const StudentIssueReport = () => {
   const handleFileChange = (event)  => {
     setFile(event.target.files[0]);
   };
+
   const handleIssueSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return;
-    setIsSubmitting(true);
-    
+    console.log("===FORM SUBMISSION STARTED===");
+    console.log("Form Data:",{
+      issueTitle,
+      category,
+      courseUnitName,
+      courseCode,
+      issueDescription,
+      selectedLecturer,
+      file: file? file.name :"No file"
+    });
+   // Prevent double submission
+   if (isSubmitting) return;
+   setIsSubmitting(true);
     // Validate form
-    if (!issueTitle || !category || !courseUnitName || !courseCode || !issueDescription || !selectedLecturer) {
+    if (!issueTitle || !category || !courseUnitName || !courseCode||!issueDescription || !selectedLecturer ) {
       toast.error("Please fill in all required fields");
       setIsSubmitting(false);
       return;
     }
-    
-    // Get student ID from localStorage
-    const user = JSON.parse(localStorage.getItem('user'));
-    const studentId = user ? user.id : null;
-    
-    if (!studentId) {
-      toast.error("User information not found. Please login again.");
-      navigate('/login');
-      return;
-    }
-    
     // Submit issue to API
-    const formData = new FormData();
+    const formData =  new FormData();
     formData.append("title", issueTitle);
     formData.append("lecturer", selectedLecturer);
     formData.append("category", category);
-    formData.append("course_unit_name", courseUnitName);
-    formData.append("courseCode", courseCode);
+    formData.append("course_unit_name",courseUnitName);
+    formData.append("courseCode",courseCode);
     formData.append("description", issueDescription);
-    formData.append("student", studentId); // Add student ID
-    formData.append("status", "pending"); // Add default status
-    
+  
     if (file) {
       formData.append("attachment", file);
     }
-    
-    try {
-      const response = await submitIssue(formData);
-      console.log("Issue submitted successfully:", response);
+    console.log("Submitting issue...");
+      try {
+        const response = await submitIssue(formData);
+        console.log("Issue submitted successfully:", response);
         //alert("Issue submitted succesfully!")
         toast.success("Issue submitted successfully!");
         // Handle success (e.g., show a success message, clear form fields, etc.)
