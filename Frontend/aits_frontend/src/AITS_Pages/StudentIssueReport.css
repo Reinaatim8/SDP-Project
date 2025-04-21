@@ -247,3 +247,62 @@ div:has(> input[type="file"]) {
   position: relative;
   margin-bottom: 20px;
 }
+/* Responsive Design and Polish */
+@media screen and (max-width: 768px) {
+  .student-issue-report-container {
+    max-width: 95%;
+    padding: 15px;
+    margin: 15px auto;
+  }
+  
+  .student-issue-report-content {
+    padding: 20px;
+  }
+  
+  .student-issue-report-form {
+    padding: 20px;
+  }
+  
+  .student-issue-report-title {
+    font-size: 1.7rem;
+  }
+  
+  .student-issue-report-tag-button {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .student-issue-report-tag-button {
+    width: 100%;
+  }
+  
+  .student-issue-report-form input,
+  .student-issue-report-textarea {
+    padding: 10px;
+  }
+  
+  .student-issue-report-submit-button {
+    padding: 12px 15px;
+  }
+}
+
+/* Background and Global Styling */
+body {
+  background-image: url(../../public/images/studentwallpaper.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Animation for form submission */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 123, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+}
+
+.student-issue-report-submit-button:focus:not(:disabled) {
+  animation: pulse 1.5s infinite;
+}
