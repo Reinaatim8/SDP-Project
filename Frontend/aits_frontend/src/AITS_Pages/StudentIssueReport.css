@@ -103,3 +103,43 @@
   width: 100%;
   box-sizing: border-box;
 }
+/* Form Inputs Styling */
+.student-issue-report-form input,
+.student-issue-report-course-input,
+.student-issue-report-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.student-issue-report-form input:focus,
+.student-issue-report-course-input:focus,
+.student-issue-report-textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.student-issue-report-form-group input {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.student-issue-report-label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  width: 100%;
+  color: #2c3e50;
+  font-size: 15px;
+}
+
+.student-issue-report-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
