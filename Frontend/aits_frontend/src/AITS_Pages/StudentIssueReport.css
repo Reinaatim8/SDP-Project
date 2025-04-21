@@ -65,3 +65,41 @@
   margin-bottom: 25px;
   color: #2c3e50;
 }
+/* Form Styling - Enhanced Container */
+.student-issue-report-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  margin-top: 25px;
+  height: fit-content;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.student-issue-report-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, #007bff, #00c853);
+  border-radius: 12px 12px 0 0;
+}
+
+.student-issue-report-form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.student-issue-report-form2 {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  margin-top: 25px;
+  height: 250px;
+  width: 100%;
+  box-sizing: border-box;
+}
