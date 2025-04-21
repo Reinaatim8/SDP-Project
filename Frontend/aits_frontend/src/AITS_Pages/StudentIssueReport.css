@@ -143,3 +143,61 @@
   min-height: 120px;
   resize: vertical;
 }
+
+
+/* Button Styling and Interactions */
+.student-issue-report-submit-button {
+  background: linear-gradient(to right, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  text-transform: uppercase;
+}
+
+.student-issue-report-submit-button:hover {
+  background: linear-gradient(to right, #0056b3, #004094);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+.student-issue-report-submit-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 3px rgba(0, 123, 255, 0.2);
+}
+
+.student-issue-report-submit-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.student-issue-report-tag-button {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 10px 5px 5px 0;
+  color: #333;
+  width: 22%;
+  height: 45px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.student-issue-report-tag-button.selected {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
