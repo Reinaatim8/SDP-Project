@@ -28,3 +28,40 @@
   margin-left: 0;
   width: 100%;
 }
+/* Typography and Headings */
+.student-issue-report-title {
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.student-issue-report-description {
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.student-issue-report-divider {
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+  margin: 20px 0 30px;
+}
+
+.student-issue-report-form p {
+  font-weight: 700;
+  text-decoration: underline darkgreen;
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
