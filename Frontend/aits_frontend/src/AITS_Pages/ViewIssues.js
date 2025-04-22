@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../utils/axiosInstance';
 import { toast } from 'react-toastify';
-import StudentSidebar from '../components/StudentSidebar';
 import StudentHoverBar from './StudentHoverBar';
 
 const ViewIssues = () => {
@@ -172,7 +171,7 @@ const ViewIssues = () => {
 
   return (
     <div className="view-issues-page">
-      <StudentSidebar/>
+      
       
       <div className="history-container">
         <div className="history-header">
