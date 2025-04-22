@@ -41,7 +41,7 @@ const StudentHoverBar = () => {
             <a href="/StudentIssueReport" className={isActive("/StudentIssueReport") ? "active" : ""}>
               <FaDatabase /> Issues
             </a>
-            <a href="/StudentHistory" className={isActive("/StudentHistory") ? "active" : ""}>
+            <a href="/ViewIssues" className={isActive("/ViewIssues") ? "active" : ""}>
               <FaHistory /> History
             </a>
             <a href="/Profile" className={isActive("/Profile") ? "active" : ""}>
