@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import apiClient from '../utils/axiosInstance';
 import { toast } from 'react-toastify';
 import StudentSidebar from '../components/StudentSidebar';
+import StudentHoverBar from './StudentHoverBar';
 
 const ViewIssues = () => {
   const [issues, setIssues] = useState([]);
@@ -92,6 +93,7 @@ const ViewIssues = () => {
 
     return (
       <div className="history-table-container">
+        <StudentHoverBar/>
         <table className="history-table">
           <thead className="history-table-header">
             <tr>
