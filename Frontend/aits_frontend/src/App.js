@@ -11,7 +11,6 @@ import StudentIssueReport from './AITS_Pages/StudentIssueReport';
 import LecturerDashboard from './AITS_Pages/LecturerDashboard';
 import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
 import RespondToQueries from './AITS_Pages/RespondToQueries';
-import StudentHistory from './AITS_Pages/StudentHistory';
 import NotificationsPage from './AITS_Pages/Notifications';
 import ViewIssues from './AITS_Pages/ViewIssues';
 import LecturerIssueManagement from './AITS_Pages/LecturerIssueManagement';
@@ -46,7 +45,6 @@ function App() {
         <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
         <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />
         <Route path="/RespondToQueries" element={<RespondToQueries />} />
-        <Route path="/StudentHistory" element={<StudentHistory />} />
         <Route path="/Notifications" element={<NotificationsPage />} />
         <Route path="/LecturerIssueManagement" element={<LecturerIssueManagement />} />
         <Route path="/ViewIssues" element={<ViewIssues />} />
