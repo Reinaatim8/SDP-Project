@@ -13,6 +13,7 @@ import RegistrarDashboard from './AITS_Pages/RegistrarDashboard';
 import RespondToQueries from './AITS_Pages/RespondToQueries';
 import StudentHistory from './AITS_Pages/StudentHistory';
 import NotificationsPage from './AITS_Pages/Notifications';
+import ViewIssues from './AITS_Pages/ViewIssues';
 import LecturerIssueManagement from './AITS_Pages/LecturerIssueManagement';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -48,6 +49,7 @@ function App() {
         <Route path="/StudentHistory" element={<StudentHistory />} />
         <Route path="/Notifications" element={<NotificationsPage />} />
         <Route path="/LecturerIssueManagement" element={<LecturerIssueManagement />} />
+        <Route path="/ViewIssues" element={<ViewIssues />} />
 
       </Routes>
     </Router>
