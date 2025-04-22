@@ -12,4 +12,4 @@ class CustomUserCreationForm(UserCreationForm):
 class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ['title', 'description', 'priority']
+        fields = ['title', 'description', 'priority', 'status']
