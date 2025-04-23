@@ -104,7 +104,7 @@ const StudentIssueReport = () => {
       <StudentHoverBar />
       
       <div className="issue-report-container">
-        <header className="issue-header">
+        <header className="student-issue-header">
           <div className="header-content">
             <div className="header-icon">📩</div>
             <h1>Report an Issue</h1>
