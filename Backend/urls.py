@@ -7,7 +7,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet, basename="users")
 router.register(r'courses', views.CourseViewSet, basename="courses")
-router.register(r'enrollments', views.EnrollmentViewSet)
+router.register(r'enrollments', views.EnrollmentViewSet, basename="enrollments")
 router.register(r'categories', views.IssueCategoryViewSet)
 router.register(r'issues', views.IssueViewSet)
 router.register(r'comments', views.CommentViewSet)
