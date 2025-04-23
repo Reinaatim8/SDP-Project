@@ -46,8 +46,14 @@ const ViewIssuesAdmin = () => {
     fetchIssues();
   }, [navigate]);
 
-  //if (loading) return <p>Loading issues...</p>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+    </div>
+  );
 
+
+  
   return (
     <div className="view-issues-container">
       <RegistrarSidebar/>
@@ -71,11 +77,11 @@ const ViewIssuesAdmin = () => {
         <tbody>
           {issues.map((issue) => (
             <tr key={issue.id}>
-              <td>{issue.title}</td>
-              <td>{issue.description}</td>
+              <td data-label="Title">{issue.title}</td>
+              <td data-label="Description">{issue.description}</td>
               <td>{issue.category}</td>
-              <td>{issue.status}</td>
-              <td>{issue.priority}</td>
+              <td className={`status-${issue.status.toLowerCase()}`}>{issue.status}</td>
+              <td className={`priority-${issue.priority.toLowerCase()}`}>{issue.priority}</td>
               <td>{issue.assigned_to_name}</td>
               <td>{new Date(issue.created_at).toLocaleString()}</td>
             </tr>
