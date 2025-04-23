@@ -42,7 +42,7 @@ const WelcomePage = () => {
           <h1 className="hero-title">Welcome to AITS</h1>
           <h2 className="hero-subtitle">Academic Issue Tracking System</h2>
           <p className="hero-description">
-            Streamline your academic concerns with our efficient issue tracking system. Submit, track, and resolve academic matters seamlessly.
+            "Streamline your academic concerns with our efficient issue tracking system. Submit, track, and resolve academic matters seamlessly."
           </p>
           <div className="hero-buttons">
             <Link to="/signup" className="hero-button">GET STARTED</Link>
@@ -59,9 +59,9 @@ const WelcomePage = () => {
                                     <h2>ABOUT</h2>
                                     <p>AITS (Academic Issue Tracking System) is operated by the IT Support Unit
                                     , within the Faculty of Computing and Informatics (COCIS). This platform is developed and updated by the 
-                                    CS Students Year 1(SDP). For more information, please contact us via our email address makerereaits@gmail.com or
-                                    elearning@mak.ac.ug.You will need a University email address to complete the AITS account creation process. 
-                                     Contacts to have a working email created or re-activated to enable you to access AITS with ease.</p>
+                                    CS Students Year 1(SDP). For more information, please contact us via our email address makerereaits@gmail.com 
+                                    You will need a University email address to complete the AITS account creation process. 
+                                     Contact us to have a working email to access AITS with ease.</p>
                                      </div>
           <div className='divone'>
             <h2>INFO</h2>
