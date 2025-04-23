@@ -45,7 +45,7 @@ const navigate = useNavigate();
 
     <h1 style={{textAlign: 'center',textDecoration: 'none',color:'#f0a500'}}>CONTACT US </h1>
     <p className="about-paragraph">For inquiries or assistance, please contact our support team:</p>
-    <p className="about-paragraph" style={{fontWeight:'bold'}}>Email: aits@gmail.com</p>
+    <p className="about-paragraph" style={{fontWeight:'bold'}}>Email: makerereaits@gmail.com</p>
     <p className="about-paragraph" style={{fontWeight:'bold'}}> Telephone no.: 080090045</p>
     <p className="about-paragraph" style={{fontWeight:'bold'}}> Address: Makerere University, Kampala, Uganda</p>
     
