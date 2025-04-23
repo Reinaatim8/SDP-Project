@@ -69,7 +69,7 @@ const WelcomePage = () => {
               <li><a href='https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://mak.ac.ug/&ved=2ahUKEwiy9s3XipKMAxUyhf0HHRZFClgQFnoECAwQAQ&usg=AOvVaw3NazKROMvUyH2a4dN4fqCU'>Makerere main site</a></li>
               <li><a href='https://intranet.mak.ac.ug/'>Intranet</a></li>
               <li><a href='http://cocis.mak.ac.ug/'>COCIS</a></li>
-              <li><a href="https://support.mak.ac.ug/">Support COCIS</a></li>
+              <li>Support Us At AITS </li>
               <li><strong>GROUP Q</strong></li>
             </ul>
             
