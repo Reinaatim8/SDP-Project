@@ -31,7 +31,7 @@ class NotificationTests(TestCase):
         self.assertEqual(EmailNotificationLog.objects.count(), 1)
         email_log = EmailNotificationLog.objects.first()
         self.assertEqual(email_log.notification, notification)
-    #Verifies notification read status
+    
     def test_mark_as_read(self):
         notification = Notification.objects.create(
             recipient=self.user,
