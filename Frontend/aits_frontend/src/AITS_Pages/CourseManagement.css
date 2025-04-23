@@ -23,6 +23,7 @@ body {
   color: var(--text-color);
   background-color: #f9fafb;
   line-height: 1.6;
+  background-image: url("../../public/images/studentwallpaper.jpg");
 }
 
 /* Main Container Layout */
@@ -245,13 +246,13 @@ body {
   border-radius: 8px !important;
 }
 
-.Toastify__toast--success {
+/* .Toastify__toast--success {
   background-color: var(--success-color) !important;
 }
 
 .Toastify__toast--error {
   background-color: var(--error-color) !important;
-}
+} */
 
 /* Animations */
 @keyframes fadeIn {
