@@ -116,9 +116,20 @@ const CourseManagement = () => {
                 <td>{course.description }</td>
                 
               </tr>
+              
             ))}
           </tbody>
         </table>
+        <div className="course-stats" style={{margin: '20px 0', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px'}}>
+  <h3 style={{textAlign:'center', marginBottom: '15px'}}>COURSE STATISTICS</h3>
+  <div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <div className="stat-box">
+      <p style={{fontSize: '24px', fontWeight: 'bold',textAlign:'center'}}>Total Courses <br></br>{courses.length}
+      </p>
+    </div>
+    {/* You could add more statistics here if needed */}
+  </div>
+</div>
       </div>
 
     </div>

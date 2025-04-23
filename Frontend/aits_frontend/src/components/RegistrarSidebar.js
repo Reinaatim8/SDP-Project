@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Navigate, NavLink, useLocation } from 'react-router-dom';
+import {  NavLink, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { 
-  Menu, FileText, Bell, Home, BarChart2,Search,ChevronRight,LogOut,User,Moon,Sun,Calendar,Clock,X,
+  Menu, FileText, Bell, Home,Search,ChevronRight,LogOut,User,Moon,Sun,X,
   InfoIcon} from 'lucide-react';
 
 const RegistrarSidebar = () => {
@@ -20,11 +20,6 @@ const RegistrarSidebar = () => {
     { id: 3, title: "End of semester report due", read: true, time: "Yesterday" }
   ]);
   const [showNotificationPanel, setShowNotificationPanel] = useState(false);
-  const [favorites, setFavorites] = useState([
-    { id: 1, title: "Student Enrollment", path: "/students/enrollment" },
-    { id: 2, title: "Course Schedule", path: "/courses/schedule" }
-  ]);
-
   
   const location = useLocation();
   const navigate = useNavigate();
@@ -84,7 +79,6 @@ const RegistrarSidebar = () => {
     { title: "Course Management", path: "/CourseManagement", icon: <FileText size={20} /> },
     {title:"Profile", path: "/ProfileAdmin", icon: <User size={20} /> },
     {title: "About AITS", path: "/Aboutpage", icon: <InfoIcon size={20} /> },
-    { title: "Calendar", path: "/calendar", icon: <Calendar size={20} /> },
 
   ];
   
@@ -135,7 +129,7 @@ const RegistrarSidebar = () => {
               className="search-input"
             />
             {searchQuery && (
-              <button className="clear-search" onClick={() => setSearchQuery('')}>
+              <button className="clear-search" onClick={() => toggleSearch('')}>
                 <X size={14} />
               </button>
             )}
