@@ -54,7 +54,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #Bulk marks notifications read
+    
     @action(detail=False, methods=['post'])
     def mark_all_as_read(self, request):
         updated = self.get_queryset().filter(is_read=True).update(is_read=True)
