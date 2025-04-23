@@ -229,6 +229,7 @@ const ViewIssues = () => {
         /* View Issues Page */
         .view-issues-page {
           display: flex;
+          height: 100vh;
         }
         
         /* Container styles */

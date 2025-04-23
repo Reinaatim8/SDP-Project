@@ -72,7 +72,7 @@ const [faqs, setFaqs] = useState([
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
         setUser(JSON.parse(storedUser));
-        toast.success('Hello Again!', { autoClose: 60000 });
+        toast.success('Hello Again!', { autoClose: 6000 });
         //alert("Login Successful!");
       }
     } catch (error) {
@@ -102,7 +102,7 @@ const [faqs, setFaqs] = useState([
           </h2>
           <p style={{ color: "#666", fontSize: "16px" }}>Track your academic progress and stay organized.</p>
         </div>
-<div style={{ marginTop: "20px", backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", width: "100%" }}>
+<div style={{ marginTop: "20px", backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", width:"" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📊 Issue Status Summary</h2>
   <div style={{ display: "flex", justifyContent: "space-around" }}>
     <div style={{ textAlign: "center" }}>
@@ -125,8 +125,8 @@ const [faqs, setFaqs] = useState([
     </div>
   </div>
 </div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔍 Search Issues</h2>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
+  {/* <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔍 Search Issues</h2>
   <div style={{ display: "flex", marginBottom: "15px" }}>
     <input
       type="text"
@@ -156,9 +156,9 @@ const [faqs, setFaqs] = useState([
   </div>
   <div style={{ fontSize: "14px", color: "#6c757d" }}>
     Try searching for keywords like "wifi", "grades", or "classroom"
-  </div>
+  </div> */}
 </div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔔 Recent Activity</h2>
   {activities.length > 0 ? (
     <ul style={{ listStyle: "none", padding: "0" }}>
@@ -185,7 +185,7 @@ const [faqs, setFaqs] = useState([
     <p>No recent activity.</p>
   )}
 </div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⚠️ Priority Issues</h2>
   {issues.filter(issue => issue.priority === "High").length > 0 ? (
     <ul style={{ listStyle: "none", padding: "0" }}>
@@ -218,7 +218,7 @@ const [faqs, setFaqs] = useState([
     <p>No high priority issues at the moment.</p>
   )}
 </div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⏱️ Response Time Metrics</h2>
   <div style={{ display: "flex", justifyContent: "space-around" }}>
     <div style={{ textAlign: "center", padding: "10px" }}>
@@ -235,7 +235,7 @@ const [faqs, setFaqs] = useState([
     </div>
   </div>
 </div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🚀 Quick Issue Report</h2>
   <p style={{ marginBottom: "10px" }}>Select an issue category to report:</p>
   <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
@@ -258,7 +258,7 @@ const [faqs, setFaqs] = useState([
       </button>
     ))}
   </div>
-  <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
+  <div style={{marginBottom:"10px", backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📈 Issue Statistics</h2>
   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
     <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
@@ -282,7 +282,7 @@ const [faqs, setFaqs] = useState([
 </div>
 
 
-        <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
+        <div style={{marginTop:"20px", display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
           <button
             style={{
               backgroundColor: "#007bff",
