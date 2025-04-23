@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {  NavLink, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { 
-  Menu, 
-  Settings, 
-  Users, 
-  FileText, 
-  Bell, 
-  Home, 
-  BarChart2,
-  Search,
-  ChevronRight,
-  LogOut,
-  User,
-  HelpCircle,
-  Moon,
-  Sun,
-  Calendar,
-  Clock,
-  X,
-  Bookmark,
-  Star
-} from 'lucide-react';
+  Menu, FileText, Bell, Home,Search,ChevronRight,LogOut,User,Moon,Sun,X,
+  InfoIcon} from 'lucide-react';
 
 const RegistrarSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -35,17 +20,17 @@ const RegistrarSidebar = () => {
     { id: 3, title: "End of semester report due", read: true, time: "Yesterday" }
   ]);
   const [showNotificationPanel, setShowNotificationPanel] = useState(false);
-  const [favorites, setFavorites] = useState([
-    { id: 1, title: "Student Enrollment", path: "/students/enrollment" },
-    { id: 2, title: "Course Schedule", path: "/courses/schedule" }
-  ]);
-  const [recentItems, setRecentItems] = useState([
-    { id: 1, title: "Grade Submission", path: "/grades/submit", time: "2 hours ago" },
-    { id: 2, title: "Class Roster", path: "/students/roster", time: "Yesterday" }
-  ]);
   
   const location = useLocation();
-  
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    navigate('/login');
+    console.log("User logged out");
+    toast.success("Logout successful. Login Again to continue.");
+  };
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -90,18 +75,17 @@ const RegistrarSidebar = () => {
   
   const mainMenuItems = [
     { title: "Dashboard", path: "/RegistrarDashboard", icon: <Home size={20} /> },
-    { title: "Student Management", path: "/students", icon: <Users size={20} /> },
-    { title: "Course Management", path: "/courses", icon: <FileText size={20} /> },
-    { title: "Reports & Analytics", path: "/reports", icon: <BarChart2 size={20} /> },
-    { title: "Calendar", path: "/calendar", icon: <Calendar size={20} /> },
-    { title: "Settings", path: "/settings", icon: <Settings size={20} /> }
+    {title: "General Student Submitted Issues", path: "/ViewIssuesAdmin", icon: <FileText size={20} /> },
+    { title: "Course Management", path: "/CourseManagement", icon: <FileText size={20} /> },
+    {title:"Profile", path: "/ProfileAdmin", icon: <User size={20} /> },
+    {title: "About AITS", path: "/Aboutpage", icon: <InfoIcon size={20} /> },
+
   ];
   
   const quickActionItems = [
-    { title: "Add New Student", action: () => alert("Add New Student modal would open") },
-    { title: "Register Course", action: () => alert("Register Course modal would open") },
-    { title: "Generate Transcript", action: () => alert("Generate Transcript modal would open") },
-    { title: "Schedule Exam", action: () => alert("Schedule Exam modal would open") }
+    { title: "View all Student Issues", action: () => navigate('/ViewIssuesAdmin') },
+    { title: "Register Course", action: () => navigate ('/CourseManagement') },
+    
   ];
   
   const formatDate = () => {
@@ -145,7 +129,7 @@ const RegistrarSidebar = () => {
               className="search-input"
             />
             {searchQuery && (
-              <button className="clear-search" onClick={() => setSearchQuery('')}>
+              <button className="clear-search" onClick={() => toggleSearch('')}>
                 <X size={14} />
               </button>
             )}
@@ -170,40 +154,6 @@ const RegistrarSidebar = () => {
         <>
           <div className="section-divider">
             <span>Quick Access</span>
-          </div>
-          
-          <div className="favorites-section">
-            <h3>
-              <Bookmark size={16} />
-              <span>Favorites</span>
-            </h3>
-            <ul>
-              {favorites.map(item => (
-                <li key={item.id}>
-                  <NavLink to={item.path} className="favorite-link">
-                    <Star size={14} className="star-icon" />
-                    <span>{item.title}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          <div className="recents-section">
-            <h3>
-              <Clock size={16} />
-              <span>Recent</span>
-            </h3>
-            <ul>
-              {recentItems.map(item => (
-                <li key={item.id}>
-                  <NavLink to={item.path} className="recent-link">
-                    <span>{item.title}</span>
-                    <small>{item.time}</small>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
           </div>
           
           <div className="quick-actions">
@@ -269,11 +219,7 @@ const RegistrarSidebar = () => {
         
         {isExpanded && (
           <div className="footer-actions">
-            <button className="help-btn">
-              <HelpCircle size={16} />
-              <span>Help</span>
-            </button>
-            <button className="logout-btn">
+            <button className="logout-btn" onClick={handleLogout}>
               <LogOut size={16} />
               <span>Logout</span>
             </button>

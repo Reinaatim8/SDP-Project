@@ -2,13 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Tabs, Tab, Badge, Alert, ProgressBar } from 'react-bootstrap';
 import RegistrarSidebar from '../components/RegistrarSidebar';
 import './RegistrarDashboard.css';
-import { FiRefreshCw, FiPlus, FiSearch, FiDownload, FiPrinter, FiEdit, FiTrash2, FiUser, FiBook, FiCalendar, FiAward, FiBarChart2, FiMail, FiBell } from 'react-icons/fi';
+import {  FiPlus, FiSearch, FiDownload, FiPrinter, FiEdit, FiTrash2, FiUser, FiBook, FiCalendar, FiAward } from 'react-icons/fi';
+import AuditLogsTab from '../components/AuditLogsTab';
+import apiClient from '../utils/axiosInstance'; 
+import { toast } from 'react-toastify';
+
 
 const RegistrarDashboard = () => {
-  // State for various components
-  const [enrollments, setEnrollments] = useState([]);
   const [students, setStudents] = useState([]);
-  const [courses, setCourses] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUer = localStorage.getItem('user');
+    if (storedUer) {
+      setUser(JSON.parse(storedUer));
+      //toast.success('Hello Again!', { autoClose: 10000 });
+    }
+  }, []);
   const [loading, setLoading] = useState({
     enrollments: false,
     students: false,
@@ -55,6 +65,7 @@ const RegistrarDashboard = () => {
         fetchEnrollments(),
         fetchStudents(),
         fetchCourses(),
+        fetchIssues(), // Fetch issues here
         fetchStatistics()
       ]);
     } catch (err) {
@@ -63,7 +74,20 @@ const RegistrarDashboard = () => {
     } finally {
       setLoading(prev => ({ ...prev, general: false }));
     }
-  };
+  };// Fetch issues
+const fetchIssues = async () => {
+  setLoading(prev => ({ ...prev, issues: true }));
+  setError('');
+  try {
+    const res = await apiClient.get('/issues/api/issues/');
+    setStats(prev => ({ ...prev, totalIssues: res.data.results.length })); // Update totalIssues count
+  } catch (error) {
+    setError('Failed to fetch issues.');
+    console.error(error);
+  } finally {
+    setLoading(prev => ({ ...prev, issues: false }));
+  }
+};
 
   // Fetch enrollments
   const fetchEnrollments = async () => {
@@ -79,13 +103,20 @@ const RegistrarDashboard = () => {
     // API call removed - add your API call here later
     setLoading(prev => ({ ...prev, students: false }));
   };
-
-  // Fetch courses
-  const fetchCourses = async () => {
-    setLoading(prev => ({ ...prev, courses: true }));
-    // API call removed - add your API call here later
+// Fetch courses
+const fetchCourses = async () => {
+  setLoading(prev => ({ ...prev, courses: true }));
+  setError('');
+  try {
+    const res = await apiClient.get('/issues/api/courses/');
+    setStats(prev => ({ ...prev, coursesOffered: res.data.results.length })); // Update coursesOffered count
+  } catch (error) {
+    setError('Failed to fetch courses.');
+    console.error(error);
+  } finally {
     setLoading(prev => ({ ...prev, courses: false }));
-  };
+  }
+};
 
   // Fetch statistics
   const fetchStatistics = async () => {
@@ -124,19 +155,7 @@ const RegistrarDashboard = () => {
     setModalContent(null);
   };
 
-  // Filter enrollments based on search term
-  const filteredEnrollments = enrollments.filter(enrollment => {
-    const searchLower = searchTerm.toLowerCase();
-    return (
-      enrollment.student_name?.toLowerCase().includes(searchLower) ||
-      enrollment.course_name?.toLowerCase().includes(searchLower) ||
-      enrollment.course_code?.toLowerCase().includes(searchLower) ||
-      enrollment.semester?.toLowerCase().includes(searchLower) ||
-      enrollment.academic_year?.toString().includes(searchTerm) ||
-      enrollment.current_grade?.toLowerCase().includes(searchLower)
-    );
-  });
-
+ 
   // Filter students based on search term
   const filteredStudents = students.filter(student => {
     const searchLower = searchTerm.toLowerCase();
@@ -155,34 +174,22 @@ const RegistrarDashboard = () => {
 
   return (
     <div className="registrar-dashboard-container">
-      <RegistrarSidebar />
+      <RegistrarSidebar className="sidebar" />
       
       <div className="registrar-dashboard-content">
+        
         {/* Header Section */}
         <div className="registrar-dashboard-header">
-          <div className="header-left">
+          <div className="header">
             <img src="/images/registrarlogo.png" alt="registrarlogo" className="logo" />
             <div>
-              <h2 className="registrar-dashboard-title">Registrar Dashboard</h2>
+              <h2 className="registrar-dashboard-title">Registrar Dashboard <br/> Welcome back, {user?.username || 'Registrar'}!</h2>
               <p className="registrar-dashboard-subtitle">
-                Welcome back! Manage student records, courses, and academic administration.
+                <br/> Manage student records, courses, and academic administration.
               </p>
             </div>
           </div>
-          <div className="header-right">
-            <button className="icon-button">
-              <FiBell size={20} />
-              <span className="badge">3</span>
-            </button>
-            <button className="icon-button">
-              <FiMail size={20} />
-              <span className="badge">5</span>
-            </button>
-            <div className="user-profile">
-              <FiUser size={24} />
-              <span>Registrar</span>
-            </div>
-          </div>
+
         </div>
 
         {/* Stats Overview */}
@@ -198,32 +205,24 @@ const RegistrarDashboard = () => {
             </div>
           </div>
           <div className="stat-card">
-            <div className="stat-icon">
-              <FiBook size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.activeEnrollments}</h3>
-              <p>Active Enrollments</p>
-            </div>
-          </div>
+  <div className="stat-icon">
+    <FiAward size={24} />
+  </div>
+  <div className="stat-info">
+    <h3>{stats.totalIssues}</h3>
+    <p>Total Issues</p>
+  </div>
+</div>
+
           <div className="stat-card">
-            <div className="stat-icon">
-              <FiCalendar size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.coursesOffered}</h3>
-              <p>Courses Offered</p>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">
-              <FiAward size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.graduationRate}%</h3>
-              <p>Graduation Rate</p>
-            </div>
-          </div>
+  <div className="stat-icon">
+    <FiBook size={24} />
+  </div>
+  <div className="stat-info">
+    <h3>{stats.coursesOffered}</h3>
+    <p>Courses Offered</p>
+  </div>
+</div>         
         </div>
 
         {/* Main Content */}
@@ -252,12 +251,7 @@ const RegistrarDashboard = () => {
               >
                 <FiPlus /> Add Enrollment
               </button>
-              <button className="btn-outline">
-                <FiDownload /> Export
-              </button>
-              <button className="btn-outline">
-                <FiPrinter /> Print
-              </button>
+
             </div>
           </div>
 
@@ -267,86 +261,9 @@ const RegistrarDashboard = () => {
             onSelect={(k) => setActiveTab(k)}
             className="dashboard-tabs"
           >
-            <Tab eventKey="enrollments" title="Enrollments">
+            <Tab eventKey="audit-logs" title="Audit Logs">
               <div className="tab-content">
-                {loading.enrollments ? (
-                  <div className="loading-spinner">Loading enrollments...</div>
-                ) : error ? (
-                  <Alert variant="danger">{error}</Alert>
-                ) : (
-                  <>
-                    <div className="table-responsive">
-                      <table className="enrollments-table">
-                        <thead>
-                          <tr>
-                            <th>Student</th>
-                            <th>Course</th>
-                            <th>Semester</th>
-                            <th>Academic Year</th>
-                            <th>Grade</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {filteredEnrollments.map((enrollment) => (
-                            <tr key={enrollment.id}>
-                              <td>
-                                <div className="student-info">
-                                  <FiUser className="student-icon" />
-                                  <div>
-                                    <strong>{enrollment.student_name}</strong>
-                                    <small>ID: {enrollment.student}</small>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div className="course-info">
-                                  <FiBook className="course-icon" />
-                                  <div>
-                                    <strong>{enrollment.course_name}</strong>
-                                    <small>{enrollment.course_code}</small>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>{enrollment.semester}</td>
-                              <td>{enrollment.academic_year}</td>
-                              <td>
-                                <Badge 
-                                  bg={
-                                    enrollment.current_grade === 'A' ? 'success' :
-                                    ['B', 'C'].includes(enrollment.current_grade) ? 'warning' :
-                                    'danger'
-                                  }
-                                >
-                                  {enrollment.current_grade}
-                                </Badge>
-                              </td>
-                              <td>
-                                <Badge bg={enrollment.status === 'active' ? 'success' : 'secondary'}>
-                                  {enrollment.status}
-                                </Badge>
-                              </td>
-                              <td>
-                                <button className="action-btn edit-btn">
-                                  <FiEdit />
-                                </button>
-                                <button className="action-btn delete-btn">
-                                  <FiTrash2 />
-                                </button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    {filteredEnrollments.length === 0 && (
-                      <div className="no-results">
-                        <p>No enrollments found. Try adjusting your search or add a new enrollment.</p>
-                      </div>
-                    )}
-                  </>
-                )}
+                <AuditLogsTab />
               </div>
             </Tab>
 
@@ -358,17 +275,7 @@ const RegistrarDashboard = () => {
                   <>
                     <div className="table-responsive">
                       <table className="students-table">
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Admission Date</th>
-                            <th>Status</th>
-                            <th>Enrollments</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
+  
                         <tbody>
                           {filteredStudents.map((student) => (
                             <tr key={student.id}>
@@ -416,88 +323,9 @@ const RegistrarDashboard = () => {
                         </tbody>
                       </table>
                     </div>
-                    {filteredStudents.length === 0 && (
-                      <div className="no-results">
-                        <p>No students found. Try adjusting your search or add a new student.</p>
-                      </div>
-                    )}
+
                   </>
                 )}
-              </div>
-            </Tab>
-
-            <Tab eventKey="courses" title="Courses">
-              <div className="tab-content">
-                {loading.courses ? (
-                  <div className="loading-spinner">Loading courses...</div>
-                ) : (
-                  <>
-                    <div className="courses-grid">
-                      {courses.map((course) => (
-                        <div key={course.id} className="course-card">
-                          <div className="course-header">
-                            <h4>{course.code}: {course.name}</h4>
-                            <Badge bg="info">{course.credits} Credits</Badge>
-                          </div>
-                          <div className="course-body">
-                            <p>{course.description || 'No description available.'}</p>
-                            <div className="course-meta">
-                              <span><FiUser /> {course.instructor || 'TBA'}</span>
-                              <span><FiCalendar /> {course.semester_offered.join(', ')}</span>
-                            </div>
-                          </div>
-                          <div className="course-footer">
-                            <Badge bg="secondary">{course.enrollment_count} Enrollments</Badge>
-                            <div className="course-actions">
-                              <button className="action-btn edit-btn">
-                                <FiEdit />
-                              </button>
-                              <button className="action-btn delete-btn">
-                                <FiTrash2 />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    {courses.length === 0 && (
-                      <div className="no-results">
-                        <p>No courses found. You may need to add courses to the system.</p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            </Tab>
-
-            <Tab eventKey="reports" title="Reports">
-              <div className="tab-content">
-                <div className="reports-container">
-                  <div className="report-card">
-                    <h4>Enrollment Trends</h4>
-                    <div className="chart-placeholder">
-                      <FiBarChart2 size={48}/>
-                      <p>charts will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                  <div className="report-card">
-                    <h4>Graduation Analysis</h4>
-                    <div className="chart-placeholder">
-                    <FiAward size={48}/>
-                    <p>Graduation Analysis will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                  <div className="report-card">
-                    <h4>Course Popularity</h4>
-                    <div className="chart-placeholder">
-                      <FiBook size={48} />
-                      <p>Course popularity chart will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                </div>
               </div>
             </Tab>
           </Tabs>
@@ -506,12 +334,7 @@ const RegistrarDashboard = () => {
         {/* Footer */}
         <footer className="registrar-dashboard-footer">
           <div className="footer-content">
-            <p>&copy; 2025 Academic Institution Management System. All rights reserved.</p>
-            <div className="footer-links">
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Service</a>
-              <a href="#">Help Center</a>
-            </div>
+            <p>&copy; 2025 AITS System. All rights reserved.</p>
           </div>
         </footer>
       </div>
@@ -612,12 +435,6 @@ const RegistrarDashboard = () => {
                   onChange={(e) => setNewEnrollment({ ...newEnrollment, course: e.target.value })}
                   required
                 >
-                  <option value="">Select Course</option>
-                  {courses.map(course => (
-                    <option key={course.id} value={course.id}>
-                      {course.code}: {course.name}
-                    </option>
-                  ))}
                 </select>
               </div>
               <div className="form-row">

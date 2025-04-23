@@ -5,7 +5,7 @@ from .models import Notification, EmailNotificationLog
 from .services import NotificationService
 
 User = get_user_model()
-
+#Creates test user instance
 class NotificationTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
@@ -14,7 +14,7 @@ class NotificationTests(TestCase):
             first_name='Test',
             last_name='User'
         )
-    
+    #Tests notification creation service
     def test_create_notification(self):
         notification = NotificationService.create_notification(
             recipient=self.user,
@@ -27,11 +27,11 @@ class NotificationTests(TestCase):
         self.assertEqual(notification.recipient, self.user)
         self.assertEqual(notification.title, 'Test Notification')
         
-        # Check that email was logged
+        # check that email was logged
         self.assertEqual(EmailNotificationLog.objects.count(), 1)
         email_log = EmailNotificationLog.objects.first()
         self.assertEqual(email_log.notification, notification)
-    
+    #Verifies notification read status
     def test_mark_as_read(self):
         notification = Notification.objects.create(
             recipient=self.user,

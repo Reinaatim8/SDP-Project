@@ -20,7 +20,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'course_code', 'course_name', 'description', 'lecturer', 'lecturer_name']
+        fields = ['id' , 'course_code', 'course_name', 'description', 'lecturer', 'lecturer_name']
 
     def get_lecturer_name(self, obj):
         if obj.lecturer:
@@ -33,7 +33,7 @@ class EnrollmentSerializer(serializers.ModelSerializer):
     student_name = serializers.CharField(source='student.get_full_name', read_only=True)
     
     class Meta:
-        model = Enrollment
+        model =  Enrollment
         fields = [
             'id',
             'student_name',
@@ -66,7 +66,7 @@ class IssueSerializer(serializers.ModelSerializer):
                    'current_grade', 'expected_grade', 'status', 'priority',
                   'assigned_to', 'assigned_to_name', 'created_at', 'updated_at', 
                   'resolved_at', 'attachments', 'comments',]
-        read_only_fields = ['student']
+        read_only_fields =  ['student']
 
     def get_assigned_to_name(self, obj):
         if obj.assigned_to:
@@ -93,7 +93,7 @@ class AuditLogSerializer(serializers.ModelSerializer):
         ]
 class NotificationSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.get_full_name', read_only=True)
-    issue_title = serializers.CharField(source='issue.title', read_only=True)
+    issue_title =  serializers.CharField(source='issue.title', read_only=True)
 
     class Meta:
         model = Notification
