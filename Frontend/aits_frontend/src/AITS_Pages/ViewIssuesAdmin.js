@@ -82,7 +82,18 @@ const ViewIssuesAdmin = () => {
             ))}
           </tbody>
         </table>
-      )}
+         )}
+          <div className="course-stats" style={{margin: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px',width:'815px', marginLeft:'300px'}}>
+           <h3 style={{textAlign:'center', marginBottom: '15px'}}>ISSUSE STATISTICS</h3>
+                <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                  <div className="stat-box">
+                    <p style={{fontSize: '24px', fontWeight: 'bold',textAlign:'center'}}>Total Issues Submitted<br></br>{issues.length}
+                    </p>
+                  </div>
+          </div>
+         </div>
+                   
+      
     </div>
   );
 };

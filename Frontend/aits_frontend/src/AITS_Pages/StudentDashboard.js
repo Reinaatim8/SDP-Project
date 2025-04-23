@@ -36,7 +36,7 @@ useEffect(() => {
     localStorage.removeItem("user");
     navigate("/login");
     console.log("User logged out");
-    toast.success('Logout Successful! Login Again to continue.',{autoClose:60000});
+    toast.success('Logout Successful! Login Again to continue.',{autoClose:6000});
   };
 
 
