@@ -5,7 +5,7 @@ from .models import Notification, EmailNotificationLog
 from .services import NotificationService
 
 User = get_user_model()
-#Creates test user instance
+
 class NotificationTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
