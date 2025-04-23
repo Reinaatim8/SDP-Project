@@ -79,8 +79,8 @@ const WelcomePage = () => {
           <h2>FOLLOW US</h2>
           <ul>
             <li><img src='/images/X.png' alt='Twitter logo'/></li>
-            <li><img src='/images/whatsapp.png' alt=''/></li>
-            <li><img src='images/messenger.png'/></li>
+            <li><img src='/images/whatsapp.png' alt='Whatsapp logo'/></li>
+            <li><img src='images/messenger.png' alt='Messenger logo'/></li>
             <li><img src='/images/instagram.png' id='instagram'/></li>
           </ul>
           </div>
