@@ -27,7 +27,7 @@ class NotificationTests(TestCase):
         self.assertEqual(notification.recipient, self.user)
         self.assertEqual(notification.title, 'Test Notification')
         
-        # Check that email was logged
+        
         self.assertEqual(EmailNotificationLog.objects.count(), 1)
         email_log = EmailNotificationLog.objects.first()
         self.assertEqual(email_log.notification, notification)
