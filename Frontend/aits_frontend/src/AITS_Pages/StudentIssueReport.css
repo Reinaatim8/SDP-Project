@@ -29,6 +29,8 @@
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  background-image: url(../../public/images/studentwallpaper.jpg);
+
 }
 
 .issue-report-container {
