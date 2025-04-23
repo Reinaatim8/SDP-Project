@@ -66,11 +66,11 @@ const WelcomePage = () => {
           <div className='divone'>
             <h2>INFO</h2>
             <ul>
-              <li><a href='https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://mak.ac.ug/&ved=2ahUKEwiy9s3XipKMAxUyhf0HHRZFClgQFnoECAwQAQ&usg=AOvVaw3NazKROMvUyH2a4dN4fqCU'>Makerere main site</a></li>
+              <li><a href='https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://mak.ac.ug/&ved=2ahUKEwiy9s3XipKMAxUyhf0HHRZFClgQFnoECAwQAQ&usg=AOvVaw3NazKROMvUyH2a4dN4fqCU'>MAKERERE UNIVERSITY MAIN SITE </a></li>
               <li><a href='https://intranet.mak.ac.ug/'>Intranet</a></li>
-              <li><a href='http://cocis.mak.ac.ug/'>COCIS</a></li>
+              <li><a href='http://cocis.mak.ac.ug/'>COCIS FACULTY</a></li>
               <li>Support Us At AITS </li>
-              <li><strong>GROUP Q</strong></li>
+              <li><strong>GROUP Q CS YEAR 1</strong></li>
             </ul>
             
             </div>
@@ -78,8 +78,8 @@ const WelcomePage = () => {
           <div className='divone'>            
           <h2>FOLLOW US</h2>
           <ul>
-            <li><img src='/images/X.png'/></li>
-            <li><img src='/images/whatsapp.png'/></li>
+            <li><img src='/images/X.png' alt='Twitter logo'/></li>
+            <li><img src='/images/whatsapp.png' alt=''/></li>
             <li><img src='images/messenger.png'/></li>
             <li><img src='/images/instagram.png' id='instagram'/></li>
           </ul>
