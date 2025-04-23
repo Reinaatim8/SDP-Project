@@ -58,11 +58,10 @@ const WelcomePage = () => {
           <div className='divone' id='divOne'>
                                     <h2>ABOUT</h2>
                                     <p>AITS (Academic Issue Tracking System) is operated by the IT Support Unit
-                                    , within the Faculty of Computing and Informatics. This platform is developed and updated by the 
-                                    Systems Administration Team. For more information, please contact us via makerere@mak.ac.ug or
+                                    , within the Faculty of Computing and Informatics (COCIS). This platform is developed and updated by the 
+                                    CS Students Year 1(SDP). For more information, please contact us via makerere@mak.ac.ug or
                                     elearning@mak.ac.ug.You will need a University email address to complete the AITS account creation process. 
-                                    Students without University Email Addresses should write to or visit the College ICT personnel listed here in the College
-                                     Contacts to have a working one created or re-activated to enable you to access AITS with ease.</p>
+                                     Contacts to have a working email created or re-activated to enable you to access AITS with ease.</p>
                                      </div>
           <div className='divone'>
             <h2>INFO</h2>
