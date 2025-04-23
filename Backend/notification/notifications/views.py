@@ -45,7 +45,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
         unread_notifications = self.get_queryset().filter(is_read=False)
         serializer = self.get_serializer(unread_notifications, many=True)
         return Response(serializer.data)
-    
+    #Updates notification read status
     @action(detail=True, methods=['post'])
     def mark_as_read(self, request, pk=None):
         notification = self.get_object()
