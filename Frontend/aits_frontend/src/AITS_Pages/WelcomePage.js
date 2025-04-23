@@ -81,7 +81,7 @@ const WelcomePage = () => {
             <li><img src='/images/X.png' alt='Twitter logo'/></li>
             <li><img src='/images/whatsapp.png' alt='Whatsapp logo'/></li>
             <li><img src='images/messenger.png' alt='Messenger logo'/></li>
-            <li><img src='/images/instagram.png' id='instagram'/></li>
+            <li><img src='/images/instagram.png' alt='IG Logo' id='instagram'/></li>
           </ul>
           </div>
 
