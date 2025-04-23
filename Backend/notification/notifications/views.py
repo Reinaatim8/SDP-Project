@@ -30,7 +30,7 @@ class ProtectedView(APIView):
 
 
 
-#Manages user notification endpoints
+
 User = get_user_model()
 
 class NotificationViewSet(viewsets.ModelViewSet):
