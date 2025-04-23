@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 User = get_user_model()
-#Stores user notification data
+
 class Notification(models.Model):
     NOTIFICATION_TYPES = (
         ('grade_update', 'Grade Update'),
