@@ -4,6 +4,7 @@ import RegistrarSidebar from '../components/RegistrarSidebar';
 import './RegistrarDashboard.css';
 import { FiRefreshCw, FiPlus, FiSearch, FiDownload, FiPrinter, FiEdit, FiTrash2, FiUser, FiBook, FiCalendar, FiAward, FiBarChart2, FiMail, FiBell } from 'react-icons/fi';
 import AuditLogsTab from '../components/AuditLogsTab';
+import { toast } from 'react-toastify';
 
 const RegistrarDashboard = () => {
   // State for various components
@@ -16,6 +17,7 @@ const RegistrarDashboard = () => {
     const storedUer = localStorage.getItem('user');
     if (storedUer) {
       setUser(JSON.parse(storedUer));
+      //toast.success('Hello Again!', { autoClose: 10000 });
     }
   }, []);
   const [loading, setLoading] = useState({

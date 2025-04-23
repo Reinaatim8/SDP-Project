@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-# notifications/views.py
+
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+#Secures API for admin access
 class ProtectedView(APIView):
     permission_classes = [IsAdminUser,IsAuthenticated]
     authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
@@ -30,7 +30,7 @@ class ProtectedView(APIView):
 
 
 
-
+#Manages user notification endpoints
 User = get_user_model()
 
 class NotificationViewSet(viewsets.ModelViewSet):

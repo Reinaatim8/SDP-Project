@@ -18,8 +18,8 @@ useEffect(() => {
   const storedUser = localStorage.getItem("user");
   if (storedUser) {
     setUser(JSON.parse(storedUser));
-    toast.success('Hello Again!',{autoClose:60000});
-    //alert("Login Successful!");
+    //toast.success('Hello Again!',{autoClose:60000});
+    
   }  
   } catch (error) {
     console.error("Error loading user from local storage:", error);
@@ -35,6 +35,8 @@ useEffect(() => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
+    console.log("User logged out");
+    toast.success('Logout Successful! Login Again to continue.',{autoClose:60000});
   };
 
 
