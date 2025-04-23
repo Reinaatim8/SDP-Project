@@ -39,7 +39,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         return Notification.objects.filter(recipient=self.request.user).order_by('-created_at')
-    
+    #Retrieves user's unread notifications
     @action(detail=False, methods=['get'])
     def unread(self, request):
         unread_notifications = self.get_queryset().filter(is_read=False)
