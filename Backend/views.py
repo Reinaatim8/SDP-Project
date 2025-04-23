@@ -213,7 +213,7 @@ class IssueViewSet(viewsets.ModelViewSet):
             except Exception as e:
                 print(f"Email sending failed: {e}")
         
-        return Response({"success": "Status updated successfully"})
+        return Response({"success": "Update successfull"})
     
     @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
     def update_grade(self, request, pk=None):
@@ -254,7 +254,7 @@ class IssueViewSet(viewsets.ModelViewSet):
             issue=issue
         )
         
-        return Response({"success": "Grade updated successfully"})
+        return Response({"success": "Update successfull"})
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()

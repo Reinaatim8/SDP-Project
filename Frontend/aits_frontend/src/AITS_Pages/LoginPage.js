@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate,useLocation } from 'react-router-dom';
 import { login } from '../utils/auth'; // Import the login function from your utils
-//import axios from 'axios';
-//import apiClient from '../utils/axiosInstance';
 import './LoginPage.css';
-//import Toast from '../components/ToastContainer';
 import { toast} from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Loginpage = () => {
@@ -27,11 +23,51 @@ const Loginpage = () => {
       || location.pathname=== '/LecturerDashboard'
       || location.pathname=== '/RegistrarDashboard'){
         toast.success('Login Successful!',{
-          autoClose:60000,
+          autoClose:40000,
         });
       }
       },[location]);
       
+      useEffect(() => {
+        // Setup session timeout on component mount only
+        const sessionTimeout = 25 * 60 * 1000; // 25 minutes
+        let timeoutId = null;
+    
+        const resetTimeout = () => {
+          if (timeoutId) clearTimeout(timeoutId);
+          
+          timeoutId = setTimeout(() => {
+            // Only log out if the user is logged in
+            const token = localStorage.getItem('access');
+            if (token) {
+              localStorage.removeItem('access');
+              localStorage.removeItem('user');
+              toast.info('Your session has expired. Please login again.');
+              navigate('/login');
+            }
+          }, sessionTimeout);
+        };
+    
+        // Add event listeners for user activity
+        const handleUserActivity = () => {
+          resetTimeout();
+        };
+    
+        // Only set up the session timeout if the user is logged in
+        if (localStorage.getItem('access')) {
+          window.addEventListener('mousemove', handleUserActivity);
+          window.addEventListener('keypress', handleUserActivity);
+          resetTimeout(); // Initial timeout setup
+        }
+    
+        // Cleanup function
+        return () => {
+          window.removeEventListener('mousemove', handleUserActivity);
+          window.removeEventListener('keypress', handleUserActivity);
+          if (timeoutId) clearTimeout(timeoutId);
+        };
+      }, []); // Empty dependency array so this runs once on mount
+    
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,9 +75,16 @@ const Loginpage = () => {
     setError('');
 
     try {
-      // Step 1: Authenticate the user
+      //  Authenticate the user
       const response = await login( username, password );
-      if (response.tokens) {
+      if (response.token && response.user) {
+        // Save tokens to localStorage
+        localStorage.setItem('access', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        toast.success('Login Successful!', {
+          autoClose: 40000,
+        });
+
         // Determine the user's role and navigate accordingly
       const user_type = response.user.user_type; // Assuming the user type is included in the response
       let dashboardPath;
@@ -79,35 +122,6 @@ const Loginpage = () => {
       setLoading(false);
     }
   };
-
-  const setupSessionTimeout = () => {
-    const sessionTimeout = 10 * 60 * 1000; // 10 minutes
-    let timeoutHandle;
-
-    const resetTimeout = () => {
-      clearTimeout(timeoutHandle);
-      timeoutHandle = setTimeout(() => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        localStorage.removeItem('user');
-        navigate('/login');
-      }, sessionTimeout);
-    };
-
-    window.addEventListener('mousemove', resetTimeout);
-    window.addEventListener('keypress', resetTimeout);
-
-    resetTimeout();
-  };
-
-  useEffect(() => {
-    setupSessionTimeout();
-    return () => {
-      window.removeEventListener('mousemove', setupSessionTimeout);
-      window.removeEventListener('keypress', setupSessionTimeout);
-    };
-  }, []);
-
 
    return (
    <div className="Login-container">

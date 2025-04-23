@@ -1,6 +1,8 @@
 import React, { useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
+//import InAppNotifications from "../components/InAppNotifications";
+//import EmailNotifications from "../components/EmailNotifications";
 import "./StudentDashboard.css";
 import { toast } from "react-toastify";
 
@@ -16,8 +18,8 @@ useEffect(() => {
   const storedUser = localStorage.getItem("user");
   if (storedUser) {
     setUser(JSON.parse(storedUser));
-    toast.success('Hello Again!',{autoClose:60000});
-    //alert("Login Successful!");
+    //toast.success('Hello Again!',{autoClose:60000});
+    
   }  
   } catch (error) {
     console.error("Error loading user from local storage:", error);
@@ -33,12 +35,17 @@ useEffect(() => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
+    console.log("User logged out");
+    toast.success('Logout Successful! Login Again to continue.',{autoClose:60000});
   };
 
 
   return (
     <div className="student-dashboard-container">
       <StudentSidebar />
+
+     {/*} <EmailNotifications />
+     {/* <InAppNotifications />*/}
       <div className="student-dashboard-content">
         <div className="student-dashboard-panel">
           <div className="student-dashboard-header">

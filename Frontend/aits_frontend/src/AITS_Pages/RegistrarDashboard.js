@@ -3,12 +3,23 @@ import { Modal, Tabs, Tab, Badge, Alert, ProgressBar } from 'react-bootstrap';
 import RegistrarSidebar from '../components/RegistrarSidebar';
 import './RegistrarDashboard.css';
 import { FiRefreshCw, FiPlus, FiSearch, FiDownload, FiPrinter, FiEdit, FiTrash2, FiUser, FiBook, FiCalendar, FiAward, FiBarChart2, FiMail, FiBell } from 'react-icons/fi';
+import AuditLogsTab from '../components/AuditLogsTab';
+import { toast } from 'react-toastify';
 
 const RegistrarDashboard = () => {
   // State for various components
   const [enrollments, setEnrollments] = useState([]);
   const [students, setStudents] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUer = localStorage.getItem('user');
+    if (storedUer) {
+      setUser(JSON.parse(storedUer));
+      //toast.success('Hello Again!', { autoClose: 10000 });
+    }
+  }, []);
   const [loading, setLoading] = useState({
     enrollments: false,
     students: false,
@@ -155,34 +166,21 @@ const RegistrarDashboard = () => {
 
   return (
     <div className="registrar-dashboard-container">
-      <RegistrarSidebar />
+      <RegistrarSidebar className="sidebar" />
       
       <div className="registrar-dashboard-content">
         {/* Header Section */}
         <div className="registrar-dashboard-header">
-          <div className="header-left">
+          <div className="header">
             <img src="/images/registrarlogo.png" alt="registrarlogo" className="logo" />
             <div>
-              <h2 className="registrar-dashboard-title">Registrar Dashboard</h2>
+              <h2 className="registrar-dashboard-title">Registrar Dashboard <br/> Welcome back, {user?.username || 'Registrar'}!</h2>
               <p className="registrar-dashboard-subtitle">
-                Welcome back! Manage student records, courses, and academic administration.
+                <br/> Manage student records, courses, and academic administration.
               </p>
             </div>
           </div>
-          <div className="header-right">
-            <button className="icon-button">
-              <FiBell size={20} />
-              <span className="badge">3</span>
-            </button>
-            <button className="icon-button">
-              <FiMail size={20} />
-              <span className="badge">5</span>
-            </button>
-            <div className="user-profile">
-              <FiUser size={24} />
-              <span>Registrar</span>
-            </div>
-          </div>
+
         </div>
 
         {/* Stats Overview */}
@@ -267,6 +265,11 @@ const RegistrarDashboard = () => {
             onSelect={(k) => setActiveTab(k)}
             className="dashboard-tabs"
           >
+            <Tab eventKey="audit-logs" title="Audit Logs">
+              <div className="tab-content">
+                <AuditLogsTab />
+              </div>
+            </Tab>
             <Tab eventKey="enrollments" title="Enrollments">
               <div className="tab-content">
                 {loading.enrollments ? (
@@ -425,88 +428,13 @@ const RegistrarDashboard = () => {
                 )}
               </div>
             </Tab>
-
-            <Tab eventKey="courses" title="Courses">
-              <div className="tab-content">
-                {loading.courses ? (
-                  <div className="loading-spinner">Loading courses...</div>
-                ) : (
-                  <>
-                    <div className="courses-grid">
-                      {courses.map((course) => (
-                        <div key={course.id} className="course-card">
-                          <div className="course-header">
-                            <h4>{course.code}: {course.name}</h4>
-                            <Badge bg="info">{course.credits} Credits</Badge>
-                          </div>
-                          <div className="course-body">
-                            <p>{course.description || 'No description available.'}</p>
-                            <div className="course-meta">
-                              <span><FiUser /> {course.instructor || 'TBA'}</span>
-                              <span><FiCalendar /> {course.semester_offered.join(', ')}</span>
-                            </div>
-                          </div>
-                          <div className="course-footer">
-                            <Badge bg="secondary">{course.enrollment_count} Enrollments</Badge>
-                            <div className="course-actions">
-                              <button className="action-btn edit-btn">
-                                <FiEdit />
-                              </button>
-                              <button className="action-btn delete-btn">
-                                <FiTrash2 />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    {courses.length === 0 && (
-                      <div className="no-results">
-                        <p>No courses found. You may need to add courses to the system.</p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            </Tab>
-
-            <Tab eventKey="reports" title="Reports">
-              <div className="tab-content">
-                <div className="reports-container">
-                  <div className="report-card">
-                    <h4>Enrollment Trends</h4>
-                    <div className="chart-placeholder">
-                      <FiBarChart2 size={48}/>
-                      <p>charts will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                  <div className="report-card">
-                    <h4>Graduation Analysis</h4>
-                    <div className="chart-placeholder">
-                    <FiAward size={48}/>
-                    <p>Graduation Analysis will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                  <div className="report-card">
-                    <h4>Course Popularity</h4>
-                    <div className="chart-placeholder">
-                      <FiBook size={48} />
-                      <p>Course popularity chart will appear here</p>
-                    </div>
-                    <button className="btn-outline">Generate Report</button>
-                  </div>
-                </div>
-              </div>
-            </Tab>
           </Tabs>
         </div>
 
         {/* Footer */}
         <footer className="registrar-dashboard-footer">
           <div className="footer-content">
-            <p>&copy; 2025 Academic Institution Management System. All rights reserved.</p>
+            <p>&copy; 2025 AITS System. All rights reserved.</p>
             <div className="footer-links">
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Service</a>
