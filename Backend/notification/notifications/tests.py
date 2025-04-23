@@ -14,7 +14,7 @@ class NotificationTests(TestCase):
             first_name='Test',
             last_name='User'
         )
-    
+    #Tests notification creation service
     def test_create_notification(self):
         notification = NotificationService.create_notification(
             recipient=self.user,
