@@ -1,86 +1,290 @@
+/* Course Management Styling */
+:root {
+  --primary-color: #3a6ea5;
+  --primary-dark: #2c5282;
+  --primary-light: #ebf4ff;
+  --secondary-color: #f0f4f8;
+  --text-color: #2d3748;
+  --border-color: #e2e8f0;
+  --success-color: #38a169;
+  --error-color: #e53e3e;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  background-color: #f9fafb;
+  line-height: 1.6;
+}
+
+/* Main Container Layout */
 .course-management-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-
+  min-height: 100vh;
+  background-image: url("../../public/images/studentwallpaper.jpg");
+  margin-left: 300px;
 }
+
 
 .course-management-content {
-
-  padding: 20px;
-  background-color: white;
-  width:800px;
-  background: rgba(255, 255, 255, 0);
-  backdrop-filter: blur(20px);
-  transition: all 0.3s ease;
- 
-  margin-left: 300px;
- 
+  flex: 1;
+  padding: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.course-form-group{
-  display: flex;
-  flex-direction: column;
-  gap:10px;
-  margin-bottom: 10px;
-  /*background: rgba(242, 238, 238, 0.98);*/
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 6px 6px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 0px;
-  height: fit-content;
-  background: white;
-  backdrop-filter: blur(20px);
-  transition: all 0.3s ease;
-  
+
+/* Headings */
+.course-management-content h2 {
+  font-size: 5.2rem;
+  color: var(--primary-dark);
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 700;
+  color: rgb(11, 11, 92);
+  border: 1px solid #000;
+  text-decoration: none;
+}
+
+.course-management-content h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.course-management-content h3 {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+/* Form Styling */
+.course-form-group {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2.5rem;
+  border-top: 5px solid var(--primary-color);
 }
 
 .course-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 30px;
-  max-width: 715px;
- 
+  display: grid;
+  gap: 1.25rem;
 }
-.course-description {
-  width: 90%;
-  height: 100px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  resize: none;
+
+.course-form h3 {
+  margin-top: 0;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.course-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 .course-form input,
+.course-form textarea,
 .course-form select {
-  padding: 8px;
-  border: 1px solid #ccc;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  width:90%;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.course-form input:focus,
+.course-form textarea:focus,
+.course-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(58, 110, 165, 0.2);
 }
 
 .course-form button {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
-  padding: 10px;
   border: none;
+  padding: 0.875rem;
   border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 0.5rem;
 }
 
+.course-form button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.course-description {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Table Styling */
 .course-table {
   width: 100%;
-  border-collapse: collapse;
- 
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-top: 1.5rem;
 }
 
-.course-table th{
-  padding: 10px;
-  background-color:#2c3e50;
+.course-table thead {
+  background-color: var(--primary-color);
   color: white;
-  border: 1px solid #ccc;
 }
+
+.course-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+
 .course-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.course-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.course-table tbody tr:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Stats Box Styling */
+.course-stats {
+  background: linear-gradient(135deg, var(--primary-light), white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin: 2rem 0;
+  border-left: 5px solid var(--primary-color);
+}
+
+.stat-box {
   background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-box p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .course-management-container {
+    flex-direction: column;
+  }
+  
+  .course-management-content {
+    padding: 1.5rem;
+  }
+  
+  .course-form-group,
+  .course-table,
+  .course-stats {
+    margin-bottom: 1.5rem;
+  }
+  
+  .course-table {
+    overflow-x: auto;
+    display: block;
+  }
+  
+  .course-management-content h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Toast Notifications (for react-toastify) */
+.Toastify__toast {
+  border-radius: 8px !important;
+}
+
+.Toastify__toast--success {
+  background-color: var(--success-color) !important;
+}
+
+.Toastify__toast--error {
+  background-color: var(--error-color) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.course-form-group,
+.course-table,
+.course-stats {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Additional UI improvements */
+.course-management-content h2 i {
+  margin-right: 0.5rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
 }
