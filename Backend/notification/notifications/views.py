@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
-#Secures API for admin access
+
 class ProtectedView(APIView):
     permission_classes = [IsAdminUser,IsAuthenticated]
     authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
