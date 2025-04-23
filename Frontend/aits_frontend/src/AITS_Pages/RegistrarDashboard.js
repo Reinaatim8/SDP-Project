@@ -229,15 +229,7 @@ const fetchCourses = async () => {
         <div className="main-content">
           {/* Search and Actions Bar */}
           <div className="action-bar">
-            <div className="search-box">
-              <FiSearch className="search-icon" />
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+            {}
             <div className="action-buttons">
               <button 
                 className="btn-primary"

@@ -54,11 +54,11 @@ const CourseManagement = () => {
     <div className="course-management-container">
       <RegistrarSidebar />
       <div className="course-management-content">
-        <h2 style={{textAlign:'center', fontWeight:'900',textDecoration:'underline'}}>📘 COURSE MANAGEMENT</h2>
+        <h2 style={{textAlign:'center', fontWeight:'900',textDecoration:'none'}}>📘 COURSE MANAGEMENT</h2>
 
         <div className="course-form-group">
         <form className="course-form" onSubmit={handleCourseCreate}>
-          <h3 style={{textAlign:'center', textDecoration:'underline'}}>ADD A NEW COURSE</h3>
+          <h3 style={{textAlign:'center', textDecoration:'none'}}>ADD A NEW COURSE</h3>
         
           <label style={{fontWeight:'700'}}>Course Code:</label>
           <input
@@ -96,10 +96,10 @@ const CourseManagement = () => {
           
         </form>
         </div>
-        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'underline'}}>📘 COURSE LIST</h3>
+        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'none'}}>📘 COURSE LIST</h3>
         
 
-        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'underline'}}>ALL COURSES CREATED</h3>
+        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'none'}}>ALL COURSES CREATED</h3>
         <table className="course-table">
           <thead>
             <tr>
