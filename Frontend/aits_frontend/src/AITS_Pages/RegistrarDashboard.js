@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Tabs, Tab, Badge, Alert, ProgressBar } from 'react-bootstrap';
+import { Modal, Tabs, Tab, Badge, ProgressBar } from 'react-bootstrap';
 import RegistrarSidebar from '../components/RegistrarSidebar';
 import './RegistrarDashboard.css';
-import {  FiPlus, FiSearch, FiDownload, FiPrinter, FiEdit, FiTrash2, FiUser, FiBook, FiCalendar, FiAward } from 'react-icons/fi';
+import {  FiPlus, FiSearch,  FiEdit, FiTrash2, FiUser, FiBook,  FiAward } from 'react-icons/fi';
 import AuditLogsTab from '../components/AuditLogsTab';
 import apiClient from '../utils/axiosInstance'; 
-import { toast } from 'react-toastify';
+
 
 
 const RegistrarDashboard = () => {
@@ -16,7 +16,7 @@ const RegistrarDashboard = () => {
     const storedUer = localStorage.getItem('user');
     if (storedUer) {
       setUser(JSON.parse(storedUer));
-      //toast.success('Hello Again!', { autoClose: 10000 });
+      
     }
   }, []);
   const [loading, setLoading] = useState({
