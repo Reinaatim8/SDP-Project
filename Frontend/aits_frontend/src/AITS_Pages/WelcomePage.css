@@ -1,0 +1,225 @@
+/* General container */
+.welcome-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('../images/pic.jpg');
+  background-size: cover; /* Use cover for better scaling */
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem; /* Use rem for padding */
+  background-color: #0f1e2e;
+  color: white;
+}
+
+.navbar-left .logo {
+  font-size: 1.5rem; /* Use rem for font size */
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 1rem; /* Use rem for gap */
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  font-size: 1rem; /* use rem */
+}
+
+.nav-link:hover {
+  color: #f0a500;
+}
+
+/* Image conveyor belt */
+.image-slider {
+  width: 100%;
+  overflow: hidden;
+  padding: 0.5rem 0; /* Reduced padding with rem */
+}
+
+.image-track {
+  display: flex;
+  animation: slide 15s linear infinite;
+}
+
+.slider-image {
+  width: 150px; /* Adjust size if needed */
+  height: auto;
+  margin: 0 0.25rem; /* use rem */
+  border-radius: 5px;
+}
+
+/* Hero Section */
+.hero-section {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem; /* Use rem for padding */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  text-align: center;
+  margin-top: 2rem; /* Use rem for margin */
+}
+
+.hero-logo {
+  width: 80px; /*adjust size*/
+  margin-bottom: 0.5rem; /* use rem */
+}
+
+.hero-title {
+  font-size: 1.75rem; /* Use rem for font size */
+  font-weight: bold;
+  color: #0f1e2e;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem; /* Use rem for font size */
+  color: #555;
+}
+
+.hero-description {
+  font-size: 1rem; /* Use rem for font size */
+  color: #444;
+  margin-bottom: 1rem; /* use rem */
+}
+
+/* Hero Buttons */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem; /* use rem */
+  margin-top: 0.5rem; /* use rem */
+}
+
+.hero-button {
+  background-color: #f0a500;
+  color: white;
+  padding: 0.5rem 1rem; /* Use rem for padding */
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.hero-button-outline {
+  border: 2px solid #f0a500;
+  color: #f0a500;
+  padding: 0.5rem 1rem; /* Use rem for padding */
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.hero-button:hover {
+  background-color: #c07d00;
+}
+
+.hero-button-outline:hover {
+  background-color: #f0a500;
+  color: white;
+}
+
+/* Footer */
+.footer-welcome {
+  background-color: #0f1e2e;
+  color: white;
+  text-align: center; 
+  padding: 0.5rem 0; /* use rem */
+  margin-top: auto;
+}
+
+/* Keyframes for Conveyor */
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+.divone{
+  background: #0f1e2e;
+  width: 25em;
+  height: 25em;
+  float: left;
+  margin: auto;
+  overflow: auto;
+  border-radius: 30px;
+}
+#footer-daddy {
+  width: 100vw;
+}
+
+.footer-div{
+  display: flex;
+  align-items: center;
+  justify-items: center
+}
+
+.footer-welcome{
+  margin-top: 100px;
+}
+
+.divone p{
+  margin: 30px;
+  text-align: justify;
+  font-family: sans-serif;
+  /* font-weight: bold; */
+}
+#divOne{
+  width: 40em;
+}
+
+.divone h2{
+  color: #f0a500;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.divone ul{
+  text-decoration: none;
+}
+
+a{ color: #c07d00;}
+
+.divone ul{
+  list-style-type: none;
+  list-style: none;
+  align-items: center; 
+  text-align: left;/* Optional: Remove default bullets */
+}
+.divone li{
+  margin-top: 18px;
+  display: inline-block;
+  padding: 10px;
+  
+}
+
+.divone img{
+  width: 50px;
+  
+}
+.divone ul li:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+  filter: brightness(120%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+}
+#footer-footer{
+  font-family: sans-serif;
+  font-weight: bold;
+}
