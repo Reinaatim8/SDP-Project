@@ -241,6 +241,7 @@ const ViewIssues = () => {
           border-radius: 0.5rem;
           margin-bottom: 210px;
           flex-grow: 1;
+          overflow-y: auto;
         }
         
         /* Header styles */
