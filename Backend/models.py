@@ -133,7 +133,7 @@ class AuditLog(models.Model):
     """
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='audit_logs')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_actions')
-    action = models.CharField(max_length=255)
+    action = models.CharField(max_length=200)
     old_value = models.CharField(max_length=200, null=True, blank=True)
     new_value = models.CharField(max_length=200, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
