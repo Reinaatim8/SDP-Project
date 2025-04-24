@@ -54,7 +54,7 @@ class IssueCategory(models.Model):
     """
     Model to categorize different types of academic issues.
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=150)
     description = models.TextField(blank=True, null=True)
     
     def __str__(self):
