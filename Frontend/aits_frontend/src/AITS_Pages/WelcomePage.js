@@ -42,7 +42,7 @@ const WelcomePage = () => {
           <h1 className="hero-title">Welcome to AITS</h1>
           <h2 className="hero-subtitle">Academic Issue Tracking System</h2>
           <p className="hero-description">
-            Streamline your academic concerns with our efficient issue tracking system. Submit, track, and resolve academic matters seamlessly.
+            "Streamline your academic concerns with our efficient issue tracking system. Submit, track, and resolve academic matters seamlessly."
           </p>
           <div className="hero-buttons">
             <Link to="/signup" className="hero-button">GET STARTED</Link>
@@ -58,20 +58,18 @@ const WelcomePage = () => {
           <div className='divone' id='divOne'>
                                     <h2>ABOUT</h2>
                                     <p>AITS (Academic Issue Tracking System) is operated by the IT Support Unit
-                                    , within the Faculty of Computing and Informatics. This platform is developed and updated by the 
-                                    Systems Administration Team. For more information, please contact us via makerere@mak.ac.ug or
-                                    elearning@mak.ac.ug.You will need a University email address to complete the AITS account creation process. 
-                                    Students without University Email Addresses should write to or visit the College ICT personnel listed here in the College
-                                     Contacts to have a working one created or re-activated to enable you to access AITS with ease.</p>
+                                    , within the Faculty of Computing and Informatics (COCIS). This platform is developed and updated by the 
+                                    CS Students Year 1(SDP). For more information, please contact us via our email address makerereaits@gmail.com 
+                                    You will need a University email address to complete the AITS account creation process. 
+                                     Contact us to have a working email to access AITS with ease.</p>
                                      </div>
           <div className='divone'>
             <h2>INFO</h2>
             <ul>
-              <li><a href='https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://mak.ac.ug/&ved=2ahUKEwiy9s3XipKMAxUyhf0HHRZFClgQFnoECAwQAQ&usg=AOvVaw3NazKROMvUyH2a4dN4fqCU'>Makerere main site</a></li>
-              <li><a href='https://intranet.mak.ac.ug/'>Intranet</a></li>
-              <li><a href='http://cees.mak.ac.ug/'>COCIS</a></li>
-              <li><a href="https://support.mak.ac.ug/">Support COCIS</a></li>
-              <li><a href='#'><strong>credit GroupQ</strong></a></li>
+              <li><a href='https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://mak.ac.ug/&ved=2ahUKEwiy9s3XipKMAxUyhf0HHRZFClgQFnoECAwQAQ&usg=AOvVaw3NazKROMvUyH2a4dN4fqCU'>MAKERERE UNIVERSITY MAIN SITE </a></li>
+              <li><a href='http://cocis.mak.ac.ug/'>COCIS FACULTY</a></li>
+              <li>Support Us At AITS </li>
+              <li><strong>GROUP Q CS YEAR 1</strong></li>
             </ul>
             
             </div>
@@ -79,10 +77,10 @@ const WelcomePage = () => {
           <div className='divone'>            
           <h2>FOLLOW US</h2>
           <ul>
-            <li><img src='/images/X.png'/></li>
-            <li><img src='/images/whatsapp.png'/></li>
-            <li><img src='images/messenger.png'/></li>
-            <li><img src='/images/instagram.png' id='instagram'/></li>
+            <li><img src='/images/X.png' alt='Twitter logo'/></li>
+            <li><img src='/images/whatsapp.png' alt='Whatsapp logo'/></li>
+            <li><img src='images/messenger.png' alt='Messenger logo'/></li>
+            <li><img src='/images/instagram.png' alt='IG Logo' id='instagram'/></li>
           </ul>
           </div>
 

@@ -28,10 +28,11 @@
   font-weight: bold;
   text-decoration: none;
   margin: 0 10px;
+  gap:2rem;
 }
 .navbar-right{
   display: flex;
-  gap: 1rem; 
+  gap: 2rem; 
   
 }
 .nav-link {

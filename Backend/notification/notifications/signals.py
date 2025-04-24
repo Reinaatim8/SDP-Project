@@ -14,6 +14,6 @@ def send_welcome_notification(sender, instance, created, **kwargs):
             recipient=instance,
             notification_type='general',
             title='Welcome to AITS',
-            message='Thank you for registering with the Academic Issue Tracking System.'
+            message='Registration Successful.'
         )
         
