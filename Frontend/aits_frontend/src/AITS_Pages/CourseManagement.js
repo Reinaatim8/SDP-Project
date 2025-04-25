@@ -34,6 +34,7 @@ const CourseManagement = () => {
       };
       await apiClient.post("/issues/api/courses/", newCourse);
       toast.success("Course created successfully!");
+      // Reset form fields
       setCourseCode("");
       setCourseName("");
       setDescription("");
