@@ -30,7 +30,7 @@ const RegistrarDashboard = () => {
   const [activeTab, setActiveTab] = useState('enrollments');
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
   const [stats, setStats] = useState({
     totalStudents: 0,
     activeEnrollments: 0,
