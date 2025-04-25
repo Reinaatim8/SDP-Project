@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate, FaUniversity, FaBuilding, FaCalendarAlt } from "react-icons/fa";
+import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding, FaCalendarAlt } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import StudentHoverBar from './StudentHoverBar.js'
 import NotificationsModal from '../components/NotificationsModal';
