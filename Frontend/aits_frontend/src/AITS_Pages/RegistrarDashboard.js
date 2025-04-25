@@ -191,7 +191,7 @@ const fetchCourses = async () => {
 
         {/* Stats Overview */}
         <div className="stats-overview">
-          <div className='stat-cardd'><img src='images/AITSLOGO.png' style={{width:'200px'}}/></div>
+          <div className='stat-cardd'><img src='images/AITSLOGO.png' alt="aits-logo"style={{width:'200px'}}/></div>
           <div className="stat-card">
             <div className="stat-icon">
               <FiUser size={24} />
