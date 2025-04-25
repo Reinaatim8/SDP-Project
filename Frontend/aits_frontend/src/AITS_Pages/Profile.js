@@ -191,7 +191,6 @@ const Profile = () => {
         padding: "40px",
         overflowY: "auto",
         marginLeft:"6%",
-        
       }}>
         {userData ? (
           <div style={{
@@ -223,7 +222,7 @@ const Profile = () => {
             
               <img 
                 src="/images/AITSLOGO.png" 
-                alt="Profile Logo" 
+                alt="profile logo" 
                 style={{
                   width: "180px",
                   marginBottom: "20px",
