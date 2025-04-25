@@ -123,10 +123,7 @@ const fetchCourses = async () => {
     // API call removed - add your API call here later
   };
 
-  // Refresh token
-  const refreshAccessToken = async () => {
-    // API call removed - add your API call here later
-  };
+ 
 
   // Add new enrollment
   const addEnrollment = async () => {
