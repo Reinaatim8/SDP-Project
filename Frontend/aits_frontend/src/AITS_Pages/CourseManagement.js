@@ -54,7 +54,7 @@ const CourseManagement = () => {
     <div className="course-management-container">
       <RegistrarSidebar />
       <div className="course-management-content">
-        <h2 style={{textAlign:'center', fontWeight:'700',textDecoration:'none'}}>📘 COURSE MANAGEMENT</h2>
+        <h2 style={{textAlign:'center', fontWeight:'600',textDecoration:'none'}}>📘 COURSE MANAGEMENT</h2>
 
         <div className="course-form-group">
         <form className="course-form" onSubmit={handleCourseCreate}>
