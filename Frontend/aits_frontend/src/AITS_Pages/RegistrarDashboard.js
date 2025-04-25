@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Tabs, Tab, Badge, ProgressBar } from 'react-bootstrap';
 import RegistrarSidebar from '../components/RegistrarSidebar';
 import './RegistrarDashboard.css';
-import {  FiPlus, FiSearch,  FiEdit, FiTrash2, FiUser, FiBook,  FiAward } from 'react-icons/fi';
+import {  FiPlus,  FiEdit, FiTrash2, FiUser, FiBook,  FiAward } from 'react-icons/fi';
 import AuditLogsTab from '../components/AuditLogsTab';
 import apiClient from '../utils/axiosInstance'; 
 
