@@ -1,0 +1,103 @@
+.lecturer-floating-tabbar-container {
+    position: fixed;
+    bottom: 20px;
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    background: #0f1e2e;
+    border-radius: 30px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    transition: all 0.3s ease;
+    width:70%;
+    padding:12px;
+    scale:0.8;
+    margin-left: 10%;
+  }
+  
+  .minimized {
+    height: auto;
+    width: auto;
+    left: 35%;;
+  }
+  
+  .floating-tabbar-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .minimize-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #f0a500;
+  }
+  
+  .floating-tabbar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #2e2e3f;
+    border-radius: 20px;
+    padding: 4px 10px;
+  }
+  
+  .search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    margin-left: 8px;
+    width: 120px;
+  }
+  
+  .clear-search {
+    background: none;
+    border: none;
+    margin-left: 6px;
+    color: #aaa;
+    cursor: pointer;
+  }
+  
+  .tab-icons {
+    display: flex;
+    gap: 18px;
+    font-size: 20px;
+  }
+  
+  .tab-icons a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+  
+  .tab-icons a.active {
+    background-color: #f0a500;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .tab-icons a:hover {
+    background-color: #f0a500;
+    color: white;
+  }

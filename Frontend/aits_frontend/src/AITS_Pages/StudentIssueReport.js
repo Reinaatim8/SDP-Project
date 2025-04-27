@@ -1,208 +1,268 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import StudentSidebar from "../components/StudentSidebar";
 import LecturerDropdown from "../components/LecturerDropdown";
-import Categorydropdown from "../components/Categorydropdown"
+import Categorydropdown from "../components/Categorydropdown";
+import { submitIssue } from "../utils/issues";
+import { toast } from 'react-toastify';
+import StudentHoverBar from "./StudentHoverBar";
+import axios from "axios";
 import "./StudentIssueReport.css";
-import { submitIssue} from "../utils/issues";
-import {toast} from 'react-toastify';
+
 
 const StudentIssueReport = () => {
-  const [issueTitle, setIssueTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [courseCode, setCourseCode] = useState("");
-  const [courseUnitName,setCourseUnitName] = useState("");
-  const [issueDescription, setIssueDescription] = useState("");
-  const [selectedLecturer, setSelectedLecturer] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    category: "",
+    courseCode: "",
+    courseUnitName: "",
+    description: "",
+    lecturer: "",
+  });
   const [file, setFile] = useState(null);
-  const [isSubmitting,setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  // Check for authentication on component mount
   useEffect(() => {
-    const accessToken = localStorage.getItem('access');
-    if (!accessToken) {
+    if (!localStorage.getItem('access')) {
       toast.error("Please login to submit an issue");
       navigate('/login');
     }
   }, [navigate]);
+
+  // Handle all text input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Handle dropdown selections
   const handleLecturerSelection = (lecturer) => {
-    setSelectedLecturer(lecturer);
+    setFormData(prev => ({ ...prev, lecturer }));
   };
 
-  const handleCategorySelection = (value) => {
-    setCategory (value);
-  }
-
-  const handleFileChange = (event)  => {
-    setFile(event.target.files[0]);
+  const handleCategorySelection = (category) => {
+    setFormData(prev => ({ ...prev, category }));
   };
 
-  const handleIssueSubmit = async (e) => {
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("===FORM SUBMISSION STARTED===");
-    console.log("Form Data:",{
-      issueTitle,
-      category,
-      courseUnitName,
-      courseCode,
-      issueDescription,
-      selectedLecturer,
-      file: file? file.name :"No file"
-    });
-   // Prevent double submission
-   if (isSubmitting) return;
-   setIsSubmitting(true);
-    // Validate form
-    if (!issueTitle || !category || !courseUnitName || !courseCode||!issueDescription || !selectedLecturer ) {
+    if (isSubmitting) return;
+    
+    // Validate all required fields
+    const { title, category, courseUnitName, courseCode, description, lecturer } = formData;
+    if (!title || !category || !courseUnitName || !courseCode || !description || !lecturer) {
       toast.error("Please fill in all required fields");
-      setIsSubmitting(false);
       return;
     }
-    // Submit issue to API
-    const formData =  new FormData();
-    formData.append("title", issueTitle);
-    formData.append("lecturer", selectedLecturer);
-    formData.append("category", category);
-    formData.append("course_unit_name",courseUnitName);
-    formData.append("courseCode",courseCode);
-    formData.append("description", issueDescription);
-  
+
+    setIsSubmitting(true);
+    
+    // Create form data for submission
+    const submitFormData = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      submitFormData.append(key, value);
+    });
+    
     if (file) {
-      formData.append("attachment", file);
+      submitFormData.append("attachment", file);
     }
-    console.log("Submitting issue...");
-      try {
-        const response = await submitIssue(formData);
-        console.log("Issue submitted successfully:", response);
-        //alert("Issue submitted succesfully!")
-        toast.success("Issue submitted successfully!");
-        // Handle success (e.g., show a success message, clear form fields, etc.)
-        //resetFormFields();
-        setIssueTitle("");
-        setIssueDescription("");
-        setCourseUnitName("");
-        setCourseCode("");
-        setCategory("");
-        setSelectedLecturer("");
-         toast.success("Issue submitted successfully!");
-        // Clear form fields
-        //navigate to the student dashboard after short delay
-        setTimeout(() => {
-          navigate('/StudentDashboard');
-        },1500);
 
-        console.log("API Response:", response.data);
-      } catch (error) {
-        console.error("Failed to submit issue:", error.response ? error.response.data : error);
-        toast.error("Failed to submit issue. Please try again.");
-
-        if (error.response && error.response.status === 401) {
-          toast.error("Your session has expired. Please login again.");
-          navigate('/login');
-        } else {
-          toast.error("Failed to submit issue. Please try again.");
-        }
-      } finally {
-        setIsSubmitting(false);
+    try {
+      await submitIssue(submitFormData);
+      toast.success("Issue submitted successfully!");
+          // 2. Now trigger the GET request to send the email
+    await axios.get('https://kennedymutebi7.pythonanywhere.com//issues/api/notifications/', {
+      headers: {
+        Authorization: `Token ${localStorage.getItem('access')}`, // if needed
+      },
+    });
+    toast.success("Email notification sent!");
       
+      // Reset form
+      setFormData({
+        title: "",
+        category: "",
+        courseCode: "",
+        courseUnitName: "",
+        description: "",
+        lecturer: "",
+      });
+      setFile(null);
+      
+      // Redirect after success
+      setTimeout(() => navigate('/StudentDashboard'), 1500);
+    } catch (error) {
+      console.error("Failed to submit issue:", error);
+      if (error.response?.status === 401) {
+        toast.error("Your session has expired. Please login again.");
+        navigate('/login');
+      } else {
+        toast.error("Failed to submit issue. Please try again.");
       }
-    };
-
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div className="student-issue-report-container">
-      <StudentSidebar />
-      <div className="student-issue-report-content">
-        <h1 className="student-issue-report-title">📩 REPORT AN ISSUE</h1>
-        <p className="student-issue-report-description" style={{color:'white'}}>Select a lecturer, categorize your issue, and describe it below. You can also attach any relevant files.</p>
-        <hr className="student-issue-report-divider" />
+    <div className="issue-report-page">
+      <StudentHoverBar />
+      
+      <div className="issue-report-container">
+        <header className="student-issue-header">
+          <div className="header-content">
+            <div className="header-icon">📩</div>
+            <h1>Report an Issue</h1>
+          </div>
+          <p>Submit your academic concerns directly to faculty members</p>
+        </header>
 
-       {/*FORM FIELDS FOR THE ISSUE */}
-        <form className="student-issue-report-form" onSubmit={handleIssueSubmit}>
-        <p style={{fontWeight:"bolder", textDecoration:" underline darkgreen", textAlign:"center",fontSize:"25px"}}>SUBMIT YOUR ISSUE.</p>
-
-          {/* Issue Title */}
-          <div className="student-issue-report-form-group">
-            <label className="student-issue-report-label">Issue Subject:</label>
-            <input type="text"
-             placeholder="Enter the Issue Subject..." 
-              value={issueTitle}
-              onChange={(e) => setIssueTitle(e.target.value)}
-             required />
+        <div className="content-container">
+          <div className="form-sidebar">
+            <div className="sidebar-section">
+              <h3>Submission Guidelines</h3>
+              <ul>
+                <li>Be specific about your issue</li>
+                <li>Include relevant course details</li>
+                <li>Attach supporting documents if needed</li>
+                <li>Write clear and concise descriptions</li>
+              </ul>
+            </div>
+            
+            <div className="sidebar-section">
+              <h3>Issue Categories</h3>
+              <ul>
+                <li>Academic Concerns</li>
+                <li>Assignment Problems</li>
+                <li>Grading Questions</li>
+                <li>Technical Issues</li>
+                <li>Administrative Requests</li>
+              </ul>
+            </div>
           </div>
           
-          {/* Lecturer Selection */}
-          <div className="student-issue-report-form-group">
-            <label className="student-issue-report-label">Select Lecturer of the Course Unit:</label>
-            <LecturerDropdown onSelect={handleLecturerSelection}
-            />
-          </div>
-         {/*Category dropdownn list*/}
-         <div className="student-issue-report-form-group">
-          <label className="student-issue-report-label">Select Issue category: </label>
-          <Categorydropdown onSelect={handleCategorySelection}
-           value={category}
-           required />
-         </div>
-  
-          {/*Course Unit Name */}
-           <div className="student-issue-report-form-group">
-           <label className="student-issue-report-label">Course Unit Name:</label>
-              <input 
-                type="text"
-                placeholder="Enter the Course Unit Name....."
-                value={courseUnitName}
-                onChange={(e) => setCourseUnitName(e.target.value)}
-                required
-              />
-            </div>
-           {/*Course code */} 
-           <div className="student-issue-report-form-group">
-           <label className="student-issue-report-label">Course Unit Code:</label>
-           <input
-            type="text"
-            placeholder="Enter the Code of the Course Unit..."
-            value={courseCode}
-            onChange={(e) => setCourseCode(e.target.value)}
-            required
-            />
-           </div>
-         
-          {/* Issue Description */}
-          <div className="student-issue-report-form-group">
-            <label className="student-issue-report-label">Issue Description:</label>
-            <textarea
-              className="student-issue-report-textarea"
-              rows="5"
-              placeholder="Describe your Issue here..."
-              value={issueDescription}
-              onChange={(e) => setIssueDescription(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-              <label>Attachment (Optional)</label>
-              <br></br>
-              <div>
-              <input  className='attachment'
-              type="file"
-              id="myFile"
-               name="filename"
-               onChange={handleFileChange}
-               ></input>
+          <form className="issue-form" onSubmit={handleSubmit}>
+            <div className="form-section">
+              <h2>Issue Details</h2>
+              
+              <div className="form-field">
+                <label htmlFor="title">Issue Subject <span className="required">*</span></label>
+                <input 
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Enter a concise subject line" 
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  required 
+                />
               </div>
-          </div>
-          <br></br>
-          <div>
-          {/*Submit Button */}
-          <button type="submit" className="student-issue-report-submit-button" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...':'Submit Issue' }</button>
-          </div>
-        </form>
-        
+              
+              <div className="form-row">
+                <div className="form-field">
+                  <label htmlFor="lecturer">Lecturer <span className="required">*</span></label>
+                  <LecturerDropdown onSelect={handleLecturerSelection} />
+                </div>
+              
+                <div className="form-field">
+                  <label htmlFor="category">Category <span className="required">*</span></label>
+                  <Categorydropdown 
+                    onSelect={handleCategorySelection}
+                    value={formData.category}
+                  />
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-field">
+                  <label htmlFor="courseUnitName">Course Unit Name <span className="required">*</span></label>
+                  <input 
+                    type="text"
+                    id="courseUnitName"
+                    name="courseUnitName"
+                    placeholder="E.g. Introduction to Computer Science"
+                    value={formData.courseUnitName}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                
+                <div className="form-field">
+                  <label htmlFor="courseCode">Course Code <span className="required">*</span></label>
+                  <input
+                    type="text"
+                    id="courseCode"
+                    name="courseCode"
+                    placeholder="E.g. CS101"
+                    value={formData.courseCode}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="form-field">
+                <label htmlFor="description">Issue Description <span className="required">*</span></label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="5"
+                  placeholder="Provide a detailed explanation of your issue..."
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              
+              <div className="form-field file-upload">
+                <label htmlFor="attachment">
+                  <div className="upload-container">
+                    <i className="upload-icon">📎</i>
+                    <span>Attachment (Optional)</span>
+                  </div>
+                </label>
+                <input
+                  type="file"
+                  id="attachment"
+                  name="attachment"
+                  onChange={handleFileChange}
+                />
+                <div className="file-info">
+                  {file ? (
+                    <span className="file-name">{file.name}</span>
+                  ) : (
+                    <span className="file-help">Drag & drop or click to upload (PDF, DOCX, JPG, PNG - Max 5MB)</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            <div className="form-actions">
+              <button 
+                type="button" 
+                className="cancel-btn" 
+                onClick={() => navigate('/StudentDashboard')}
+              >
+                Cancel
+              </button>
+              <button 
+                type="submit" 
+                className="submit-btn" 
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit Issue'}
+                
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
-export default StudentIssueReport;  // Export the component
+
+export default StudentIssueReport;

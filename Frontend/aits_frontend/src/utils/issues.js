@@ -18,7 +18,7 @@ export const submitIssue = async (formData) => {
     
     const response = await apiClient.post('issues/api/issues/', formData, {
       headers: {
-        'Authorization': `Bearer ${access}`,
+        'Authorization': `Token ${access}`,
        
       },
     });
