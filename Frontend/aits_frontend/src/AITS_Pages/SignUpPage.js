@@ -105,11 +105,11 @@ const SignUpPage = () => {
           newErrors.email = 'Email has an invalid format';
           toast.warning('Email has an invalid format');
         }
-        if (formData.user_type === 'student' && formData.email && !formData.email.endsWith('@students.mak.ac.ug')) {
-          newErrors.email = 'Student email must end with @students.mak.ac.ug';
+        if (formData.user_type === 'student' && formData.email && !formData.email('@gmail.com')) {
+          newErrors.email = 'Student email must have @gmail.com or @students.mak.ac.ug';
         }
-        if (formData.user_type === 'lecturer' && formData.email && !formData.email.endsWith('@mak.ac.ug')) {
-          newErrors.email = 'Lecturer email must end with @mak.ac.ug';
+        if (formData.user_type === 'lecturer' && formData.email && !formData.email('@gmail.com') ) {
+          newErrors.email = 'Lecturer email must have @gmail.com with @mak.ac.ug';
         }
         if (!formData.phone_number) newErrors.phone_number = 'Phone number is required';
         break;
