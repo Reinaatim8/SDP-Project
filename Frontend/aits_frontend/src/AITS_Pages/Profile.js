@@ -3,6 +3,7 @@ import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding, FaCale
 import { toast } from 'react-toastify';
 import StudentHoverBar from './StudentHoverBar.js'
 import NotificationsModal from '../components/NotificationsModal';
+import axios from 'axios';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -14,6 +15,31 @@ const Profile = () => {
     { id: 2, message: "New course materials are available.", type: "info" },
     { id: 3, message: "Your password will expire soon.", type: "warning" },
   ]);
+
+
+const updateProfile = async (updatedData) => {
+  try {
+    const token = localStorage.getItem('token'); // if your API needs authentication
+    const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', updatedData, {
+      headers: {
+        Authorization: `Token ${token}`, // include token if required
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // Update the local state with the new data
+    setUserData(response.data);
+    toast.success('Profile updated successfully!');
+    
+    // Optionally update localStorage too
+    localStorage.setItem('user', JSON.stringify(response.data));
+
+  } catch (error) {
+    console.error(error);
+    toast.error('Failed to update profile.');
+  }
+};
+
 
   // Simulated loading with animation
   useEffect(() => {
@@ -442,7 +468,15 @@ const Profile = () => {
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent";
               }}
-              onClick={() => toast.info("Edit functionality would be implemented here")}
+              onClick={() => updateProfile({
+                // Placeholder for edit action
+                first_name: "",
+                last_name: "",
+                email: "",
+                phone_number: "",
+                department: "",
+                profile_picture: ""
+              })} // Placeholder for edit action
               >
                 Edit Profile
               </button>
