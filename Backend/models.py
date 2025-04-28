@@ -91,7 +91,7 @@ class Issue(models.Model):
                                   null=True, blank=True)
     
     current_grade = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    expected_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    expected_grade = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
