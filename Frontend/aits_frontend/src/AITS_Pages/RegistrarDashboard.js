@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, Tabs, Tab, Badge, ProgressBar } from 'react-bootstrap';
 import RegistrarSidebar from '../components/RegistrarSidebar';
 import './RegistrarDashboard.css';
-import {  FiPlus, FiSearch,  FiEdit, FiTrash2, FiUser, FiBook,  FiAward } from 'react-icons/fi';
+import {  FiPlus,  FiEdit, FiTrash2, FiUser, FiBook,  FiAward } from 'react-icons/fi';
 import AuditLogsTab from '../components/AuditLogsTab';
 import apiClient from '../utils/axiosInstance'; 
 
@@ -30,7 +30,7 @@ const RegistrarDashboard = () => {
   const [activeTab, setActiveTab] = useState('enrollments');
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
   const [stats, setStats] = useState({
     totalStudents: 0,
     activeEnrollments: 0,
@@ -123,10 +123,7 @@ const fetchCourses = async () => {
     // API call removed - add your API call here later
   };
 
-  // Refresh token
-  const refreshAccessToken = async () => {
-    // API call removed - add your API call here later
-  };
+ 
 
   // Add new enrollment
   const addEnrollment = async () => {
@@ -194,7 +191,7 @@ const fetchCourses = async () => {
 
         {/* Stats Overview */}
         <div className="stats-overview">
-          <div className='stat-cardd'><img src='images/AITSLOGO.png' style={{width:'200px'}}/></div>
+          <div className='stat-cardd'><img src='images/AITSLOGO.png' alt="aits-logo"style={{width:'200px'}}/></div>
           <div className="stat-card">
             <div className="stat-icon">
               <FiUser size={24} />

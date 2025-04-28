@@ -5,7 +5,9 @@ import Categorydropdown from "../components/Categorydropdown";
 import { submitIssue } from "../utils/issues";
 import { toast } from 'react-toastify';
 import StudentHoverBar from "./StudentHoverBar";
+import axios from "axios";
 import "./StudentIssueReport.css";
+
 
 const StudentIssueReport = () => {
   const [formData, setFormData] = useState({
@@ -72,6 +74,13 @@ const StudentIssueReport = () => {
     try {
       await submitIssue(submitFormData);
       toast.success("Issue submitted successfully!");
+          // 2. Now trigger the GET request to send the email
+    await axios.get('https://kennedymutebi7.pythonanywhere.com//issues/api/notifications/', {
+      headers: {
+        Authorization: `Token ${localStorage.getItem('access')}`, // if needed
+      },
+    });
+    toast.success("Email notification sent!");
       
       // Reset form
       setFormData({
@@ -246,6 +255,7 @@ const StudentIssueReport = () => {
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Issue'}
+                
               </button>
             </div>
           </form>

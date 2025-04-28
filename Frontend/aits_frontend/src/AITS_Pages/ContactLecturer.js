@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ContactLecturer.css';
 
+// Importing axios for API calls
 const ContactLecturer = () => {
   const [lecturers, setLecturers] = useState([]);
   const [loading, setLoading] = useState(true);

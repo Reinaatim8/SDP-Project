@@ -34,6 +34,7 @@ const CourseManagement = () => {
       };
       await apiClient.post("/issues/api/courses/", newCourse);
       toast.success("Course created successfully!");
+      // Reset form fields
       setCourseCode("");
       setCourseName("");
       setDescription("");
@@ -54,7 +55,7 @@ const CourseManagement = () => {
     <div className="course-management-container">
       <RegistrarSidebar />
       <div className="course-management-content">
-        <h2 style={{textAlign:'center', fontWeight:'900',textDecoration:'none'}}>📘 COURSE MANAGEMENT</h2>
+        <h2 style={{textAlign:'center', fontWeight:'600',textDecoration:'none'}}>📘 COURSE MANAGEMENT</h2>
 
         <div className="course-form-group">
         <form className="course-form" onSubmit={handleCourseCreate}>

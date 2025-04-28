@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation
 import "./StudentHoverBar.css";
 import {
-  FaHome, FaUser, FaSignOutAlt, FaUsers, FaPhone,
+  FaHome, FaUser,  FaPhone,
   FaAddressCard,FaHistory, FaDatabase, FaBell
 } from "react-icons/fa";
 

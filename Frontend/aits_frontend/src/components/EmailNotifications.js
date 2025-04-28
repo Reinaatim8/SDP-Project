@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+// Importing axios for API calls
 const EMAIL_API_BASE = "https://Kaja732.pythonanywhere.com";
 
 const EmailNotifications = () => {
