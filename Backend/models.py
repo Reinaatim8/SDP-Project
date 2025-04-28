@@ -42,7 +42,7 @@ class Enrollment(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
     semester = models.CharField(max_length=15)
     academic_year = models.CharField(max_length=10)  # Format: 2023/2024
-    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    current_grade = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     
     class Meta:
         unique_together = ['student', 'course', 'semester', 'academic_year']
