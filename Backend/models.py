@@ -14,7 +14,7 @@ class User(AbstractUser):
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     
-    groups = models.ManyToManyField(Group, related_name="issues_users")
+    groups = models.ManyToManyField(Group, related_name="issue_users")
     user_permissions = models.ManyToManyField(Permission, related_name="issues_user_permissions")
     
     def __str__(self):
