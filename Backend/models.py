@@ -40,9 +40,9 @@ class Enrollment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments', 
                               limit_choices_to={'user_type': 'student'})
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
-    semester = models.CharField(max_length=20)
-    academic_year = models.CharField(max_length=9)  # Format: 2023/2024
-    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    semester = models.CharField(max_length=15)
+    academic_year = models.CharField(max_length=10)  # Format: 2023/2024
+    current_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     
     class Meta:
         unique_together = ['student', 'course', 'semester', 'academic_year']
@@ -90,8 +90,8 @@ class Issue(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE, related_name='enrollment_issues',
                                   null=True, blank=True)
     
-    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    expected_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    current_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
+    expected_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
