@@ -52,6 +52,7 @@ const updateProfile = async (updatedData) => {
         Authorization: `Token ${access}`, // include token if required
         'Content-Type': 'application/json'
       }
+      
     });
 
     // Update the local state with the new data
