@@ -20,7 +20,9 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div>
+    
+      <div className="auth-page">
+     <div className="auth-card">
       <h2>Forgot Password</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -33,6 +35,10 @@ const ForgotPassword = () => {
         <button type="submit">Send Reset Link</button>
       </form>
       {message && <p>{message}</p>}
+    </div>
+    <footer className="footer">
+      <p>&copy; 2025 AITS. All rights reserved.</p>
+    </footer>
     </div>
   );
 };

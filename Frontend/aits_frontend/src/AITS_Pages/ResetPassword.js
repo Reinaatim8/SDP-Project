@@ -32,7 +32,8 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
+    <div className="auth-page">
+      <div className="auth-card">  
       <h2>Reset Your Password</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -52,6 +53,10 @@ const ResetPassword = () => {
         <button type="submit">Reset Password</button>
       </form>
       {message && <p>{message}</p>}
+    </div>
+    <footer className="footer">
+      <p>&copy; 2025 AITS. All rights reserved.</p>
+    </footer>
     </div>
   );
 };
