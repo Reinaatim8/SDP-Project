@@ -45,10 +45,11 @@ const Profile = () => {
 
 const updateProfile = async (updatedData) => {
   try {
-    const token = localStorage.getItem('token'); // if your API needs authentication
+    const access = localStorage.getItem('access'); // if your API needs authentication
+    console.log("Access Token:", access);
     const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', updatedData, {
       headers: {
-        Authorization: `Token ${token}`, // include token if required
+        Authorization: `Token ${access}`, // include token if required
         'Content-Type': 'application/json'
       }
     });
