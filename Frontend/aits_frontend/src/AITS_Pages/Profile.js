@@ -365,6 +365,7 @@ const handleInputChange = (e) => {
               borderBottom: "1px solid rgba(0,0,0,0.1)"
             }}>
               <TabButton id="personal" label="Personal Info" active={activeTab === 'personal'} />
+              <TabButton id="academic" label="Academic Info" active={activeTab === 'academic'} />
   
             </div>
 
@@ -392,6 +393,7 @@ const handleInputChange = (e) => {
                       background: colors.accent,
                       borderRadius: "2px"
                     }}></span>
+                
                   </h2>
                   
                   <InfoCard 
