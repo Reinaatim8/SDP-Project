@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Passwordreset.css';
+import { toast } from 'react-toastify';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -10,11 +12,14 @@ const ForgotPassword = () => {
     try {
       await axios.post(
         'https://kennedymutebi7.pythonanywhere.com/auth/password-reset-request/',
-        { email }
+        { email },
       );
       setMessage("Check your email for a password reset link.");
+      toast.success("Check your email for a password reset link.", )
+      
     } catch (err) {
       setMessage("Error sending reset email.");
+      toast.error("Error sending reset email.");
       console.error(err);
     }
   };
