@@ -22,11 +22,16 @@ const ForgotPassword = () => {
           }
         }
       );
-      // Extract link from response (assuming it's in response.data.link)
-      const resetURL = response.data?.reset_link || response.data?.link || response.data?.url;
+      // Replace the fake domain with your actual frontend host (local or deployed)
+      const originalLink = response.data?.reset_link || response.data?.link || response.data?.url;
 
-      if (resetURL) {
-        setResetLink(resetURL);
+      if (originalLink) {
+        const baseFrontendURL = window.location.origin; // dynamically get current frontend URL
+        const fixedLink = originalLink.replace(/^https?:\/\/[^/]+/, baseFrontendURL);
+        console.log("Fixed Reset Link:", fixedLink);
+
+        setResetLink(fixedLink);
+        console.log("Fixed Reset Link:", fixedLink);
         setMessage("Password reset link generated successfully.");
         toast.success("Password reset link generated successfully. Please click the link in your email to reset your password.");
       } else {
@@ -58,15 +63,17 @@ const ForgotPassword = () => {
       {message && <p>{message}</p>}
 
       {resetLink && (
-          <div className="reset-link">
-            <p><strong>Reset Link:</strong></p>
-            <a href={resetLink} target="_blank" rel="noopener noreferrer">{resetLink}</a>
-          </div>
-        )}
-    </div>
+         <div className="reset-link">
+         <p><strong>Reset Link:</strong></p>
+         <p>{resetLink}</p>
+         <button onClick={() => window.location.href = resetLink}>Go to Reset Page</button>
+       
+      </div>)}
+   
     <footer className="footer">
       <p>&copy; 2025 AITS. All rights reserved.</p>
     </footer>
+    </div>
     </div>
   );
 };

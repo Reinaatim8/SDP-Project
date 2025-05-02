@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate,navigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import './Passwordreset.css';
+import { toast } from 'react-toastify';
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
+  const email = searchParams.get("email");
 
-  const [password, setPassword] = useState('');
+  const [new_password, setNew_password] = useState('');
   const [confirm, setConfirm] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirm) {
+    if (new_password !== confirm) {
       return setMessage("Passwords do not match");
     }
 
@@ -22,12 +26,17 @@ const ResetPassword = () => {
         'https://kennedymutebi7.pythonanywhere.com/auth/password-reset-confirm/',
         {
           token,
-          password
+          new_password,
+          email,
         }
       );
       setMessage("Password has been reset successfully!");
+      console.log("Password reset successfully!");
+      toast.success("Password has been reset successfully!");
+      navigate ('/login');
     } catch (err) {
       setMessage("Error resetting password.");
+      toast.error("Error resetting password.");
       console.error(err);
     }
   };
@@ -40,8 +49,8 @@ const ResetPassword = () => {
         <input
           type="password"
           placeholder="New Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={new_password}
+          onChange={(e) => setNew_password(e.target.value)}
           required
         />
         <input
