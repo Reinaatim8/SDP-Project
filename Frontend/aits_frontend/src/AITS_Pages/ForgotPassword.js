@@ -6,20 +6,36 @@ import { toast } from 'react-toastify';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [resetLink, setResetLink] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setResetLink('');
+    setMessage('');
     try {
-      await axios.post(
+     const response = await axios.post(
         'https://kennedymutebi7.pythonanywhere.com/auth/password-reset-request/',
         { email },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
-      setMessage("Check your email for a password reset link.");
-      toast.success("Check your email for a password reset link.", )
-      
+      // Extract link from response (assuming it's in response.data.link)
+      const resetURL = response.data?.reset_link || response.data?.link || response.data?.url;
+
+      if (resetURL) {
+        setResetLink(resetURL);
+        setMessage("Password reset link generated successfully.");
+        toast.success("Password reset link generated successfully. Please click the link in your email to reset your password.");
+      } else {
+        setMessage("Email found, but no reset link was returned.");
+      }
+  
     } catch (err) {
-      setMessage("Error sending reset email.");
-      toast.error("Error sending reset email.");
+      setMessage("Error sending reset email. Please check your email.");
+      toast.error("Error sending reset email. Please check your email.");
       console.error(err);
     }
   };
@@ -40,6 +56,13 @@ const ForgotPassword = () => {
         <button type="submit">Send Reset Link</button>
       </form>
       {message && <p>{message}</p>}
+
+      {resetLink && (
+          <div className="reset-link">
+            <p><strong>Reset Link:</strong></p>
+            <a href={resetLink} target="_blank" rel="noopener noreferrer">{resetLink}</a>
+          </div>
+        )}
     </div>
     <footer className="footer">
       <p>&copy; 2025 AITS. All rights reserved.</p>
