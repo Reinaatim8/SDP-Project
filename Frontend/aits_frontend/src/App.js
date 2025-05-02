@@ -17,6 +17,7 @@ import ViewIssuesAdmin from './AITS_Pages/ViewIssuesAdmin';
 import CourseManagement from './AITS_Pages/CourseManagement';
 import LecturerIssueManagement from './AITS_Pages/LecturerIssueManagement';
 import ForgotPassword from './AITS_Pages/ForgotPassword';
+import ResetPassword from './AITS_Pages/ResetPassword';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
