@@ -47,13 +47,16 @@ const updateProfile = async (updatedData) => {
   try {
     const access = localStorage.getItem('access'); // if your API needs authentication
     console.log("Access Token:", access);
+
     const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', updatedData, {
       headers: {
         Authorization: `Token ${access}`, // include token if required
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+       
       }
-      
+
     });
+    console.log('Update response:', response.data);
 
     // Update the local state with the new data
     setUserData(response.data);
