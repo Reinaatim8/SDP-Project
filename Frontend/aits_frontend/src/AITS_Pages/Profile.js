@@ -467,7 +467,6 @@ const handleInputChange = (e) => {
                     }}></span>
                   </h2>
                   
-                  {userData.program && (
                     <InfoCard 
                       icon={<FaUserGraduate size={20} />} 
                       title="Program" 
@@ -476,9 +475,6 @@ const handleInputChange = (e) => {
                       editable={true}
                     />
                   
-                  )}
-                  
-                  {userData.department && (
                     <InfoCard 
                       icon={<FaBuilding size={20} />} 
                       title="Department" 
@@ -486,7 +482,6 @@ const handleInputChange = (e) => {
                       name="department"
                       editable={true}
                     />
-                  )}
                   
                 </div>
               )}
