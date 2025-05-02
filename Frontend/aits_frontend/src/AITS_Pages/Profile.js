@@ -105,7 +105,7 @@ const handleInputChange = (e) => {
   };
 
   // Info card component
-  const InfoCard = ({ icon, title, value }) => {
+  const InfoCard = ({ icon, title, value,name,editable = false }) => {
     return (
       <div style={{
         display: "flex",
@@ -121,14 +121,7 @@ const handleInputChange = (e) => {
         overflow: "hidden",
         position: "relative"
       }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-3px)";
-        e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.1)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.08)";
-      }}
+
       >
         <div style={{
           backgroundColor: colors.secondary,
@@ -144,7 +137,26 @@ const handleInputChange = (e) => {
         </div>
         <div style={{ flexGrow: 1 }}>
           <div style={{ fontSize: "14px", color: colors.dark, opacity: 0.7, marginBottom: "4px" }}>{title}</div>
-          <div style={{ fontSize: "16px", fontWeight: "600", color: colors.dark }}>{value || "Not provided"}</div>
+          {editMode && editable ? (
+            <input
+              type="text"
+              name={name}
+              value={value}
+              onChange={handleInputChange}
+              style={{
+                fontSize: "16px",
+                fontWeight: "600",
+                border: `1px solid ${colors.secondary}`,
+                borderRadius: "4px",
+                padding: "4px 8px",
+                width: "100%",
+                backgroundColor: "white"
+              }}
+            />
+          ) : (
+          <div style={{ fontSize: "16px", fontWeight: "600", color: colors.dark }}>{value || "Not provided"}
+          </div>
+          )}
         </div>
       </div>
     );
