@@ -24,6 +24,7 @@ const Profile = () => {
     phone_number: '',
     department: '',
     program: '',
+    profile_picture: ''
 
   });
     // Initialize form data when userData loads
