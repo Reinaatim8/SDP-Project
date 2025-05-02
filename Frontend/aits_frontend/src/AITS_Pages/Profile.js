@@ -440,6 +440,21 @@ const handleInputChange = (e) => {
                     name="phone_number"
                     editable={true}
                   />
+                     <InfoCard 
+                      icon={<FaUserGraduate size={20} />} 
+                      title="Program" 
+                      value={formData.program} 
+                      name="program"
+                      editable={true}
+                    />
+                  
+                    <InfoCard 
+                      icon={<FaBuilding size={20} />} 
+                      title="Department" 
+                      value={formData.department} 
+                      name="department"
+                      editable={true}
+                    />
                 </div>
               )}
               
