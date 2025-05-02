@@ -44,6 +44,10 @@ const ResetPassword = () => {
   return (
     <div className="auth-page">
       <div className="auth-card">  
+      <h1 className="logo">AITS</h1>
+      <img src='/images/nobgmaklogo.png' id='maklogo' alt="logo"  style={{ width: "120px",
+  margin: "0px",
+  padding: "0px"}}/>
       <h2>Reset Your Password</h2>
       <form onSubmit={handleSubmit}>
         <input
