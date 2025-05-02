@@ -360,7 +360,7 @@ const handleInputChange = (e) => {
               borderBottom: "1px solid rgba(0,0,0,0.1)"
             }}>
               <TabButton id="personal" label="Personal Info" active={activeTab === 'personal'} />
-              <TabButton id="academic" label="Academic Details" active={activeTab === 'academic'} />
+  
             </div>
 
             {/* Content Area */}
@@ -392,19 +392,46 @@ const handleInputChange = (e) => {
                   <InfoCard 
                     icon={<FaUserCircle size={20} />} 
                     title="Username" 
-                    value={userData.username} 
+                    value={formData.username} 
+                    name="username"
+                    editable={true}
                   />
                   
                   <InfoCard 
                     icon={<FaEnvelope size={20} />} 
                     title="Email Address" 
-                    value={userData.email} 
+                    value={formData.email} 
+                    name="email"
+                    editable={true}
                   />
                   
                   <InfoCard 
                     icon={<FaIdCard size={20} />} 
                     title="User Type" 
                     value={userData.user_type} 
+                  />
+                    <InfoCard 
+                    icon={<FaIdCard size={20} />} 
+                    title="First Name" 
+                    value={formData.first_name}
+                    name="first_name"
+                    editable={true}
+                  />
+                  
+                  <InfoCard 
+                    icon={<FaIdCard size={20} />} 
+                    title="Last Name" 
+                    value={formData.last_name}
+                    name="last_name"
+                    editable={true}
+                  />
+                  
+                  <InfoCard 
+                    icon={<FaIdCard size={20} />} 
+                    title="Phone Number" 
+                    value={formData.phone_number}
+                    name="phone_number"
+                    editable={true}
                   />
                 </div>
               )}
@@ -437,53 +464,23 @@ const handleInputChange = (e) => {
                     <InfoCard 
                       icon={<FaUserGraduate size={20} />} 
                       title="Program" 
-                      value={userData.program} 
+                      value={formData.program} 
+                      name="program"
+                      editable={true}
                     />
-                  )}
                   
-                  {userData.year_of_study && (
-                    <InfoCard 
-                      icon={<FaCalendarAlt size={20} />} 
-                      title="Year of Study" 
-                      value={userData.year_of_study} 
-                    />
-                  )}
-                  
-                  {userData.student_id && (
-                    <InfoCard 
-                      icon={<FaIdCard size={20} />} 
-                      title="Student ID" 
-                      value={userData.student_id} 
-                    />
-                  )}
-                  
-                  {userData.staff_id && (
-                    <InfoCard 
-                      icon={<FaIdCard size={20} />} 
-                      title="Staff ID" 
-                      value={userData.staff_id} 
-                    />
                   )}
                   
                   {userData.department && (
                     <InfoCard 
                       icon={<FaBuilding size={20} />} 
                       title="Department" 
-                      value={userData.department} 
+                      value={formData.department} 
+                      name="department"
+                      editable={true}
                     />
                   )}
                   
-                  {!userData.program && !userData.year_of_study && !userData.student_id && 
-                   !userData.staff_id && !userData.department && (
-                    <div style={{
-                      textAlign: "center",
-                      padding: "40px 20px",
-                      color: colors.dark,
-                      opacity: 0.7
-                    }}>
-                      No academic information available
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -497,23 +494,40 @@ const handleInputChange = (e) => {
               background: colors.light,
               marginBottom: "10%",
             }}>
-              
-              <button style={{
-                background: "transparent",
-                border: `1px solid ${colors.primary}`,
-                color: colors.primary,
-                padding: "10px 20px",
-                borderRadius: "8px",
-                fontWeight: "500",
-                cursor: "pointer",
-                transition: "all 0.2s"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(10, 36, 99, 0.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-              }}
+              {editMode ? (
+                <>
+                <button style={{
+                    background: "transparent",
+                    border: `1px solid ${colors.dark}`,
+                    color: colors.dark,
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px"
+                  }}
+                  onClick={() => setEditMode(false)}
+                  >
+                    <FaTimes /> Cancel
+                  </button>
+
+                  <button style={{
+                    background: colors.primary,
+                    border: "none",
+                    color: "white",
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 8px rgba(10, 36, 99, 0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    transition: "all 0.2s"
+                  }}
               onClick={() => updateProfile({
                 // Placeholder for edit action
                 first_name: "",
@@ -523,10 +537,12 @@ const handleInputChange = (e) => {
                 department: "",
                 profile_picture: ""
               })} // Placeholder for edit action
-              >
-                Edit Profile
-              </button>
-              
+                  >
+              <FaSave /> Save Changes
+                  </button>
+               
+              </>
+               ) : (
               <button style={{
                 background: colors.primary,
                 border: "none",
