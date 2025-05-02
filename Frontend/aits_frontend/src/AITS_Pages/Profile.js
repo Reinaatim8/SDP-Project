@@ -55,6 +55,7 @@ const updateProfile = async (updatedData) => {
     // Update the local state with the new data
     setUserData(response.data);
     toast.success('Profile updated successfully!');
+    setEditMode(false);
     
     // Optionally update localStorage too
     localStorage.setItem('user', JSON.stringify(response.data));
