@@ -51,8 +51,7 @@ const updateProfile = async (updatedData) => {
     const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', updatedData, {
       headers: {
         Authorization: `Token ${access}`, // include token if required
-        'Content-Type': 'application/json',
-       
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
 
     });
