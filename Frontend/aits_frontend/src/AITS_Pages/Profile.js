@@ -15,6 +15,17 @@ const Profile = () => {
     { id: 2, message: "New course materials are available.", type: "info" },
     { id: 3, message: "Your password will expire soon.", type: "warning" },
   ]);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    phone_number: '',
+    department: '',
+    program: '',
+
+  });
 
 
 const updateProfile = async (updatedData) => {
@@ -452,6 +463,7 @@ const updateProfile = async (updatedData) => {
               background: colors.light,
               marginBottom: "10%",
             }}>
+              
               <button style={{
                 background: "transparent",
                 border: `1px solid ${colors.primary}`,
