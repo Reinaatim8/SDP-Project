@@ -198,3 +198,15 @@ text-align: center;
 .password-input-container{
   position: relative;
 }
+.forgot-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+.forgot-link:active {
+  color: #0056b3;
+}
