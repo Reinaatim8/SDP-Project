@@ -26,6 +26,20 @@ const Profile = () => {
     program: '',
 
   });
+    // Initialize form data when userData loads
+    useEffect(() => {
+      if (userData) {
+        setFormData({
+          username: userData.username || '',
+          email: userData.email || '',
+          first_name: userData.first_name || '',
+          last_name: userData.last_name || '',
+          phone_number: userData.phone_number || '',
+          department: userData.department || '',
+          program: userData.program || '',
+        });
+      }
+    }, [userData]);
 
 
 const updateProfile = async (updatedData) => {
