@@ -65,6 +65,13 @@ const updateProfile = async (updatedData) => {
     toast.error('Failed to update profile.');
   }
 };
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData(prev => ({
+    ...prev,
+    [name]: value
+  }));
+};
 
 
   // Simulated loading with animation
