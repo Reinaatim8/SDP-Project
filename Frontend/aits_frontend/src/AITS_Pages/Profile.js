@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding, FaCalendarAlt } from "react-icons/fa";
+import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding, FaCalendarAlt, FaSave, FaTimes } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import StudentHoverBar from './StudentHoverBar.js'
 import NotificationsModal from '../components/NotificationsModal';
@@ -556,21 +556,11 @@ const handleInputChange = (e) => {
                 alignItems: "center",
                 transition: "all 0.2s"
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 12px rgba(10, 36, 99, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 8px rgba(10, 36, 99, 0.2)";
-              }}
-              onClick={() => toast.success("Changes saved successfully!")}
+              onClick={() => setEditMode(true)}
               >
-                <span style={{ marginRight: "8px" }}>Save Changes</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
+                <span style={{ marginRight: "8px" }}>Edit Profile</span>
+                </button>
+              )}
             </div>
           </div>
         ) : (
