@@ -40,7 +40,7 @@ class Enrollment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments', 
                               limit_choices_to={'user_type': 'student'})
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
-    semester = models.CharField(max_length=15)
+    semester = models.CharField(max_length=20)
     academic_year = models.CharField(max_length=10)  # Format: 2023/2024
     current_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     
