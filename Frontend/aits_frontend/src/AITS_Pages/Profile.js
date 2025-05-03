@@ -73,7 +73,7 @@ const updateProfile = async (updatedData) => {
 
     });
     console.log('Update response:', response.data);
-
+    console.log('Sending payload:', payload);
     // Update the local state with the new data
     setUserData(response.data);
     toast.success('Profile updated successfully!');
