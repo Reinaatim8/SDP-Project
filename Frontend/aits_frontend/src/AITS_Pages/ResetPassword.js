@@ -55,12 +55,14 @@ const ResetPassword = () => {
       <h2>Reset Your Password</h2>
       <form onSubmit={handleSubmit}>
         <input
-          type="password"
+          type={showPassword ? 'text':'password'}
           placeholder="New Password"
           value={new_password}
           onChange={(e) => setNew_password(e.target.value)}
-          required
-        />
+          required />
+          <button type='button' className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaRegEye/>:<FaRegEyeSlash/>}</button>
+          
+       
         <input
           type="password"
           placeholder="Confirm Password"
