@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding, FaCalendarAlt, FaSave, FaTimes } from "react-icons/fa";
+import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding,  FaSave, FaTimes } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import StudentHoverBar from './StudentHoverBar.js'
 import NotificationsModal from '../components/NotificationsModal';
@@ -88,12 +88,15 @@ const updateProfile = async (updatedData) => {
   }
 };
 const handleInputChange = (e) => {
+  console.log('Before update:', formData.email); // Current value
   const { name, value } = e.target;
+  console.log('Updating:', name, 'with:', value); // New value
   setFormData(prev => ({
     ...prev,
     [name]: value
   }));
 };
+console.log('Final form data before submit:', formData);
 
 
   // Simulated loading with animation
