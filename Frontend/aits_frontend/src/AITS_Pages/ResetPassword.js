@@ -4,12 +4,16 @@ import { useNavigate,navigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import './Passwordreset.css';
 import { toast } from 'react-toastify';
+import {FaRegEye, FaRegEyeSlash} from 'react-icons/fa';
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const email = searchParams.get("email");
-
+  const [showPassword,setShowPassword] = useState(false);
+  const togglePasswordVisibility = () =>{
+    setShowPassword(!showPassword);
+  };
   const [new_password, setNew_password] = useState('');
   const [confirm, setConfirm] = useState('');
   const [message, setMessage] = useState('');
