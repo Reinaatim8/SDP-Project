@@ -47,25 +47,26 @@ const updateProfile = async (updatedData) => {
   try {
     const access = localStorage.getItem('access'); // if your API needs authentication
     console.log("Access Token:", access);
-     // Create a clean payload with only non-empty fields
-     const payload = {};
-     for (const key in updatedData) {
-       if (updatedData[key] !== null && updatedData[key] !== undefined && updatedData[key] !== '') {
-         payload[key] = updatedData[key];
-       }
-     }
- 
-     // Add validation for required fields
-     if (!payload.email) {
-       toast.error('Email is required');
-       return;
-     }
-     if (!payload.department) {
-       toast.error('Department is required');
-       return;
-     }
 
-    const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', updatedData, {
+        // Validate required fields
+        if (!formData.email || !formData.email.trim()) {
+          toast.error('Email is required');
+          return;
+        }
+        if (!formData.department || !formData.department.trim()) {
+          toast.error('Department is required');
+          return;
+        }
+     // Create URLSearchParams for form-data style submission
+    const formDataPayload = new URLSearchParams();
+    for (const key in formData) {
+      if (formData[key] !== null && formData[key] !== undefined) {
+        formDataPayload.append(key, formData[key]);
+      }
+    }
+    console.log('Form data payload:', formDataPayload.toString());
+
+    const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', formDataPayload, {
       headers: {
         Authorization: `Token ${access}`, // include token if required
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -73,7 +74,7 @@ const updateProfile = async (updatedData) => {
 
     });
     console.log('Update response:', response.data);
-    console.log('Sending payload:', payload);
+    console.log('Sending payload:', formDataPayload);
     // Update the local state with the new data
     setUserData(response.data);
     toast.success('Profile updated successfully!');
@@ -161,7 +162,12 @@ console.log('Final form data before submit:', formData);
           {icon}
         </div>
         <div style={{ flexGrow: 1 }}>
-          <div style={{ fontSize: "14px", color: colors.dark, opacity: 0.7, marginBottom: "4px" }}>{title}</div>
+          <div style={{ fontSize: "14px", color: colors.dark, opacity: 0.7, marginBottom: "4px" }}>{title} 
+          {(name === 'email' || name === 'department') && (
+            <span style={{ color: colors.accent, marginLeft: "4px" }}>*</span>
+          )}
+
+          </div>
           {editMode && editable ? (
             <input
               type={name === 'email' ? 'email' : 'text'}
