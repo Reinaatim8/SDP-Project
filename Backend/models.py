@@ -25,7 +25,7 @@ class Course(models.Model):
     Model to represent academic courses in the system.
     """
     course_code = models.CharField(max_length=5, unique=True)
-    course_name = models.CharField(max_length=100)
+    course_name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     lecturer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='taught_courses', 
                                 limit_choices_to={'user_type': 'lecturer'})
