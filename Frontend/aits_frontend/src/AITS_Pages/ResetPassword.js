@@ -11,8 +11,12 @@ const ResetPassword = () => {
   const token = searchParams.get("token");
   const email = searchParams.get("email");
   const [showPassword,setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const togglePasswordVisibility = () =>{
     setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () =>{
+    setShowConfirmPassword(!showConfirmPassword);
   };
   const [new_password, setNew_password] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -58,7 +62,7 @@ const ResetPassword = () => {
         <label htmlFor="password" style={{color:"#f0a500"}}>New Password</label>
         <input
           type={showPassword ? 'text':'password'}
-          placeholder="New Password"
+          placeholder="Enter New Password..."
           value={new_password}
           onChange={(e) => setNew_password(e.target.value)}
           required />
@@ -67,12 +71,14 @@ const ResetPassword = () => {
           
        <label htmlFor="password" style={{color:"#f0a500"}}>Confirm New Password</label>
         <input
-          type="password"
-          placeholder="Confirm Password"
+         type={showConfirmPassword ? 'text':'password'}
+          placeholder="Confirm New Password..."
           value={confirm}
           onChange={(e) => setConfirm(e.target.value)}
           required
         />
+        <button type='button' className='password-toggle-button'
+          onClick={toggleConfirmPasswordVisibility}>{showConfirmPassword ? <FaRegEye/>:<FaRegEyeSlash/>}</button>
         </div>
         <button type="submit">Reset Password</button>
       </form>
