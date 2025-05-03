@@ -11,7 +11,7 @@ class User(AbstractUser):
         ('admin', 'Administrator'),
     ]
     
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
+    user_type = models.CharField(max_length=15, choices=USER_TYPE_CHOICES)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     
     groups = models.ManyToManyField(Group, related_name="issues_users")
