@@ -47,6 +47,23 @@ const updateProfile = async (updatedData) => {
   try {
     const access = localStorage.getItem('access'); // if your API needs authentication
     console.log("Access Token:", access);
+     // Create a clean payload with only non-empty fields
+     const payload = {};
+     for (const key in updatedData) {
+       if (updatedData[key] !== null && updatedData[key] !== undefined && updatedData[key] !== '') {
+         payload[key] = updatedData[key];
+       }
+     }
+ 
+     // Add validation for required fields
+     if (!payload.email) {
+       toast.error('Email is required');
+       return;
+     }
+     if (!payload.department) {
+       toast.error('Department is required');
+       return;
+     }
 
     const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', updatedData, {
       headers: {
@@ -144,10 +161,11 @@ const handleInputChange = (e) => {
           <div style={{ fontSize: "14px", color: colors.dark, opacity: 0.7, marginBottom: "4px" }}>{title}</div>
           {editMode && editable ? (
             <input
-              type="text"
+              type={name === 'email' ? 'email' : 'text'}
               name={name}
               value={value}
               onChange={handleInputChange}
+              required={name === 'email' || name === 'department'}
               style={{
                 fontSize: "16px",
                 fontWeight: "600",
