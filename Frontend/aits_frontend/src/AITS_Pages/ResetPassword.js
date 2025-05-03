@@ -54,15 +54,18 @@ const ResetPassword = () => {
   padding: "0px"}}/>
       <h2>Reset Your Password</h2>
       <form onSubmit={handleSubmit}>
+        <div className="password-input-container">
+        <label htmlFor="password" style={{color:"#f0a500"}}>New Password</label>
         <input
           type={showPassword ? 'text':'password'}
           placeholder="New Password"
           value={new_password}
           onChange={(e) => setNew_password(e.target.value)}
           required />
-          <button type='button' className='password-toggle-button' onClick={togglePasswordVisibility}>{showPassword ? <FaRegEye/>:<FaRegEyeSlash/>}</button>
+          <button type='button' className='password-toggle-button'
+          onClick={togglePasswordVisibility}>{showPassword ? <FaRegEye/>:<FaRegEyeSlash/>}</button>
           
-       
+       <label htmlFor="password" style={{color:"#f0a500"}}>Confirm New Password</label>
         <input
           type="password"
           placeholder="Confirm Password"
@@ -70,6 +73,7 @@ const ResetPassword = () => {
           onChange={(e) => setConfirm(e.target.value)}
           required
         />
+        </div>
         <button type="submit">Reset Password</button>
       </form>
       {message && <p>{message}</p>}
