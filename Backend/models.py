@@ -11,8 +11,8 @@ class User(AbstractUser):
         ('admin', 'Administrator'),
     ]
     
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    user_type = models.CharField(max_length=15, choices=USER_TYPE_CHOICES)
+    phone_number = models.CharField(max_length=10, blank=True, null=True)
     
     groups = models.ManyToManyField(Group, related_name="issues_users")
     user_permissions = models.ManyToManyField(Permission, related_name="issues_user_permissions")
@@ -24,8 +24,8 @@ class Course(models.Model):
     """
     Model to represent academic courses in the system.
     """
-    course_code = models.CharField(max_length=20, unique=True)
-    course_name = models.CharField(max_length=100)
+    course_code = models.CharField(max_length=5, unique=True)
+    course_name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     lecturer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='taught_courses', 
                                 limit_choices_to={'user_type': 'lecturer'})
@@ -40,7 +40,7 @@ class Enrollment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enrollments', 
                               limit_choices_to={'user_type': 'student'})
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
-    semester = models.CharField(max_length=15)
+    semester = models.CharField(max_length=20)
     academic_year = models.CharField(max_length=10)  # Format: 2023/2024
     current_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     

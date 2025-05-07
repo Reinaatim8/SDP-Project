@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding, FaCalendarAlt } from "react-icons/fa";
+import { FaUserCircle, FaEnvelope, FaIdCard, FaUserGraduate,  FaBuilding,  FaSave, FaTimes } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import StudentHoverBar from './StudentHoverBar.js'
 import NotificationsModal from '../components/NotificationsModal';
@@ -15,21 +15,70 @@ const Profile = () => {
     { id: 2, message: "New course materials are available.", type: "info" },
     { id: 3, message: "Your password will expire soon.", type: "warning" },
   ]);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    phone_number: '',
+    department: '',
+    program: '',
+    profile_picture: ''
+
+  });
+    // Initialize form data when userData loads
+    useEffect(() => {
+      if (userData) {
+        setFormData({
+          username: userData.username || '',
+          email: userData.email || '',
+          first_name: userData.first_name || '',
+          last_name: userData.last_name || '',
+          phone_number: userData.phone_number || '',
+          department: userData.department || '',
+          program: userData.program || '',
+        });
+      }
+    }, [userData]);
 
 
 const updateProfile = async (updatedData) => {
   try {
-    const token = localStorage.getItem('token'); // if your API needs authentication
-    const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', updatedData, {
-      headers: {
-        Authorization: `Token ${token}`, // include token if required
-        'Content-Type': 'application/json'
-      }
-    });
+    const access = localStorage.getItem('access'); // if your API needs authentication
+    console.log("Access Token:", access);
 
+        // Validate required fields
+        if (!formData.email || !formData.email.trim()) {
+          toast.error('Email is required');
+          return;
+        }
+        if (!formData.department || !formData.department.trim()) {
+          toast.error('Department is required');
+          return;
+        }
+     // Create URLSearchParams for form-data style submission
+    const formDataPayload = new URLSearchParams();
+    for (const key in formData) {
+      if (formData[key] !== null && formData[key] !== undefined) {
+        formDataPayload.append(key, formData[key]);
+      }
+    }
+    console.log('Form data payload:', formDataPayload.toString());
+
+    const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', formDataPayload, {
+      headers: {
+        Authorization: `Token ${access}`, // include token if required
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+
+    });
+    console.log('Update response:', response.data);
+    console.log('Sending payload:', formDataPayload);
     // Update the local state with the new data
     setUserData(response.data);
     toast.success('Profile updated successfully!');
+    setEditMode(false);
     
     // Optionally update localStorage too
     localStorage.setItem('user', JSON.stringify(response.data));
@@ -39,6 +88,16 @@ const updateProfile = async (updatedData) => {
     toast.error('Failed to update profile.');
   }
 };
+const handleInputChange = (e) => {
+  console.log('Before update:', formData.email); // Current value
+  const { name, value } = e.target;
+  console.log('Updating:', name, 'with:', value); // New value
+  setFormData(prev => ({
+    ...prev,
+    [name]: value
+  }));
+};
+console.log('Final form data before submit:', formData);
 
 
   // Simulated loading with animation
@@ -72,7 +131,7 @@ const updateProfile = async (updatedData) => {
   };
 
   // Info card component
-  const InfoCard = ({ icon, title, value }) => {
+  const InfoCard = ({ icon, title, value,name,editable = false }) => {
     return (
       <div style={{
         display: "flex",
@@ -88,14 +147,7 @@ const updateProfile = async (updatedData) => {
         overflow: "hidden",
         position: "relative"
       }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-3px)";
-        e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.1)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.08)";
-      }}
+
       >
         <div style={{
           backgroundColor: colors.secondary,
@@ -110,8 +162,33 @@ const updateProfile = async (updatedData) => {
           {icon}
         </div>
         <div style={{ flexGrow: 1 }}>
-          <div style={{ fontSize: "14px", color: colors.dark, opacity: 0.7, marginBottom: "4px" }}>{title}</div>
-          <div style={{ fontSize: "16px", fontWeight: "600", color: colors.dark }}>{value || "Not provided"}</div>
+          <div style={{ fontSize: "14px", color: colors.dark, opacity: 0.7, marginBottom: "4px" }}>{title} 
+          {(name === 'email' || name === 'department') && (
+            <span style={{ color: colors.accent, marginLeft: "4px" }}>*</span>
+          )}
+
+          </div>
+          {editMode && editable ? (
+            <input
+              type={name === 'email' ? 'email' : 'text'}
+              name={name}
+              value={value}
+              onChange={handleInputChange}
+              required={name === 'email' || name === 'department'}
+              style={{
+                fontSize: "16px",
+                fontWeight: "600",
+                border: `1px solid ${colors.secondary}`,
+                borderRadius: "4px",
+                padding: "4px 8px",
+                width: "100%",
+                backgroundColor: "white"
+              }}
+            />
+          ) : (
+          <div style={{ fontSize: "16px", fontWeight: "600", color: colors.dark }}>{value || "Not provided"}
+          </div>
+          )}
         </div>
       </div>
     );
@@ -315,7 +392,8 @@ const updateProfile = async (updatedData) => {
               borderBottom: "1px solid rgba(0,0,0,0.1)"
             }}>
               <TabButton id="personal" label="Personal Info" active={activeTab === 'personal'} />
-              <TabButton id="academic" label="Academic Details" active={activeTab === 'academic'} />
+              <TabButton id="academic" label="Academic Info" active={activeTab === 'academic'} />
+  
             </div>
 
             {/* Content Area */}
@@ -342,18 +420,23 @@ const updateProfile = async (updatedData) => {
                       background: colors.accent,
                       borderRadius: "2px"
                     }}></span>
+                
                   </h2>
                   
                   <InfoCard 
                     icon={<FaUserCircle size={20} />} 
                     title="Username" 
-                    value={userData.username} 
+                    value={formData.username} 
+                    name="username"
+                    editable={true}
                   />
                   
                   <InfoCard 
                     icon={<FaEnvelope size={20} />} 
                     title="Email Address" 
-                    value={userData.email} 
+                    value={formData.email} 
+                    name="email"
+                    editable={true}
                   />
                   
                   <InfoCard 
@@ -361,6 +444,44 @@ const updateProfile = async (updatedData) => {
                     title="User Type" 
                     value={userData.user_type} 
                   />
+                    <InfoCard 
+                    icon={<FaIdCard size={20} />} 
+                    title="First Name" 
+                    value={formData.first_name}
+                    name="first_name"
+                    editable={true}
+                  />
+                  
+                  <InfoCard 
+                    icon={<FaIdCard size={20} />} 
+                    title="Last Name" 
+                    value={formData.last_name}
+                    name="last_name"
+                    editable={true}
+                  />
+                  
+                  <InfoCard 
+                    icon={<FaIdCard size={20} />} 
+                    title="Phone Number" 
+                    value={formData.phone_number}
+                    name="phone_number"
+                    editable={true}
+                  />
+                     <InfoCard 
+                      icon={<FaUserGraduate size={20} />} 
+                      title="Program" 
+                      value={formData.program} 
+                      name="program"
+                      editable={true}
+                    />
+                  
+                    <InfoCard 
+                      icon={<FaBuilding size={20} />} 
+                      title="Department" 
+                      value={formData.department} 
+                      name="department"
+                      editable={true}
+                    />
                 </div>
               )}
               
@@ -388,57 +509,22 @@ const updateProfile = async (updatedData) => {
                     }}></span>
                   </h2>
                   
-                  {userData.program && (
                     <InfoCard 
                       icon={<FaUserGraduate size={20} />} 
                       title="Program" 
-                      value={userData.program} 
+                      value={formData.program} 
+                      name="program"
+                      editable={true}
                     />
-                  )}
                   
-                  {userData.year_of_study && (
-                    <InfoCard 
-                      icon={<FaCalendarAlt size={20} />} 
-                      title="Year of Study" 
-                      value={userData.year_of_study} 
-                    />
-                  )}
-                  
-                  {userData.student_id && (
-                    <InfoCard 
-                      icon={<FaIdCard size={20} />} 
-                      title="Student ID" 
-                      value={userData.student_id} 
-                    />
-                  )}
-                  
-                  {userData.staff_id && (
-                    <InfoCard 
-                      icon={<FaIdCard size={20} />} 
-                      title="Staff ID" 
-                      value={userData.staff_id} 
-                    />
-                  )}
-                  
-                  {userData.department && (
                     <InfoCard 
                       icon={<FaBuilding size={20} />} 
                       title="Department" 
-                      value={userData.department} 
+                      value={formData.department} 
+                      name="department"
+                      editable={true}
                     />
-                  )}
                   
-                  {!userData.program && !userData.year_of_study && !userData.student_id && 
-                   !userData.staff_id && !userData.department && (
-                    <div style={{
-                      textAlign: "center",
-                      padding: "40px 20px",
-                      color: colors.dark,
-                      opacity: 0.7
-                    }}>
-                      No academic information available
-                    </div>
-                  )}
                 </div>
               )}
             </div>
@@ -452,22 +538,40 @@ const updateProfile = async (updatedData) => {
               background: colors.light,
               marginBottom: "10%",
             }}>
-              <button style={{
-                background: "transparent",
-                border: `1px solid ${colors.primary}`,
-                color: colors.primary,
-                padding: "10px 20px",
-                borderRadius: "8px",
-                fontWeight: "500",
-                cursor: "pointer",
-                transition: "all 0.2s"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(10, 36, 99, 0.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-              }}
+              {editMode ? (
+                <>
+                <button style={{
+                    background: "transparent",
+                    border: `1px solid ${colors.dark}`,
+                    color: colors.dark,
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px"
+                  }}
+                  onClick={() => setEditMode(false)}
+                  >
+                    <FaTimes /> Cancel
+                  </button>
+
+                  <button style={{
+                    background: colors.primary,
+                    border: "none",
+                    color: "white",
+                    padding: "10px 20px",
+                    borderRadius: "8px",
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    boxShadow: "0 4px 8px rgba(10, 36, 99, 0.2)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    transition: "all 0.2s"
+                  }}
               onClick={() => updateProfile({
                 // Placeholder for edit action
                 first_name: "",
@@ -477,10 +581,12 @@ const updateProfile = async (updatedData) => {
                 department: "",
                 profile_picture: ""
               })} // Placeholder for edit action
-              >
-                Edit Profile
-              </button>
-              
+                  >
+              <FaSave /> Save Changes
+                  </button>
+               
+              </>
+               ) : (
               <button style={{
                 background: colors.primary,
                 border: "none",
@@ -494,21 +600,11 @@ const updateProfile = async (updatedData) => {
                 alignItems: "center",
                 transition: "all 0.2s"
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 12px rgba(10, 36, 99, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 8px rgba(10, 36, 99, 0.2)";
-              }}
-              onClick={() => toast.success("Changes saved successfully!")}
+              onClick={() => setEditMode(true)}
               >
-                <span style={{ marginRight: "8px" }}>Save Changes</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
+                <span style={{ marginRight: "8px" }}>Edit Profile</span>
+                </button>
+              )}
             </div>
           </div>
         ) : (
