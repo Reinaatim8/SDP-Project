@@ -349,4 +349,4 @@ class NotificationViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'])
     def mark_all_read(self, request):
         Notification.objects.filter(user=request.user, is_read=False).update(is_read=True)
-        return Response({"success": " 12345notifications marked as add read "})
+        return Response({"success": " 1234notifications marked as add read "})
