@@ -55,7 +55,7 @@ const StudentSidebar = () => {
               <a href="StudentIssueReport" className="student-sidebar-link"><FaDatabase/>  Report an Issue</a>
             </li>
             <li className="student-sidebar-list-item">
-              <a href ="ViewIssues" className="student-sidebar-link"><FaHistory/>  History</a>
+              <a href ="ViewIssues" className="student-sidebar-link"><FaHistory/>  View Your Issues</a>
             </li>
             <li className="student-sidebar-list-item">
               <a href="Profile" className="student-sidebar-link"><FaUser/> Student Profile</a>
