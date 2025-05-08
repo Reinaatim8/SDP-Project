@@ -155,12 +155,9 @@ const ViewIssues = () => {
                   <div className="history-assignee">{issue.assigned_to_name || 'Unassigned'}</div>
                 </td>
                 <td className="history-table-cell history-actions-cell">
-                  <button 
-                    className="history-action-btn history-view-btn"
-                    onClick={() => navigate(`/issues/${issue.id}`)}
-                  >
+                
                     View
-                  </button>
+                  
                 </td>
               </tr>
             ))}
@@ -203,19 +200,19 @@ const ViewIssues = () => {
         </div>
         <div className="issue-summary-container">
   <div className="issue-summary-card">
-    <div className="issue-summary-title">Total Issues</div>
+    <div style={{color:'dark-blue'}}className="issue-summary-title">Total Issues</div>
     <div className="issue-summary-count">{getIssueCounts().total}</div>
   </div>
   <div className="issue-summary-card">
-    <div className="issue-summary-title">Pending</div>
+    <div style={{color:'red'}}className="issue-summary-title"><FaClock/> Pending</div>
     <div className="issue-summary-count">{getIssueCounts().pending}</div>
   </div>
   <div className="issue-summary-card">
-    <div className="issue-summary-title">In Progress</div>
-    <div className="issue-summary-count">{getIssueCounts().in_progress}</div>
+    <div style={{color:'blue'}} className="issue-summary-title"><FaSpinner/> In Progress</div>
+    <div  className="issue-summary-count">{getIssueCounts().in_progress}</div>
   </div>
   <div className="issue-summary-card">
-    <div className="issue-summary-title">Resolved</div>
+    <div style={{color:'green'}} className="issue-summary-title"><FaCheckCircle/> Resolved</div>
     <div className="issue-summary-count">{getIssueCounts().resolved}</div>
   </div>
 </div>
