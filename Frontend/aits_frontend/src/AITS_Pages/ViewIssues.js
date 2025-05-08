@@ -175,7 +175,7 @@ const ViewIssues = () => {
       
       <div className="history-container">
         <div className="history-header">
-          <h3 className="history-title">Issue History</h3>
+          <h3 className="history-title">View Your Issues </h3>
           <p className="history-subtitle">
             View all your submitted issues
           </p>
