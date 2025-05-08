@@ -16,6 +16,7 @@ const Profile = () => {
     { id: 3, message: "Your password will expire soon.", type: "warning" },
   ]);
   const [editMode, setEditMode] = useState(false);
+  const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -38,6 +39,7 @@ const Profile = () => {
           phone_number: userData.phone_number || '',
           department: userData.department || '',
           program: userData.program || '',
+          profile_picture: userData.profile_picture || ''
         });
       }
     }, [userData]);
@@ -87,6 +89,9 @@ const updateProfile = async (updatedData) => {
     console.error(error);
     toast.error('Failed to update profile.');
   }
+};
+const handleFileChange = (e) => {
+  setFile(e.target.files[0]);
 };
 const handleInputChange = (e) => {
   console.log('Before update:', formData.email); // Current value
@@ -458,6 +463,14 @@ console.log('Final form data before submit:', formData);
                     value={formData.last_name}
                     name="last_name"
                     editable={true}
+                  />
+                  <InfoCard
+                    icon={<FaIdCard size={20} />}
+                    title="Profile Picture"
+                    value={formData.profile_picture}
+                    name="profile_picture"
+                    editable={true}
+                    type="file"
                   />
                   
                   <InfoCard 
