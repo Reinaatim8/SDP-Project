@@ -110,19 +110,19 @@ useEffect(() => {
   <div style={{ display: "flex", justifyContent: "space-around" }}>
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "24px", fontWeight: "bold", color: "#dc3545" }}>
-        {issues.filter(issue => issue.status === "Pending").length || 0}
+        {issues.filter(issue => issue.status === "pending").length || 0}
       </div>
       <div>Pending</div>
     </div>
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ffc107" }}>
-        {issues.filter(issue => issue.status === "In Progress").length || 0}
+        {issues.filter(issue => issue.status === "in_progress").length || 0}
       </div>
       <div>In Progress</div>
     </div>
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "24px", fontWeight: "bold", color: "#28a745" }}>
-        {issues.filter(issue => issue.status === "Resolved").length || 0}
+        {issues.filter(issue => issue.status === "resolved").length || 0}
       </div>
       <div>Resolved</div>
     </div>
@@ -131,7 +131,7 @@ useEffect(() => {
 
 
 
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
+{/*<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⏱️ Response Time Metrics</h2>
   <div style={{ display: "flex", justifyContent: "space-around" }}>
     <div style={{ textAlign: "center", padding: "10px" }}>
@@ -173,7 +173,7 @@ useEffect(() => {
   </div>
 
 
-</div>
+</div>*/}
 
 
         <div style={{marginTop:"20px", display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
@@ -226,20 +226,10 @@ useEffect(() => {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "20px" }}>
           <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
             <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📌 Issue Tracker</h2>
-            <ul style={{ listStyle: "none", padding: "0" }}>
-              {issues.length > 0 ? (
-                issues.map((issue, index) => (
-                  <li key={index} style={{ marginBottom: "10px", display: "flex", alignItems: "center" }}>
-                    <span style={{ marginRight: "10px" }}>
-                      {issue.status === "Pending" ? "⚠️" : issue.status === "Resolved" ? "✅" : "🔄"}
-                    </span>
-                    <span>{issue.title} - {issue.status}</span>
-                  </li>
-                ))
-              ) : (
-                <li>No issues reported yet.</li>
-              )}
-            </ul>
+            <ul>*Submit  Academic and non-academic issues</ul>
+            <ul>*Monitor your Submitted issues</ul>
+            
+             
           </div>
 
           <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
