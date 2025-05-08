@@ -85,6 +85,10 @@ useEffect(() => {
   const handleReportIssue = () => {
     navigate('/StudentIssueReport');
   };
+  const handleContactUs = () => {
+    navigate('/Aboutpage');
+  };
+
   // Logout function to clear local storage and redirect to login
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -300,19 +304,7 @@ useEffect(() => {
           >
             📩 Report an Issue
           </button>
-          <button
-            style={{
-              backgroundColor: "#28a745",
-              color: "#fff",
-              padding: "10px 20px",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              fontSize: "16px",
-            }}
-          >
-            📅 View Course Schedule
-          </button>
+          
           <button
             style={{
               backgroundColor: "#ffc107",
@@ -323,6 +315,7 @@ useEffect(() => {
               cursor: "pointer",
               fontSize: "16px",
             }}
+            onClick={handleContactUs}
           >
             📞 Contact Us
           </button>
@@ -380,7 +373,7 @@ useEffect(() => {
           <p style={{ color: "#666" }}>Your GPA: 3.8</p>
           <p style={{ color: "#666" }}>Credits Earned: 45</p>
         </div>
-        // Add this to your return statement
+
 <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "15px" }}>❓ Frequently Asked Questions</h2>
   {faqs.map((faq, index) => (
