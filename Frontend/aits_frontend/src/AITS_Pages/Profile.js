@@ -75,7 +75,7 @@ const updateProfile = async (updatedData) => {
       headers: {
         Authorization: `Token ${access}`, // include token if required
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Type': 'multipart/form-data'
+        //'Content-Type': 'multipart/form-data'
       }
 
     });
@@ -475,18 +475,40 @@ console.log('Final form data before submit:', formData);
                     name="last_name"
                     editable={true}
                   />
-                  <InfoCard
-                    icon={<FaIdCard size={20} />}
-                    title="Profile Picture"
-                    value={formData.profile_picture}
-                    name="profile_picture"
-                    editable={true}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    
-                  />
-                  
+                 <div className="form-field file-upload">
+               <label htmlFor="profile_picture">
+                <div className="upload-container">
+                   <i className="upload-icon"><FaIdCard size={20} style={{color:"dark-blue"}} /></i>
+                   <span style={{ display: "flex", alignItems: "center", gap: "8px", }}>Profile Picture</span>
+                   </div>
+                 </label>
+
+                <input
+                placeholder='Upload Profile Picture'
+               id="profile_picture"
+               name="profile_picture"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ fontSize: "16px",
+                fontWeight: "500",
+                border: "1px solid #ccc",
+                padding: "6px 10px",
+                borderRadius: "4px",
+                width: "100%",
+                opacity: '0',
+                backgroundColor: "#fff"}} 
+               />
+
+                <div>
+                  {file ? (
+                   <span className="file-name">{file.name}</span>
+                  ) : (
+                 <span className="file-help">Drag & drop or click to upload (JPG, PNG - Max 5MB)</span>
+                  )}
+                 </div>
+                 </div>
+
                   <InfoCard 
                     icon={<FaIdCard size={20} />} 
                     title="Phone Number" 
