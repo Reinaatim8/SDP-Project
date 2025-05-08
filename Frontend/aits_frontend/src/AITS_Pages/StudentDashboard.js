@@ -5,6 +5,7 @@ import NotificationsModal from '../components/NotificationsModal';
 import "./StudentDashboard.css";
 import { toast } from "react-toastify";
 import { FaPowerOff } from "react-icons/fa";
+import apiClient from '../utils/axiosInstance';
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
@@ -12,7 +13,17 @@ const StudentDashboard = () => {
   const [issues, setIssues] = useState([
     { id: 1, title: "Computer Lab Access", description: "Unable to login to computer lab workstations", status: "Pending", priority: "High", reportedDate: "Apr 13, 2025" },
     { id: 2, title: "Missing Assignment Grades", description: "Assignment 2 grades not showing in system", status: "In Progress", priority: "Medium", reportedDate: "Apr 10, 2025" }
-  ]);  
+  ]); 
+  const [stats, setStats] = useState({
+    totalIssues: 0,
+    totalResolved: 0,
+    totalPending: 0,
+    totalInProgress: 0,
+  }); 
+  const [loading, setLoading] = useState({
+    issues: false,
+  });
+  const [error, setError] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
   const [activities, setActivities] = useState([
     { id: 1, title: "Network Issue", description: "Lecturer responded to your ticket", type: "response", time: "Today, 2:30 PM" },
@@ -25,11 +36,7 @@ const StudentDashboard = () => {
     { id: 3, message: "Your password will expire soon.", type: "warning" },
     
   ]);
-  const [responseMetrics, setResponseMetrics] = useState({
-    averageResponse: "4 hours",
-    averageResolution: "2 days",
-    responseRate: "92%"
-  });
+
   const quickIssueCategories = ["Missing marks", "Wrong marks", "Marking complaint", "Lecturer Consultation"];
 
 
@@ -38,7 +45,19 @@ const handleQuickIssue = (category) => {
   navigate('/StudentIssueReport', { state: { category } });
 };
 
-
+const fetchIssues = async () => {
+  setLoading(prev => ({ ...prev, issues: true }));
+  setError('');
+  try {
+    const res = await apiClient.get('/issues/api/issues/');
+    setStats(prev => ({ ...prev, totalIssues: res.data.results.length })); // Update totalIssues count
+  } catch (error) {
+    setError('Failed to fetch issues.');
+    console.error(error);
+  } finally {
+    setLoading(prev => ({ ...prev, issues: false }));
+  }
+};
 // Add a function to handle search
 const [issueStats, setIssueStats] = useState({
   totalReported: 24,
@@ -105,15 +124,22 @@ useEffect(() => {
           </h2>
           <p style={{ color: "#666", fontSize: "16px" }}>Track your academic progress and stay organized.</p>
         </div>
+
 <div style={{ marginTop: "20px", backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", width:"" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📊 Issue Status Summary</h2>
   <div style={{ display: "flex", justifyContent: "space-around" }}>
     <div style={{ textAlign: "center" }}>
+    <div style={{ fontSize: "24px", fontWeight: "bold", color: "#004085" }}>
+  {stats.totalIssues || issues.length}
+
+      <div>Total Issues</div>
+    </div>
       <div style={{ fontSize: "24px", fontWeight: "bold", color: "#dc3545" }}>
         {issues.filter(issue => issue.status === "pending").length || 0}
       </div>
       <div>Pending</div>
     </div>
+
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ffc107" }}>
         {issues.filter(issue => issue.status === "in_progress").length || 0}

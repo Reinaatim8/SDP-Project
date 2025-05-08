@@ -22,9 +22,9 @@ const ProfileAdmin = () => {
       {userData ? (
         <div className="profile-card">
           <div className="profile-header">
-            <img style={{width:'250px', paddingLeft:'150px' }}src="/images/AITSLOGO.png" alt="Profile Logo" className="profile-logo" />
+            <img style={{width:'450px', paddingLeft:'150px' }}src="/images/AITSLOGO.png" alt="Profile Logo" className="profile-logo" />
             </div>
-          <h2 style={{textAlign: "center", textDecoration: "underline darkgreen", fontWeight: "800"}}>MY PROFILE</h2>
+          <h2 style={{textAlign: "center", textDecoration: "underline darkgreen", fontWeight: "600",marginLeft:'50px'}}>MY PROFILE</h2>
           <div className="profile-icon">
             <FaUserCircle size={100} color="#2c3e50"  />
           </div>

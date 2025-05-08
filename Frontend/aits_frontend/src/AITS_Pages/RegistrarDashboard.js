@@ -65,7 +65,7 @@ const RegistrarDashboard = () => {
         fetchEnrollments(),
         fetchStudents(),
         fetchCourses(),
-        fetchIssues(), // Fetch issues here
+        fetchIssues(), 
         fetchStatistics()
       ]);
     } catch (err) {
@@ -136,7 +136,7 @@ const fetchCourses = async () => {
   // Add new student
   const addStudent = async () => {
     setLoading(prev => ({ ...prev, students: true }));
-    // API call removed - add your API call here later
+
     setLoading(prev => ({ ...prev, students: false }));
   };
 
@@ -192,22 +192,15 @@ const fetchCourses = async () => {
         {/* Stats Overview */}
         <div className="stats-overview">
           <div className='stat-cardd'><img src='images/AITSLOGO.png' alt="aits-logo"style={{width:'200px'}}/></div>
-          <div className="stat-card">
-            <div className="stat-icon">
-              <FiUser size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.totalStudents}</h3>
-              <p>Total Students</p>
-            </div>
-          </div>
-          <div className="stat-card">
+         
+            
+    <div className="stat-card">
   <div className="stat-icon">
     <FiAward size={24} />
   </div>
   <div className="stat-info">
     <h3>{stats.totalIssues}</h3>
-    <p>Total Issues</p>
+    <p>Total Issues Submitted</p>
   </div>
 </div>
 
@@ -217,7 +210,7 @@ const fetchCourses = async () => {
   </div>
   <div className="stat-info">
     <h3>{stats.coursesOffered}</h3>
-    <p>Courses Offered</p>
+    <p>Courses/ Course Units Offered</p>
   </div>
 </div>         
         </div>
