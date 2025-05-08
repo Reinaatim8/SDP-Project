@@ -130,15 +130,11 @@ useEffect(() => {
   <div style={{ display: "flex", justifyContent: "space-around" }}>
     <div style={{ textAlign: "center" }}>
     <div style={{ fontSize: "24px", fontWeight: "bold", color: "#004085" }}>
-  {stats.totalIssues || issues.length}
-
-      <div>Total Issues</div>
-    </div>
-      <div style={{ fontSize: "24px", fontWeight: "bold", color: "#dc3545" }}>
-        {issues.filter(issue => issue.status === "pending").length || 0}
+        {issues.filter(issue => issue.status === "pending").length || 0}  
       </div>
       <div>Pending</div>
     </div>
+    
 
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ffc107" }}>

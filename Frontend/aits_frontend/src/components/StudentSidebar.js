@@ -8,6 +8,7 @@ const StudentSidebar = () => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   
+  
  
 
   const toggleMinimize = () => {

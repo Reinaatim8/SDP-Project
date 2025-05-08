@@ -49,6 +49,26 @@ const ViewIssues = () => {
     }
   }, [activeTab, issues]);
 
+  const getIssueCounts = () => {
+    const counts = {
+      total: issues.length,
+      resolved: 0,
+      in_progress: 0,
+      pending: 0,
+      // Add other statuses if needed
+    };
+  
+    issues.forEach(issue => {
+      const status = issue.status.toLowerCase();
+      if (status === 'resolved') counts.resolved++;
+      else if (status === 'in_progress') counts.in_progress++;
+      else if (status === 'pending') counts.pending++;
+      // Add other status checks if needed
+    });
+  
+    return counts;
+  };
+
   // Helper function to format dates
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -61,9 +81,9 @@ const ViewIssues = () => {
     switch (lowercaseStatus) {
       case 'resolved':
         return 'history-status-badge history-status-resolved';
-      case 'in progress':
+      case 'in_progress':
         return 'history-status-badge history-status-unresolved';
-      case 'open':
+      case 'pending':
         return 'history-status-badge history-status-draft';
       default:
         return 'history-status-badge';
@@ -153,8 +173,8 @@ const ViewIssues = () => {
   const getStatusCounts = () => {
     const counts = {
       resolved: 0,
-      'in progress': 0,
-      open: 0
+      in_progress: 0,
+      pending: 0
     };
     
     issues.forEach(issue => {
@@ -180,6 +200,24 @@ const ViewIssues = () => {
             View all your submitted issues
           </p>
         </div>
+        <div className="issue-summary-container">
+  <div className="issue-summary-card">
+    <div className="issue-summary-title">Total Issues</div>
+    <div className="issue-summary-count">{getIssueCounts().total}</div>
+  </div>
+  <div className="issue-summary-card">
+    <div className="issue-summary-title">Pending</div>
+    <div className="issue-summary-count">{getIssueCounts().pending}</div>
+  </div>
+  <div className="issue-summary-card">
+    <div className="issue-summary-title">In Progress</div>
+    <div className="issue-summary-count">{getIssueCounts().in_progress}</div>
+  </div>
+  <div className="issue-summary-card">
+    <div className="issue-summary-title">Resolved</div>
+    <div className="issue-summary-count">{getIssueCounts().resolved}</div>
+  </div>
+</div>
         
         
         
@@ -399,6 +437,44 @@ const ViewIssues = () => {
           font-weight: 500;
           display: inline-block;
         }
+          /* Issue summary styles */
+  .issue-summary-container {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+  }
+  
+  .issue-summary-card {
+    flex: 1;
+    min-width: 150px;
+    background-color: #F9FAFB;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .issue-summary-title {
+    font-size: 0.875rem;
+    color: #6B7280;
+    margin-bottom: 0.5rem;
+  }
+  
+  .issue-summary-count {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+  }
+  
+  /* Add these to your existing styles */
+  .history-container {
+    /* ... existing styles ... */
+    margin-bottom: 210px;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+
         
         .history-priority-high {
           background-color: #FEE2E2;
