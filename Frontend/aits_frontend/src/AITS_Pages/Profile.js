@@ -65,6 +65,9 @@ const updateProfile = async (updatedData) => {
       if (formData[key] !== null && formData[key] !== undefined) {
         formDataPayload.append(key, formData[key]);
       }
+      if (file) {
+        formDataPayload.append('profile_picture', file);
+      }
     }
     console.log('Form data payload:', formDataPayload.toString());
 
