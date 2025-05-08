@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import apiClient from '../utils/axiosInstance';
 import { toast } from 'react-toastify';
 import StudentHoverBar from './StudentHoverBar';
+import { FaSpinner,FaClock,FaCheckCircle } from 'react-icons/fa';
 
 const ViewIssues = () => {
   const [issues, setIssues] = useState([]);
