@@ -161,66 +161,8 @@ useEffect(() => {
     Try searching for keywords like "wifi", "grades", or "classroom"
   </div> */}
 </div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔔 Recent Activity</h2>
-  {activities.length > 0 ? (
-    <ul style={{ listStyle: "none", padding: "0" }}>
-      {activities.slice(0, 5).map((activity, index) => (
-        <li key={index} style={{ 
-          padding: "8px", 
-          borderLeft: `4px solid ${
-            activity.type === "response" ? "#28a745" : 
-            activity.type === "status_change" ? "#ffc107" : "#007bff"
-          }`,
-          marginBottom: "8px",
-          backgroundColor: "#f8f9fa"
-        }}>
-          <div style={{ fontSize: "14px", color: "#495057" }}>
-            <span style={{ fontWeight: "bold" }}>{activity.title}</span> - {activity.description}
-          </div>
-          <div style={{ fontSize: "12px", color: "#6c757d", marginTop: "4px" }}>
-            {activity.time}
-          </div>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p>No recent activity.</p>
-  )}
-</div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⚠️ Priority Issues</h2>
-  {issues.filter(issue => issue.priority === "High").length > 0 ? (
-    <ul style={{ listStyle: "none", padding: "0" }}>
-      {issues
-        .filter(issue => issue.priority === "High")
-        .slice(0, 3)
-        .map((issue, index) => (
-          <li key={index} style={{ 
-            padding: "10px", 
-            backgroundColor: "#fff3cd", 
-            border: "1px solid #ffeeba", 
-            borderRadius: "4px",
-            marginBottom: "8px"
-          }}>
-            <div style={{ fontWeight: "bold" }}>{issue.title}</div>
-            <div style={{ fontSize: "14px", marginTop: "5px" }}>{issue.description}</div>
-            <div style={{ 
-              display: "flex", 
-              justifyContent: "space-between", 
-              fontSize: "12px", 
-              marginTop: "8px" 
-            }}>
-              <span>Status: {issue.status}</span>
-              <span>Reported: {issue.reportedDate}</span>
-            </div>
-          </li>
-        ))}
-    </ul>
-  ) : (
-    <p>No high priority issues at the moment.</p>
-  )}
-</div>
+
+
 <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⏱️ Response Time Metrics</h2>
   <div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -261,27 +203,8 @@ useEffect(() => {
       </button>
     ))}
   </div>
-  <div style={{marginBottom:"10px", backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📈 Issue Statistics</h2>
-  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
-    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
-      <div style={{ fontSize: "14px", color: "#6c757d" }}>Total Issues Reported</div>
-      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.totalReported}</div>
-    </div>
-    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
-      <div style={{ fontSize: "14px", color: "#6c757d" }}>Issues Resolved</div>
-      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.totalResolved}</div>
-    </div>
-    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
-      <div style={{ fontSize: "14px", color: "#6c757d" }}>Issues Per Week</div>
-      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.averageIssuesPerWeek}</div>
-    </div>
-    <div style={{ padding: "10px", backgroundColor: "#f8f9fa", borderRadius: "4px" }}>
-      <div style={{ fontSize: "14px", color: "#6c757d" }}>Most Common Issue</div>
-      <div style={{ fontSize: "20px", fontWeight: "bold" }}>{issueStats.mostCommonCategory}</div>
-    </div>
-  </div>
-</div>
+
+
 </div>
 
 
