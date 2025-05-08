@@ -52,7 +52,7 @@ const StudentSidebar = () => {
               <a href="Enrollment" className="student-sidebar-link"><FaAddressCard/>     Enroll in a Course</a>
             </li>
             <li className="student-sidebar-list-item">  
-              <a href="StudentIssueReport" className="student-sidebar-link"><FaDatabase/>  Report an Issue</a>
+              <a href="StudentIssueReport" className="student-sidebar-link"><FaDatabase/>  Submit an Issue</a>
             </li>
             <li className="student-sidebar-list-item">
               <a href ="ViewIssues" className="student-sidebar-link"><FaHistory/>  View Your Issues</a>
