@@ -30,7 +30,7 @@ const StudentDashboard = () => {
     averageResolution: "2 days",
     responseRate: "92%"
   });
-  const quickIssueCategories = ["Technical Issue", "Course Content", "Administrative", "Facility Problem"];
+  const quickIssueCategories = ["Missing marks", "Wrong marks", "Marking complaint", "Lecturer Consultation"];
   const [selectedDepartment, setSelectedDepartment] = useState("All");
   const departments = ["All", "Computer Science", "Engineering", "Business", "Arts & Humanities"];
 
@@ -244,7 +244,7 @@ useEffect(() => {
 </div>
 <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
   <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🚀 Quick Issue Report</h2>
-  <p style={{ marginBottom: "10px" }}>Select an issue category to report:</p>
+  <p style={{ marginBottom: "10px" }}>Select Different Issue categories to report such as;</p>
   <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
     {quickIssueCategories.map((category, index) => (
       <button
@@ -369,9 +369,8 @@ useEffect(() => {
         </div>
 
         <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>🎓 Academic Progress</h2>
-          <p style={{ color: "#666" }}>Your GPA: 3.8</p>
-          <p style={{ color: "#666" }}>Credits Earned: 45</p>
+          <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>🎓Track Your Academic Progress with Ease.</h2>
+
         </div>
 
 <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "100%" }}>
