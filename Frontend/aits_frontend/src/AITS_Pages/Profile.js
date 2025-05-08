@@ -74,7 +74,8 @@ const updateProfile = async (updatedData) => {
     const response = await axios.patch('https://kennedymutebi7.pythonanywhere.com/auth/api/profile/', formDataPayload, {
       headers: {
         Authorization: `Token ${access}`, // include token if required
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'multipart/form-data'
       }
 
     });
@@ -177,11 +178,17 @@ console.log('Final form data before submit:', formData);
 
           </div>
           {editMode && editable ? (
+            // Editable input field
+            
             <input
-              type={name === 'email' ? 'email' : 'text'}
+             type={
+                 name === 'profile_picture' ? 'file' :
+                 name === 'email' ? 'email' :
+                  'text'
+             }
               name={name}
-              value={value}
-              onChange={handleInputChange}
+              value={name === 'profile_picture' ? undefined : value} 
+              onChange={name === 'profile_picture' ? handleFileChange : handleInputChange}
               required={name === 'email' || name === 'department'}
               style={{
                 fontSize: "16px",
@@ -193,6 +200,7 @@ console.log('Final form data before submit:', formData);
                 backgroundColor: "white"
               }}
             />
+
           ) : (
           <div style={{ fontSize: "16px", fontWeight: "600", color: colors.dark }}>{value || "Not provided"}
           </div>
@@ -474,6 +482,7 @@ console.log('Final form data before submit:', formData);
                     name="profile_picture"
                     editable={true}
                     type="file"
+                    accept="image/*"
                     onChange={handleFileChange}
                     
                   />
