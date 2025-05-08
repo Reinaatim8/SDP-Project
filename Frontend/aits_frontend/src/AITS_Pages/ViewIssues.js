@@ -181,44 +181,8 @@ const ViewIssues = () => {
           </p>
         </div>
         
-        {/* Tabs */}
-        <div className="history-tabs-container">
-          <nav className="history-tabs" aria-label="Tabs">
-            <button
-              onClick={() => setActiveTab('all')}
-              className={`history-tab ${activeTab === 'all' ? 'history-tab-active' : ''}`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setActiveTab('resolved')}
-              className={`history-tab ${activeTab === 'resolved' ? 'history-tab-active' : ''}`}
-            >
-              Resolved 
-              <span className="history-tab-count">
-                {statusCounts.resolved}
-              </span>
-            </button>
-            <button
-              onClick={() => setActiveTab('in progress')}
-              className={`history-tab ${activeTab === 'in progress' ? 'history-tab-active' : ''}`}
-            >
-              In Progress
-              <span className="history-tab-count">
-                {statusCounts['in progress']}
-              </span>
-            </button>
-            <button
-              onClick={() => setActiveTab('open')}
-              className={`history-tab ${activeTab === 'open' ? 'history-tab-active' : ''}`}
-            >
-              Open
-              <span className="history-tab-count">
-                {statusCounts.open}
-              </span>
-            </button>
-          </nav>
-        </div>
+        
+        
         
         <div className="history-content">
           {renderTable()}

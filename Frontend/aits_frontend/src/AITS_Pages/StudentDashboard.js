@@ -128,39 +128,7 @@ useEffect(() => {
     </div>
   </div>
 </div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
-  {/* <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🔍 Search Issues</h2>
-  <div style={{ display: "flex", marginBottom: "15px" }}>
-    <input
-      type="text"
-      placeholder="Search for previously reported issues..."
-      value={searchTerm}
-      onChange={handleSearch}
-      style={{
-        flex: 1,
-        padding: "8px 12px",
-        border: "1px solid #ced4da",
-        borderRadius: "4px 0 0 4px",
-        fontSize: "14px",
-      }}
-    />
-    <button
-      style={{
-        padding: "8px 16px",
-        backgroundColor: "#007bff",
-        color: "#fff",
-        border: "none",
-        borderRadius: "0 4px 4px 0",
-        cursor: "pointer",
-      }}
-    >
-      Search
-    </button>
-  </div>
-  <div style={{ fontSize: "14px", color: "#6c757d" }}>
-    Try searching for keywords like "wifi", "grades", or "classroom"
-  </div> */}
-</div>
+
 
 
 <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
@@ -276,14 +244,15 @@ useEffect(() => {
 
           <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
             <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📢 Announcements</h2>
-            <p>Midterm results will be released on March 10th.</p>
+          
             <p>Course registration closes soon.</p>
+            <p>Recess starts soon.</p>
           </div>
 
           <div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}>
             <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📚 Upcoming Deadlines</h2>
-            <p>Assignment 3 - Due March 5th</p>
-            <p>Final Project - Due March 20th</p>
+            <p>Assignments - Due Soon</p>
+            <p>Final Project - Due Soon</p>
           </div>
         </div>
 
