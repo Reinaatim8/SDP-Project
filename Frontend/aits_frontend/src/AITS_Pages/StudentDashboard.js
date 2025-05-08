@@ -4,7 +4,7 @@ import StudentSidebar from "../components/StudentSidebar";
 import NotificationsModal from '../components/NotificationsModal';
 import "./StudentDashboard.css";
 import { toast } from "react-toastify";
-import { FaPowerOff } from "react-icons/fa";
+import { FaPowerOff,FaSpinner, FaCheckCircle, FaClock } from "react-icons/fa";
 import apiClient from '../utils/axiosInstance';
 
 const StudentDashboard = () => {
@@ -126,30 +126,16 @@ useEffect(() => {
         </div>
 
 <div style={{ marginTop: "20px", backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", width:"" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📊 Issue Status Summary</h2>
-  <div style={{ display: "flex", justifyContent: "space-around" }}>
-    <div style={{ textAlign: "center" }}>
-    <div style={{ fontSize: "24px", fontWeight: "bold", color: "#004085" }}>
-        {issues.filter(issue => issue.status === "pending").length || 0}  
-      </div>
-      <div>Pending</div>
-    </div>
-    
-
-    <div style={{ textAlign: "center" }}>
-      <div style={{ fontSize: "24px", fontWeight: "bold", color: "#ffc107" }}>
-        {issues.filter(issue => issue.status === "in_progress").length || 0}
-      </div>
-      <div>In Progress</div>
-    </div>
-    <div style={{ textAlign: "center" }}>
-      <div style={{ fontSize: "24px", fontWeight: "bold", color: "#28a745" }}>
-        {issues.filter(issue => issue.status === "resolved").length || 0}
-      </div>
-      <div>Resolved</div>
-    </div>
+  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>📊 Issue Status Detail Summary</h2>
+      <div style={{color:"red", fontWeight:"bold"}}><FaClock/> Pending 
+        <p style={{color:'black',textDecoration:"none"}}>
+          The issues has not yet beeen worked on or opened yet.</p>
+          </div>
+      <div style={{color:"blue", fontWeight:"bold"}}> <FaSpinner/> In Progress <p style={{color:'black'}}>The issues are in the middle of being solved.</p></div>
+      <div style={{color:"green", fontWeight:"bold"}}><FaCheckCircle/> Resolved <p style={{color:'black'}}>The issues have been worked upon and solved.</p></div>
+   
   </div>
-</div>
+
 
 
 
