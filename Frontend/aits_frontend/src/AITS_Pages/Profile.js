@@ -471,6 +471,8 @@ console.log('Final form data before submit:', formData);
                     name="profile_picture"
                     editable={true}
                     type="file"
+                    onChange={handleFileChange}
+                    
                   />
                   
                   <InfoCard 
