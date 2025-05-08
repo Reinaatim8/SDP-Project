@@ -23,7 +23,9 @@ const LecturerIssueManagement = () => {
   const API_BASE_URL = "https://kennedymutebi7.pythonanywhere.com";
   const API_URL = `${API_BASE_URL}/issues/api/issues/`;
   const COMMENTS_URL = `${API_BASE_URL}/issues/api/comments/`;
-  const API_TOKEN = "b0377bfb90173aac2ebd1b106a93dec811de90ab";
+  
+  const API_TOKEN = localStorage.getItem("access");
+  console.log("API_TOKEN:", API_TOKEN);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -91,7 +93,7 @@ const LecturerIssueManagement = () => {
         {
           headers: {
             Authorization: `Token ${API_TOKEN}`,
-            'Content-Type': 'application/json',
+            //'Content-Type': 'application/json',
           },
         }
       );
