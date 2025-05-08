@@ -31,24 +31,20 @@ const StudentDashboard = () => {
     responseRate: "92%"
   });
   const quickIssueCategories = ["Missing marks", "Wrong marks", "Marking complaint", "Lecturer Consultation"];
-  const [selectedDepartment, setSelectedDepartment] = useState("All");
-  const departments = ["All", "Computer Science", "Engineering", "Business", "Arts & Humanities"];
+
 
 
 const handleQuickIssue = (category) => {
   navigate('/StudentIssueReport', { state: { category } });
 };
-const [searchTerm, setSearchTerm] = useState("");
+
 
 // Add a function to handle search
-const handleSearch = (e) => {
-  setSearchTerm(e.target.value);
-};
 const [issueStats, setIssueStats] = useState({
   totalReported: 24,
   totalResolved: 19,
   averageIssuesPerWeek: 5,
-  mostCommonCategory: "Technical Issues"
+ 
 });
 // Add this state to your component
 const [faqs, setFaqs] = useState([
@@ -61,8 +57,8 @@ const [faqs, setFaqs] = useState([
     answer: "Most technical issues are resolved within 24-48 hours of reporting." 
   },
   { 
-    question: "Where can I find my student ID?", 
-    answer: "Your student ID is shown on your profile page and student card." 
+    question: "Where can I find my email?", 
+    answer: "You email is shown on your Student Profile." 
   }
 ]);
 
@@ -386,14 +382,7 @@ useEffect(() => {
     </div>
   ))}
 </div>
-
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <h2 style={{ fontSize: "20px", marginBottom: "10px" }}>🌟 Quick Links</h2>
-          <a href="/library" style={{ marginRight: "10px", color: "#007bff", textDecoration: "none" }}>Library</a>
-          <a href="/timetable" style={{ marginRight: "10px", color: "#007bff", textDecoration: "none" }}>Timetable</a>
-          <a href="/resources" style={{ color: "#007bff", textDecoration: "none" }}>Resources</a>
-        </div>
-      </div>
+</div>
       
 
       <button onClick={() => setShowNotifications(true)} style={{
