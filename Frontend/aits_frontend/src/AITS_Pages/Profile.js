@@ -45,7 +45,7 @@ const Profile = () => {
     }, [userData]);
 
 
-const updateProfile = async (updatedData) => {
+const updateProfile = async (updatedData ) => {
   try {
     const access = localStorage.getItem('access'); // if your API needs authentication
     console.log("Access Token:", access);
