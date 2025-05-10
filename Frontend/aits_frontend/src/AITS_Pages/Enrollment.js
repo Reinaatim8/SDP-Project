@@ -17,7 +17,7 @@ const Enrollment = () => {
 
   useEffect(() => {
     if (!localStorage.getItem('access')) {
-      toast.error("Please login to enroll in courses");
+      toast.error("Please login to enroll in a course.");
       navigate('/login');
     }
   }, [navigate]);
