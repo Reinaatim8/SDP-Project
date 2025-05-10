@@ -85,7 +85,7 @@ const LecturerDashboard = () => {
         </div>
 
         <div className="lecturer-dashboard-quick-actions">
-          <button className="lecturer-dashboard-action-button" onClick={handleReportIssue}>
+          <button className="lecturer-dashboard-action-button">
             <FaGraduationCap className="lecturer-dashboard-action-icon" />
             <span>Submit Grade Report</span>
           </button>
