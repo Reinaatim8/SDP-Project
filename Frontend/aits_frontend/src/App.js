@@ -7,6 +7,7 @@ import Loginpage from './AITS_Pages/LoginPage';
 import StudentDashboard from './AITS_Pages/StudentDashboard'; 
 import Profile from './AITS_Pages/Profile';
 import ProfileAdmin from './components/ProfileAdmin';
+import LecturerProfile from './components/LecturerProfile';
 import Enrollment from './AITS_Pages/Enrollment';
 import StudentIssueReport from './AITS_Pages/StudentIssueReport';
 import LecturerDashboard from './AITS_Pages/LecturerDashboard';
@@ -48,6 +49,7 @@ function App() {
         <Route path="/CourseManagement" element={<CourseManagement />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/ProfileAdmin" element={<ProfileAdmin />} />
+        <Route path="/LecturerProfile" element={<LecturerProfile />} />
         <Route path="/ViewIssuesAdmin" element={<ViewIssuesAdmin/>} />
         <Route path="/LecturerDashboard" element={<LecturerDashboard />} />
         <Route path="/RegistrarDashboard" element={<RegistrarDashboard />} />

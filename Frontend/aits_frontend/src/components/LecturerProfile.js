@@ -18,7 +18,7 @@ const LecturerProfile = () => {
   return (
     <div className="profile-page">
       <div style={{marginLeft:"8%",marginBottom:"10%"}}>
-      <StudentHoverBar />
+      <LecturerHoverBar />
       </div>
     <div className="profile-container">
      
