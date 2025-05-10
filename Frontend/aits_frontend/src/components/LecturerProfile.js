@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './ProfileAdmin.css'; //for styling
-import LecturerHoverSidebar from '../components/LecturerHoverSidebar'; // 
+import LecturerHoverBar from '../components/LecturerHoverBar'; 
 import { FaUserCircle } from "react-icons/fa"; // Import user icon
+import './LecturerProfile.css'; // Import your CSS file
 
 
 const LecturerProfile = () => {
