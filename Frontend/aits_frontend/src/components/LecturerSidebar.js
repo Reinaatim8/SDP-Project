@@ -197,7 +197,7 @@ const LecturerSidebar = () => {
               </Link>
             </li>
             <li className="lecturer-sidebar-list-item">
-              <a className="lecturer-sidebar-link" onClick={handleOpenModal}>
+              <a className="lecturer-sidebar-link" href="/LecturerIssueManagement" >
                 <FaUsers className="lecturer-sidebar-icon" /> Respond to Students
               </a>
             </li>

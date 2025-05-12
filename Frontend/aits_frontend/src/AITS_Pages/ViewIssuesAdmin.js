@@ -46,8 +46,14 @@ const ViewIssuesAdmin = () => {
     fetchIssues();
   }, [navigate]);
 
-  //if (loading) return <p>Loading issues...</p>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+    </div>
+  );
 
+
+  
   return (
     <div className="view-issues-container">
       <RegistrarSidebar/>
@@ -71,18 +77,29 @@ const ViewIssuesAdmin = () => {
         <tbody>
           {issues.map((issue) => (
             <tr key={issue.id}>
-              <td>{issue.title}</td>
-              <td>{issue.description}</td>
+              <td data-label="Title">{issue.title}</td>
+              <td data-label="Description">{issue.description}</td>
               <td>{issue.category}</td>
-              <td>{issue.status}</td>
-              <td>{issue.priority}</td>
+              <td className={`status-${issue.status.toLowerCase()}`}>{issue.status}</td>
+              <td className={`priority-${issue.priority.toLowerCase()}`}>{issue.priority}</td>
               <td>{issue.assigned_to_name}</td>
               <td>{new Date(issue.created_at).toLocaleString()}</td>
             </tr>
             ))}
           </tbody>
         </table>
-      )}
+         )}
+          <div className="course-stats" style={{margin: '20px', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px',width:'815px', marginLeft:'300px'}}>
+           <h3 style={{textAlign:'center', marginBottom: '15px'}}>ISSUSE STATISTICS</h3>
+                <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                  <div className="stat-box">
+                    <p style={{fontSize: '24px', fontWeight: 'bold',textAlign:'center'}}>Total Issues Submitted<br></br>{issues.length}
+                    </p>
+                  </div>
+          </div>
+         </div>
+                   
+      
     </div>
   );
 };

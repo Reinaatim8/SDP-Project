@@ -34,6 +34,7 @@ const CourseManagement = () => {
       };
       await apiClient.post("/issues/api/courses/", newCourse);
       toast.success("Course created successfully!");
+      // Reset form fields
       setCourseCode("");
       setCourseName("");
       setDescription("");
@@ -54,11 +55,11 @@ const CourseManagement = () => {
     <div className="course-management-container">
       <RegistrarSidebar />
       <div className="course-management-content">
-        <h2 style={{textAlign:'center', fontWeight:'900',textDecoration:'underline'}}>📘 COURSE MANAGEMENT</h2>
+        <h2 style={{textAlign:'center', fontWeight:'boldER',textDecoration:'none',fontSize:'30px'}}>📘 COURSE MANAGEMENT</h2>
 
         <div className="course-form-group">
         <form className="course-form" onSubmit={handleCourseCreate}>
-          <h3 style={{textAlign:'center', textDecoration:'underline'}}>ADD A NEW COURSE</h3>
+          <h3 style={{textAlign:'center', textDecoration:'underline'}}>ADD A NEW COURSE UNIT</h3>
         
           <label style={{fontWeight:'700'}}>Course Code:</label>
           <input
@@ -96,10 +97,10 @@ const CourseManagement = () => {
           
         </form>
         </div>
-        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'underline'}}>📘 COURSE LIST</h3>
+        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'none'}}>📘 COURSE LIST</h3>
         
 
-        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'underline'}}>ALL COURSES CREATED</h3>
+        <h3 style={{textAlign:'center', fontWeight:'900',textDecoration:'underline'}}>ALL COURSES/COURSE UNITS CREATED</h3>
         <table className="course-table">
           <thead>
             <tr>
@@ -116,9 +117,20 @@ const CourseManagement = () => {
                 <td>{course.description }</td>
                 
               </tr>
+              
             ))}
           </tbody>
         </table>
+        <div className="course-stats" style={{margin: '20px 0', padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '8px'}}>
+  <h3 style={{textAlign:'center', marginBottom: '15px'}}>COURSE STATISTICS</h3>
+  <div style={{display: 'flex', justifyContent: 'space-around'}}>
+    <div className="stat-box">
+      <p style={{fontSize: '24px', fontWeight: 'bold',textAlign:'center'}}>Total Courses <br></br>{courses.length}
+      </p>
+    </div>
+    {/* You could add more statistics here if needed */}
+  </div>
+</div>
       </div>
 
     </div>

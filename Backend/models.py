@@ -11,8 +11,8 @@ class User(AbstractUser):
         ('admin', 'Administrator'),
     ]
     
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    user_type = models.CharField(max_length=15, choices=USER_TYPE_CHOICES)
+    phone_number = models.CharField(max_length=10, blank=True, null=True)
     
     groups = models.ManyToManyField(Group, related_name="issues_users")
     user_permissions = models.ManyToManyField(Permission, related_name="issues_user_permissions")
@@ -24,8 +24,8 @@ class Course(models.Model):
     """
     Model to represent academic courses in the system.
     """
-    course_code = models.CharField(max_length=20, unique=True)
-    course_name = models.CharField(max_length=100)
+    course_code = models.CharField(max_length=5, unique=True)
+    course_name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     lecturer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='taught_courses', 
                                 limit_choices_to={'user_type': 'lecturer'})
@@ -41,8 +41,8 @@ class Enrollment(models.Model):
                               limit_choices_to={'user_type': 'student'})
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='enrollments')
     semester = models.CharField(max_length=20)
-    academic_year = models.CharField(max_length=9)  # Format: 2023/2024
-    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    academic_year = models.CharField(max_length=10)  # Format: 2023/2024
+    current_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     
     class Meta:
         unique_together = ['student', 'course', 'semester', 'academic_year']
@@ -54,7 +54,7 @@ class IssueCategory(models.Model):
     """
     Model to categorize different types of academic issues.
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=150)
     description = models.TextField(blank=True, null=True)
     
     def __str__(self):
@@ -90,8 +90,8 @@ class Issue(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE, related_name='enrollment_issues',
                                   null=True, blank=True)
     
-    current_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    expected_grade = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    current_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
+    expected_grade = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
@@ -133,9 +133,9 @@ class AuditLog(models.Model):
     """
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='audit_logs')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_actions')
-    action = models.CharField(max_length=255)
-    old_value = models.CharField(max_length=255, null=True, blank=True)
-    new_value = models.CharField(max_length=255, null=True, blank=True)
+    action = models.CharField(max_length=200)
+    old_value = models.CharField(max_length=200, null=True, blank=True)
+    new_value = models.CharField(max_length=200, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -144,7 +144,7 @@ class AuditLog(models.Model):
 class Notification(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
     message = models.TextField()
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE,  related_name='issue_notifications', null=True, blank=True)
     is_read = models.BooleanField(default=False)

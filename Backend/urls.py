@@ -10,8 +10,8 @@ router.register(r'courses', views.CourseViewSet, basename="courses")
 router.register(r'enrollments', views.EnrollmentViewSet, basename="enrollments")
 router.register(r'categories', views., basename="caategories")
 router.register(r'issues', views.IssueViewSet, basename="issues")
-router.register(r'comments', views.CommentViewSet)
-router.register(r'audit-logs', views.AuditLogViewSet)
+router.register(r'comments', views.CommentViewSet, basename="comments")
+router.register(r'audit-logs', views.AuditLogViewSet, basename="audit-logs")
 router.register(r'notifications', views.NotificationViewSet)
 
 urlpatterns = [

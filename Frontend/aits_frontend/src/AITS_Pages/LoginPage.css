@@ -10,7 +10,6 @@
   font-family: sans-serif;
   page: center;
   background: #0f1e2ed5;
-  /* background-image: linear-gradient(315deg, #f0f0f0 0%, #ffffff 74%); */
   border-style: groove 5px;
   transform: scale(0.9);
   
@@ -40,12 +39,6 @@
   transform: translate(-50%, -50%);
   /* background-color: transparent; */
   padding: 20px;
-  /* border-radius: 10px; */
-  /* width: 60vh; */
-  /* height: 65.7vh; */
-  /* box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
-  /* border-color: black; */
-  /* border-style: groove; */
   margin: 0;
 }
 .card h1{
@@ -192,27 +185,29 @@ text-align: center;
 .password-toggle-button{
   position: absolute;
   right: 5px;
-  top:60%;
-  bottom: 70%;
-  transform:translateY(-50%);
-  background-color: transparent;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-}
-.password-toggle-button :focus{
-  position: absolute;
-  right: 10px;
   top:50%;
-  bottom: 50%;
-  transform:translateY(-50%);
+  bottom: 60%;
+  transform:translateY(-85%)  ;
   background-color: transparent;
   cursor: pointer;
   padding: 0;
-  margin: 0;
-  width: 0;
-  border-color: transparent;
+  margin-top: 0.1px;
+  border: none;
+  color: #0f1e2e;
 }
+
 .password-input-container{
   position: relative;
+}
+.forgot-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+.forgot-link:active {
+  color: #0056b3;
 }

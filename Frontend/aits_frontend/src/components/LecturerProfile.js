@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './ProfileAdmin.css'; //for styling
-import RegistrarSidebar from '../components/RegistrarSidebar';
+import LecturerHoverBar from '../components/LecturerHoverBar'; 
 import { FaUserCircle } from "react-icons/fa"; // Import user icon
+import './LecturerProfile.css'; // Import your CSS file
 
 
-const ProfileAdmin = () => {
+const LecturerProfile = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -16,7 +17,9 @@ const ProfileAdmin = () => {
 
   return (
     <div className="profile-page">
-      <RegistrarSidebar />
+      <div style={{marginLeft:"8%",marginBottom:"10%"}}>
+      <LecturerHoverBar />
+      </div>
     <div className="profile-container">
      
       {userData ? (
@@ -46,4 +49,4 @@ const ProfileAdmin = () => {
   );
 };
 
-export default ProfileAdmin;
+export default LecturerProfile;
