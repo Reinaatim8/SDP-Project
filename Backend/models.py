@@ -32,7 +32,7 @@ class Course(models.Model):
     
     def __str__(self):
         return f"{self.course_code}: {self.course_name}"
- 
+ # Defines student enrolment model
 class Enrollment(models.Model):
     """
     Model to represent student enrollment in courses.
