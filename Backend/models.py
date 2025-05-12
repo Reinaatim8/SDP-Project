@@ -61,7 +61,7 @@ class IssueCategory(models.Model):
         return self.name
     
     class Meta:
-        verbose_name_plural = "Issue Categories" #67
+        verbose_name_plural = "Issue Categories" 
 
 class Issue(models.Model):
     """
