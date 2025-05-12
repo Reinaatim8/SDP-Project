@@ -18,7 +18,7 @@ class NotificationSerializer(serializers.ModelSerializer):
         model = Notification
         fields = '__all__'
         read_only_fields = ['is_read', 'created_at']
-#Serializes notification read status
+
 class NotificationUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
