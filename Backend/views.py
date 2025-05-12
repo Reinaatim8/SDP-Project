@@ -99,7 +99,7 @@ class IssueViewSet(viewsets.ModelViewSet):
         #if self.action == 'create':
             #return [permissions.IsAuthenticated(), IsStudentPermission()]
         return [permissions.IsAuthenticated()]
-    
+    #Filters issues by user
     def get_queryset(self):
         user = self.request.user
         if user.user_type == 'student':
