@@ -19,7 +19,7 @@ class User(AbstractUser):
     
     def __str__(self):
         return f"{self.username} ({self.get_user_type_display()})"
-
+#Defines academic course model
 class Course(models.Model):
     """
     Model to represent academic courses in the system.
