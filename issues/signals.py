@@ -16,7 +16,7 @@ def auto_assign_issue(sender, instance, created, **kwargs):
             if admin_users.exists():
                 instance.assigned_to = admin_users.first()
                 instance.save()
-
+#Creates issue notification signal
 @receiver(post_save, sender=apps.get_model('issues', 'Issue'))  
 def create_notification(sender, instance, created, **kwargs):
     if created:
