@@ -28,7 +28,7 @@ class Course(models.Model):
     course_name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     lecturer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='taught_courses', 
-                                limit_choices_to={'user_type': 'lecturer'})#34
+                                limit_choices_to={'user_type': 'lecturer'})
     
     def __str__(self):
         return f"{self.course_code}: {self.course_name}"
