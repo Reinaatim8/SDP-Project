@@ -49,7 +49,7 @@ class Enrollment(models.Model):
     
     def __str__(self):
         return f"{self.student.username} - {self.course.course_code} ({self.semester}, {self.academic_year})"
-#Defines issue category model
+
 class IssueCategory(models.Model):
     """
     Model to categorize different types of academic issues.
