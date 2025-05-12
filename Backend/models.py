@@ -73,7 +73,7 @@ class Issue(models.Model):
         ('resolved', 'Resolved'),
         ('rejected', 'Rejected'),
     ]
-    
+    #Defines priority level options
     PRIORITY_CHOICES = [
         ('low', 'Low'),
         ('medium', 'Medium'),
