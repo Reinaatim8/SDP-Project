@@ -8,7 +8,7 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ['username', 'first_name', 'last_name', 'email', 'role', 'password']
 
-# Issue FormsS
+# Issue Forms
 class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue
