@@ -69,7 +69,7 @@ class Issue(models.Model):
     """
     STATUS_CHOICES = [
         ('pending', 'Pending Review'),
-        ('in_progress', 'In Progress'),   #Defines status options list
+        ('in_progress', 'In Progress'),   
         ('resolved', 'Resolved'),
         ('rejected', 'Rejected'),
     ]
