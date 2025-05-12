@@ -78,7 +78,7 @@ class Issue(models.Model):
         ('low', 'Low'),
         ('medium', 'Medium'),
         ('high', 'High'),
-        ('urgent', 'Urgent'),#1
+        ('urgent', 'Urgent'),
     ]
     
     title = models.CharField(max_length=200)
