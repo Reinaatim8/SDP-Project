@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-//import WelcomePage from './AITS_Pages/WelcomePage';
+import WelcomePage from './AITS_Pages/WelcomePage';
 import Aboutpage from './AITS_Pages/Aboutpage';
 import SignUpPage from './AITS_Pages/SignUpPage';
 import Loginpage from './AITS_Pages/LoginPage';
@@ -39,6 +39,7 @@ function App() {
        pauseOnHover
        />
       <Routes>
+        <Route path="/WelcomePage" element={<WelcomePage />} />
         <Route path="/" element={<Loginpage />} />
         <Route path="/Aboutpage" element={<Aboutpage />} />
         <Route path="/signup" element={<SignUpPage />} />
