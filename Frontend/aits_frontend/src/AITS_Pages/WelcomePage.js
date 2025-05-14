@@ -12,7 +12,7 @@ const WelcomePage = () => {
   ];
 
   return (
-    <div className="welcome-container">
+     <div className="welcome-container" id='welcome'>
       {/* Fixed Navigation Bar */}
       <nav className="navbar">
         <div className="navbar-left">
