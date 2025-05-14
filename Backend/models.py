@@ -8,7 +8,7 @@ class User(AbstractUser):
     USER_TYPE_CHOICES = [
         ('student', 'Student'),
         ('lecturer', 'Lecturer'),
-        ('admin', 'Administrator'),
+        ('admin', 'Administrator'),       #Extends the custom user model
     ]
     
     user_type = models.CharField(max_length=15, choices=USER_TYPE_CHOICES)
@@ -19,7 +19,7 @@ class User(AbstractUser):
     
     def __str__(self):
         return f"{self.username} ({self.get_user_type_display()})"
-
+#Defines the academic student model
 class Course(models.Model):
     """
     Model to represent academic courses in the system.
@@ -32,7 +32,7 @@ class Course(models.Model):
     
     def __str__(self):
         return f"{self.course_code}: {self.course_name}"
-
+ # Defines student enrolment model
 class Enrollment(models.Model):
     """
     Model to represent student enrollment in courses.
@@ -49,7 +49,7 @@ class Enrollment(models.Model):
     
     def __str__(self):
         return f"{self.student.username} - {self.course.course_code} ({self.semester}, {self.academic_year})"
-
+#Defines issue category model
 class IssueCategory(models.Model):
     """
     Model to categorize different types of academic issues.
@@ -61,7 +61,7 @@ class IssueCategory(models.Model):
         return self.name
     
     class Meta:
-        verbose_name_plural = "Issue Categories"
+        verbose_name_plural = "Issue Categories" 
 
 class Issue(models.Model):
     """
@@ -69,11 +69,11 @@ class Issue(models.Model):
     """
     STATUS_CHOICES = [
         ('pending', 'Pending Review'),
-        ('in_progress', 'In Progress'),
+        ('in_progress', 'In Progress'),  #Defines status options list 
         ('resolved', 'Resolved'),
         ('rejected', 'Rejected'),
     ]
-    
+    #Defines priority level options
     PRIORITY_CHOICES = [
         ('low', 'Low'),
         ('medium', 'Medium'),
