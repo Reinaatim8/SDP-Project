@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"; // Import useLocation
 import "./LecturerHoverBar.css";
 import {
   FaHome, FaUser, FaPhone,
-   FaDatabase, FaBell
+   FaDatabase
 } from "react-icons/fa";
 
 const StudentHoverBar = () => {

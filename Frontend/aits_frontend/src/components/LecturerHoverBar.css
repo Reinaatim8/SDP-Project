@@ -1,6 +1,6 @@
 .lecturer-floating-tabbar-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 0px;
     /* left: 50%; */
     /* transform: translateX(-50%); */
     background: #0f1e2e;
@@ -13,7 +13,7 @@
     align-items: center;
     color: white;
     transition: all 0.3s ease;
-    width:70%;
+    width:50%;
     padding:12px;
     scale:0.8;
     margin-left: 10%;
