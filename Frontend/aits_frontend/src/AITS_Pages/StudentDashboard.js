@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StudentSidebar from "../components/StudentSidebar";
-import NotificationsModal from '../components/NotificationsModal';
 import "./StudentDashboard.css";
 import { toast } from "react-toastify";
 import { FaPowerOff,FaSpinner, FaCheckCircle, FaClock } from "react-icons/fa";
-import apiClient from '../utils/axiosInstance';
+
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
@@ -24,40 +23,12 @@ const StudentDashboard = () => {
     issues: false,
   });
   const [error, setError] = useState('');
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [activities, setActivities] = useState([
-    { id: 1, title: "Network Issue", description: "Lecturer responded to your ticket", type: "response", time: "Today, 2:30 PM" },
-    { id: 2, title: "Library Access", description: "Status changed to In Progress", type: "status_change", time: "Yesterday, 4:15 PM" },
-    { id: 3, title: "Course Material Error", description: "New issue reported", type: "new", time: "Apr 14, 10:00 AM" }
-  ]);
-  const [notifications] = useState([
-    { id: 1, message: "Your profile has been updated.", type: "success" },
-    { id: 2, message: "New course materials are available.", type: "info" },
-    { id: 3, message: "Your password will expire soon.", type: "warning" },
-    
-  ]);
-
-  const quickIssueCategories = ["Missing marks", "Wrong marks", "Marking complaint", "Lecturer Consultation"];
-
-
 
 const handleQuickIssue = (category) => {
   navigate('/StudentIssueReport', { state: { category } });
 };
 
-const fetchIssues = async () => {
-  setLoading(prev => ({ ...prev, issues: true }));
-  setError('');
-  try {
-    const res = await apiClient.get('/issues/api/issues/');
-    setStats(prev => ({ ...prev, totalIssues: res.data.results.length })); // Update totalIssues count
-  } catch (error) {
-    setError('Failed to fetch issues.');
-    console.error(error);
-  } finally {
-    setLoading(prev => ({ ...prev, issues: false }));
-  }
-};
+
 // Add a function to handle search
 const [issueStats, setIssueStats] = useState({
   totalReported: 24,
@@ -136,55 +107,7 @@ useEffect(() => {
    
   </div>
 
-
-
-
-{/*<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>⏱️ Response Time Metrics</h2>
-  <div style={{ display: "flex", justifyContent: "space-around" }}>
-    <div style={{ textAlign: "center", padding: "10px" }}>
-      <div style={{ fontSize: "14px", color: "#666" }}>Avg. First Response</div>
-      <div style={{ fontSize: "20px", fontWeight: "bold", color: "#004085" }}>{responseMetrics.averageResponse}</div>
-    </div>
-    <div style={{ textAlign: "center", padding: "10px" }}>
-      <div style={{ fontSize: "14px", color: "#666" }}>Avg. Resolution Time</div>
-      <div style={{ fontSize: "20px", fontWeight: "bold", color: "#004085" }}>{responseMetrics.averageResolution}</div>
-    </div>
-    <div style={{ textAlign: "center", padding: "10px" }}>
-      <div style={{ fontSize: "14px", color: "#666" }}>Response Rate</div>
-      <div style={{ fontSize: "20px", fontWeight: "bold", color: "#004085" }}>{responseMetrics.responseRate}</div>
-    </div>
-  </div>
-</div>
-<div style={{ backgroundColor: "#fff", padding: "15px", borderRadius: "5px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", marginTop: "20px", width: "" }}>
-  <h2 style={{ fontSize: "18px", marginBottom: "10px" }}>🚀 Quick Issue Report</h2>
-  <p style={{ marginBottom: "10px" }}>Select Different Issue categories to report such as;</p>
-  <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-    {quickIssueCategories.map((category, index) => (
-      <button
-        key={index}
-        onClick={() => handleQuickIssue(category)}
-        style={{
-          padding: "8px 12px",
-          backgroundColor: "#e9ecef",
-          border: "1px solid #ced4da",
-          borderRadius: "4px",
-          cursor: "pointer",
-          transition: "all 0.2s ease",
-          fontSize: "14px",
-          ":hover": { backgroundColor: "#dee2e6" }
-        }}
-      >
-        {category}
-      </button>
-    ))}
-  </div>
-
-
-</div>*/}
-
-
-        <div style={{marginTop:"20px", display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
+  <div style={{marginTop:"20px", display: "flex", justifyContent: "space-around", marginBottom: "20px" }}>
           <button
             style={{
               backgroundColor: "#007bff",
@@ -275,26 +198,6 @@ useEffect(() => {
 </div>
       
 
-      <button onClick={() => setShowNotifications(true)} style={{
-        position: "fixed",
-        top: "20px",
-        right: "20px",
-        padding: "10px 20px",
-        backgroundColor: "#0a2463",
-        color: "white",
-        border: "none",
-        borderRadius: "5px",
-        cursor: "pointer"
-      }}>
-        View Notifications
-      </button>
-
-      {showNotifications && (
-        <NotificationsModal
-          notifications={notifications}
-          onClose={() => setShowNotifications(false)}
-        />
-      )}
       
     </div>
     
