@@ -1,6 +1,6 @@
 /* Lecturer Sidebar Styles */
 .lecturer-sidebar {
-  width: 250px;
+  width: 300px;
   height: 100vh;
   background: #0f1e2e !important;
   color: #f0a500;
@@ -16,7 +16,7 @@
 }
 
 .lecturer-sidebar-minimized {
-  width: 20px;
+  width: 10px;
 }
 
 .lecturer-sidebar-header {
