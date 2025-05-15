@@ -44,9 +44,8 @@ const StudentHoverBar = () => {
             <a href="/Aboutpage" className={isActive("/Aboutpage") ? "active" : ""}>
               <FaPhone /> Contact Us
             </a>
-            <a href="/notifications" className={isActive("/notifications") ? "active" : ""}>
-              <FaBell /> Notifications
-            </a>
+           
+            
           </div>
         </div>
       )}
