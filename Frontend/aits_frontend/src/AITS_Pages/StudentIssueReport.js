@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import LecturerDropdown from "../components/LecturerDropdown";
 import Categorydropdown from "../components/Categorydropdown";
 import CourseNamedropdown from "../components/CourseNamedropdown";
+import CourseCodedropdown from "../components/CourseCodedropdown";
 import { submitIssue } from "../utils/issues";
 import { toast } from 'react-toastify';
 import StudentHoverBar from "./StudentHoverBar";
@@ -47,6 +48,10 @@ const StudentIssueReport = () => {
 
   const handleCourseNameSelection = (courseUnitName) => {
     setFormData(prev => ({...prev, courseUnitName}));
+  };
+
+  const handleCourseCodeSelection = (courseCode) => {
+    setFormData(prev => ({...prev, courseCode}));
   };
 
   const handleFileChange = (e) => {
@@ -191,16 +196,11 @@ const StudentIssueReport = () => {
                 </div>
                 
                 <div className="form-field">
-                  <label htmlFor="courseCode">Course Code <span className="required">*</span></label>
-                  <input
-                    type="text"
-                    id="courseCode"
-                    name="courseCode"
-                    placeholder="E.g. CS101"
-                    value={formData.courseCode}
-                    onChange={handleInputChange}
-                    required
-                  />
+                  <label htmlFor="courseUnitCode">Course Unit Code  <span className="required">*</span></label>
+                  <CourseCodedropdown onSelect={handleCourseCodeSelection}
+                  value={formData.courseCode}
+                 />
+                 
                 </div>
               </div>
               
